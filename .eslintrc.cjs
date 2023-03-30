@@ -1,35 +1,45 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
 
-/** @type {import("eslint").Linter.Config} */
-const config = {
+/**
+ * @type {import("eslint").Linter.Config}
+ */
+module.exports = {
   overrides: [
     {
       extends: [
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
       ],
       files: ["*.ts", "*.tsx"],
       parserOptions: {
-        project: path.join(__dirname, "tsconfig.json"),
-      },
-    },
+        project: path.join(__dirname, "tsconfig.json")
+      }
+    }
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
-    project: path.join(__dirname, "tsconfig.json"),
+    project: path.join(__dirname, "tsconfig.json")
   },
   plugins: ["@typescript-eslint"],
-  extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  extends: [
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended"
+  ],
   rules: {
-    "@typescript-eslint/consistent-type-imports": [
-      "warn",
-      {
-        prefer: "type-imports",
-        fixStyle: "inline-type-imports",
-      },
-    ],
-    "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
-  },
+    "@typescript-eslint/consistent-type-imports": "warn",
+    "indent": "off",
+    "@typescript-eslint/indent": ["error", 2],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", {argsIgnorePattern: "^_"}],
+    "semi": ["warn", "always"],
+    "quotes": ["error", "double", {"allowTemplateLiterals": true}],
+    "no-multiple-empty-lines": ["error", {"max": 1, "maxEOF": 0}],
+    "arrow-parens": ["error", "always"],
+    "array-bracket-spacing": ["error", "never"],
+    "object-curly-spacing": ["error", "never"],
+    "no-multi-spaces": "error",
+    "comma-dangle": "warn",
+    "react/jsx-tag-spacing": "error",
+    "comma-spacing": ["error"]
+  }
 };
-
-module.exports = config;
