@@ -8,6 +8,7 @@ html {
 
 body {
   @apply bg-slate-100;
+  @apply text-slate-900;
   height: 100%
 }
 
