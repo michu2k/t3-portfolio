@@ -31,17 +31,17 @@ const Header = () => {
 
   return (
     <header className="grid md:grid-cols-[320px_1fr] gap-10 py-6">
-      <div className="h-60 md:h-96 bg-slate-300 rounded-lg overflow-hidden">
+      <div className="h-64 md:h-96 bg-slate-300 rounded-lg overflow-hidden">
         {/* <Image /> */}
       </div>
 
       <div className="flex flex-col justify-center">
         <h1 className="font-bold text-3xl md:text-4xl mb-4">Hi! I am John Doe</h1>
-        <p className="mb-8 text-md text-slate-700 leading-6 whitespace-pre">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. {"\n"}
+        <p className="mb-8 text-md text-slate-700 leading-6">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
           Nihil incidunt accusamus mollitia exercitationem sapiente quasi qui eligendi architecto non dolor.
-          {"\n"}{"\n"}
-          Autem consectetur et voluptatum labore accusantium magni. {"\n"}
+          <br /><br />
+          Autem consectetur et voluptatum labore accusantium magni. <br />
           Laudantium quia vitae quas provident nostrum adipisci.
         </p>
 
