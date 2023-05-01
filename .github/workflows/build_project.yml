@@ -1,0 +1,30 @@
+name: "Build Next.js project"
+
+on:
+  pull_request
+
+jobs:
+  build:
+    name: "Build project"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          # Generate a new cache whenever packages or source files change.
+          key: ${{ runner.os }}-next-js-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          # If source files changed but packages didn't, rebuild from a prior cache.
+          restore-keys: ${{ runner.os }}-next-js-${{ hashFiles('**/package-lock.json') }}-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
