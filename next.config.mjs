@@ -19,6 +19,35 @@ const config = {
   i18n: {
     locales: ["en"],
     defaultLocale: "en"
+  },
+  webpack(config) {
+
+    // Convert *.svg imports to React components
+    config.module.rules.push({
+      test: /\.svg$/,
+      issuer: {and: [/\.(js|ts)x?$/]},
+      use: [
+        {
+          loader: "@svgr/webpack",
+          options: {
+            svgoConfig: {
+              plugins: [
+                {
+                  name: "preset-default",
+                  params: {
+                    overrides: {
+                      removeViewBox: false
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    });
+
+    return config;
   }
 };
 

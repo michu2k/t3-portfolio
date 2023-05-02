@@ -1,3 +1,5 @@
+import defaultTheme from "tailwindcss/defaultTheme";
+
 /**
  * @type {import('tailwindcss').Config}
  */
@@ -7,7 +9,11 @@ const config = {
     "./pages/**/*.{js,ts,jsx,tsx}"
   ],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        sans: ["Inter", ...defaultTheme.fontFamily.sans]
+      }
+    }
   },
   plugins: []
 };
