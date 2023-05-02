@@ -36,17 +36,14 @@ const Header = () => {
       </div>
 
       <div className="flex flex-col justify-center">
-        <h1 className="font-bold text-3xl md:text-4xl mb-4">Hi! I am John Doe</h1>
+        <h1 className="font-bold text-3xl md:text-4xl mb-5">Hi! I am John Doe</h1>
         <p className="text-md text-slate-700 leading-6">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
           Nihil incidunt accusamus mollitia exercitationem sapiente quasi qui eligendi architecto non dolor.
-          <br /><br />
-          Autem consectetur et voluptatum labore accusantium magni. <br />
-          Laudantium quia vitae quas provident nostrum adipisci.
         </p>
 
         <div className="mt-10">
-          <h2 className="font-semibold text-xl mb-4">Social Media</h2>
+          <h2 className="font-semibold text-xl mb-5">Social Media</h2>
 
           <ul className="flex gap-3">
             {displaySocialMediaIcons()}

@@ -4,6 +4,7 @@ import {signIn, signOut, useSession} from "next-auth/react";
 
 import {api} from "~/utils/api";
 import {Header} from "~/components/Header";
+import {AboutMe} from "~/components/AboutMe";
 
 const Home: NextPage = () => {
   const hello = api.example.hello.useQuery({text: "from tRPC"});
@@ -16,6 +17,7 @@ const Home: NextPage = () => {
 
       <main className="container mx-auto p-4 max-w-xl md:max-w-5xl min-h-full">
         <Header />
+        <AboutMe />
         {hello.data ? hello.data.greeting : "Loading tRPC query..."}
         <AuthShowcase />
       </main>
