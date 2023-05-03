@@ -30,22 +30,22 @@ const Header = () => {
   }
 
   return (
-    <header className="grid md:grid-cols-[320px_1fr] gap-10 py-6">
+    <header className="grid md:grid-cols-[320px_1fr] gap-10 py-6 mb-6">
       <div className="h-64 md:h-96 bg-slate-300 rounded-lg overflow-hidden">
         {/* <Image /> */}
       </div>
 
       <div className="flex flex-col justify-center">
         <h1 className="font-bold text-3xl md:text-4xl mb-5">Hi! I am John Doe</h1>
-        <p className="text-md text-slate-700 leading-6">
+        <p className="text-md text-slate-700 leading-7">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
-          Nihil incidunt accusamus mollitia exercitationem sapiente quasi qui eligendi architecto non dolor.
+          Nihil incidunt accusamus mollitia exercitationem sapiente quasi.
         </p>
 
         <div className="mt-10">
-          <h2 className="font-semibold text-xl mb-5">Social Media</h2>
+          <h2 className="font-semibold text-lg mb-5">Social Media</h2>
 
-          <ul className="flex gap-3">
+          <ul className="flex gap-2">
             {displaySocialMediaIcons()}
           </ul>
         </div>
@@ -68,7 +68,7 @@ const SocialMediaItem = ({name, icon: Icon, url}: SocialMediaItemProps) => {
         className="flex items-center justify-center w-8 h-8 md:w-6 md:h-6"
         rel="noopener noreferrer"
         target="_blank">
-        <Icon className="w-6 h-6 md:w-4 md:h-4" />
+        <Icon className="w-6 h-6 md:w-4 md:h-4 fill-slate-500" />
         <span className="sr-only">{name}</span>
       </a>
     </li>
