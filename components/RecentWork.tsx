@@ -1,16 +1,15 @@
 import React from "react";
+import {PageSection} from "./generics/PageSection";
 
 const RecentWork = () => {
   return (
-    <section className="py-6 mb-6">
-      <h2 className="font-semibold text-2xl mb-5">Recent Work</h2>
-
+    <PageSection heading="Recent Work">
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
         <RecentWorkItem />
         <RecentWorkItem />
         <RecentWorkItem />
       </div>
-    </section>
+    </PageSection>
   );
 };
 

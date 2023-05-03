@@ -6,18 +6,18 @@ import LinkedInSvg from "~/public/svgs/linkedin.svg";
 const socialMedia: Array<SocialMediaItemProps> = [
   {
     name: "Github",
-    icon: GithubSvg,
-    url: "https://github.com/"
+    url: "https://github.com/",
+    icon: GithubSvg
   },
   {
     name: "Twitter",
-    icon: TwitterSvg,
-    url: "https://twitter.com/"
+    url: "https://twitter.com/",
+    icon: TwitterSvg
   },
   {
     name: "LinkedIn",
-    icon: LinkedInSvg,
-    url: "https://www.linkedin.com/"
+    url: "https://www.linkedin.com/",
+    icon: LinkedInSvg
   }
 ];
 
@@ -56,11 +56,11 @@ const Header = () => {
 
 type SocialMediaItemProps = {
   name: string;
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
   url: string;
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
-const SocialMediaItem = ({name, icon: Icon, url}: SocialMediaItemProps) => {
+const SocialMediaItem = ({name, url, icon: Icon}: SocialMediaItemProps) => {
   return (
     <li>
       <a
