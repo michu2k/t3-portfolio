@@ -3,8 +3,8 @@ import {PageSection} from "./generics/PageSection";
 
 const RecentWork = () => {
   return (
-    <PageSection heading="Recent Work">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <PageSection heading="Recent Work" className="py-12 bg-slate-50">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <RecentWorkItem />
         <RecentWorkItem />
         <RecentWorkItem />
