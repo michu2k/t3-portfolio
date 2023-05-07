@@ -39,7 +39,7 @@ const KeepInTouch = () => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit? Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </p>
 
-      <ul className="flex flex-col gap-6 mt-10">
+      <ul className="flex flex-col gap-8 mt-10">
         {displayContactItems()}
       </ul>
     </PageSection>
