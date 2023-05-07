@@ -2,6 +2,7 @@ import React from "react";
 import GithubSvg from "~/public/svgs/github.svg";
 import TwitterSvg from "~/public/svgs/twitter.svg";
 import LinkedInSvg from "~/public/svgs/linkedin.svg";
+import InstagramSvg from "~/public/svgs/instagram.svg";
 
 const socialMedia: Array<SocialMediaItemProps> = [
   {
@@ -18,6 +19,11 @@ const socialMedia: Array<SocialMediaItemProps> = [
     name: "LinkedIn",
     url: "https://www.linkedin.com/",
     icon: LinkedInSvg
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/",
+    icon: InstagramSvg
   }
 ];
 
@@ -31,22 +37,21 @@ const Header = () => {
 
   return (
     <header className="py-10 px-4 md:px-8">
-      <div className="max-w-xl md:max-w-4xl mx-auto grid md:grid-cols-[320px_1fr] gap-8">
-        <div className="h-64 md:h-96 bg-slate-300 rounded-lg overflow-hidden">
+      <div className="max-w-xl md:max-w-4xl mx-auto grid md:grid-cols-[20rem_1fr] gap-8">
+        <div className="h-72 md:h-96 bg-slate-300 rounded-lg overflow-hidden">
           {/* <Image /> */}
         </div>
 
         <div className="flex flex-col justify-center">
-          <h1 className="font-bold text-3xl md:text-4xl mb-5">Hi! I am John Doe</h1>
-          <p className="text-md text-slate-700 leading-7">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
-          Nihil incidunt accusamus mollitia exercitationem sapiente quasi.
+          <span className="font-semibold text-xl mb-2">Hello!</span>
+          <h1 className="font-bold text-3xl lg:text-4xl mb-4">I am John Doe</h1>
+          <p className="text-md text-slate-600 leading-7">
+            Full-time <strong>JavaScript</strong> developer.
+            I am specializing in creating dynamic and user-friendly web applications using modern techniques and tools.
           </p>
 
           <div className="mt-10">
-            <h2 className="font-semibold text-lg mb-5">Social Media</h2>
-
-            <ul className="flex gap-4">
+            <ul className="flex gap-4" aria-label="Social media">
               {displaySocialMediaIcons()}
             </ul>
           </div>
@@ -67,10 +72,16 @@ const SocialMediaItem = ({name, url, icon: Icon}: SocialMediaItemProps) => {
     <li>
       <a
         href={url}
-        className="flex items-center justify-center w-6 h-6 md:w-5 md:h-5"
+        className="group flex items-center justify-center w-6 h-6 md:w-5 md:h-5"
         rel="noopener noreferrer"
         target="_blank">
-        <Icon className="w-6 h-6 md:w-5 md:h-5 fill-slate-500" />
+        <Icon
+          className="
+            w-6 h-6 md:w-5 md:h-5
+          fill-slate-500
+          group-hover:fill-primary group-focus:fill-primary
+            transition-colors"
+          aria-hidden="true" />
         <span className="sr-only">{name}</span>
       </a>
     </li>
