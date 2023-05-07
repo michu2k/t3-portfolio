@@ -3,7 +3,7 @@ import {PageSection} from "./generics/PageSection";
 
 const AboutMe = () => {
   return (
-    <PageSection heading="About Me">
+    <PageSection upperHeading="About Me" heading="JavaScript developer & UI designer">
       <p className="text-md text-slate-700 leading-7">
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
         Nihil incidunt accusamus mollitia exercitationem sapiente quasi qui eligendi architecto non dolor.

@@ -19,10 +19,10 @@ const Home: NextPage = () => {
 
       <main className="sm:px-4 md:px-8 mx-auto md:max-w-7xl min-h-full">
         <Header />
-        <hr className="max-w-xl md:max-w-4xl mx-auto h-px my-4 dark:bg-slate-700" />
+        <hr className="max-w-xl md:max-w-4xl mx-auto h-px bg-slate-200 border-0" />
         <AboutMe />
         <RecentWork />
-        {/* <hr className="max-w-xl md:max-w-4xl mx-auto h-px my-4 dark:bg-slate-700" /> */}
+        {/* <hr className="max-w-xl md:max-w-4xl mx-auto h-px bg-slate-200 border-0" /> */}
         <KeepInTouch />
         {/*   {hello.data ? hello.data.greeting : "Loading tRPC query..."} */}
         <AuthShowcase />

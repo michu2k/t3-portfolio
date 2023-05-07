@@ -6,16 +6,19 @@ import EnvelopeSvg from "~/public/svgs/envelope.svg";
 
 const socialMedia: Array<ContactItemProps> = [
   {
+    id: "address",
     name: "Łódź, Poland",
     text: "Drewnowska 58",
     icon: HouseSvg
   },
   {
+    id: "phone",
     name: "700-999-3737",
     text: "Monday to Friday 10am to 6pm",
     icon: PhoneSvg
   },
   {
+    id: "email",
     name: "contact@portfolio.com",
     text: "Send your message anytime",
     icon: EnvelopeSvg
@@ -26,12 +29,12 @@ const KeepInTouch = () => {
 
   function displayContactItems() {
     return socialMedia.map((item) => (
-      <ContactItem key={item.name} {...item} />
+      <ContactItem key={item.id} {...item} />
     ));
   }
 
   return (
-    <PageSection heading="Keep in touch">
+    <PageSection upperHeading="Contact" heading="Keep in touch">
       <p className="text-md text-slate-700 leading-7">
         Lorem ipsum dolor sit amet consectetur adipisicing elit? Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </p>
@@ -44,7 +47,8 @@ const KeepInTouch = () => {
 };
 
 type ContactItemProps = {
-  name: string;
+  id: string;
+  name: string | React.ReactElement;
   text: string;
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
@@ -54,7 +58,7 @@ const ContactItem = ({name, icon: Icon, text}: ContactItemProps) => {
     <li className="flex items-center gap-4">
       <Icon className="w-5 h-5 fill-slate-500" />
 
-      <div>
+      <div className="flex-1">
         <p className="font-semibold text-md text-slate-700">{name}</p>
         <p className="text-sm text-slate-500">{text}</p>
       </div>
