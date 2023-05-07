@@ -45,7 +45,7 @@ const Header = () => {
         <div className="flex flex-col justify-center">
           <span className="font-semibold text-xl mb-2">Hello!</span>
           <h1 className="font-bold text-3xl lg:text-4xl mb-4">I am John Doe</h1>
-          <p className="text-md text-slate-700 leading-7">
+          <p className="text-md text-slate-600 leading-7">
             Full-time <strong>JavaScript</strong> developer.
             I am specializing in creating dynamic and user-friendly web applications using modern techniques and tools.
           </p>
@@ -76,10 +76,11 @@ const SocialMediaItem = ({name, url, icon: Icon}: SocialMediaItemProps) => {
         rel="noopener noreferrer"
         target="_blank">
         <Icon
-          className="w-6 h-6 md:w-5 md:h-5
+          className="
+            w-6 h-6 md:w-5 md:h-5
           fill-slate-500
-          group-hover:fill-primary
-          group-focus:fill-primary"
+          group-hover:fill-primary group-focus:fill-primary
+            transition-colors"
           aria-hidden="true" />
         <span className="sr-only">{name}</span>
       </a>

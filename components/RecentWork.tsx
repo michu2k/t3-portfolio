@@ -50,8 +50,8 @@ const RecentWorkItem = ({id, name, description}: RecentWorkItemProps) => {
       </div>
 
       <div className="flex flex-col items-start py-4">
-        <p className="font-semibold text-xl mb-4 inline-flex rounded-sm">{name}</p>
-        <p className="text-sm inline-flex rounded-sm leading-6 text-slate-700">
+        <p className="font-semibold text-xl mb-4 inline-flex rounded-sm text-slate-700">{name}</p>
+        <p className="text-sm inline-flex rounded-sm leading-6 text-slate-600">
           {description}
         </p>
       </div>

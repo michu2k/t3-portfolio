@@ -35,7 +35,7 @@ const KeepInTouch = () => {
 
   return (
     <PageSection upperHeading="Contact" heading="Keep in touch">
-      <p className="text-md text-slate-700 leading-7">
+      <p className="text-md text-slate-600 leading-7">
         Lorem ipsum dolor sit amet consectetur adipisicing elit? Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </p>
 
@@ -60,7 +60,7 @@ const ContactItem = ({name, icon: Icon, text}: ContactItemProps) => {
 
       <div className="flex-1">
         <p className="font-semibold text-md text-slate-700">{name}</p>
-        <p className="text-sm text-slate-500">{text}</p>
+        <p className="text-sm text-slate-600">{text}</p>
       </div>
     </li>
   );
