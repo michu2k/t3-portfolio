@@ -21,7 +21,7 @@ const socialMedia: Array<SocialMediaItemProps> = [
     icon: LinkedInSvg
   },
   {
-    name: "Instagra,",
+    name: "Instagram",
     url: "https://www.instagram.com/",
     icon: InstagramSvg
   }
@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <header className="py-10 px-4 md:px-8">
-      <div className="max-w-xl md:max-w-4xl mx-auto grid md:grid-cols-[320px_1fr] gap-8">
+      <div className="max-w-xl md:max-w-4xl mx-auto grid md:grid-cols-[20rem_1fr] gap-8">
         <div className="h-72 md:h-96 bg-slate-300 rounded-lg overflow-hidden">
           {/* <Image /> */}
         </div>

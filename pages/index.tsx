@@ -7,6 +7,7 @@ import {Header} from "~/components/Header";
 import {AboutMe} from "~/components/AboutMe";
 import {RecentWork} from "~/components/RecentWork";
 import {KeepInTouch} from "~/components/KeepInTouch";
+import {Footer} from "~/components/Footer";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({text: "from tRPC"});
@@ -22,8 +23,9 @@ const Home: NextPage = () => {
         <hr className="max-w-xl md:max-w-4xl mx-auto h-px bg-slate-200 border-0" />
         <AboutMe />
         <RecentWork />
-        {/* <hr className="max-w-xl md:max-w-4xl mx-auto h-px bg-slate-200 border-0" /> */}
         <KeepInTouch />
+        <hr className="max-w-xl md:max-w-4xl mx-auto h-px bg-slate-200 border-0" />
+        <Footer />
         {/*   {hello.data ? hello.data.greeting : "Loading tRPC query..."} */}
         <AuthShowcase />
       </main>
