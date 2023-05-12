@@ -28,13 +28,13 @@ const myServicesItems: Array<ServiceItemProps> = [
 const MyServices = () => {
 
   function displayServicesItems() {
-    return myServicesItems.map((item, idx) => (
+    return myServicesItems.map((item) => (
       <ServiceItem key={item.id} {...item} />
     ));
   }
 
   return (
-    <PageSection upperHeading="My services" heading="What I do" className="bg-stone-50">
+    <PageSection upperHeading="My services" heading="What I do" className="bg-neutral-50">
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayServicesItems()}
       </div>
