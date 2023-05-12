@@ -5,6 +5,7 @@ import {signIn, signOut, useSession} from "next-auth/react";
 import {api} from "~/utils/api";
 import {Header} from "~/components/Header";
 import {AboutMe} from "~/components/AboutMe";
+import {MyServices} from "~/components/MyServices";
 import {RecentWork} from "~/components/RecentWork";
 import {KeepInTouch} from "~/components/KeepInTouch";
 import {Footer} from "~/components/Footer";
@@ -22,6 +23,7 @@ const Home: NextPage = () => {
         <Header />
         <hr className="max-w-xl md:max-w-4xl mx-auto h-px bg-slate-200 border-0" />
         <AboutMe />
+        <MyServices />
         <RecentWork />
         <KeepInTouch />
         <hr className="max-w-xl md:max-w-4xl mx-auto h-px bg-slate-200 border-0" />

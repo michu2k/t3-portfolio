@@ -29,7 +29,7 @@ const RecentWork = () => {
   }
 
   return (
-    <PageSection upperHeading="Portfolio" heading="My recent work" className="bg-slate-50">
+    <PageSection upperHeading="Portfolio" heading="My recent work" className="bg-stone-50">
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayRecentWorkItems()}
       </div>
@@ -48,14 +48,14 @@ const RecentWorkItem = ({id, name, description}: RecentWorkItemProps) => {
   const itemPageUrl = `/portfolio/${id}`;
 
   return (
-    <article className="w-auto rounded-lg shrink-0 flex flex-col">
+    <article className="w-auto shrink-0">
       <Link href={itemPageUrl}>
-        <div className="w-auto h-56 rounded-lg bg-slate-300 shrink-0">
+        <div className="w-auto h-56 rounded bg-slate-300 shrink-0">
           {/* <Image /> */}
         </div>
 
         <div className="flex flex-col items-start py-4">
-          <p className="font-semibold text-xl mb-4 inline-flex rounded-sm text-slate-700">
+          <p className="font-semibold text-lg mb-4 inline-flex rounded-sm text-slate-700">
             {name}
           </p>
 
