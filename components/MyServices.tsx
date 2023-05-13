@@ -34,8 +34,8 @@ const MyServices = () => {
   }
 
   return (
-    <PageSection upperHeading="My services" heading="What I do" className="bg-neutral-50">
-      <div className="grid md:grid-cols-3 gap-8 md:gap-4 lg:gap-8">
+    <PageSection heading="What I do">
+      <div className="grid md:grid-cols-3 gap-6 md:gap-4 lg:gap-6">
         {displayServicesItems()}
       </div>
     </PageSection>
@@ -56,7 +56,7 @@ const ServiceItem = ({name, description, icon: Icon}: ServiceItemProps) => {
       flex flex-col items-center shrink-0
       w-auto
       rounded
-      bg-white
+      bg-neutral-50
       py-8 px-4">
       <span className="
         font-bold text-lg text-slate-700
@@ -64,21 +64,23 @@ const ServiceItem = ({name, description, icon: Icon}: ServiceItemProps) => {
         w-20 h-20
         mb-5
         rounded-full
-        bg-slate-100">
+        bg-neutral-100">
         <Icon className="w-8 h-8 fill-slate-500 group-hover:fill-primary transition-colors" />
       </span>
 
-      <p className="font-semibold text-md inline-flex rounded-sm text-slate-700">
+      <h3 className="font-semibold text-md inline-flex mb-4">
         {name}
-      </p>
-
-      <hr className="shrink-0 w-12 h-px bg-slate-200 border-0 my-6" />
+      </h3>
 
       <p className="text-sm text-center inline-flex rounded-sm leading-6 text-slate-600">
         {description}
       </p>
 
-      <button className="font-medium text-sm mt-6 h-8 px-2 text-slate-700 border-b-2 border-primary">
+      <button className="
+        font-medium text-sm text-slate-900
+        mt-6 h-8 px-2
+        border-b-2 border-slate-800
+        group-hover:border-primary transition-colors">
         Learn more
       </button>
     </article>

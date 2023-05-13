@@ -34,7 +34,7 @@ const KeepInTouch = () => {
   }
 
   return (
-    <PageSection upperHeading="Contact" heading="Keep in touch">
+    <PageSection heading="Keep in touch">
       <p className="text-md text-slate-600 leading-7">
         Lorem ipsum dolor sit amet consectetur adipisicing elit? Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </p>

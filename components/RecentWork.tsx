@@ -17,6 +17,16 @@ const recentWorkItems: Array<RecentWorkItemProps> = [
     id: 3,
     name: "Dolor Sit Amet",
     description: "Consistency across products with a design system."
+  },
+  {
+    id: 4,
+    name: "Lorem Ipsum",
+    description: "Refresh the website and administration panel using the Tailwind framework."
+  },
+  {
+    id: 5,
+    name: "Dolor Sit Amet",
+    description: "Consistency across products with a design system."
   }
 ];
 
@@ -29,7 +39,7 @@ const RecentWork = () => {
   }
 
   return (
-    <PageSection upperHeading="Portfolio" heading="My recent work" className="bg-neutral-50">
+    <PageSection heading="Portfolio" className="bg-neutral-50">
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayRecentWorkItems()}
       </div>
@@ -50,7 +60,7 @@ const RecentWorkItem = ({id, name, description}: RecentWorkItemProps) => {
   return (
     <article className="w-auto shrink-0">
       <Link href={itemPageUrl}>
-        <div className="w-auto h-56 rounded bg-slate-300 shrink-0">
+        <div className="w-auto h-64 rounded bg-slate-300 shrink-0">
           {/* <Image /> */}
         </div>
 
