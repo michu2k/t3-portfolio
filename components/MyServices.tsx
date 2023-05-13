@@ -1,8 +1,8 @@
 import React from "react";
 import {PageSection} from "./generics/PageSection";
-import CodeSvg from "~/public/svgs/code.svg";
-import DesignSvg from "~/public/svgs/design.svg";
-import WriteSvg from "~/public/svgs/write.svg";
+import CodeSvg from "~/public/svgs/services/code.svg";
+import DesignSvg from "~/public/svgs/services/design.svg";
+import WriteSvg from "~/public/svgs/services/write.svg";
 
 const myServicesItems: Array<ServiceItemProps> = [
   {
@@ -35,7 +35,7 @@ const MyServices = () => {
 
   return (
     <PageSection upperHeading="My services" heading="What I do" className="bg-neutral-50">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-3 gap-8 md:gap-4 lg:gap-8">
         {displayServicesItems()}
       </div>
     </PageSection>
@@ -64,11 +64,11 @@ const ServiceItem = ({name, description, icon: Icon}: ServiceItemProps) => {
         w-20 h-20
         mb-5
         rounded-full
-        bg-slate-100 ">
-        <Icon className="w-10 h-10 fill-slate-500 group-hover:fill-primary transition-colors" />
+        bg-slate-100">
+        <Icon className="w-8 h-8 fill-slate-500 group-hover:fill-primary transition-colors" />
       </span>
 
-      <p className="font-semibold text-lg inline-flex rounded-sm text-slate-700">
+      <p className="font-semibold text-md inline-flex rounded-sm text-slate-700">
         {name}
       </p>
 

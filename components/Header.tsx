@@ -1,8 +1,8 @@
 import React from "react";
-import GithubSvg from "~/public/svgs/github.svg";
-import TwitterSvg from "~/public/svgs/twitter.svg";
-import LinkedInSvg from "~/public/svgs/linkedin.svg";
-import InstagramSvg from "~/public/svgs/instagram.svg";
+import GithubSvg from "~/public/svgs/socialMedia/github.svg";
+import TwitterSvg from "~/public/svgs/socialMedia/twitter.svg";
+import LinkedInSvg from "~/public/svgs/socialMedia/linkedin.svg";
+import InstagramSvg from "~/public/svgs/socialMedia/instagram.svg";
 
 const socialMedia: Array<SocialMediaItemProps> = [
   {

@@ -6,6 +6,7 @@ import {api} from "~/utils/api";
 import {Header} from "~/components/Header";
 import {AboutMe} from "~/components/AboutMe";
 import {MyServices} from "~/components/MyServices";
+import {Technologies} from "~/components/Technologies";
 import {RecentWork} from "~/components/RecentWork";
 import {KeepInTouch} from "~/components/KeepInTouch";
 import {Footer} from "~/components/Footer";
@@ -24,6 +25,7 @@ const Home: NextPage = () => {
         <hr className="max-w-xl md:max-w-4xl mx-auto h-px bg-slate-200 border-0" />
         <AboutMe />
         <MyServices />
+        <Technologies />
         <RecentWork />
         <KeepInTouch />
         <hr className="max-w-xl md:max-w-4xl mx-auto h-px bg-slate-200 border-0" />
