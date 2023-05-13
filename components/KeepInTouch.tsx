@@ -55,8 +55,8 @@ type ContactItemProps = {
 
 const ContactItem = ({name, icon: Icon, text}: ContactItemProps) => {
   return (
-    <li className="flex items-center gap-4">
-      <Icon className="w-5 h-5 fill-slate-500" />
+    <li className="flex items-center gap-6">
+      <Icon className="w-5 h-5 fill-slate-600" />
 
       <div className="flex-1">
         <p className="font-semibold text-md text-slate-700">{name}</p>

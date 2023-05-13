@@ -39,7 +39,7 @@ const RecentWork = () => {
   }
 
   return (
-    <PageSection heading="Portfolio" className="bg-neutral-50">
+    <PageSection heading="Recent work">
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayRecentWorkItems()}
       </div>

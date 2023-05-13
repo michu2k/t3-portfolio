@@ -25,7 +25,7 @@ const AboutMe = () => {
 
   function displaySkills() {
     return skills.map((name) => (
-      <li key={name} className="bg-neutral-50 px-4 rounded">
+      <li key={name} className="bg-neutral-50 px-3 rounded">
         <p className="font-medium text-xs text-slate-700 leading-8">{name}</p>
       </li>
     ));

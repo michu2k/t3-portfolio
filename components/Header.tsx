@@ -86,14 +86,14 @@ const SocialMediaItem = ({name, url, icon: Icon}: SocialMediaItemProps) => {
     <li>
       <a
         href={url}
-        className="group flex items-center justify-center w-6 h-6 md:w-5 md:h-5"
+        className="group flex items-center justify-center w-6 h-6"
         rel="noopener noreferrer"
         target="_blank">
         <Icon
           className="
-            w-6 h-6 md:w-5 md:h-5
-          fill-slate-600
-          group-hover:fill-primary group-focus:fill-primary
+            w-5 h-5
+            fill-slate-600
+            group-hover:fill-primary group-focus:fill-primary
             transition-colors"
           aria-hidden="true" />
         <span className="sr-only">{name}</span>

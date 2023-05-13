@@ -24,9 +24,9 @@ const Home: NextPage = () => {
         <Header />
         <Line />
         <AboutMe />
-        <Line />
         <MyServices />
         <RecentWork />
+        <Line />
         <KeepInTouch />
         <Line />
         <Footer />
