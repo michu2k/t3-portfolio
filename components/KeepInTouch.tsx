@@ -1,8 +1,8 @@
 import React from "react";
 import {PageSection} from "./generics/PageSection";
-import HouseSvg from "~/public/svgs/house.svg";
-import PhoneSvg from "~/public/svgs/phone.svg";
-import EnvelopeSvg from "~/public/svgs/envelope.svg";
+import HouseSvg from "~/public/svgs/contact/house.svg";
+import PhoneSvg from "~/public/svgs/contact/phone.svg";
+import EnvelopeSvg from "~/public/svgs/contact/envelope.svg";
 
 const socialMedia: Array<ContactItemProps> = [
   {
