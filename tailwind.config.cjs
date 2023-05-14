@@ -11,7 +11,7 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", ...defaultTheme.fontFamily.sans]
+        sans: ["Poppins", ...defaultTheme.fontFamily.sans]
       },
       colors: {
         primary: "#38bdf8" // sky.400
