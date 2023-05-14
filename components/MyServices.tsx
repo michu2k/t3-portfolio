@@ -35,6 +35,10 @@ const MyServices = () => {
 
   return (
     <PageSection heading="What I do" className="bg-neutral-50">
+      <p className="text-md text-slate-600 leading-8 mb-10 max-w-xl">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti pariatur quisquam blanditiis at quo esse.
+      </p>
+
       <div className="grid md:grid-cols-3 gap-6 md:gap-4 lg:gap-6">
         {displayServicesItems()}
       </div>

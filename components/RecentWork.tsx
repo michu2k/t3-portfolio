@@ -40,6 +40,10 @@ const RecentWork = () => {
 
   return (
     <PageSection heading="Recent work">
+      <p className="text-md text-slate-600 leading-8 mb-10 max-w-xl">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti pariatur quisquam blanditiis at quo esse.
+      </p>
+
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayRecentWorkItems()}
       </div>
