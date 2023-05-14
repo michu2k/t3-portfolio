@@ -44,7 +44,7 @@ const AboutMe = () => {
         <h3 className="font-semibold text-lg mb-3">My Skills</h3>
         {/* <hr className="h-1 w-10 mb-4 bg-primary border-0 rounded-md" /> */}
         <p className="text-md text-slate-600 leading-8 mb-8">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Tools and programming languages that I use daily and have experience with.
         </p>
 
         <ul className="flex flex-wrap gap-2">
