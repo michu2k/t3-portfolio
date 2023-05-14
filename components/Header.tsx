@@ -43,7 +43,7 @@ const Header = () => {
         </div>
 
         <div className="flex flex-col justify-center items-start">
-          <h1 className="font-bold text-4xl lg:text-6xl mb-8">Allison Doe</h1>
+          <h1 className="font-bold text-4xl lg:text-5xl mb-8">Allison Doe</h1>
           <p className="text-md text-slate-600 leading-8 max-w-xl mb-8">
           Full-time <strong className="text-slate-700">JavaScript</strong> developer
           specialized in creating dynamic and user-friendly web applications using modern techniques and tools.
