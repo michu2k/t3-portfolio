@@ -8,6 +8,7 @@ import {Header} from "~/components/Header";
 import {AboutMe} from "~/components/AboutMe";
 import {MyServices} from "~/components/MyServices";
 import {RecentWork} from "~/components/RecentWork";
+import {Experience} from "~/components/Experience";
 import {KeepInTouch} from "~/components/KeepInTouch";
 import {Footer} from "~/components/Footer";
 
@@ -26,6 +27,8 @@ const Home: NextPage = () => {
         <AboutMe />
         <MyServices />
         <RecentWork />
+        <Line />
+        <Experience />
         <Line />
         <KeepInTouch />
         <Line />
