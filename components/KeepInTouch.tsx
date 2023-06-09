@@ -1,5 +1,6 @@
 import React from "react";
 import {PageSection} from "./generics/PageSection";
+import {SectionText} from "./generics/SectionText";
 import HouseSvg from "~/public/svgs/contact/house.svg";
 import PhoneSvg from "~/public/svgs/contact/phone.svg";
 import EnvelopeSvg from "~/public/svgs/contact/envelope.svg";
@@ -35,9 +36,9 @@ const KeepInTouch = () => {
 
   return (
     <PageSection heading="Keep in touch">
-      <p className="text-md text-slate-600 leading-8 mb-10">
+      <SectionText>
         Lorem ipsum dolor sit amet consectetur adipisicing elit? Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-      </p>
+      </SectionText>
 
       <ul className="flex flex-col gap-8">
         {displayContactItems()}

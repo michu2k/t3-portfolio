@@ -1,5 +1,6 @@
 import React from "react";
 import {PageSection} from "./generics/PageSection";
+import {SectionText} from "./generics/SectionText";
 import CodeSvg from "~/public/svgs/services/code.svg";
 import DesignSvg from "~/public/svgs/services/design.svg";
 import WriteSvg from "~/public/svgs/services/write.svg";
@@ -35,9 +36,9 @@ const MyServices = () => {
 
   return (
     <PageSection heading="What I do" className="bg-neutral-50">
-      <p className="text-md text-slate-600 leading-8 mb-10 max-w-xl">
+      <SectionText>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti pariatur quisquam blanditiis at quo esse.
-      </p>
+      </SectionText>
 
       <div className="grid md:grid-cols-3 gap-6 md:gap-4 lg:gap-6">
         {displayServicesItems()}

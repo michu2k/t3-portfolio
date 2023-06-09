@@ -1,0 +1,17 @@
+import type {PropsWithChildren} from "react";
+import {memo} from "react";
+import React from "react";
+
+type SectionTextProps = PropsWithChildren
+
+const SectionText = memo(({children}: SectionTextProps) => {
+  return (
+    <p className="text-md text-slate-600 leading-8 mb-10 max-w-xl">
+      {children}
+    </p>
+  );
+});
+
+SectionText.displayName = "SectionText";
+
+export {SectionText};
