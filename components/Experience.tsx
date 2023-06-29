@@ -70,11 +70,11 @@ const ExperienceItem = ({from, to, companyName, position, responsibilities}: Exp
     <li className="flex flex-col items-start gap-4 md:flex-row md:gap-6">
       <div className="flex flex-col justify-center md:min-h-[4rem] ">
         <span className="
-          text-xs text-slate-600 text-center
+          text-xs text-slate-700 text-center
           py-2 px-4 rounded-full
           min-w-[10rem]
           flex-inline
-          bg-slate-100">
+          bg-neutral-200">
           {from ? format(new Date(from), "MMM yyyy") : "-"} {" - "}
           {to ? format(new Date(to), "MMM yyyy") : "Now"}
         </span>
@@ -83,7 +83,7 @@ const ExperienceItem = ({from, to, companyName, position, responsibilities}: Exp
       <div className="flex flex-col gap-4">
         <div className="flex flex-col justify-center md:min-h-[4rem]">
           <p className="font-semibold text-lg leading-8 text-slate-700">{position}</p>
-          <p className="font-semibold text-sm text-slate-600 leading-6">
+          <p className="font-semibold text-sm text-slate-600 leading-7">
             {companyName}
           </p>
         </div>
@@ -92,7 +92,7 @@ const ExperienceItem = ({from, to, companyName, position, responsibilities}: Exp
           {responsibilities?.map((item, idx) => (
             <li key={idx} className="flex items-start gap-2">
               <span className="">.</span>
-              <p className="text-sm text-slate-600 leading-7">{item}</p>
+              <p className="text-sm text-slate-600 leading-8">{item}</p>
             </li>
           ))}
         </ul>

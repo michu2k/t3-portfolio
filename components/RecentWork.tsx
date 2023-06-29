@@ -2,32 +2,68 @@ import React from "react";
 import Link from "next/link";
 import {PageSection} from "./generics/PageSection";
 import {SectionText} from "./generics/SectionText";
+import Image from "next/image";
 
 const recentWorkItems: Array<RecentWorkItemProps> = [
   {
     id: 1,
     name: "Lorem",
-    description: "Consistency across products with a design system. Improved developer experience and more efficient engineering."
+    description: "Consistency across products with a design system. Improved developer experience and more efficient engineering.",
+    tags: ["React", "Tailwind", "Typescript"],
+    image: {
+      thumbnail: "https://picsum.photos/id/14/600/400",
+      full: "https://picsum.photos/id/14/2500/1667"
+    }
   },
   {
     id: 2,
     name: "Lorem Ipsum",
-    description: "Refresh the website and administration panel using the Tailwind framework."
+    description: "Refresh the website and administration panel using the Tailwind framework.",
+    tags: ["Next.js", "Tailwind", "Typescript"],
+    image: {
+      thumbnail: "https://picsum.photos/id/27/600/400",
+      full: "https://picsum.photos/id/27//3264/1830"
+    }
   },
   {
     id: 3,
     name: "Dolor Sit Amet",
-    description: "Consistency across products with a design system."
+    description: "Consistency across products with a design system.",
+    tags: ["Next.js", "Styled components", "Typescript"],
+    image: {
+      thumbnail: "https://picsum.photos/id/58/600/400",
+      full: "https://picsum.photos/id/58/1280/853"
+    }
   },
   {
     id: 4,
     name: "Lorem Ipsum",
-    description: "Refresh the website and administration panel using the Tailwind framework."
+    description: "Refresh the website and administration panel using the Tailwind framework.",
+    tags: ["Wordpress", "Javascript", "Bulma", "SCSS"],
+    image: {
+      thumbnail: "https://picsum.photos/id/68/600/400",
+      full: "https://picsum.photos/id/68/4608/3072"
+    }
   },
   {
     id: 5,
     name: "Dolor Sit Amet",
-    description: "Consistency across products with a design system."
+    description: "Consistency across products with a design system.",
+    tags: ["React", "Tailwind", "Typescript"],
+    image: {
+      thumbnail: "https://picsum.photos/id/250/600/400",
+      full: "https://picsum.photos/id/250/4928/3264"
+    }
+  },
+  {
+    id: 6,
+    name: "Dolor Sit Amet & Hello World",
+    description: "Consistency across products with a design system.",
+    tags: ["React", "Typescript"],
+    image: {
+      thumbnail: "https://picsum.photos/id/244/600/400",
+      full: "https://picsum.photos/id/244/4288/2848"
+    }
   }
 ];
 
@@ -45,6 +81,7 @@ const RecentWork = () => {
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti pariatur quisquam blanditiis at quo esse.
       </SectionText>
 
+      {/* columns-1 md:columns-2 lg:columns-3 gap-8 */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayRecentWorkItems()}
       </div>
@@ -52,21 +89,27 @@ const RecentWork = () => {
   );
 };
 
+type RecentWorkItemImage = {
+  thumbnail: string;
+  full: string;
+}
+
 type RecentWorkItemProps = {
   id: number;
   name: string;
   description: string;
+  tags: Array<string>;
+  image: RecentWorkItemImage;
 }
 
-const RecentWorkItem = ({id, name, description}: RecentWorkItemProps) => {
-
+const RecentWorkItem = ({id, name, description, image}: RecentWorkItemProps) => {
   const itemPageUrl = `/portfolio/${id}`;
 
   return (
-    <article className="w-auto shrink-0">
+    <article className="break-inside-avoid-column w-auto shrink-0">
       <Link href={itemPageUrl}>
-        <div className="w-auto h-64 rounded bg-slate-300 shrink-0">
-          {/* <Image /> */}
+        <div className={`w-auto h-64 rounded bg-slate-300 shrink-0 relative`}>
+          <Image src={image.thumbnail} fill className="rounded" style={{objectFit: "cover"}} alt="" />
         </div>
 
         <div className="flex flex-col items-start py-4">
@@ -74,7 +117,7 @@ const RecentWorkItem = ({id, name, description}: RecentWorkItemProps) => {
             {name}
           </p>
 
-          <p className="text-sm inline-flex rounded-sm leading-6 text-slate-600">
+          <p className="text-sm inline-flex rounded-sm leading-7 text-slate-600">
             {description}
           </p>
         </div>

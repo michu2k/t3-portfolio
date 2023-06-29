@@ -25,8 +25,8 @@ const AboutMe = () => {
 
   function displaySkills() {
     return skills.map((name) => (
-      <li key={name} className="bg-neutral-50 px-3 rounded">
-        <p className="font-medium text-xs text-slate-700 leading-8">{name}</p>
+      <li key={name} className="bg-neutral-200 px-4 rounded-full">
+        <p className="text-xs text-slate-700 leading-7">{name}</p>
       </li>
     ));
   }
@@ -41,15 +41,12 @@ const AboutMe = () => {
       </p>
 
       <div className="mt-14">
-        <h3 className="font-semibold text-lg mb-3">My Skills</h3>
-        <p className="text-md text-slate-600 leading-8 mb-8">
-          Tools and programming languages that I use daily and have experience with.
-        </p>
+        <h3 className="font-semibold text-lg mb-10">My Skills</h3>
 
         <ul className="flex flex-wrap gap-2">
           {displaySkills()}
           <li className="px-2">
-            <p className="text-xs text-slate-400 leading-8">& more...</p>
+            <p className="text-xs text-slate-400 leading-7">& more...</p>
           </li>
         </ul>
       </div>

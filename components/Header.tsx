@@ -3,6 +3,9 @@ import GithubSvg from "~/public/svgs/socialMedia/github.svg";
 import TwitterSvg from "~/public/svgs/socialMedia/twitter.svg";
 import LinkedInSvg from "~/public/svgs/socialMedia/linkedin.svg";
 import InstagramSvg from "~/public/svgs/socialMedia/instagram.svg";
+import Image from "next/image";
+
+const image = "https://picsum.photos/id/821/4403/2476";
 
 const socialMedia: Array<SocialMediaItemProps> = [
   {
@@ -38,8 +41,8 @@ const Header = () => {
   return (
     <header className="py-14 px-4 md:px-6">
       <div className="min-h-[32rem] max-w-xl md:max-w-5xl mx-auto grid md:grid-cols-[20rem_1fr] gap-8">
-        <div className="h-80 md:h-96 my-auto  bg-slate-300 rounded-lg overflow-hidden">
-          {/* <Image /> */}
+        <div className="h-80 md:h-96 my-auto  bg-slate-300 rounded-lg overflow-hidden relative">
+          <Image src={image} fill alt="" style={{objectFit: "cover"}} />
         </div>
 
         <div className="flex flex-col justify-center items-start">
