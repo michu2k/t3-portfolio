@@ -69,9 +69,9 @@ const ServiceItem = ({name, description, icon: Icon}: ServiceItemProps) => {
         w-12 h-12 md:w-16 md:h-16
         mb-4
         rounded-full
-        bg-slate-100 group-hover:bg-primary
+        group-hover:bg-primary
         transition-colors">
-        <Icon className="w-5 h-5 md:w-7 md:h-7 fill-primary group-hover:fill-white transition-colors" />
+        <Icon className="w-5 h-5 md:w-8 md:h-8 fill-primary group-hover:fill-white transition-colors" />
       </span>
 
       <h3 className="font-semibold text-lg inline-flex mb-4">

@@ -83,7 +83,7 @@ const ExperienceItem = ({from, to, companyName, position, responsibilities}: Exp
       <div className="flex flex-col gap-4">
         <div className="flex flex-col justify-center md:min-h-[4rem]">
           <p className="font-semibold text-lg leading-8 text-slate-700">{position}</p>
-          <p className="font-semibold text-sm text-slate-600 leading-7">
+          <p className="font-semibold text-sm text-slate-500 leading-7">
             {companyName}
           </p>
         </div>
@@ -91,7 +91,14 @@ const ExperienceItem = ({from, to, companyName, position, responsibilities}: Exp
         <ul>
           {responsibilities?.map((item, idx) => (
             <li key={idx} className="flex items-start gap-2">
-              <span className="">.</span>
+              <span className="
+                before:content-['']
+                before:w-1
+                before:h-1
+                before:rounded-full
+                before:bg-slate-500
+                before:mt-[0.875rem]
+                before:block" />
               <p className="text-sm text-slate-600 leading-8">{item}</p>
             </li>
           ))}

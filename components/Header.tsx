@@ -64,13 +64,13 @@ const Header = () => {
               h-12 px-8
               inline-flex items-center
               rounded-md
-              text-md font-semibold text-slate-900
-              border-2 border-slate-800
-              hover:text-white hover:bg-slate-800
+              text-md font-semibold text-primary
+              border-2 border-primary
+              hover:text-white hover:bg-primary
               transition-colors"
             rel="noopener noreferrer"
             target="_blank">
-            Download CV
+              Download CV
           </a>
         </div>
       </div>

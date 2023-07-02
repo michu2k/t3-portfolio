@@ -46,7 +46,7 @@ const AboutMe = () => {
         <ul className="flex flex-wrap gap-2">
           {displaySkills()}
           <li className="px-2">
-            <p className="text-xs text-slate-400 leading-7">& more...</p>
+            <p className="text-xs text-slate-500 leading-7">& more...</p>
           </li>
         </ul>
       </div>

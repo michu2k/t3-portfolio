@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import {PageSection} from "./generics/PageSection";
-import {SectionText} from "./generics/SectionText";
 import Image from "next/image";
 
 const recentWorkItems: Array<RecentWorkItemProps> = [
@@ -77,10 +76,6 @@ const RecentWork = () => {
 
   return (
     <PageSection heading="Recent work">
-      <SectionText>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti pariatur quisquam blanditiis at quo esse.
-      </SectionText>
-
       {/* columns-1 md:columns-2 lg:columns-3 gap-8 */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayRecentWorkItems()}
@@ -106,14 +101,18 @@ const RecentWorkItem = ({id, name, description, image}: RecentWorkItemProps) => 
   const itemPageUrl = `/portfolio/${id}`;
 
   return (
-    <article className="break-inside-avoid-column w-auto shrink-0">
+    <article className="group break-inside-avoid-column w-auto shrink-0">
       <Link href={itemPageUrl}>
         <div className={`w-auto h-64 rounded bg-slate-300 shrink-0 relative`}>
           <Image src={image.thumbnail} fill className="rounded" style={{objectFit: "cover"}} alt="" />
         </div>
 
         <div className="flex flex-col items-start py-4">
-          <p className="font-semibold text-lg mb-4 inline-flex rounded-sm text-slate-700">
+          <p className="
+            font-semibold text-lg text-slate-700
+            mb-4 inline-flex rounded-sm
+          group-hover:text-primary
+            transition-colors">
             {name}
           </p>
 
