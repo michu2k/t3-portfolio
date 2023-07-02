@@ -20,6 +20,15 @@ const config = {
     locales: ["en"],
     defaultLocale: "en"
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "picsum.photos",
+        pathname: "/id/**"
+      }
+    ]
+  },
   webpack(config) {
 
     // Convert *.svg imports to React components

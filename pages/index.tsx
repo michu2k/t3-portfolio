@@ -3,11 +3,12 @@ import Head from "next/head";
 import {signIn, signOut, useSession} from "next-auth/react";
 
 import {api} from "~/utils/api";
+import {Line} from "~/components/generics/Line";
 import {Header} from "~/components/Header";
 import {AboutMe} from "~/components/AboutMe";
 import {MyServices} from "~/components/MyServices";
-import {Technologies} from "~/components/Technologies";
 import {RecentWork} from "~/components/RecentWork";
+import {Experience} from "~/components/Experience";
 import {KeepInTouch} from "~/components/KeepInTouch";
 import {Footer} from "~/components/Footer";
 
@@ -20,15 +21,17 @@ const Home: NextPage = () => {
         <title>T3 Portfolio</title>
       </Head>
 
-      <main className="sm:px-4 md:px-8 mx-auto md:max-w-7xl min-h-full">
+      <main className="sm:px-4 md:px-8 mx-auto min-h-full">
         <Header />
-        <hr className="max-w-xl md:max-w-4xl mx-auto h-px bg-slate-200 border-0" />
+        <Line />
         <AboutMe />
         <MyServices />
-        <Technologies />
         <RecentWork />
+        <Line />
+        <Experience />
+        <Line />
         <KeepInTouch />
-        <hr className="max-w-xl md:max-w-4xl mx-auto h-px bg-slate-200 border-0" />
+        <Line />
         <Footer />
         {/*   {hello.data ? hello.data.greeting : "Loading tRPC query..."} */}
         <AuthShowcase />

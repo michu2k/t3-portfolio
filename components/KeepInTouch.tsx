@@ -1,5 +1,6 @@
 import React from "react";
 import {PageSection} from "./generics/PageSection";
+import {SectionText} from "./generics/SectionText";
 import HouseSvg from "~/public/svgs/contact/house.svg";
 import PhoneSvg from "~/public/svgs/contact/phone.svg";
 import EnvelopeSvg from "~/public/svgs/contact/envelope.svg";
@@ -34,12 +35,12 @@ const KeepInTouch = () => {
   }
 
   return (
-    <PageSection upperHeading="Contact" heading="Keep in touch">
-      <p className="text-md text-slate-600 leading-7">
+    <PageSection heading="Keep in touch">
+      <SectionText>
         Lorem ipsum dolor sit amet consectetur adipisicing elit? Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-      </p>
+      </SectionText>
 
-      <ul className="flex flex-col gap-8 mt-10">
+      <ul className="flex flex-col gap-8">
         {displayContactItems()}
       </ul>
     </PageSection>
@@ -55,8 +56,8 @@ type ContactItemProps = {
 
 const ContactItem = ({name, icon: Icon, text}: ContactItemProps) => {
   return (
-    <li className="flex items-center gap-4">
-      <Icon className="w-5 h-5 fill-slate-500" />
+    <li className="flex items-center gap-6">
+      <Icon className="w-5 h-5 fill-slate-600" />
 
       <div className="flex-1">
         <p className="font-semibold text-md text-slate-700">{name}</p>

@@ -1,13 +1,13 @@
 import {type AppType} from "next/app";
 import {type Session} from "next-auth";
 import {SessionProvider} from "next-auth/react";
-import {Inter} from "next/font/google";
+import {Poppins} from "next/font/google";
 
 import {api} from "~/utils/api";
 
 import "~/styles/globals.css";
 
-const inter = Inter({
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"]
 });
@@ -20,7 +20,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <>
       <style jsx global>{`
         html {
-          font-family: ${inter.style.fontFamily};
+          font-family: ${poppins.style.fontFamily};
         }
       `}</style>
 

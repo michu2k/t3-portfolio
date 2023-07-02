@@ -1,5 +1,6 @@
 import React from "react";
 import {PageSection} from "./generics/PageSection";
+import {SectionText} from "./generics/SectionText";
 import CodeSvg from "~/public/svgs/services/code.svg";
 import DesignSvg from "~/public/svgs/services/design.svg";
 import WriteSvg from "~/public/svgs/services/write.svg";
@@ -8,19 +9,19 @@ const myServicesItems: Array<ServiceItemProps> = [
   {
     id: 1,
     name: "Web Development",
-    description: "lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    description: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis veritatis similique praesentium cum.",
     icon: CodeSvg
   },
   {
     id: 2,
     name: "UX/UI Design",
-    description: "lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    description: "Placeat alias eaque corrupti quam accusamus explicabo optio, qui recusandae expedita magni adipisci dolores.",
     icon: DesignSvg
   },
   {
     id: 3,
     name: "Content writing",
-    description: "lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    description: " Esse nisi illo exercitationem nobis aperiam cum consequatur.",
     icon: WriteSvg
   }
 ];
@@ -34,8 +35,12 @@ const MyServices = () => {
   }
 
   return (
-    <PageSection upperHeading="My services" heading="What I do" className="bg-neutral-50">
-      <div className="grid md:grid-cols-3 gap-8 md:gap-4 lg:gap-8">
+    <PageSection heading="What I do" className="bg-neutral-50">
+      <SectionText>
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti pariatur quisquam blanditiis at quo esse.
+      </SectionText>
+
+      <div className="grid md:grid-cols-3 gap-6 md:gap-4 lg:gap-6">
         {displayServicesItems()}
       </div>
     </PageSection>
@@ -53,34 +58,29 @@ const ServiceItem = ({name, description, icon: Icon}: ServiceItemProps) => {
   return (
     <article className="
       group
-      flex flex-col items-center shrink-0
+      flex flex-col items-start md:items-center shrink-0
       w-auto
       rounded
       bg-white
-      py-8 px-4">
+      py-6 md:py-10 px-4">
       <span className="
         font-bold text-lg text-slate-700
         flex items-center justify-center
-        w-20 h-20
-        mb-5
+        w-12 h-12 md:w-16 md:h-16
+        mb-4
         rounded-full
-        bg-slate-100">
-        <Icon className="w-8 h-8 fill-slate-500 group-hover:fill-primary transition-colors" />
+        group-hover:bg-primary
+        transition-colors">
+        <Icon className="w-5 h-5 md:w-8 md:h-8 fill-primary group-hover:fill-white transition-colors" />
       </span>
 
-      <p className="font-semibold text-md inline-flex rounded-sm text-slate-700">
+      <h3 className="font-semibold text-lg inline-flex mb-4">
         {name}
-      </p>
+      </h3>
 
-      <hr className="shrink-0 w-12 h-px bg-slate-200 border-0 my-6" />
-
-      <p className="text-sm text-center inline-flex rounded-sm leading-6 text-slate-600">
+      <p className="text-sm md:text-center inline-flex rounded-sm leading-7 text-slate-600">
         {description}
       </p>
-
-      <button className="font-medium text-sm mt-6 h-8 px-2 text-slate-700 border-b-2 border-primary">
-        Learn more
-      </button>
     </article>
   );
 };
