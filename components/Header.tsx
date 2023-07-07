@@ -39,16 +39,16 @@ const Header = () => {
   }
 
   return (
-    <header className="py-14 px-4 md:px-6">
+    <header id="top" className="py-14 px-4 md:px-6">
       <div className="min-h-[32rem] max-w-xl md:max-w-5xl mx-auto grid md:grid-cols-[20rem_1fr] gap-8">
         <div className="h-80 md:h-96 my-auto  bg-slate-300 rounded-lg overflow-hidden relative">
           <Image src={image} fill alt="" style={{objectFit: "cover"}} />
         </div>
 
         <div className="flex flex-col justify-center items-start">
-          <h1 className="font-bold text-4xl lg:text-5xl mb-8">Allison Doe</h1>
-          <p className="text-md text-slate-600 leading-8 max-w-xl mb-8">
-          Full-time <strong className="text-slate-700">JavaScript</strong> developer
+          <h1 className="font-bold text-4xl lg:text-5xl text-slate-900 mb-8">Allison Doe</h1>
+          <p className="text-md leading-8 max-w-xl mb-8">
+          Full-time <strong>JavaScript</strong> developer
           specialized in creating dynamic and user-friendly web applications using modern techniques and tools.
           </p>
 

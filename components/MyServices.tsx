@@ -35,7 +35,7 @@ const MyServices = () => {
   }
 
   return (
-    <PageSection heading="What I do" className="bg-neutral-50">
+    <PageSection id="services" heading="What I do" className="bg-neutral-50">
       <SectionText>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corrupti pariatur quisquam blanditiis at quo esse.
       </SectionText>
@@ -78,7 +78,7 @@ const ServiceItem = ({name, description, icon: Icon}: ServiceItemProps) => {
         {name}
       </h3>
 
-      <p className="text-sm md:text-center inline-flex rounded-sm leading-7 text-slate-600">
+      <p className="text-sm md:text-center inline-flex rounded-sm leading-7">
         {description}
       </p>
     </article>

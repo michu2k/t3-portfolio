@@ -32,8 +32,8 @@ const AboutMe = () => {
   }
 
   return (
-    <PageSection heading="About Me">
-      <p className="text-md text-slate-600 leading-8">
+    <PageSection id="about" heading="About Me">
+      <p className="text-md leading-8">
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
         Nihil incidunt accusamus mollitia exercitationem sapiente quasi qui eligendi architecto non dolor.
         Autem consectetur et voluptatum labore accusantium magni. Laudantium quia vitae quas provident nostrum adipisci.
@@ -46,7 +46,7 @@ const AboutMe = () => {
         <ul className="flex flex-wrap gap-2">
           {displaySkills()}
           <li className="px-2">
-            <p className="text-xs text-slate-500 leading-7">& more...</p>
+            <p className="text-xs leading-7">& more...</p>
           </li>
         </ul>
       </div>
