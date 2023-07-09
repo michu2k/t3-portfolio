@@ -1,5 +1,6 @@
 import React from "react";
 import {PageSection} from "./generics/PageSection";
+import Image from "next/image";
 
 const skills = [
   "HTML",
@@ -12,6 +13,7 @@ const skills = [
   "JavaScript",
   "Storybook",
   "Framer Motion",
+  "Node.js",
   "Express",
   "GraphQL",
   "Prisma",
@@ -20,6 +22,8 @@ const skills = [
   "Cypress",
   "Git"
 ];
+
+const image = "https://picsum.photos/id/821/4403/2476";
 
 const AboutMe = () => {
 
@@ -33,23 +37,36 @@ const AboutMe = () => {
 
   return (
     <PageSection id="about" heading="About Me">
-      <p className="text-md leading-8">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        Nihil incidunt accusamus mollitia exercitationem sapiente quasi qui eligendi architecto non dolor.
-        Autem consectetur et voluptatum labore accusantium magni. Laudantium quia vitae quas provident nostrum adipisci.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, voluptates.
-      </p>
+      <div className="grid md:grid-cols-[20rem_1fr] gap-12">
+        <div className="
+          h-80 md:h-96 my-auto
+          rounded-lg
+          bg-slate-300
+          overflow-hidden relative">
+          <Image src={image} fill alt="" style={{objectFit: "cover"}} />
+        </div>
 
-      <div className="mt-14">
-        <h3 className="font-semibold text-lg mb-10">My Skills</h3>
+        <div>
+          <p className="text-md leading-8">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Nihil incidunt accusamus mollitia exercitationem sapiente quasi qui eligendi architecto non dolor.
+          Autem consectetur et voluptatum labore accusantium magni. Laudantium quia vitae quas provident nostrum adipisci.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, voluptates.
+          </p>
 
-        <ul className="flex flex-wrap gap-2">
-          {displaySkills()}
-          <li className="px-2">
-            <p className="text-xs leading-7">& more...</p>
-          </li>
-        </ul>
+          <div className="mt-14">
+            <h3 className="font-semibold text-xl text-slate-700 mb-10">My Skills</h3>
+
+            <ul className="flex flex-wrap gap-2">
+              {displaySkills()}
+              <li className="px-2">
+                <p className="text-xs leading-7">& more...</p>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
+
     </PageSection>
   );
 };
