@@ -14,21 +14,16 @@ const navigationItems: Array<NavigationItemProps> = [
   },
   {
     id: 3,
-    href: "#services",
-    text: "Services"
-  },
-  {
-    id: 4,
     href: "#recent-work",
     text: "Recent work"
   },
   {
-    id: 5,
+    id: 4,
     href: "#experience",
     text: "Experience"
   },
   {
-    id: 6,
+    id: 5,
     href: "#keep-in-touch",
     text: "Contact"
   }
@@ -47,8 +42,8 @@ const Navigation = () => {
       bg-white
       border-b-[1px]
       border-slate-200
-      w-full
-      h-16
+      px-4 md:px-6
+      w-full h-20
       sticky z-20
       top-0 left-0 right-0
       mx-auto">
