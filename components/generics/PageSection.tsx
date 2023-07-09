@@ -10,7 +10,7 @@ type PageSectionProps = PropsWithChildren<{
 
 const PageSection = memo(({id, heading, className, children}: PageSectionProps) => {
 
-  const sectionClassName = cn("py-16 px-4 md:py-20 md:px-6 rounded", className);
+  const sectionClassName = cn("py-16 px-4 md:py-24 md:px-6 rounded", className);
 
   return (
     <section id={id} className={sectionClassName}>

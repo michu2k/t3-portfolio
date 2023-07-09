@@ -7,7 +7,6 @@ import {Line} from "~/components/generics/Line";
 import {Navigation} from "~/components/Navigation";
 import {Header} from "~/components/Header";
 import {AboutMe} from "~/components/AboutMe";
-import {MyServices} from "~/components/MyServices";
 import {RecentWork} from "~/components/RecentWork";
 import {Experience} from "~/components/Experience";
 import {KeepInTouch} from "~/components/KeepInTouch";
@@ -22,12 +21,11 @@ const Home: NextPage = () => {
         <title>T3 Portfolio</title>
       </Head>
 
-      <main className="sm:px-4 md:px-8 mx-auto min-h-full">
+      <main className="mx-auto min-h-full">
         <Navigation />
         <Header />
         <Line />
         <AboutMe />
-        <MyServices />
         <RecentWork />
         <Line />
         <Experience />
