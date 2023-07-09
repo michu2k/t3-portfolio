@@ -3,9 +3,7 @@ import GithubSvg from "~/public/svgs/socialMedia/github.svg";
 import TwitterSvg from "~/public/svgs/socialMedia/twitter.svg";
 import LinkedInSvg from "~/public/svgs/socialMedia/linkedin.svg";
 import InstagramSvg from "~/public/svgs/socialMedia/instagram.svg";
-import Image from "next/image";
-
-const image = "https://picsum.photos/id/821/4403/2476";
+import Link from "next/link";
 
 const socialMedia: Array<SocialMediaItemProps> = [
   {
@@ -39,40 +37,47 @@ const Header = () => {
   }
 
   return (
-    <header className="py-14 px-4 md:px-6">
-      <div className="min-h-[32rem] max-w-xl md:max-w-5xl mx-auto grid md:grid-cols-[20rem_1fr] gap-8">
-        <div className="h-80 md:h-96 my-auto  bg-slate-300 rounded-lg overflow-hidden relative">
-          <Image src={image} fill alt="" style={{objectFit: "cover"}} />
-        </div>
-
-        <div className="flex flex-col justify-center items-start">
-          <h1 className="font-bold text-4xl lg:text-5xl mb-8">Allison Doe</h1>
-          <p className="text-md text-slate-600 leading-8 max-w-xl mb-8">
-          Full-time <strong className="text-slate-700">JavaScript</strong> developer
+    <header id="top" className="py-14 px-4 md:px-6">
+      <div className="min-h-[34rem] max-w-xl md:max-w-5xl mx-auto flex flex-col justify-center items-start">
+        <h1 className="font-bold text-4xl lg:text-6xl text-slate-900 mb-8">Hi! I&apos;m Allison</h1>
+        <p className="text-md leading-8 max-w-3xl mb-12">
+          Full-time <strong>JavaScript</strong> developer
           specialized in creating dynamic and user-friendly web applications using modern techniques and tools.
-          </p>
+        </p>
 
-          <div className="mb-10">
-            <ul className="flex gap-5" aria-label="Social media">
-              {displaySocialMediaIcons()}
-            </ul>
-          </div>
-
+        <div className="flex gap-4 mb-16">
           <a
             href="./cv.pdf"
             className="
-              h-12 px-8
+              h-12 px-6
+              inline-flex items-center
+              rounded-md
+              text-md font-semibold text-white
+              bg-primary
+              hover:bg-slate-700
+              transition-colors"
+            rel="noopener noreferrer"
+            target="_blank">
+            Download CV
+          </a>
+
+          <Link
+            href="#keep-in-touch"
+            className="
+              h-12 px-6
               inline-flex items-center
               rounded-md
               text-md font-semibold text-primary
               border-2 border-primary
               hover:text-white hover:bg-primary
-              transition-colors"
-            rel="noopener noreferrer"
-            target="_blank">
-              Download CV
-          </a>
+              transition-colors">
+              Let&apos;s talk
+          </Link>
         </div>
+
+        <ul className="flex gap-5" aria-label="Social media">
+          {displaySocialMediaIcons()}
+        </ul>
       </div>
     </header>
   );
@@ -95,7 +100,7 @@ const SocialMediaItem = ({name, url, icon: Icon}: SocialMediaItemProps) => {
         <Icon
           className="
             w-5 h-5
-            fill-slate-600
+            fill-slate-700
             group-hover:fill-primary group-focus:fill-primary
             transition-colors"
           aria-hidden="true" />

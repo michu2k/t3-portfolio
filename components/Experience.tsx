@@ -48,7 +48,7 @@ const Experience = () => {
   }
 
   return (
-    <PageSection heading="Experience">
+    <PageSection id="experience" heading="Experience">
       <ul className="flex flex-col gap-14">
         {displayExperience()}
       </ul>
@@ -83,7 +83,7 @@ const ExperienceItem = ({from, to, companyName, position, responsibilities}: Exp
       <div className="flex flex-col gap-4">
         <div className="flex flex-col justify-center md:min-h-[4rem]">
           <p className="font-semibold text-lg leading-8 text-slate-700">{position}</p>
-          <p className="font-semibold text-sm text-slate-500 leading-7">
+          <p className="font-semibold text-sm text-slate-400 leading-7">
             {companyName}
           </p>
         </div>
@@ -99,7 +99,7 @@ const ExperienceItem = ({from, to, companyName, position, responsibilities}: Exp
                 before:bg-slate-500
                 before:mt-[0.875rem]
                 before:block" />
-              <p className="text-sm text-slate-600 leading-8">{item}</p>
+              <p className="text-sm leading-8">{item}</p>
             </li>
           ))}
         </ul>

@@ -75,7 +75,7 @@ const RecentWork = () => {
   }
 
   return (
-    <PageSection heading="Recent work">
+    <PageSection id="recent-work" heading="Recent work">
       {/* columns-1 md:columns-2 lg:columns-3 gap-8 */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayRecentWorkItems()}
@@ -116,7 +116,7 @@ const RecentWorkItem = ({id, name, description, image}: RecentWorkItemProps) => 
             {name}
           </p>
 
-          <p className="text-sm inline-flex rounded-sm leading-7 text-slate-600">
+          <p className="text-sm inline-flex rounded-sm leading-7">
             {description}
           </p>
         </div>
