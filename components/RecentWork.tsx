@@ -75,7 +75,7 @@ const RecentWork = () => {
   }
 
   return (
-    <PageSection id="recent-work" heading="Recent work">
+    <PageSection id="recent-work" heading="Recent Work Showcases" subheading="Portfolio">
       {/* columns-1 md:columns-2 lg:columns-3 gap-8 */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayRecentWorkItems()}

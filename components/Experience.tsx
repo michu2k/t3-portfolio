@@ -48,7 +48,7 @@ const Experience = () => {
   }
 
   return (
-    <PageSection id="experience" heading="Experience">
+    <PageSection id="experience" heading="Professional Experience" subheading="Experience">
       <ul className="flex flex-col gap-14">
         {displayExperience()}
       </ul>
