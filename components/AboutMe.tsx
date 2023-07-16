@@ -36,8 +36,8 @@ const AboutMe = () => {
   }
 
   return (
-    <PageSection id="about" heading="About Me">
-      <div className="grid md:grid-cols-[20rem_1fr] gap-12">
+    <PageSection id="about" heading="Who Am I?" subheading="About Me">
+      <div className="grid md:grid-cols-[20rem_1fr] gap-16">
         <div className="
           h-80 md:h-96 my-auto
           rounded-lg
