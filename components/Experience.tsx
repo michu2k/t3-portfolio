@@ -76,7 +76,7 @@ const ExperienceItem = ({from, to, companyName, position, responsibilities}: Exp
           flex-inline
           bg-neutral-200">
           {from ? format(new Date(from), "MMM yyyy") : "-"} {" - "}
-          {to ? format(new Date(to), "MMM yyyy") : "Now"}
+          {to ? format(new Date(to), "MMM yyyy") : <strong>Now</strong>}
         </span>
       </div>
 

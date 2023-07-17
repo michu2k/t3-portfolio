@@ -46,14 +46,14 @@ const AboutMe = () => {
           after:bg-primary
           after:rounded-br-2xl
           after:top-10
-          after:left-20
+          after:left-24
           after:-right-2
           after:-bottom-2
           after:-z-10">
           <div className="
             w-full h-full
             rounded-lg
-            bg-slate-300
+            bg-slate-100
             overflow-hidden relative">
             <Image src={image} fill alt="" style={{objectFit: "cover"}} />
           </div>
