@@ -41,9 +41,22 @@ const AboutMe = () => {
         <div className="
           h-80 md:h-96 my-auto
           rounded-lg
-          bg-slate-300
-          overflow-hidden relative">
-          <Image src={image} fill alt="" style={{objectFit: "cover"}} />
+          relative
+          after:absolute
+          after:bg-primary
+          after:rounded-br-2xl
+          after:top-10
+          after:left-20
+          after:-right-2
+          after:-bottom-2
+          after:-z-10">
+          <div className="
+            w-full h-full
+            rounded-lg
+            bg-slate-300
+            overflow-hidden relative">
+            <Image src={image} fill alt="" style={{objectFit: "cover"}} />
+          </div>
         </div>
 
         <div>
