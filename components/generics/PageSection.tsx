@@ -1,6 +1,6 @@
 import React, {memo} from "react";
 import type {PropsWithChildren} from "react";
-import cn from "classnames";
+import {cn} from "~/utils/className";
 
 type PageSectionProps = PropsWithChildren<{
   id: string;
