@@ -2,7 +2,7 @@ import React from "react";
 
 const Line = () => {
   return (
-    <hr className="max-w-xl md:max-w-5xl mx-auto h-px bg-slate-300 border-0" />
+    <hr className="section-container h-px bg-slate-300 border-0" />
   );
 };
 
