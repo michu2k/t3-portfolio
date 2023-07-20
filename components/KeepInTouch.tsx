@@ -35,7 +35,7 @@ const KeepInTouch = () => {
   }
 
   return (
-    <PageSection id="keep-in-touch" heading="Keep in touch">
+    <PageSection id="keep-in-touch" heading="Have Some Questions?" subheading="Keep in touch">
       <SectionText>
         Lorem ipsum dolor sit amet consectetur adipisicing elit? Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </SectionText>

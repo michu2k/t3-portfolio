@@ -36,14 +36,27 @@ const AboutMe = () => {
   }
 
   return (
-    <PageSection id="about" heading="About Me">
-      <div className="grid md:grid-cols-[20rem_1fr] gap-12">
+    <PageSection id="about" heading="Who Am I?" subheading="About Me">
+      <div className="grid md:grid-cols-[20rem_1fr] gap-16">
         <div className="
           h-80 md:h-96 my-auto
           rounded-lg
-          bg-slate-300
-          overflow-hidden relative">
-          <Image src={image} fill alt="" style={{objectFit: "cover"}} />
+          relative
+          after:absolute
+          after:bg-primary
+          after:rounded-br-2xl
+          after:top-10
+          after:left-24
+          after:-right-2
+          after:-bottom-2
+          after:-z-10">
+          <div className="
+            w-full h-full
+            rounded-lg
+            bg-slate-100
+            overflow-hidden relative">
+            <Image src={image} fill alt="" style={{objectFit: "cover"}} />
+          </div>
         </div>
 
         <div>

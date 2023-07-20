@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
-import {PageSection} from "./generics/PageSection";
 import Image from "next/image";
+import {PageSection} from "./generics/PageSection";
+import {SectionText} from "./generics/SectionText";
+import ĄrrowUpRightSvg from "~/public/svgs/arrow-up-right.svg";
 
 const recentWorkItems: Array<RecentWorkItemProps> = [
   {
@@ -75,8 +77,11 @@ const RecentWork = () => {
   }
 
   return (
-    <PageSection id="recent-work" heading="Recent work">
-      {/* columns-1 md:columns-2 lg:columns-3 gap-8 */}
+    <PageSection id="recent-work" heading="Recent Work Showcases" subheading="Portfolio">
+      <SectionText>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+      </SectionText>
+
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayRecentWorkItems()}
       </div>
@@ -101,26 +106,39 @@ const RecentWorkItem = ({id, name, description, image}: RecentWorkItemProps) => 
   const itemPageUrl = `/portfolio/${id}`;
 
   return (
-    <article className="group break-inside-avoid-column w-auto shrink-0">
-      <Link href={itemPageUrl}>
-        <div className={`w-auto h-64 rounded bg-slate-300 shrink-0 relative`}>
-          <Image src={image.thumbnail} fill className="rounded" style={{objectFit: "cover"}} alt="" />
-        </div>
+    <article className="group break-inside-avoid-column w-auto shrink-0 ">
+      <div className="w-auto h-64 rounded bg-slate-100 shrink-0 relative">
+        <Image src={image.thumbnail} fill className="rounded" style={{objectFit: "cover"}} alt="" />
+      </div>
 
-        <div className="flex flex-col items-start py-4">
+      <div className="flex flex-col items-start py-4">
+        <Link href={itemPageUrl} className="flex items-center justify-between w-full mb-4">
           <p className="
             font-semibold text-lg text-slate-700
-            mb-4 inline-flex rounded-sm
+            inline-flex rounded-sm
+            mr-2
           group-hover:text-primary
             transition-colors">
             {name}
           </p>
 
-          <p className="text-sm inline-flex rounded-sm leading-7">
-            {description}
-          </p>
-        </div>
-      </Link>
+          <span className="
+            w-10 h-10 rounded-full
+            border-slate-300 border border-solid
+            bg-white
+            flex items-center justify-center shrink-0
+            group-hover:border-primary
+            transition-colors">
+            <ĄrrowUpRightSvg
+              className="w-4 h-4 fill-slate-700"
+              aria-hidden="true" />
+          </span>
+        </Link>
+
+        <p className="text-sm inline-flex rounded-sm leading-6">
+          {description}
+        </p>
+      </div>
     </article>
   );
 };

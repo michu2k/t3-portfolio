@@ -48,7 +48,7 @@ const Experience = () => {
   }
 
   return (
-    <PageSection id="experience" heading="Experience">
+    <PageSection id="experience" heading="Professional Experience" subheading="Experience">
       <ul className="flex flex-col gap-14">
         {displayExperience()}
       </ul>
@@ -76,7 +76,7 @@ const ExperienceItem = ({from, to, companyName, position, responsibilities}: Exp
           flex-inline
           bg-neutral-200">
           {from ? format(new Date(from), "MMM yyyy") : "-"} {" - "}
-          {to ? format(new Date(to), "MMM yyyy") : "Now"}
+          {to ? format(new Date(to), "MMM yyyy") : <strong>Now</strong>}
         </span>
       </div>
 
