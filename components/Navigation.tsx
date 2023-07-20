@@ -1,34 +1,55 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
+import GithubSvg from "~/public/svgs/socialMedia/github.svg";
+import TwitterSvg from "~/public/svgs/socialMedia/twitter.svg";
+import LinkedInSvg from "~/public/svgs/socialMedia/linkedin.svg";
+import InstagramSvg from "~/public/svgs/socialMedia/instagram.svg";
 
 const navigationItems: Array<NavigationItemProps> = [
   {
     id: 1,
-    href: "#top",
-    text: "Home"
-  },
-  {
-    id: 2,
     href: "#about",
     text: "About"
   },
   {
-    id: 3,
+    id: 2,
     href: "#recent-work",
     text: "Recent work"
   },
   {
-    id: 4,
+    id: 3,
     href: "#experience",
     text: "Experience"
   },
   {
-    id: 5,
+    id: 4,
     href: "#keep-in-touch",
     text: "Contact"
   }
 ];
 
+const socialMedia: Array<SocialMediaItemProps> = [
+  {
+    name: "Github",
+    url: "https://github.com/",
+    icon: GithubSvg
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/",
+    icon: LinkedInSvg
+  },
+  {
+    name: "Twitter",
+    url: "https://twitter.com/",
+    icon: TwitterSvg
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/",
+    icon: InstagramSvg
+  }
+];
 const Navigation = () => {
 
   function displayNavigationItems() {
@@ -37,11 +58,15 @@ const Navigation = () => {
     ));
   }
 
+  function displaySocialMediaIcons() {
+    return socialMedia.map((item) => (
+      <SocialMediaItem key={item.name} {...item} />
+    ));
+  }
+
   return (
     <div className="
       bg-white
-      border-b-[1px]
-      border-slate-200
       px-4 md:px-6
       w-full h-20
       sticky z-20
@@ -52,9 +77,12 @@ const Navigation = () => {
         w-full max-w-xl md:max-w-5xl
         h-full
         mx-auto">
-        <span>My Website</span>
-        <ul className="flex items-center gap-6">
+        <ul className="flex items-center gap-8">
           {displayNavigationItems()}
+        </ul>
+
+        <ul className="flex gap-5" aria-label="Social media">
+          {displaySocialMediaIcons()}
         </ul>
       </nav>
     </div>
@@ -70,8 +98,35 @@ type NavigationItemProps = {
 const NavigationItem = ({href, text}: NavigationItemProps) => {
 
   return (
-    <li className="font-medium text-sm text-slate-900">
+    <li className="text-sm text-slate-700">
       <Link href={href}>{text}</Link>
+    </li>
+  );
+};
+
+type SocialMediaItemProps = {
+  name: string;
+  url: string;
+  icon: React.FC<React.SVGProps<SVGSVGElement>>;
+}
+
+const SocialMediaItem = ({name, url, icon: Icon}: SocialMediaItemProps) => {
+  return (
+    <li>
+      <a
+        href={url}
+        className="group flex items-center justify-center w-4 h-4"
+        rel="noopener noreferrer"
+        target="_blank">
+        <Icon
+          className="
+            w-4 h-4
+            fill-slate-700
+            group-hover:fill-primary group-focus:fill-primary
+            transition-colors"
+          aria-hidden="true" />
+        <span className="sr-only">{name}</span>
+      </a>
     </li>
   );
 };
