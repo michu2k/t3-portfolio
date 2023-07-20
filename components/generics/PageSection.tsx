@@ -15,7 +15,7 @@ const PageSection = memo(({id, heading, subheading, className, children}: PageSe
 
   return (
     <section id={id} className={sectionClassName}>
-      <div className="max-w-xl md:max-w-5xl mx-auto">
+      <div className="section-container">
         <p className="font-semibold text-md text-primary mb-2">{subheading}</p>
         <h2 className="font-bold text-3xl text-slate-900 mb-4">{heading}</h2>
         <hr className="h-1 w-10 mb-10 bg-primary border-0 rounded-md" />

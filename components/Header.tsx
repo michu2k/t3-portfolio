@@ -6,8 +6,8 @@ const image = "https://picsum.photos/id/821/4403/2476";
 
 const Header = () => {
   return (
-    <header id="top" className="py-14 px-4 md:px-6">
-      <div className="min-h-[34rem] max-w-xl md:max-w-5xl mx-auto flex flex-col justify-center items-start">
+    <header id="top" className="pt-10 pb-16 px-4 md:px-6">
+      <div className="section-container min-h-[34rem] flex flex-col justify-center items-start">
         <div className="flex flex-col md:flex-row md:items-center gap-8 mb-8 w-full">
           <div className="
             w-28 h-28 my-auto
@@ -53,7 +53,7 @@ const Header = () => {
             bg-primary
             hover:bg-slate-700
             transition-colors">
-            Let&apos;s talk
+          Let&apos;s talk
         </Link>
       </div>
     </header>
