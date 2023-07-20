@@ -32,7 +32,6 @@ const Home: NextPage = () => {
         <Experience />
         <Line />
         <KeepInTouch />
-        <Line />
         <Footer />
         {/*   {hello.data ? hello.data.greeting : "Loading tRPC query..."} */}
         <AuthShowcase />
