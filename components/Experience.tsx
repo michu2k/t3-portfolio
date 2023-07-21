@@ -68,7 +68,7 @@ type ExperienceItemProps = {
 const ExperienceItem = ({from, to, companyName, position, responsibilities}: ExperienceItemProps) => {
   return (
     <li className="flex flex-col items-start gap-4 md:flex-row md:gap-6">
-      <div className="flex flex-col justify-center md:min-h-[4rem] ">
+      <div className="flex flex-col justify-center md:min-h-[4rem]">
         <span className="
           text-xs text-slate-700 text-center
           py-2 px-4 rounded-full
@@ -92,12 +92,11 @@ const ExperienceItem = ({from, to, companyName, position, responsibilities}: Exp
           {responsibilities?.map((item, idx) => (
             <li key={idx} className="flex items-start gap-2">
               <span className="
-                before:content-['']
                 before:w-1
                 before:h-1
                 before:rounded-full
                 before:bg-slate-500
-                before:mt-[0.875rem]
+                before:mt-3.5
                 before:block" />
               <p className="text-sm leading-8">{item}</p>
             </li>
