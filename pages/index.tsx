@@ -4,13 +4,13 @@ import {signIn, signOut, useSession} from "next-auth/react";
 
 import {api} from "~/utils/api";
 import {Line} from "~/components/generics/Line";
-import {Navigation} from "~/components/Navigation";
-import {Header} from "~/components/Header";
-import {AboutMe} from "~/components/AboutMe";
-import {RecentWork} from "~/components/RecentWork";
-import {Experience} from "~/components/Experience";
-import {KeepInTouch} from "~/components/KeepInTouch";
-import {Footer} from "~/components/Footer";
+import {Navigation} from "~/components/landing-page/Navigation";
+import {Header} from "~/components/landing-page/Header";
+import {AboutMe} from "~/components/landing-page/AboutMe";
+import {RecentWork} from "~/components/landing-page/RecentWork";
+import {Experience} from "~/components/landing-page/Experience";
+import {KeepInTouch} from "~/components/landing-page/KeepInTouch";
+import {Footer} from "~/components/landing-page/Footer";
 
 const Home: NextPage = () => {
   // const hello = api.example.hello.useQuery({text: "from tRPC"});

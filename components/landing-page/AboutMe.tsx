@@ -1,5 +1,5 @@
 import React from "react";
-import {PageSection} from "./generics/PageSection";
+import {PageSection} from "~/components/generics/PageSection";
 import Image from "next/image";
 
 const skills = [

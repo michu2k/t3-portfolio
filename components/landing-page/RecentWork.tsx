@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {PageSection} from "./generics/PageSection";
-import {SectionText} from "./generics/SectionText";
+import {PageSection} from "~/components/generics/PageSection";
+import {SectionText} from "~/components/generics/SectionText";
 import ĄrrowUpRightSvg from "~/public/svgs/arrow-up-right.svg";
 
 const recentWorkItems: Array<RecentWorkItemProps> = [
