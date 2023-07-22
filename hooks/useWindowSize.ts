@@ -1,4 +1,5 @@
 import {useLayoutEffect, useState} from "react";
+import {debounce} from "~/utils/debounce";
 import {isClientSide} from "~/utils/isClientSide";
 
 type WindowSize = {
@@ -17,9 +18,8 @@ const useWindowSize = (debounceMs = 100) => {
   }
 
   useLayoutEffect(() => {
-    // TODO: implement debounce
     function handleWindowResize() {
-      setWindowSize(getSize());
+      debounce(() => setWindowSize(getSize()), 100);
     }
 
     window.addEventListener("resize", handleWindowResize);
