@@ -35,7 +35,7 @@ const SocialMedia = () => {
   }
 
   return (
-    <ul className="flex gap-5" aria-label="Social media">
+    <ul className="flex gap-4" aria-label="Social media">
       {displaySocialMediaIcons()}
     </ul>
   );
@@ -52,7 +52,7 @@ const SocialMediaItem = ({name, url, icon: Icon}: SocialMediaItemProps) => {
     <li>
       <a
         href={url}
-        className="group flex items-center justify-center w-5 h-5"
+        className="group flex items-center justify-center w-6 h-6"
         rel="noopener noreferrer"
         target="_blank">
         <Icon
