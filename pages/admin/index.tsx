@@ -1,7 +1,7 @@
 import {type NextPage} from "next";
 import Head from "next/head";
 
-import {Line} from "~/components/generics/Line";
+import {Line} from "~/components/Line";
 
 const Admin: NextPage = () => {
   return (

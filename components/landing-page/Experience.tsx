@@ -1,5 +1,5 @@
 import React from "react";
-import {PageSection} from "~/components/generics/PageSection";
+import {PageSection} from "~/components/PageSection";
 import {format} from "date-fns";
 
 const experienceItems: Array<ExperienceItemProps> = [

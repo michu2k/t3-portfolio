@@ -3,7 +3,7 @@ import Head from "next/head";
 import {signIn, signOut, useSession} from "next-auth/react";
 
 import {api} from "~/utils/api";
-import {Line} from "~/components/generics/Line";
+import {Line} from "~/components/Line";
 import {Navigation} from "~/components/landing-page/Navigation";
 import {Header} from "~/components/landing-page/Header";
 import {AboutMe} from "~/components/landing-page/AboutMe";
