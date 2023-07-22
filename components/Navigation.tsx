@@ -119,6 +119,10 @@ type NavigationItemProps = NavigationItemDef & {
   scrollY: MotionValue<number>;
 }
 
+// For better UX, offset the scroll position by a few pixels
+const OFFSET_TOP_MOBILE = 24;
+const OFFSET_TOP_DESKTOP = 48;
+
 const NavigationItem = ({
   id,
   href,
@@ -130,7 +134,7 @@ const NavigationItem = ({
 }: NavigationItemProps) => {
   const isMobile = useIsMobile();
   const sectionEl = isClientSide() ? document.getElementById(href.replace("#", "")) : null;
-  const viewOffsetTop = isMobile ? 16 : 48;
+  const viewOffsetTop = isMobile ? OFFSET_TOP_MOBILE : OFFSET_TOP_DESKTOP;
 
   useMotionValueEvent(scrollY, "change", (latestPos) => {
     const sectionOffsetTop = Math.max((sectionEl?.offsetTop || 0), 0);
