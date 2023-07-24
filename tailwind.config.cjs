@@ -4,6 +4,7 @@ import defaultTheme from "tailwindcss/defaultTheme";
  * @type {import('tailwindcss').Config}
  */
 const config = {
+  darkMode: "class",
   content: [
     "./components/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}"
