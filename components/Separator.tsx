@@ -1,9 +1,9 @@
 import React from "react";
 
-const Line = () => {
+const Separator = () => {
   return (
     <hr className="section-container h-px bg-slate-300 border-0" />
   );
 };
 
-export {Line};
+export {Separator};

@@ -3,7 +3,7 @@ import Head from "next/head";
 import {signIn, signOut, useSession} from "next-auth/react";
 
 import {api} from "~/utils/api";
-import {Line} from "~/components/Line";
+import {Separator} from "~/components/Separator";
 import {Navigation} from "~/components/landing-page/Navigation";
 import {Header} from "~/components/landing-page/Header";
 import {AboutMe} from "~/components/landing-page/AboutMe";
@@ -24,13 +24,13 @@ const Home: NextPage = () => {
       <main className="mx-auto min-h-full">
         <Navigation />
         <Header />
-        <Line />
+        <Separator />
         <AboutMe />
-        <Line />
+        <Separator />
         <RecentWork />
-        <Line />
+        <Separator />
         <Experience />
-        <Line />
+        <Separator />
         <KeepInTouch />
         <Footer />
         {/*   {hello.data ? hello.data.greeting : "Loading tRPC query..."} */}
