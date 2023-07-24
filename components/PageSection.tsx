@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import React from "react";
 import type {PropsWithChildren} from "react";
 import {cn} from "~/utils/className";
 
@@ -9,7 +9,7 @@ type PageSectionProps = PropsWithChildren<{
   className?: string;
 }>
 
-const PageSection = memo(({id, heading, subheading, className, children}: PageSectionProps) => {
+const PageSection = ({id, heading, subheading, className, children}: PageSectionProps) => {
 
   const sectionClassName = cn("py-16 px-4 md:py-24 md:px-6 rounded", className);
 
@@ -23,8 +23,6 @@ const PageSection = memo(({id, heading, subheading, className, children}: PageSe
       </div>
     </section>
   );
-});
-
-PageSection.displayName = "PageSection";
+};
 
 export {PageSection};
