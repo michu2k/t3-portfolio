@@ -15,7 +15,7 @@ const config = {
         sans: ["Poppins", ...defaultTheme.fontFamily.sans]
       },
       colors: {
-        primary: "#0ea5e9" // sky.500
+        primary: "#3b82f6" // blue.500
       }
     }
   },
