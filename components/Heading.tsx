@@ -2,7 +2,7 @@ import type {PropsWithChildren} from "react";
 import React from "react";
 import {cva, type VariantProps} from "class-variance-authority";
 
-const headingClassName = cva("button", {
+const headingVariants = cva("button", {
   variants: {
     size: {
       md: ["font-medium", "text-md", "mb-2"],
@@ -14,11 +14,11 @@ const headingClassName = cva("button", {
 
 type HeadingProps = PropsWithChildren<{
   as: "h1" | "h2" | "h3";
-} & VariantProps<typeof headingClassName>>
+} & VariantProps<typeof headingVariants>>
 
 const Heading = ({as: Component, size, children}: HeadingProps) => {
   return (
-    <Component className={`${headingClassName({size})} text-slate-900`}>
+    <Component className={`${headingVariants({size})} text-slate-900`}>
       {children}
     </Component>
   );
