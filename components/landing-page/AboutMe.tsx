@@ -1,6 +1,7 @@
 import React from "react";
-import {PageSection} from "~/components/PageSection";
 import Image from "next/image";
+import {PageSection} from "~/components/PageSection";
+import {Heading} from "~/components/Heading";
 
 const skills = [
   "HTML",
@@ -68,9 +69,9 @@ const AboutMe = () => {
           </p>
 
           <div className="mt-14">
-            <h3 className="font-semibold text-xl text-slate-700 mb-10">My Skills</h3>
+            <Heading as="h3" size="lg">My Skills</Heading>
 
-            <ul className="flex flex-wrap gap-2">
+            <ul className="flex flex-wrap gap-2 mt-8">
               {displaySkills()}
               <li className="px-2">
                 <p className="text-xs leading-7">& more...</p>
