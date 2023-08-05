@@ -66,7 +66,7 @@ const Contact = () => {
             <FormItem>
               <FormLabel>Address</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="" />
+                <Input {...field} placeholder="Country, city" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -80,7 +80,7 @@ const Contact = () => {
             <FormItem>
               <FormLabel>Address description</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="Street address" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -94,7 +94,7 @@ const Contact = () => {
             <FormItem>
               <FormLabel>Phone number</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="Phone number" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -108,7 +108,7 @@ const Contact = () => {
             <FormItem>
               <FormLabel>Phone description</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="Availability, possible contact hours" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -122,7 +122,7 @@ const Contact = () => {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="Email address" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -136,7 +136,7 @@ const Contact = () => {
             <FormItem>
               <FormLabel>Email description</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="Short email description" />
               </FormControl>
               <FormMessage />
             </FormItem>
