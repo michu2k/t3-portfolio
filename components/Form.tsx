@@ -49,7 +49,7 @@ React.HTMLAttributes<HTMLDivElement>
   const id = React.useId();
 
   const wrapperClassName = cn(
-    "space-y-2 mt-6",
+    "space-y-2 mt-6 mb-2",
     className
   );
 

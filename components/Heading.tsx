@@ -5,7 +5,7 @@ import {cva, type VariantProps} from "class-variance-authority";
 const headingVariants = cva("text-slate-900", {
   variants: {
     size: {
-      md: ["font-medium", "text-md", "mb-2"],
+      md: ["font-semibold", "text-md", "mb-2"],
       lg: ["font-semibold", "text-2xl", "mb-2"],
       xl: ["font-bold", "text-3xl", "mb-4"]
     }
