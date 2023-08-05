@@ -17,14 +17,13 @@ const Layout = ({heading, description, children}: LayoutProps) => {
       </aside>
 
       <section className="flex-1 p-4 md:p-10">
-        <header>
+        <header className="lg:max-w-2xl">
           <Heading as="h2" size="lg">{heading}</Heading>
           <p className="text-sm leading-6 mb-6 max-w-2xl">
             {description}
           </p>
+          <Separator />
         </header>
-
-        <Separator isFullWidth />
 
         <div className="mt-6 flex flex-col lg:flex-row lg:gap-12">
           <div className="flex-1 lg:max-w-2xl">{children}</div>

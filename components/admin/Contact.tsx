@@ -51,7 +51,7 @@ const Contact = () => {
           )}
         />
 
-        <Separator isFullWidth className="my-10" />
+        <Separator className="my-10" />
         <Heading as="h3" size="md">Contact methods</Heading>
 
         <FormDescription>
