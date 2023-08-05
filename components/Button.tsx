@@ -13,7 +13,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: "bg-slate-900 text-slate-50 hover:bg-slate-900/80",
-        secondary: "bg-slate-100 text-slate-900 hover:bg-slate-100/80",
+        secondary: "bg-slate-100 text-slate-900 hover:bg-slate-100/50",
+        ghost: "hover:bg-slate-100",
+        outline: "border border-input bg-background hover:bg-slate-100",
         destructive: "bg-red-500 text-slate-50 hover:bg-red-500/90"
       },
       size: {
@@ -33,11 +35,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({className, variant, size, ...props}, ref) => {
   return (
-    <button
-      className={cn(buttonVariants({variant, size, className}))}
-      ref={ref}
-      {...props}
-    />
+    <button ref={ref} className={cn(buttonVariants({variant, size}), className)} {...props} />
   );
 });
 
