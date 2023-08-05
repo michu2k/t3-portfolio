@@ -10,28 +10,28 @@ import {useIsMobile} from "~/hooks/useIsMobile";
 const navigationItems: Array<NavigationItemDef> = [
   {
     id: 1,
-    href: "#top",
-    text: "Top"
+    text: "Top",
+    href: "#top"
   },
   {
     id: 2,
-    href: "#about",
-    text: "About"
+    text: "About",
+    href: "#about"
   },
   {
     id: 3,
-    href: "#recent-work",
-    text: "Recent work"
+    text: "Recent work",
+    href: "#recent-work"
   },
   {
     id: 4,
-    href: "#experience",
-    text: "Experience"
+    text: "Experience",
+    href: "#experience"
   },
   {
     id: 5,
-    href: "#keep-in-touch",
-    text: "Contact"
+    text: "Contact",
+    href: "#keep-in-touch"
   }
 ];
 
@@ -108,8 +108,8 @@ const Navigation = () => {
 
 type NavigationItemDef = {
   id: number;
-  href: string;
   text: string;
+  href: string;
 }
 
 type NavigationItemProps = NavigationItemDef & {
