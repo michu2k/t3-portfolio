@@ -110,7 +110,7 @@ React.HTMLAttributes<HTMLParagraphElement>
   const {formDescriptionId} = useFormField();
 
   const descriptionClassName = cn(
-    "text-xs text-slate-500",
+    "text-xs leading-5 text-slate-500",
     className
   );
 

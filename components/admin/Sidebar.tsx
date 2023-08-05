@@ -47,7 +47,7 @@ const Sidebar = () => {
   }
 
   return (
-    <nav>
+    <nav className="md:sticky md:top-10">
       <ul className="flex md:flex-col flex-wrap gap-x-4 gap-y-1 md:gap-y-3">
         {displaySidebarItems()}
       </ul>
