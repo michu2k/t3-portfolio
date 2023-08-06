@@ -1,8 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import type {DateRange} from "react-day-picker";
-import {format} from "date-fns";
-import {CalendarIcon} from "lucide-react";
 import {Button} from "~/components/Button";
 import {
   FormControl,
@@ -16,19 +13,7 @@ import {Textarea} from "~/components/Textarea";
 
 const ItemForm = () => {
   const formMethods = useForm({});
-  const [date, setDate] = useState<DateRange | undefined>(undefined);
-
   const {control} = formMethods;
-
-  function displaySelectedDate() {
-    if (!date?.from) {
-      return <span>Pick a date</span>;
-    }
-
-    return date.to
-      ? `${format(date.from, "LLL dd, y")} - ${format(date.to, "LLL dd, y")}`
-      : format(date.from, "LLL dd, y");
-  }
 
   return (
     <FormProvider {...formMethods}>
