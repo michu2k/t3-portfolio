@@ -23,20 +23,6 @@ const About = () => {
 
         <FormField
           control={control}
-          name="heading"
-          render={({field}) => (
-            <FormItem>
-              <FormLabel>Heading</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Section heading" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={control}
           name="content"
           render={({field}) => (
             <FormItem>

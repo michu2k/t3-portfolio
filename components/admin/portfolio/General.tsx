@@ -7,7 +7,6 @@ import {
   FormLabel,
   FormMessage
 } from "~/components/Form";
-import {Input} from "~/components/Input";
 import {Button} from "~/components/Button";
 import {Heading} from "~/components/Heading";
 import {Textarea} from "~/components/Textarea";
@@ -20,20 +19,6 @@ const General = () => {
     <FormProvider {...formMethods}>
       <form>
         <Heading as="h3" size="md">General</Heading>
-
-        <FormField
-          control={control}
-          name="heading"
-          render={({field}) => (
-            <FormItem>
-              <FormLabel>Heading</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Section heading" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
         <FormField
           control={control}

@@ -11,7 +11,7 @@ const Page: NextPage = () => {
         <title>T3 Portfolio: Experience</title>
       </Head>
 
-      <Layout heading="Edit item" description="Experience section settings">
+      <Layout heading="Edit item" description="Create a new experience record or edit an existing one.">
         <ItemForm />
       </Layout>
     </>
