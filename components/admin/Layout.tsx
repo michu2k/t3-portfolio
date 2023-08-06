@@ -12,15 +12,14 @@ type LayoutProps = PropsWithChildren<{
 const Layout = ({heading, description, children}: LayoutProps) => {
   return (
     <main className="mx-auto min-h-full md:flex bg-white">
-      <aside className="md:w-64 p-4 md:py-10 bg-white">
+      <aside className="md:w-64 p-4 md:py-10 md:bg-white border-r-[1px] md:border-slate-200">
         <Sidebar />
       </aside>
 
       <section className="flex-1 p-4 md:p-10">
-        <header className="lg:max-w-2xl">
+        <header className="lg:max-w-2xl border-b-[1px] border-slate-200">
           <Heading as="h2" size="lg">{heading}</Heading>
           <p className="text-sm leading-6 mb-6 text-slate-500">{description}</p>
-          <Separator />
         </header>
 
         <div className="mt-6 flex flex-col lg:flex-row lg:gap-12">

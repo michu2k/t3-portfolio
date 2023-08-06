@@ -39,7 +39,7 @@ const General = () => {
 
           {/* Edit: social media icons */}
 
-          <Button type="submit" className="mt-8">Save changes</Button>
+          <Button type="submit" className="mt-6">Save changes</Button>
         </form>
       </FormProvider>
     </>

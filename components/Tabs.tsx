@@ -10,7 +10,7 @@ React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>
 >(({className, ...props}, ref) => {
 
   const listClassName = cn(
-    "inline-flex h-10 items-center justify-center rounded-md bg-slate-100 p-1 text-slate-500",
+    "w-full inline-flex h-10 items-center justify-center rounded-md bg-slate-100 p-1 text-slate-500",
     className
   );
 
@@ -28,8 +28,8 @@ React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
 
   const triggerClassName = cn(
     `inline-flex items-center justify-center
-    whitespace-nowrap rounded-sm
-    px-3 py-1.5
+    whitespace-nowrap rounded-md
+    w-full px-3 py-1.5
     text-sm font-medium
     ring-offset-white
     transition-all
@@ -52,7 +52,7 @@ React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
 >(({className, ...props}, ref) => {
 
   const contentClassName = cn(
-    "mt-2 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2",
+    "mt-6 ring-offset-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2",
     className
   );
 

@@ -20,7 +20,7 @@ const Contact = () => {
   return (
     <FormProvider {...formMethods}>
       <form>
-        <Heading as="h3" size="md">General</Heading>
+        <Heading as="h3" size="md">General settings</Heading>
 
         <FormField
           control={control}
@@ -128,7 +128,7 @@ const Contact = () => {
           )}
         />
 
-        <Button type="submit" className="my-8">Save changes</Button>
+        <Button type="submit" className="mt-6">Save changes</Button>
       </form>
     </FormProvider>
   );

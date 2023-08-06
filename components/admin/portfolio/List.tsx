@@ -3,7 +3,6 @@ import Image from "next/image";
 import React from "react";
 import {Plus, Pencil} from "lucide-react";
 import {Button} from "~/components/Button";
-import {Heading} from "~/components/Heading";
 import {recentWorkItems} from "~/components/landing-page/RecentWork";
 
 const List = () => {
@@ -16,9 +15,7 @@ const List = () => {
 
   return (
     <>
-      <Heading as="h3" size="md">Portfolio items</Heading>
-
-      <div className="mt-6 flex flex-col items-start">
+      <div className="flex flex-col items-start">
         {displayPortfolioItems()}
 
         <Link href="/admin/portfolio/new">

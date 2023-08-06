@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <FormProvider {...formMethods}>
       <form>
-        <Heading as="h3" size="md">General</Heading>
+        <Heading as="h3" size="md">General settings</Heading>
 
         <FormField
           control={control}
@@ -51,7 +51,7 @@ const Header = () => {
 
         {/* Edit: Header image */}
 
-        <Button type="submit" className="mt-8">Save changes</Button>
+        <Button type="submit" className="mt-6">Save changes</Button>
       </form>
     </FormProvider>
   );

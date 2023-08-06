@@ -8,7 +8,6 @@ import {
   FormMessage
 } from "~/components/Form";
 import {Button} from "~/components/Button";
-import {Heading} from "~/components/Heading";
 import {Textarea} from "~/components/Textarea";
 
 const General = () => {
@@ -18,8 +17,6 @@ const General = () => {
   return (
     <FormProvider {...formMethods}>
       <form>
-        <Heading as="h3" size="md">General</Heading>
-
         <FormField
           control={control}
           name="description"
@@ -34,7 +31,7 @@ const General = () => {
           )}
         />
 
-        <Button type="submit" className="mt-8">Save changes</Button>
+        <Button type="submit" className="mt-6">Save changes</Button>
       </form>
     </FormProvider>
   );

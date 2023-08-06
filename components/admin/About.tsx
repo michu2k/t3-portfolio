@@ -7,7 +7,6 @@ import {
   FormLabel,
   FormMessage
 } from "~/components/Form";
-import {Input} from "~/components/Input";
 import {Button} from "~/components/Button";
 import {Textarea} from "~/components/Textarea";
 import {Heading} from "~/components/Heading";
@@ -19,7 +18,7 @@ const About = () => {
   return (
     <FormProvider {...formMethods}>
       <form>
-        <Heading as="h3" size="md">General</Heading>
+        <Heading as="h3" size="md">General settings</Heading>
 
         <FormField
           control={control}
@@ -38,7 +37,7 @@ const About = () => {
         {/* Edit: My skills */}
         {/* Edit: section image */}
 
-        <Button type="submit" className="my-8">Save changes</Button>
+        <Button type="submit" className="mt-6">Save changes</Button>
       </form>
     </FormProvider>
   );

@@ -3,7 +3,7 @@ import Head from "next/head";
 import {General} from "~/components/admin/portfolio/General";
 import {List} from "~/components/admin/portfolio/List";
 import {Layout} from "~/components/admin/Layout";
-import {Separator} from "~/components/Separator";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "~/components/Tabs";
 
 const Page: NextPage = () => {
   return (
@@ -13,9 +13,18 @@ const Page: NextPage = () => {
       </Head>
 
       <Layout heading="Portfolio" description="Portfolio section settings">
-        <General />
-        <Separator className="my-8" />
-        <List />
+        <Tabs defaultValue="items">
+          <TabsList>
+            <TabsTrigger value="items">Portfolio items</TabsTrigger>
+            <TabsTrigger value="general">General settings</TabsTrigger>
+          </TabsList>
+          <TabsContent value="items">
+            <List />
+          </TabsContent>
+          <TabsContent value="general">
+            <General />
+          </TabsContent>
+        </Tabs>
       </Layout>
     </>
   );
