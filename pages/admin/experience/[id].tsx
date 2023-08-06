@@ -1,18 +1,18 @@
 import {type NextPage} from "next";
 import Head from "next/head";
 
-import {Portfolio} from "~/components/admin/Portfolio";
 import {Layout} from "~/components/admin/Layout";
+import {ItemForm} from "~/components/admin/experience/ItemForm";
 
 const Page: NextPage = () => {
   return (
     <>
       <Head>
-        <title>T3 Portfolio: Portfolio</title>
+        <title>T3 Portfolio: Experience</title>
       </Head>
 
-      <Layout heading="Portfolio" description="Portfolio section settings">
-        <Portfolio />
+      <Layout heading="Edit item" description="Experience section settings">
+        <ItemForm />
       </Layout>
     </>
   );

@@ -1,8 +1,8 @@
 import type {PropsWithChildren} from "react";
 import React from "react";
 import {Separator} from "~/components/Separator";
-import {Sidebar} from "./Sidebar";
 import {Heading} from "~/components/Heading";
+import {Sidebar} from "./Sidebar";
 
 type LayoutProps = PropsWithChildren<{
   heading: string;
@@ -19,9 +19,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
       <section className="flex-1 p-4 md:p-10">
         <header className="lg:max-w-2xl">
           <Heading as="h2" size="lg">{heading}</Heading>
-          <p className="text-sm leading-6 mb-6 max-w-2xl">
-            {description}
-          </p>
+          <p className="text-sm leading-6 mb-6 text-slate-500">{description}</p>
           <Separator />
         </header>
 

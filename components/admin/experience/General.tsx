@@ -9,10 +9,9 @@ import {
 } from "~/components/Form";
 import {Input} from "~/components/Input";
 import {Button} from "~/components/Button";
-import {Textarea} from "~/components/Textarea";
 import {Heading} from "~/components/Heading";
 
-const About = () => {
+const General = () => {
   const formMethods = useForm({});
   const {control} = formMethods;
 
@@ -35,27 +34,10 @@ const About = () => {
           )}
         />
 
-        <FormField
-          control={control}
-          name="content"
-          render={({field}) => (
-            <FormItem>
-              <FormLabel>Content</FormLabel>
-              <FormControl>
-                <Textarea {...field} placeholder="Enter section content here" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        {/* Edit: My skills */}
-        {/* Edit: section image */}
-
-        <Button type="submit" className="my-8">Save changes</Button>
+        <Button type="submit" className="mt-8">Save changes</Button>
       </form>
     </FormProvider>
   );
 };
 
-export {About};
+export {General};

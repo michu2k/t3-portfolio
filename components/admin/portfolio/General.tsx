@@ -9,35 +9,18 @@ import {
 } from "~/components/Form";
 import {Input} from "~/components/Input";
 import {Button} from "~/components/Button";
+import {Heading} from "~/components/Heading";
 import {Textarea} from "~/components/Textarea";
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "~/components/Tabs";
 
-const Portfolio = () => {
-  return (
-    <Tabs defaultValue="general">
-      <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="general">General</TabsTrigger>
-        <TabsTrigger value="items">Portfolio items</TabsTrigger>
-      </TabsList>
-
-      <TabsContent value="general">
-        <GeneralTab />
-      </TabsContent>
-
-      <TabsContent value="items">
-        <PortfolioItemsTab />
-      </TabsContent>
-    </Tabs>
-  );
-};
-
-const GeneralTab = () => {
+const General = () => {
   const formMethods = useForm({});
   const {control} = formMethods;
 
   return (
     <FormProvider {...formMethods}>
       <form>
+        <Heading as="h3" size="md">General</Heading>
+
         <FormField
           control={control}
           name="heading"
@@ -59,33 +42,17 @@ const GeneralTab = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} placeholder="Enter section description here..." />
+                <Textarea {...field} placeholder="Enter section description here" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="my-8">Save changes</Button>
+        <Button type="submit" className="mt-8">Save changes</Button>
       </form>
     </FormProvider>
   );
 };
 
-const PortfolioItemsTab = () => {
-  const formMethods = useForm({});
-  // const {control} = formMethods;
-
-  return (
-    <FormProvider {...formMethods}>
-      <form>
-
-        {/* Edit: Project items */}
-
-        <Button type="submit" className="my-8">Save changes</Button>
-      </form>
-    </FormProvider>
-  );
-};
-
-export {Portfolio};
+export {General};

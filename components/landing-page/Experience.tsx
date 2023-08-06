@@ -107,4 +107,4 @@ const ExperienceItem = ({from, to, companyName, position, responsibilities}: Exp
   );
 };
 
-export {Experience};
+export {Experience, experienceItems};

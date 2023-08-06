@@ -42,7 +42,7 @@ const Header = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} placeholder="Enter short header description here..." />
+                <Textarea {...field} placeholder="Enter short header description here" />
               </FormControl>
               <FormMessage />
             </FormItem>

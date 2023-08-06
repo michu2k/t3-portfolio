@@ -2,7 +2,6 @@ import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -44,20 +43,20 @@ const Contact = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} placeholder="Enter section description here..." />
+                <Textarea {...field} placeholder="Enter section description here" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Separator className="my-10" />
+        <Separator className="my-8" />
         <Heading as="h3" size="md">Contact methods</Heading>
 
-        <FormDescription>
+        <p className="text-xs text-slate-500 leading-5">
           Enter contact methods that will be displayed on the website.
           Leave fields empty if you don&apos;t want to display some of the methods.
-        </FormDescription>
+        </p>
 
         <FormField
           control={control}
