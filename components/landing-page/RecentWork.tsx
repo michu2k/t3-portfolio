@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {PageSection} from "./generics/PageSection";
-import {SectionText} from "./generics/SectionText";
+import {PageSection} from "~/components/PageSection";
+import {SectionText} from "~/components/SectionText";
 import ĄrrowUpRightSvg from "~/public/svgs/arrow-up-right.svg";
 
 const recentWorkItems: Array<RecentWorkItemProps> = [
@@ -106,16 +106,20 @@ const RecentWorkItem = ({id, name, description, image}: RecentWorkItemProps) => 
   const itemPageUrl = `/portfolio/${id}`;
 
   return (
-    <article className="group break-inside-avoid-column w-auto shrink-0 ">
+    <article className="group break-inside-avoid-column w-auto shrink-0">
       <div className="w-auto h-64 rounded bg-slate-100 shrink-0 relative">
-        <Image src={image.thumbnail} fill className="rounded" style={{objectFit: "cover"}} alt="" />
+        <Image
+          src={image.thumbnail}
+          fill
+          className="rounded"
+          style={{objectFit: "cover"}}
+          alt="" />
       </div>
 
       <div className="flex flex-col items-start py-4">
         <Link href={itemPageUrl} className="flex items-center justify-between w-full mb-4">
           <p className="
             font-semibold text-lg text-slate-700
-            inline-flex rounded-sm
             mr-2
           group-hover:text-primary
             transition-colors">
@@ -135,7 +139,7 @@ const RecentWorkItem = ({id, name, description, image}: RecentWorkItemProps) => 
           </span>
         </Link>
 
-        <p className="text-sm inline-flex rounded-sm leading-6">
+        <p className="text-sm leading-6">
           {description}
         </p>
       </div>
@@ -143,4 +147,4 @@ const RecentWorkItem = ({id, name, description, image}: RecentWorkItemProps) => 
   );
 };
 
-export {RecentWork};
+export {RecentWork, recentWorkItems};
