@@ -1,6 +1,5 @@
 import type {PropsWithChildren} from "react";
 import React from "react";
-import {Separator} from "~/components/Separator";
 import {Heading} from "~/components/Heading";
 import {Sidebar} from "./Sidebar";
 
