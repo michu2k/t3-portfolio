@@ -1,13 +1,13 @@
 import React from "react";
 import Link from "next/link";
-import {usePathname} from "next/navigation";
+import {useRouter} from "next/router";
 import type {LucideIcon} from "lucide-react";
 import {Settings, Info, Laptop2, Image, Mail, Briefcase} from "lucide-react";
 
 const sidebarItems: Array<SidebarItemDef> = [
   {
     text: "General",
-    href: "/admin/general",
+    href: "/admin",
     icon: Settings
   },
   {
@@ -22,12 +22,18 @@ const sidebarItems: Array<SidebarItemDef> = [
   },
   {
     text: "Portfolio",
-    href: "/admin/portfolio",
+    href: [
+      "/admin/portfolio",
+      "/admin/portfolio/[id]"
+    ],
     icon: Image
   },
   {
     text: "Experience",
-    href: "/admin/experience",
+    href: [
+      "/admin/experience",
+      "/admin/experience/[id]"
+    ],
     icon: Briefcase
   },
   {
@@ -38,12 +44,15 @@ const sidebarItems: Array<SidebarItemDef> = [
 ];
 
 const Sidebar = () => {
-  const pathname = usePathname();
+  const {pathname} = useRouter();
 
   function displaySidebarItems() {
-    return sidebarItems.map((item) => (
-      <SidebarItem key={item.href} isActive={item.href === pathname} {...item} />
-    ));
+    return sidebarItems.map(({href, ...item}) => {
+      const mainHref = Array.isArray(href) ? href[0] as string : href;
+      const isActive = Array.isArray(href) ? !!href.find((href) => href === pathname) : (href === pathname);
+
+      return <SidebarItem key={mainHref} isActive={isActive} href={href} {...item} />;
+    });
   }
 
   return (
@@ -57,8 +66,8 @@ const Sidebar = () => {
 
 type SidebarItemDef = {
   text: string;
-  href: string;
   icon: LucideIcon;
+  href: string | Array<string>;
 }
 
 type SidebarItemProps = SidebarItemDef & {
@@ -66,10 +75,12 @@ type SidebarItemProps = SidebarItemDef & {
 }
 
 const SidebarItem = ({text, href, icon: Icon, isActive}: SidebarItemProps) => {
+  const url = Array.isArray(href) ? href[0] as string : href;
+
   return (
     <li>
       <Link
-        href={href}
+        href={url}
         className={`
           font-medium leading-5 text-sm
           py-3 px-4
