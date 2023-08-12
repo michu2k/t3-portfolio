@@ -2,12 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import {Plus, Pencil} from "lucide-react";
-import {Button} from "~/components/Button";
+import {Button} from "~/components/ui/Button";
 import {recentWorkItems} from "~/components/landing-page/RecentWork";
 
-const List = () => {
+const PortfolioItems = () => {
 
-  function displayPortfolioItems() {
+  function displayItems() {
     return recentWorkItems.map((item) => (
       <PortfolioItem key={item.id} {...item} />
     ));
@@ -16,7 +16,7 @@ const List = () => {
   return (
     <>
       <div className="flex flex-col items-start">
-        {displayPortfolioItems()}
+        {displayItems()}
 
         <Link href="/dashboard/portfolio/new">
           <Button className="mt-8">
@@ -73,4 +73,4 @@ const PortfolioItem = ({id, name, description, image}: PortfolioItemProps) => {
   );
 };
 
-export {List};
+export {PortfolioItems};

@@ -2,7 +2,7 @@ import type {GetServerSidePropsContext} from "next";
 import {type NextPage} from "next";
 import Head from "next/head";
 
-import {About} from "~/components/dashboard/About";
+import {AboutForm} from "~/components/dashboard/AboutForm";
 import {Layout} from "~/components/dashboard/Layout";
 import {authRedirectToSignInPage} from "~/utils/authRedirect";
 
@@ -14,7 +14,7 @@ const Page: NextPage = () => {
       </Head>
 
       <Layout heading="About" description="About section settings">
-        <About />
+        <AboutForm />
       </Layout>
     </>
   );

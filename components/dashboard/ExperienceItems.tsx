@@ -2,13 +2,13 @@ import React from "react";
 import {format} from "date-fns";
 import Link from "next/link";
 import {Plus, Pencil} from "lucide-react";
-import {Button} from "~/components/Button";
+import {Button} from "~/components/ui/Button";
 import {experienceItems} from "~/components/landing-page/Experience"; // TEMP
-import {Heading} from "~/components/Heading";
+import {Heading} from "~/components/ui/Heading";
 
-const List = () => {
+const ExperienceItems = () => {
 
-  function displayExperienceItems() {
+  function displayItems() {
     return experienceItems.map((item) => (
       <ExperienceItem key={item.id} {...item} />
     ));
@@ -19,7 +19,7 @@ const List = () => {
       <Heading as="h3" size="md">Experience items</Heading>
 
       <div className="mt-6 flex flex-col items-start">
-        {displayExperienceItems()}
+        {displayItems()}
 
         <Link href="/dashboard/experience/new">
           <Button className="mt-8">
@@ -77,4 +77,4 @@ const ExperienceItem = ({id, from, to, companyName, position, responsibilities}:
   );
 };
 
-export {List};
+export {ExperienceItems};

@@ -7,12 +7,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from "~/components/Form";
-import {Heading} from "~/components/Heading";
-import {Input} from "~/components/Input";
-import {Button} from "~/components/Button";
+} from "~/components/ui/Form";
+import {Heading} from "~/components/ui/Heading";
+import {Input} from "~/components/ui/Input";
+import {Button} from "~/components/ui/Button";
 
-const General = () => {
+const GeneralForm = () => {
   const formMethods = useForm({});
   const {control} = formMethods;
 
@@ -46,4 +46,4 @@ const General = () => {
   );
 };
 
-export {General};
+export {GeneralForm};

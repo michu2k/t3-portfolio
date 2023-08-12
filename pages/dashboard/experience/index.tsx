@@ -2,7 +2,7 @@ import type {GetServerSidePropsContext} from "next";
 import {type NextPage} from "next";
 import Head from "next/head";
 
-import {List} from "~/components/dashboard/experience/List";
+import {ExperienceItems} from "~/components/dashboard/ExperienceItems";
 import {Layout} from "~/components/dashboard/Layout";
 import {authRedirectToSignInPage} from "~/utils/authRedirect";
 
@@ -14,7 +14,7 @@ const Page: NextPage = () => {
       </Head>
 
       <Layout heading="Experience" description="Experience section settings">
-        <List />
+        <ExperienceItems />
       </Layout>
     </>
   );

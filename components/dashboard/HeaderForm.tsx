@@ -6,13 +6,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from "~/components/Form";
-import {Input} from "~/components/Input";
-import {Button} from "~/components/Button";
-import {Textarea} from "~/components/Textarea";
-import {Heading} from "~/components/Heading";
+} from "~/components/ui/Form";
+import {Input} from "~/components/ui/Input";
+import {Button} from "~/components/ui/Button";
+import {Textarea} from "~/components/ui/Textarea";
+import {Heading} from "~/components/ui/Heading";
 
-const Header = () => {
+const HeaderForm = () => {
   const formMethods = useForm({});
   const {control} = formMethods;
 
@@ -57,4 +57,4 @@ const Header = () => {
   );
 };
 
-export {Header};
+export {HeaderForm};

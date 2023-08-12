@@ -3,7 +3,7 @@ import {type NextPage} from "next";
 import Head from "next/head";
 
 import {Layout} from "~/components/dashboard/Layout";
-import {ItemForm} from "~/components/dashboard/portfolio/ItemForm";
+import {PortfolioItemForm} from "~/components/dashboard/PortfolioItemForm";
 import {authRedirectToSignInPage} from "~/utils/authRedirect";
 
 const Page: NextPage = () => {
@@ -14,7 +14,7 @@ const Page: NextPage = () => {
       </Head>
 
       <Layout heading="Edit item" description="Create a new portfolio item or edit an existing one.">
-        <ItemForm />
+        <PortfolioItemForm />
       </Layout>
     </>
   );

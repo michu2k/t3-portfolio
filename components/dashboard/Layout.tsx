@@ -1,7 +1,7 @@
 import type {PropsWithChildren} from "react";
 import React from "react";
 import {useSession} from "next-auth/react";
-import {Heading} from "~/components/Heading";
+import {Heading} from "~/components/ui/Heading";
 import {Sidebar} from "~/components/dashboard/Sidebar";
 
 type LayoutProps = PropsWithChildren<{

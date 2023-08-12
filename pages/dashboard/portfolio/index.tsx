@@ -2,10 +2,10 @@ import type {GetServerSidePropsContext} from "next";
 import {type NextPage} from "next";
 import Head from "next/head";
 
-import {General} from "~/components/dashboard/portfolio/General";
-import {List} from "~/components/dashboard/portfolio/List";
 import {Layout} from "~/components/dashboard/Layout";
-import {Tabs, TabsContent, TabsList, TabsTrigger} from "~/components/Tabs";
+import {PortfolioForm} from "~/components/dashboard/PortfolioForm";
+import {PortfolioItems} from "~/components/dashboard/PortfolioItems";
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "~/components/ui/Tabs";
 import {authRedirectToSignInPage} from "~/utils/authRedirect";
 
 const Page: NextPage = () => {
@@ -22,10 +22,10 @@ const Page: NextPage = () => {
             <TabsTrigger value="general">General settings</TabsTrigger>
           </TabsList>
           <TabsContent value="items">
-            <List />
+            <PortfolioItems />
           </TabsContent>
           <TabsContent value="general">
-            <General />
+            <PortfolioForm />
           </TabsContent>
         </Tabs>
       </Layout>

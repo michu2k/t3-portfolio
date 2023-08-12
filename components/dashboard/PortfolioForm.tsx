@@ -6,36 +6,30 @@ import {
   FormItem,
   FormLabel,
   FormMessage
-} from "~/components/Form";
-import {Button} from "~/components/Button";
-import {Textarea} from "~/components/Textarea";
-import {Heading} from "~/components/Heading";
+} from "~/components/ui/Form";
+import {Button} from "~/components/ui/Button";
+import {Textarea} from "~/components/ui/Textarea";
 
-const About = () => {
+const PortfolioForm = () => {
   const formMethods = useForm({});
   const {control} = formMethods;
 
   return (
     <FormProvider {...formMethods}>
       <form>
-        <Heading as="h3" size="md">General settings</Heading>
-
         <FormField
           control={control}
-          name="content"
+          name="description"
           render={({field}) => (
             <FormItem>
-              <FormLabel>Content</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} placeholder="Enter section content here" />
+                <Textarea {...field} placeholder="Enter section description here" />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-
-        {/* Edit: My skills */}
-        {/* Edit: section image */}
 
         <Button type="submit" className="mt-6">Save changes</Button>
       </form>
@@ -43,4 +37,4 @@ const About = () => {
   );
 };
 
-export {About};
+export {PortfolioForm};

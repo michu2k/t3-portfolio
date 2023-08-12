@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import {PageSection} from "~/components/PageSection";
-import {Heading} from "~/components/Heading";
+import {PageSection} from "~/components/ui/PageSection";
+import {Heading} from "~/components/ui/Heading";
 
 const skills = [
   "HTML",

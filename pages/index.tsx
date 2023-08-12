@@ -1,7 +1,7 @@
 import {type NextPage} from "next";
 import Head from "next/head";
 
-import {Separator} from "~/components/Separator";
+import {Separator} from "~/components/ui/Separator";
 import {Navigation} from "~/components/landing-page/Navigation";
 import {Header} from "~/components/landing-page/Header";
 import {AboutMe} from "~/components/landing-page/AboutMe";

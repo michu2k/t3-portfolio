@@ -1,17 +1,17 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {Button} from "~/components/Button";
+import {Button} from "~/components/ui/Button";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage
-} from "~/components/Form";
-import {Input} from "~/components/Input";
-import {Textarea} from "~/components/Textarea";
+} from "~/components/ui/Form";
+import {Input} from "~/components/ui/Input";
+import {Textarea} from "~/components/ui/Textarea";
 
-const ItemForm = () => {
+const PortfolioItemForm = () => {
   const formMethods = useForm({});
   const {control} = formMethods;
 
@@ -66,4 +66,4 @@ const ItemForm = () => {
   );
 };
 
-export {ItemForm};
+export {PortfolioItemForm};
