@@ -1,9 +1,12 @@
+import type {GetServerSidePropsContext} from "next";
 import {type NextPage} from "next";
 import Head from "next/head";
+
 import {General} from "~/components/dashboard/portfolio/General";
 import {List} from "~/components/dashboard/portfolio/List";
 import {Layout} from "~/components/dashboard/Layout";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "~/components/Tabs";
+import {authRedirectToSignInPage} from "~/utils/authRedirect";
 
 const Page: NextPage = () => {
   return (
@@ -29,5 +32,9 @@ const Page: NextPage = () => {
     </>
   );
 };
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  return await authRedirectToSignInPage(ctx);
+}
 
 export default Page;

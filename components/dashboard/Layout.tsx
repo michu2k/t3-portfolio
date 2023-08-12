@@ -3,7 +3,6 @@ import React from "react";
 import {useSession} from "next-auth/react";
 import {Heading} from "~/components/Heading";
 import {Sidebar} from "~/components/dashboard/Sidebar";
-import {Login} from "~/components/dashboard/Login";
 
 type LayoutProps = PropsWithChildren<{
   heading: string;
@@ -13,9 +12,7 @@ type LayoutProps = PropsWithChildren<{
 const Layout = ({heading, description, children}: LayoutProps) => {
   const {data: sessionData} = useSession();
 
-  if (!sessionData) {
-    return <Login />;
-  }
+  console.log({sessionData});
 
   return (
     <main className="mx-auto min-h-full md:flex bg-white">
