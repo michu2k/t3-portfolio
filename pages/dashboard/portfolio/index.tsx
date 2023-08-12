@@ -1,8 +1,8 @@
 import {type NextPage} from "next";
 import Head from "next/head";
-import {General} from "~/components/admin/portfolio/General";
-import {List} from "~/components/admin/portfolio/List";
-import {Layout} from "~/components/admin/Layout";
+import {General} from "~/components/dashboard/portfolio/General";
+import {List} from "~/components/dashboard/portfolio/List";
+import {Layout} from "~/components/dashboard/Layout";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "~/components/Tabs";
 
 const Page: NextPage = () => {

@@ -7,38 +7,38 @@ import {Settings, Info, Laptop2, Image, Mail, Briefcase} from "lucide-react";
 const sidebarItems: Array<SidebarItemDef> = [
   {
     text: "General",
-    href: "/admin",
+    href: "/dashboard",
     icon: Settings
   },
   {
     text: "Header",
-    href: "/admin/header",
+    href: "/dashboard/header",
     icon: Laptop2
   },
   {
     text: "About",
-    href: "/admin/about",
+    href: "/dashboard/about",
     icon: Info
   },
   {
     text: "Portfolio",
     href: [
-      "/admin/portfolio",
-      "/admin/portfolio/[id]"
+      "/dashboard/portfolio",
+      "/dashboard/portfolio/[id]"
     ],
     icon: Image
   },
   {
     text: "Experience",
     href: [
-      "/admin/experience",
-      "/admin/experience/[id]"
+      "/dashboard/experience",
+      "/dashboard/experience/[id]"
     ],
     icon: Briefcase
   },
   {
     text: "Contact",
-    href: "/admin/contact",
+    href: "/dashboard/contact",
     icon: Mail
   }
 ];

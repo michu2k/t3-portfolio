@@ -1,8 +1,8 @@
 import {type NextPage} from "next";
 import Head from "next/head";
 
-import {Layout} from "~/components/admin/Layout";
-import {ItemForm} from "~/components/admin/portfolio/ItemForm";
+import {Layout} from "~/components/dashboard/Layout";
+import {ItemForm} from "~/components/dashboard/portfolio/ItemForm";
 
 const Page: NextPage = () => {
   return (

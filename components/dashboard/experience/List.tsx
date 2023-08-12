@@ -21,7 +21,7 @@ const List = () => {
       <div className="mt-6 flex flex-col items-start">
         {displayExperienceItems()}
 
-        <Link href="/admin/experience/new">
+        <Link href="/dashboard/experience/new">
           <Button className="mt-8">
             <Plus size={16} className="mr-1" /> Add new item
           </Button>
@@ -68,7 +68,7 @@ const ExperienceItem = ({id, from, to, companyName, position, responsibilities}:
         </ul>
       </div>
 
-      <Link href={`/admin/experience/${id}`}>
+      <Link href={`/dashboard/experience/${id}`}>
         <Button variant="ghost" size="icon">
           <Pencil size={16} />
         </Button>

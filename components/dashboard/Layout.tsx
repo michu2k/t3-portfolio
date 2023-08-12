@@ -1,7 +1,9 @@
 import type {PropsWithChildren} from "react";
 import React from "react";
+import {useSession} from "next-auth/react";
 import {Heading} from "~/components/Heading";
-import {Sidebar} from "./Sidebar";
+import {Sidebar} from "~/components/dashboard/Sidebar";
+import {Login} from "~/components/dashboard/Login";
 
 type LayoutProps = PropsWithChildren<{
   heading: string;
@@ -9,6 +11,12 @@ type LayoutProps = PropsWithChildren<{
 }>
 
 const Layout = ({heading, description, children}: LayoutProps) => {
+  const {data: sessionData} = useSession();
+
+  if (!sessionData) {
+    return <Login />;
+  }
+
   return (
     <main className="mx-auto min-h-full md:flex bg-white">
       <aside className="md:w-64 p-4 md:py-10 md:bg-white border-r-[1px] md:border-slate-200">

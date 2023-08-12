@@ -18,7 +18,7 @@ const List = () => {
       <div className="flex flex-col items-start">
         {displayPortfolioItems()}
 
-        <Link href="/admin/portfolio/new">
+        <Link href="/dashboard/portfolio/new">
           <Button className="mt-8">
             <Plus size={16} className="mr-1" /> Add new item
           </Button>
@@ -63,7 +63,7 @@ const PortfolioItem = ({id, name, description, image}: PortfolioItemProps) => {
         </p>
       </div>
 
-      <Link href={`/admin/portfolio/${id}`}>
+      <Link href={`/dashboard/portfolio/${id}`}>
         <Button variant="ghost" size="icon">
           <Pencil size={16} />
         </Button>
