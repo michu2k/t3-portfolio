@@ -9,7 +9,7 @@
     "lint:ts": "next lint",
     "lint:ts:fix": "next lint --fix",
     "postinstall": "prisma generate",
-    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:push": "npx prisma db push",
     "prisma:studio": "npx prisma studio"
   },
   "dependencies": {
