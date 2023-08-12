@@ -49,7 +49,10 @@ const Sidebar = () => {
   function displaySidebarItems() {
     return sidebarItems.map(({href, ...item}) => {
       const mainHref = Array.isArray(href) ? href[0] as string : href;
-      const isActive = Array.isArray(href) ? !!href.find((href) => href === pathname) : (href === pathname);
+
+      const isActive = Array.isArray(href)
+        ? !!href.find((href) => href === pathname)
+        : (href === pathname);
 
       return <SidebarItem key={mainHref} isActive={isActive} href={href} {...item} />;
     });
