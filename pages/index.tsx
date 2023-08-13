@@ -10,7 +10,7 @@ import {Experience} from "~/components/landing-page/Experience";
 import {KeepInTouch} from "~/components/landing-page/KeepInTouch";
 import {Footer} from "~/components/landing-page/Footer";
 
-const Home: NextPage = () => {
+const Page: NextPage = () => {
   // const hello = api.example.hello.useQuery({text: "from tRPC"});
 
   return (
@@ -37,4 +37,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default Page;
