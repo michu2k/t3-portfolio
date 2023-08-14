@@ -48,14 +48,9 @@ React.HTMLAttributes<HTMLDivElement>
 >(({className, ...props}, ref) => {
   const id = React.useId();
 
-  const wrapperClassName = cn(
-    "space-y-2 mt-6 mb-2",
-    className
-  );
-
   return (
     <FormItemContext.Provider value={{id}}>
-      <div ref={ref} className={wrapperClassName} {...props} />
+      <div ref={ref} className={cn("space-y-2 mt-6 mb-2", className)} {...props} />
     </FormItemContext.Provider>
   );
 });
@@ -68,14 +63,11 @@ React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
 >(({className, ...props}, ref) => {
   const {formItemId} = useFormField();
 
-  const labelClassName = cn(
-    "font-medium text-sm text-slate-700 leading-none block mb-2",
-    className
-  );
-
-  return (
-    <LabelPrimitive.Root ref={ref} htmlFor={formItemId} className={labelClassName} {...props} />
-  );
+  return <LabelPrimitive.Root
+    ref={ref}
+    htmlFor={formItemId}
+    className={cn("font-medium text-sm text-slate-700 leading-none block mb-2", className)}
+    {...props} />;
 });
 
 FormLabel.displayName = "Label";
@@ -109,14 +101,11 @@ React.HTMLAttributes<HTMLParagraphElement>
 >(({className, ...props}, ref) => {
   const {formDescriptionId} = useFormField();
 
-  const descriptionClassName = cn(
-    "text-xs leading-5 text-slate-500",
-    className
-  );
-
-  return (
-    <p ref={ref} id={formDescriptionId} className={descriptionClassName} {...props} />
-  );
+  return <p
+    ref={ref}
+    id={formDescriptionId}
+    className={cn("text-xs leading-5 text-slate-500", className)}
+    {...props} />;
 });
 
 FormDescription.displayName = "FormDescription";
@@ -132,13 +121,12 @@ React.HTMLAttributes<HTMLParagraphElement>
     return null;
   }
 
-  const messageClassName = cn(
-    "text-sm font-medium text-red-500",
-    className
-  );
-
   return (
-    <p ref={ref} id={formMessageId} className={messageClassName} {...props}>
+    <p
+      ref={ref}
+      id={formMessageId}
+      className={cn("text-sm font-medium text-red-500", className)}
+      {...props}>
       {body}
     </p>
   );

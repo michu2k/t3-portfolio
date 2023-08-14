@@ -6,15 +6,7 @@ type SeparatorProps = {
 };
 
 const Separator = ({className}: SeparatorProps) => {
-
-  const separatorClassName = cn(
-    "section-container h-px bg-slate-300 border-0",
-    className
-  );
-
-  return (
-    <hr className={separatorClassName} />
-  );
+  return <hr className={cn("section-container h-px bg-slate-300 border-0", className)} />;
 };
 
 export {Separator};

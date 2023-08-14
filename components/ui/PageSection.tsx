@@ -11,11 +11,8 @@ type PageSectionProps = PropsWithChildren<{
 }>
 
 const PageSection = ({id, heading, subheading, className, children}: PageSectionProps) => {
-
-  const sectionClassName = cn("py-16 px-4 md:py-24 md:px-6 rounded", className);
-
   return (
-    <section id={id} className={sectionClassName}>
+    <section id={id} className={cn("py-16 px-4 md:py-24 md:px-6 rounded", className)}>
       <div className="section-container">
         <p className="font-semibold text-md text-primary mb-2">{subheading}</p>
         <Heading as="h2" size="xl">{heading}</Heading>
