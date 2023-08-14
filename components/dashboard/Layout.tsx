@@ -15,8 +15,8 @@ const Layout = ({heading, description, children}: LayoutProps) => {
   console.log({sessionData});
 
   return (
-    <main className="mx-auto min-h-full md:flex bg-white">
-      <aside className="md:w-64 p-4 md:py-10 md:bg-white border-r-[1px] md:border-slate-200">
+    <main className="mx-auto min-h-full md:flex">
+      <aside className="md:w-64 p-4 md:py-10 border-r-[1px] md:border-slate-200">
         <Sidebar />
       </aside>
 
