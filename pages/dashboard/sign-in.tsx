@@ -6,7 +6,7 @@ import {getServerAuthSession} from "~/server/auth";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
-import {version} from "~/package.json";
+import pkg from "~/package.json";
 
 const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({providers}) => {
 
@@ -54,7 +54,7 @@ const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
           </div>
 
           <footer className="flex flex-col items-center">
-            <span className="text-xs text-slate-500">Portfolio Dashboard v{version}</span>
+            <span className="text-xs text-slate-500">Portfolio Dashboard v{pkg.version}</span>
           </footer>
         </section>
       </main>
