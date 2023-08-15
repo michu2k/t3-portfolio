@@ -3,7 +3,6 @@ import Head from "next/head";
 import {getProviders, signIn} from "next-auth/react";
 import Link from "next/link";
 import {getServerAuthSession} from "~/server/auth";
-import {Card, CardContent, CardDescription, CardFooter, CardHeader} from "~/components/ui/Card";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
@@ -26,18 +25,18 @@ const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
       </Head>
 
       <main className="mx-auto min-h-full px-4 flex items-center justify-center">
-        <Card className="w-full max-w-[20rem]">
-          <CardHeader className="space-y-1">
-            <Heading as="h1" size="lg">Sign In</Heading>
-            <CardDescription>
-              Sign In to the dashboard.
-            </CardDescription>
-          </CardHeader>
+        <section className="w-full max-w-[20rem]">
+          <header className="flex flex-col items-center">
+            <Heading as="h1" size="xl">Sign In</Heading>
+            <p className="text-sm text-center text-slate-500">
+              Sign In to the dashboard
+            </p>
+          </header>
 
-          <CardContent className="flex flex-col justify-center gap-4 pt-4 pb-10">
+          <div className="flex flex-col justify-center gap-4 pt-8 pb-12">
             {displaySignInProviders()}
 
-            <div className="relative">
+            <div className="relative mx-10">
               <div className="absolute inset-0 flex items-center">
                 <span className="w-full border-t" />
               </div>
@@ -52,12 +51,12 @@ const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
             <Link href="/" className={cn(buttonVariants({variant: "secondary"}))}>
               Go back to Home page
             </Link>
-          </CardContent>
+          </div>
 
-          <CardFooter>
+          <footer className="flex flex-col items-center">
             <span className="text-xs text-slate-500">Portfolio Dashboard v{version}</span>
-          </CardFooter>
-        </Card>
+          </footer>
+        </section>
       </main>
     </>
   );
