@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {PageSection} from "~/components/ui/PageSection";
-import {SectionText} from "~/components/ui/SectionText";
 import ĄrrowUpRightSvg from "~/public/svgs/arrow-up-right.svg";
 
 const recentWorkItems: Array<RecentWorkItemProps> = [
@@ -78,10 +77,6 @@ const RecentWork = () => {
 
   return (
     <PageSection id="recent-work" heading="Recent Work Showcases" subheading="Portfolio">
-      <SectionText>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-      </SectionText>
-
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {displayRecentWorkItems()}
       </div>

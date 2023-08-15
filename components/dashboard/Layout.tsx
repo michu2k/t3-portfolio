@@ -16,7 +16,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
 
   return (
     <main className="mx-auto min-h-full md:flex">
-      <aside className="md:w-64 p-4 md:py-10 border-r-[1px] md:border-slate-200">
+      <aside className="p-4 md:py-10 border-r-[1px] md:border-slate-200 md:sticky md:top-0 md:h-screen md:w-64">
         <Sidebar />
       </aside>
 
