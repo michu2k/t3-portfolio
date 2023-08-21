@@ -2,7 +2,7 @@ import type {PropsWithChildren} from "react";
 import React from "react";
 import {useSession} from "next-auth/react";
 import {Heading} from "~/components/ui/Heading";
-import {SidebarMenu} from "~/components/dashboard/SidebarMenu";
+import {Navigation} from "~/components/dashboard/Navigation";
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/Avatar";
 import {getUserInitials} from "~/utils/getUserInitials";
 

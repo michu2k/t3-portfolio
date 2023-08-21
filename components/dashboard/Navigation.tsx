@@ -6,7 +6,7 @@ import type {LucideIcon} from "lucide-react";
 import {Settings, Info, Laptop2, Image, Mail, Briefcase, LogOut} from "lucide-react";
 import {Button} from "~/components/ui/Button";
 
-const sidebarItems: Array<SidebarMenuItemDef> = [
+const navigationItems: Array<NavigationItemDef> = [
   {
     text: "General",
     href: "/dashboard",
@@ -45,30 +45,30 @@ const sidebarItems: Array<SidebarMenuItemDef> = [
   }
 ];
 
-const SidebarMenu = () => {
+const Navigation = () => {
   const {pathname} = useRouter();
 
-  function displaySidebarItems() {
-    return sidebarItems.map(({href, ...item}) => {
+  function displayNavigationItems() {
+    return navigationItems.map(({href, ...item}) => {
       const mainHref = Array.isArray(href) ? href[0] as string : href;
 
       const isActive = Array.isArray(href)
         ? !!href.find((href) => href === pathname)
         : (href === pathname);
 
-      return <SidebarMenuItem key={mainHref} isActive={isActive} href={href} {...item} />;
+      return <NavigationItem key={mainHref} isActive={isActive} href={href} {...item} />;
     });
   }
 
   return (
     <nav className="flex flex-col flex-grow">
-      <ul className="flex md:flex-col flex-wrap gap-x-4 gap-y-1 md:gap-y-3">
-        {displaySidebarItems()}
+      <ul className="flex flex-col flex-wrap gap-x-4 gap-y-3">
+        {displayNavigationItems()}
       </ul>
 
       <Button
         variant="ghost"
-        className="h-11 w-full justify-start mt-8 md:mt-auto"
+        className="h-11 w-full justify-start mt-auto mb-4"
         onClick={() => void signOut()}>
         <LogOut size={16} className="mr-2" /> Log Out
       </Button>
@@ -76,17 +76,17 @@ const SidebarMenu = () => {
   );
 };
 
-type SidebarMenuItemDef = {
+type NavigationItemDef = {
   text: string;
   icon: LucideIcon;
   href: string | Array<string>;
 }
 
-type SidebarMenuItemProps = SidebarMenuItemDef & {
+type NavigationItemProps = NavigationItemDef & {
   isActive: boolean;
 }
 
-const SidebarMenuItem = ({text, href, icon: Icon, isActive}: SidebarMenuItemProps) => {
+const NavigationItem = ({text, href, icon: Icon, isActive}: NavigationItemProps) => {
   const url = Array.isArray(href) ? href[0] as string : href;
 
   return (
@@ -110,4 +110,4 @@ const SidebarMenuItem = ({text, href, icon: Icon, isActive}: SidebarMenuItemProp
   );
 };
 
-export {SidebarMenu};
+export {Navigation};
