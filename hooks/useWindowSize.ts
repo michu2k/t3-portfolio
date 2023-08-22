@@ -1,4 +1,4 @@
-import {useLayoutEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {debounce} from "~/utils/debounce";
 import {isClientSide} from "~/utils/isClientSide";
 
@@ -8,7 +8,7 @@ type WindowSize = {
 }
 
 const useWindowSize = (debounceMs = 100) => {
-  const [windowSize, setWindowSize] = useState<WindowSize>(getSize);
+  const [windowSize, setWindowSize] = useState<WindowSize>(getSize());
 
   function getSize() {
     return {
@@ -17,13 +17,12 @@ const useWindowSize = (debounceMs = 100) => {
     };
   }
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     function handleWindowResize() {
       debounce(() => setWindowSize(getSize()), 100)();
     }
 
     window.addEventListener("resize", handleWindowResize);
-
     return () => window.removeEventListener("resize", handleWindowResize);
   }, [debounceMs]);
 
