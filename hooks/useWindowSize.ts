@@ -19,7 +19,7 @@ const useWindowSize = (debounceMs = 100) => {
 
   useLayoutEffect(() => {
     function handleWindowResize() {
-      debounce(() => setWindowSize(getSize()), 100);
+      debounce(() => setWindowSize(getSize()), 100)();
     }
 
     window.addEventListener("resize", handleWindowResize);
