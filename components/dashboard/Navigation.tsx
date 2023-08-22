@@ -68,7 +68,7 @@ const Navigation = () => {
 
       <Button
         variant="ghost"
-        className="h-11 w-full justify-start mt-auto mb-4"
+        className="h-11 w-full justify-start mt-auto mb-4 hover:text-primary"
         onClick={() => void signOut()}>
         <LogOut size={16} className="mr-2" /> Log Out
       </Button>
@@ -95,7 +95,7 @@ const NavigationItem = ({text, href, icon: Icon, isActive}: NavigationItemProps)
         href={url}
         className={`
           font-medium leading-5 text-sm
-          py-3 px-4
+          py-3 px-3
           flex items-center gap-3
           rounded-lg
           ${isActive ? "bg-slate-100 text-primary" : "text-slate-700"}

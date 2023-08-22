@@ -2,8 +2,9 @@ import type {PropsWithChildren} from "react";
 import React, {useContext, useState} from "react";
 import type {AnimationProps} from "framer-motion";
 import {AnimatePresence, motion} from "framer-motion";
-import {cn} from "~/utils/className";
 import * as Portal from "@radix-ui/react-portal";
+import {useIsMobile} from "~/hooks/useIsMobile";
+import {cn} from "~/utils/className";
 
 type SidebarContextValue = {
   isExpanded: boolean;
@@ -71,6 +72,7 @@ HTMLElement,
 SidebarContentProps
 >(({children, className}, ref) => {
   const {isExpanded} = useContext(SidebarContext);
+  const isMobile = useIsMobile();
 
   const contentAnimation: AnimationProps = {
     transition: {duration: 0.25, ease: "easeInOut"},
@@ -79,26 +81,36 @@ SidebarContentProps
     exit: {x: "-100%"}
   };
 
-  return (
-    <AnimatePresence>
-      {isExpanded && <>
-        <motion.aside
-          key="sidebar-content"
-          ref={ref}
-          className={cn(
-            `flex flex-col
-          h-full py-10 px-4 bg-white
-          border-r-[1px] border-slate-200
-          fixed md:sticky z-50 top-0 md:h-screen w-64`,
-            className
-          )}
-          {...contentAnimation}>
-          {children}
-        </motion.aside>
+  const sidebarClassName = cn(
+    `flex flex-col
+    h-full py-10 px-4 bg-white
+    border-r-[1px] border-slate-200
+    fixed md:sticky z-50 top-0 md:h-screen w-64`,
+    className
+  );
 
-        <SidebarOverlay />
-      </>}
-    </AnimatePresence>
+  if (isMobile) {
+    return (
+      <AnimatePresence>
+        {isExpanded && <>
+          <motion.aside
+            key="sidebar-content"
+            ref={ref}
+            className={sidebarClassName}
+            {...contentAnimation}>
+            {children}
+          </motion.aside>
+
+          <SidebarOverlay />
+        </>}
+      </AnimatePresence>
+    );
+  }
+
+  return (
+    <aside ref={ref} className={sidebarClassName}>
+      {children}
+    </aside>
   );
 });
 
