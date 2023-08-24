@@ -125,24 +125,19 @@ const SidebarTrigger = React.forwardRef<
 HTMLButtonElement,
 SidebarTriggerProps
 >(({className, onClick = () => null}, ref) => {
-  const {isExpanded, toggleExpanded} = useContext(SidebarContext);
+  const {toggleExpanded} = useContext(SidebarContext);
 
-  const dynamicLineStyles = `
+  const innerLineStyles = `
     w-8 h-0.5
     bg-slate-900
     absolute top-0 left-0 bottom-0
     m-auto
-    transition-transform
-    will-change-transform
-    ${isExpanded ? "opacity-0" : "trans"}
   `;
 
-  const staticLineStyles = `
+  const outerLineStyles = `
     w-6 h-0.5
     bg-slate-900
     flex
-    transition-opacity
-    ${isExpanded ? "opacity-0" : "opacity-100"}
   `;
 
   function handleBtnClick(e: React.MouseEvent) {
@@ -155,10 +150,9 @@ SidebarTriggerProps
       ref={ref}
       onClick={handleBtnClick}
       className={cn("w-8 h-8 flex justify-center flex-col shrink-0 md:hidden relative", className)}>
-      <span className={cn(dynamicLineStyles, isExpanded && "-rotate-45")} />
-      <span className={cn(dynamicLineStyles, isExpanded && "rotate-45")} />
-      <span className={cn(staticLineStyles, "mb-2")} />
-      <span className={cn(staticLineStyles, "mt-2")} />
+      <span className={cn(outerLineStyles, "mb-2")} />
+      <span className={innerLineStyles} />
+      <span className={cn(outerLineStyles, "mt-2")} />
       <span className="sr-only">Toggle sidebar</span>
     </button>
   );
