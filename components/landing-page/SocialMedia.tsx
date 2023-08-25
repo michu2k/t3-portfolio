@@ -3,6 +3,7 @@ import GithubSvg from "~/public/svgs/socialMedia/github.svg";
 import TwitterSvg from "~/public/svgs/socialMedia/twitter.svg";
 import LinkedInSvg from "~/public/svgs/socialMedia/linkedin.svg";
 import InstagramSvg from "~/public/svgs/socialMedia/instagram.svg";
+import {cn} from "~/utils/className";
 
 const socialMedia: Array<SocialMediaItemProps> = [
   {
@@ -27,7 +28,11 @@ const socialMedia: Array<SocialMediaItemProps> = [
   }
 ];
 
-const SocialMedia = () => {
+type SocialMediaProps = {
+  className?: string;
+}
+
+const SocialMedia = ({className}: SocialMediaProps) => {
   function displaySocialMediaIcons() {
     return socialMedia.map((item) => (
       <SocialMediaItem key={item.name} {...item} />
@@ -35,7 +40,7 @@ const SocialMedia = () => {
   }
 
   return (
-    <ul className="flex gap-4" aria-label="Social media">
+    <ul className={cn("flex items-center gap-4", className)} aria-label="Social media">
       {displaySocialMediaIcons()}
     </ul>
   );
