@@ -1,8 +1,10 @@
 import type {PropsWithChildren} from "react";
 import React, {useContext, useState} from "react";
+import {X} from "lucide-react";
 import type {AnimationProps} from "framer-motion";
 import {AnimatePresence, motion} from "framer-motion";
 import * as Portal from "@radix-ui/react-portal";
+import {Button} from "~/components/ui/Button";
 import {useIsMobile} from "~/hooks/useIsMobile";
 import {cn} from "~/utils/className";
 
@@ -71,21 +73,23 @@ const SidebarContent = React.forwardRef<
 HTMLElement,
 SidebarContentProps
 >(({children, className}, ref) => {
-  const {isExpanded} = useContext(SidebarContext);
+  const {isExpanded, toggleExpanded} = useContext(SidebarContext);
   const isMobile = useIsMobile();
 
   const contentAnimation: AnimationProps = {
     transition: {duration: 0.25, ease: "easeInOut"},
     initial: {x: "-100%"},
     animate: {x: 0},
-    exit: {x: "-100%"}
+    exit: {opacity: 0}
   };
 
   const sidebarClassName = cn(
     `flex flex-col
     h-full py-10 px-4 bg-white
     border-r-[1px] border-slate-200
-    fixed md:sticky z-50 top-0 md:h-screen w-64`,
+    w-full max-w-[18rem] md:w-72 md:h-screen
+    z-50 top-0
+    fixed md:sticky`,
     className
   );
 
@@ -98,6 +102,13 @@ SidebarContentProps
             ref={ref}
             className={sidebarClassName}
             {...contentAnimation}>
+            <Button
+              variant="ghost"
+              className="absolute right-4 top-4 w-8 h-8 p-0"
+              onClick={toggleExpanded}>
+              <X size={24} />
+            </Button>
+
             {children}
           </motion.aside>
 
@@ -161,6 +172,7 @@ SidebarTriggerProps
 SidebarTrigger.displayName = "SidebarTrigger";
 
 export {
+  SidebarContext,
   Sidebar,
   SidebarContent,
   SidebarTrigger
