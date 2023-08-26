@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import Link from "next/link";
 import type {MotionValue} from "framer-motion";
 import {motion, useMotionValueEvent, useScroll} from "framer-motion";
+import {Sidebar, SidebarContent, SidebarContext, SidebarTrigger} from "~/components/ui/Sidebar";
 import {SocialMedia} from "./SocialMedia";
-import {cn} from "~/utils/className";
-import {isClientSide} from "~/utils/isClientSide";
 import {useIsMobile} from "~/hooks/useIsMobile";
+import {isClientSide} from "~/utils/isClientSide";
 
 const navigationItems: Array<NavigationItemDef> = [
   {
@@ -36,17 +36,8 @@ const navigationItems: Array<NavigationItemDef> = [
 ];
 
 const Navigation = () => {
-  const [mobileMenuExpanded, setMobileMenuExpanded] = useState(false);
   const [activeItemId, setActiveItemId] = useState<number | null>(null);
   const {scrollY} = useScroll();
-
-  function hideMobileMenu() {
-    setMobileMenuExpanded(false);
-  }
-
-  function toggleMobileMenu() {
-    setMobileMenuExpanded(!mobileMenuExpanded);
-  }
 
   function displayNavigationItems() {
     if (!activeItemId && navigationItems[0]) {
@@ -56,7 +47,6 @@ const Navigation = () => {
     return navigationItems.map((item) => (
       <NavigationItem
         key={item.id}
-        onClick={hideMobileMenu}
         isActive={item.id === activeItemId}
         setActiveItemId={setActiveItemId}
         scrollY={scrollY}
@@ -65,44 +55,33 @@ const Navigation = () => {
   }
 
   return (
-    <div className="
-      px-4 md:px-6
-      w-full h-16 md:h-20
-      mx-auto
-      bg-white
-      sticky z-50
-      top-0 left-0 right-0">
-      <nav className="
-        section-container
-        flex items-center justify-between gap-4
-        h-full">
-        <NavigationToggler isActive={mobileMenuExpanded} onClick={toggleMobileMenu} />
+    <Sidebar>
+      <div className="
+        px-4 md:px-6
+        w-full h-16 md:h-[4.5rem]
+        mx-auto
+        bg-white
+        sticky z-40
+        top-0 left-0 right-0">
+        <nav className="section-container flex items-center justify-between gap-4 h-full">
+          <SidebarTrigger />
 
-        <div className={`
-          flex
-          ${mobileMenuExpanded ? "visible" : "invisible"} md:visible
-          ${mobileMenuExpanded ? "opacity-100" : "opacity-0"} md:opacity-100
-          justify-between flex-col md:flex-row md:flex-1
-          transition-all
-          bg-white
-          px-4 md:px-0
-          fixed md:static
-          top-16 left-0 right-0 bottom-0
-          z-50
-        `}>
-          <ul className="
-            py-10 md:py-0
-            section-container
-            flex flex-col flex-1 gap-2 md:gap-8
-            md:flex-row md:items-center
-          ">
+          <ul className="section-container hidden md:flex flex-row flex-1 gap-8 items-center">
             {displayNavigationItems()}
           </ul>
-        </div>
 
-        <SocialMedia />
-      </nav>
-    </div>
+          <SocialMedia />
+        </nav>
+      </div>
+
+      <SidebarContent className="md:hidden">
+        <ul className="section-container flex flex-col flex-1 gap-3">
+          {displayNavigationItems()}
+        </ul>
+
+        <SocialMedia className="h-11 mb-4" />
+      </SidebarContent>
+    </Sidebar>
   );
 };
 
@@ -113,7 +92,6 @@ type NavigationItemDef = {
 }
 
 type NavigationItemProps = NavigationItemDef & {
-  onClick: () => void;
   isActive: boolean;
   setActiveItemId: React.Dispatch<React.SetStateAction<number | null>>;
   scrollY: MotionValue<number>;
@@ -127,12 +105,13 @@ const NavigationItem = ({
   id,
   href,
   text,
-  onClick,
   isActive,
   setActiveItemId,
   scrollY
 }: NavigationItemProps) => {
   const isMobile = useIsMobile();
+  const {toggleExpanded} = useContext(SidebarContext);
+
   const sectionEl = isClientSide() ? document.getElementById(href.replace("#", "")) : null;
   const viewOffsetTop = isMobile ? OFFSET_TOP_MOBILE : OFFSET_TOP_DESKTOP;
 
@@ -148,7 +127,7 @@ const NavigationItem = ({
 
   function handleNavigationItemClick(e: React.MouseEvent) {
     e.preventDefault();
-    onClick();
+    toggleExpanded();
 
     if (sectionEl) {
       window.scrollTo({
@@ -163,11 +142,20 @@ const NavigationItem = ({
       <Link
         href={href}
         onClick={handleNavigationItemClick}
-        className="font-medium leading-8 text-md md:text-sm py-2 block">
+        className={`
+          font-medium leading-8 text-sm
+          py-1.5 block
+          ${isActive ? "text-primary" : "text-slate-700"}
+          transition-colors
+        `}>
         {text}
       </Link>
 
-      {isActive ? <motion.div layoutId="underline" className={`
+      {isActive ? <motion.div
+        key="item-underline"
+        layoutId="underline"
+        className={`
+          hidden md:block
           rounded-full
           w-6 md:w-4 h-0.5
           bg-primary
@@ -177,42 +165,6 @@ const NavigationItem = ({
           mb-1 md:mb-0
         `} /> : null}
     </li>
-  );
-};
-
-type NavigationTogglerProps = {
-  isActive: boolean;
-  onClick?: () => void;
-}
-
-const NavigationToggler = ({isActive, onClick}: NavigationTogglerProps) => {
-  const dynamicLineStyles = `
-    w-8 h-0.5
-    bg-slate-900
-    absolute top-0 left-0 bottom-0
-    m-auto
-    transition-transform
-    will-change-transform
-  `;
-
-  const staticLineStyles = `
-    w-6 h-0.5
-    bg-slate-900
-    flex
-    transition-opacity
-    ${isActive ? "opacity-0" : "opacity-100"}
-  `;
-
-  return (
-    <button
-      onClick={onClick}
-      className="w-8 h-8 flex justify-center flex-col shrink-0 md:hidden relative">
-      <span className={cn(dynamicLineStyles, isActive && "-rotate-45")} />
-      <span className={cn(dynamicLineStyles, isActive && "rotate-45")} />
-      <span className={cn(staticLineStyles, "mb-2")} />
-      <span className={cn(staticLineStyles, "mt-2")} />
-      <span className="sr-only">Open menu</span>
-    </button>
   );
 };
 

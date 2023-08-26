@@ -62,7 +62,7 @@ const Navigation = () => {
 
   return (
     <nav className="flex flex-col flex-grow">
-      <ul className="flex flex-col flex-wrap gap-x-4 gap-y-3">
+      <ul className="flex flex-col gap-3">
         {displayNavigationItems()}
       </ul>
 
