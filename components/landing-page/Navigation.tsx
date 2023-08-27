@@ -38,6 +38,7 @@ const navigationItems: Array<NavigationItemDef> = [
 const Navigation = () => {
   const [activeItemId, setActiveItemId] = useState<number | null>(null);
   const {scrollY} = useScroll();
+  const isMobile = useIsMobile();
 
   function displayNavigationItems() {
     if (!activeItemId && navigationItems[0]) {
@@ -66,21 +67,21 @@ const Navigation = () => {
         <nav className="section-container flex items-center justify-between gap-4 h-full">
           <SidebarTrigger />
 
-          <ul className="section-container hidden md:flex flex-row flex-1 gap-8 items-center">
+          {!isMobile && <ul className="section-container flex flex-1 gap-8 items-center">
             {displayNavigationItems()}
-          </ul>
+          </ul>}
 
           <SocialMedia />
         </nav>
       </div>
 
-      <SidebarContent className="md:hidden">
+      {isMobile && <SidebarContent>
         <ul className="section-container flex flex-col flex-1 gap-3">
           {displayNavigationItems()}
         </ul>
 
         <SocialMedia className="h-11 mb-4" />
-      </SidebarContent>
+      </SidebarContent>}
     </Sidebar>
   );
 };

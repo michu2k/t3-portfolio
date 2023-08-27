@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import GithubSvg from "~/public/svgs/socialMedia/github.svg";
 import TwitterSvg from "~/public/svgs/socialMedia/twitter.svg";
 import LinkedInSvg from "~/public/svgs/socialMedia/linkedin.svg";
@@ -32,7 +32,7 @@ type SocialMediaProps = {
   className?: string;
 }
 
-const SocialMedia = ({className}: SocialMediaProps) => {
+const SocialMedia = memo(({className}: SocialMediaProps) => {
   function displaySocialMediaIcons() {
     return socialMedia.map((item) => (
       <SocialMediaItem key={item.name} {...item} />
@@ -44,7 +44,9 @@ const SocialMedia = ({className}: SocialMediaProps) => {
       {displaySocialMediaIcons()}
     </ul>
   );
-};
+});
+
+SocialMedia.displayName = "SocialMedia";
 
 type SocialMediaItemProps = {
   name: string;
