@@ -1,6 +1,7 @@
 import type {PropsWithChildren} from "react";
 import React from "react";
 import {cva, type VariantProps} from "class-variance-authority";
+import {cn} from "~/utils/className";
 
 const headingVariants = cva("text-slate-900", {
   variants: {
@@ -14,14 +15,20 @@ const headingVariants = cva("text-slate-900", {
 
 type HeadingProps = PropsWithChildren<{
   as: "h1" | "h2" | "h3";
+  className?: string;
 } & VariantProps<typeof headingVariants>>
 
-const Heading = ({as: Component, size, children}: HeadingProps) => {
+const Heading = React.forwardRef<
+HTMLHeadingElement,
+HeadingProps
+>(({as: Component, size, className, children}, ref) => {
   return (
-    <Component className={headingVariants({size})}>
+    <Component ref={ref} className={cn(headingVariants({size}), className)}>
       {children}
     </Component>
   );
-};
+});
+
+Heading.displayName = "Heading";
 
 export {Heading};

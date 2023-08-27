@@ -1,14 +1,12 @@
 import React from "react";
 import Link from "next/link";
 import {useRouter} from "next/router";
-import {signOut, useSession} from "next-auth/react";
+import {signOut} from "next-auth/react";
 import type {LucideIcon} from "lucide-react";
 import {Settings, Info, Laptop2, Image, Mail, Briefcase, LogOut} from "lucide-react";
-import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/Avatar";
 import {Button} from "~/components/ui/Button";
-import {getUserInitials} from "~/utils/getUserInitials";
 
-const sidebarItems: Array<SidebarItemDef> = [
+const navigationItems: Array<NavigationItemDef> = [
   {
     text: "General",
     href: "/dashboard",
@@ -47,45 +45,30 @@ const sidebarItems: Array<SidebarItemDef> = [
   }
 ];
 
-const Sidebar = () => {
-  const {data: sessionData} = useSession();
+const Navigation = () => {
   const {pathname} = useRouter();
 
-  const {name, image, email} = sessionData?.user || {};
-
-  function displaySidebarItems() {
-    return sidebarItems.map(({href, ...item}) => {
+  function displayNavigationItems() {
+    return navigationItems.map(({href, ...item}) => {
       const mainHref = Array.isArray(href) ? href[0] as string : href;
 
       const isActive = Array.isArray(href)
         ? !!href.find((href) => href === pathname)
         : (href === pathname);
 
-      return <SidebarItem key={mainHref} isActive={isActive} href={href} {...item} />;
+      return <NavigationItem key={mainHref} isActive={isActive} href={href} {...item} />;
     });
   }
 
   return (
-    <nav className="flex flex-col h-full">
-      <div className="flex items-center gap-2 mb-6 md:mx-4 min-w-0">
-        <Avatar>
-          {image && <AvatarImage src={image} alt={name || ""} />}
-          <AvatarFallback>{getUserInitials(name)}</AvatarFallback>
-        </Avatar>
-
-        <div className="min-w-0">
-          <p className="text-sm font-medium text-slate-700 overflow-hidden whitespace-nowrap text-ellipsis">{name}</p>
-          <p className="text-xs text-slate-500 overflow-hidden whitespace-nowrap text-ellipsis">{email}</p>
-        </div>
-      </div>
-
-      <ul className="flex md:flex-col flex-wrap gap-x-4 gap-y-1 md:gap-y-3">
-        {displaySidebarItems()}
+    <nav className="flex flex-col flex-grow">
+      <ul className="flex flex-col gap-3">
+        {displayNavigationItems()}
       </ul>
 
       <Button
         variant="ghost"
-        className="h-11 w-full justify-start mt-8 md:mt-auto"
+        className="h-11 w-full justify-start mt-auto mb-4 hover:text-primary"
         onClick={() => void signOut()}>
         <LogOut size={16} className="mr-2" /> Log Out
       </Button>
@@ -93,17 +76,17 @@ const Sidebar = () => {
   );
 };
 
-type SidebarItemDef = {
+type NavigationItemDef = {
   text: string;
   icon: LucideIcon;
   href: string | Array<string>;
 }
 
-type SidebarItemProps = SidebarItemDef & {
+type NavigationItemProps = NavigationItemDef & {
   isActive: boolean;
 }
 
-const SidebarItem = ({text, href, icon: Icon, isActive}: SidebarItemProps) => {
+const NavigationItem = ({text, href, icon: Icon, isActive}: NavigationItemProps) => {
   const url = Array.isArray(href) ? href[0] as string : href;
 
   return (
@@ -112,7 +95,7 @@ const SidebarItem = ({text, href, icon: Icon, isActive}: SidebarItemProps) => {
         href={url}
         className={`
           font-medium leading-5 text-sm
-          py-3 px-4
+          py-3 px-3
           flex items-center gap-3
           rounded-lg
           ${isActive ? "bg-slate-100 text-primary" : "text-slate-700"}
@@ -127,4 +110,4 @@ const SidebarItem = ({text, href, icon: Icon, isActive}: SidebarItemProps) => {
   );
 };
 
-export {Sidebar};
+export {Navigation};
