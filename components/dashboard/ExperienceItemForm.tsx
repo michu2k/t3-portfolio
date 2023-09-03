@@ -23,7 +23,7 @@ const ExperienceItemForm = () => {
 
   function displaySelectedDate() {
     if (!date?.from) {
-      return <span>Pick a date</span>;
+      return "Pick a date";
     }
 
     return date.to
@@ -70,9 +70,9 @@ const ExperienceItemForm = () => {
               <Button
                 type="button"
                 variant="outline"
-                className="font-normal">
+                className="font-normal min-w-[12rem]">
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {displaySelectedDate()}
+                <span className="flex-1">{displaySelectedDate()}</span>
               </Button>
             </PopoverTrigger>
 
