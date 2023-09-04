@@ -1,14 +1,40 @@
-import {ContactMethodType} from "@prisma/client";
 import {z} from "zod";
 
 import {
   createTRPCRouter,
-  publicProcedure,
-  protectedProcedure
+  protectedProcedure,
+  publicProcedure
 } from "~/server/api/trpc";
+import {contactMethodSchema} from "~/utils/validations/contact";
 
 export const contactRouter = createTRPCRouter({
-  getAll: protectedProcedure.query(({ctx}) => {
-    return ctx.prisma.contactMethod.findMany();
-  })
+  getContactMethods: publicProcedure
+    .query(async ({ctx}) => {
+      return await ctx.prisma.contactMethod.findMany();
+    }),
+
+  getContactMethod: protectedProcedure
+    .input(z.object({id: z.string()}))
+    .query(async ({ctx, input: {id}}) => {
+      return await ctx.prisma.contactMethod.findUnique({
+        where: {id}
+      });
+    }),
+
+  createContactMethod: protectedProcedure
+    .input(contactMethodSchema)
+    .mutation(async ({ctx, input}) => {
+      return await ctx.prisma.contactMethod.create({
+        data: input
+      });
+    }),
+
+  updateContactMethod: protectedProcedure
+    .input(contactMethodSchema)
+    .mutation(async ({ctx, input: {id, ...input}}) => {
+      return await ctx.prisma.contactMethod.update({
+        where: {id},
+        data: input
+      });
+    })
 });
