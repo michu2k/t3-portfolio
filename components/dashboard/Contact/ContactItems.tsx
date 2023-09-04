@@ -8,7 +8,7 @@ import {api} from "~/utils/api";
 import {capitalize} from "~/utils/capitalize";
 
 const ContactItems = () => {
-  const {data: contactMethods = []} = api.contact.getAll.useQuery();
+  const {data: contactMethods = []} = api.contact.getContactMethods.useQuery();
 
   function displayItems() {
     return contactMethods.map((item) => (
