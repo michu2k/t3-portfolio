@@ -20,10 +20,11 @@ import {capitalize} from "~/utils/capitalize";
 import {contactMethodSchema} from "~/utils/validations/contact";
 
 const ContactItemForm = () => {
-  const {query} = useRouter();
+  const {query, push} = useRouter();
+  const utils = api.useContext();
   const contactMethodId = query.id as string;
 
-  const {data} = api.contact.getContactMethod.useQuery({id: contactMethodId});
+  const {data} = api.contact.getContactMethod.useQuery({id: contactMethodId}, {});
   const createContactMutation = api.contact.createContactMethod.useMutation();
   const updateContactMutation = api.contact.updateContactMethod.useMutation();
 
@@ -37,46 +38,51 @@ const ContactItemForm = () => {
     resolver: zodResolver(contactMethodSchema)
   });
 
-  const {register, control, handleSubmit, setValue, getValues, reset} = formMethods;
-  const {type} = getValues();
-  const fieldPlaceholder = type ? fieldPlaceholdersDef[type] : null;
+  const {control, handleSubmit, watch} = formMethods;
+  const type = watch("type");
 
-  function handleTypeChange(value: ContactMethodType) {
-    setValue("type", value, {shouldDirty: true, shouldTouch: true, shouldValidate: true});
-  }
+  const contactMutation = contactMethodId === "new" ? createContactMutation : updateContactMutation;
+  const fieldPlaceholder = type ? fieldPlaceholdersDef[type] : null;
 
   async function handleFormSubmit(contactMethod: ContactMethod, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    console.log({e, contactMethod});
-
-    const contactMutation = contactMethodId === "new" ? createContactMutation : updateContactMutation;
-
-    await contactMutation.mutateAsync(contactMethod).then(() => {
-      reset();
+    await contactMutation.mutateAsync(contactMethod, {
+      async onSuccess() {
+        await utils.contact.getContactMethod.invalidate();
+      }
     });
+
+    await push("/dashboard/contact");
   }
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={(e) => {
-        void handleSubmit(handleFormSubmit)(e);
-      }}>
-        <FormItem>
-          <FormLabel>Type</FormLabel>
+      <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
+        <FormField
+          control={control}
+          name="type"
+          render={({field: {name, value, onChange}}) => (
+            <FormItem>
+              <FormLabel>Type</FormLabel>
+              <Select name={name} value={value} onValueChange={onChange}>
+                <SelectTrigger className="w-[12rem]">
+                  <SelectValue placeholder="Select type..." />
+                </SelectTrigger>
 
-          <Select value={type} onValueChange={handleTypeChange}>
-            <SelectTrigger className="w-[12rem]">
-              <SelectValue placeholder="Select type..." />
-            </SelectTrigger>
-            <SelectContent>
-              {Object.values(ContactMethodType).map((type) => (
-                <SelectItem key={type} value={type}>{capitalize(type)}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <FormDescription>Specifies the contact method type. Relevant icon will be displayed based on the type.</FormDescription>
-        </FormItem>
+                <SelectContent>
+                  {Object.values(ContactMethodType).map((type) => (
+                    <SelectItem key={type} value={type}>{capitalize(type)}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormDescription>
+                Specifies the contact method type. Relevant icon will be displayed based on the type.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormField
           control={control}
@@ -85,7 +91,7 @@ const ContactItemForm = () => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} {...register("name")} placeholder={fieldPlaceholder?.name} />
+                <Input {...field} placeholder={fieldPlaceholder?.name} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -99,7 +105,7 @@ const ContactItemForm = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input {...field} {...register("description")} placeholder={fieldPlaceholder?.description} />
+                <Input {...field} placeholder={fieldPlaceholder?.description} />
               </FormControl>
               <FormMessage />
             </FormItem>
