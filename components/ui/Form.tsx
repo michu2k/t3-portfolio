@@ -50,7 +50,7 @@ React.HTMLAttributes<HTMLDivElement>
 
   return (
     <FormItemContext.Provider value={{id}}>
-      <div ref={ref} className={cn("space-y-2 mt-6 mb-2", className)} {...props} />
+      <div ref={ref} className={cn("space-y-2 mt-2 mb-8", className)} {...props} />
     </FormItemContext.Provider>
   );
 });
