@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
-import {Check, ChevronRight, Circle} from "lucide-react";
+import {Check, Circle} from "lucide-react";
 
 import {cn} from "~/utils/className";
 
@@ -12,54 +12,7 @@ const DropdownMenuGroup = DropdownMenuPrimitive.Group;
 
 const DropdownMenuPortal = DropdownMenuPrimitive.Portal;
 
-const DropdownMenuSub = DropdownMenuPrimitive.Sub;
-
 const DropdownMenuRadioGroup = DropdownMenuPrimitive.RadioGroup;
-
-const DropdownMenuSubTrigger = React.forwardRef<
-React.ElementRef<typeof DropdownMenuPrimitive.SubTrigger>,
-React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubTrigger> & {inset?: boolean}
->(({className, inset, children, ...props}, ref) => {
-  return (
-    <DropdownMenuPrimitive.SubTrigger
-      ref={ref}
-      className={cn(
-        `text-sm
-        relative cursor-default select-none outline-none
-        flex items-center rounded-sm px-2 py-1.5
-        focus:bg-slate-100
-        data-[state=open]:bg-slate-100`,
-        inset && "pl-8",
-        className
-      )}
-      {...props}>
-      {children}
-      <ChevronRight className="ml-auto h-4 w-4" />
-    </DropdownMenuPrimitive.SubTrigger>
-  );
-});
-
-DropdownMenuSubTrigger.displayName = DropdownMenuPrimitive.SubTrigger.displayName;
-
-const DropdownMenuSubContent = React.forwardRef<
-React.ElementRef<typeof DropdownMenuPrimitive.SubContent>,
-React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubContent>
->(({className, ...props}, ref) => {
-  return <DropdownMenuPrimitive.SubContent
-    ref={ref}
-    className={cn(
-      `text-slate-950
-      z-50 min-w-[8rem] rounded-md overflow-hidden
-      border border-slate-200 bg-white p-1 shadow-md
-      data-[state=open]:animate-in data-[state=open]:zoom-in-95 data-[state=open]:fade-in-0
-      data-[state=closed]:animate-out data-[state=closed]:zoom-out-95 data-[state=closed]:fade-out-0
-      data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2`,
-      className
-    )}
-    {...props} />;
-});
-
-DropdownMenuSubContent.displayName = DropdownMenuPrimitive.SubContent.displayName;
 
 const DropdownMenuContent = React.forwardRef<
 React.ElementRef<typeof DropdownMenuPrimitive.Content>,
@@ -215,8 +168,5 @@ export {
   DropdownMenuShortcut,
   DropdownMenuGroup,
   DropdownMenuPortal,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuRadioGroup
 };
