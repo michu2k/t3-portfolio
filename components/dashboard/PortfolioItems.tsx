@@ -43,7 +43,7 @@ type PortfolioItemProps = {
 
 const PortfolioItem = ({id, name, description, image}: PortfolioItemProps) => {
   return (
-    <article className="w-full py-3 flex items-center border-b-[1px] last-of-type:border-0 border-solid border-slate-200">
+    <article className="w-full py-2 flex items-center border-b-[1px] last-of-type:border-0 border-solid border-slate-200">
       <div className="w-16 h-16 rounded bg-slate-100 shrink-0 relative mr-4">
         <Image
           src={image.thumbnail}

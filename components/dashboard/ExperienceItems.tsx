@@ -42,10 +42,10 @@ type ExperienceItemProps = {
 
 const ExperienceItem = ({id, from, to, companyName, position, responsibilities}: ExperienceItemProps) => {
   return (
-    <article className="w-full py-3 flex items-center border-b-[1px] last-of-type:border-0 border-solid border-slate-200">
+    <article className="w-full py-2 flex items-center border-b-[1px] last-of-type:border-0 border-solid border-slate-200">
       <div className="flex-1 mr-4">
-        <p className="font-semibold text-sm text-slate-700 leading-6">{position}</p>
-        <p className="font-medium text-xs text-slate-400 leading-6">{companyName}</p>
+        <p className="font-semibold text-sm text-slate-700 leading-8">{position}</p>
+        <p className="font-medium text-xs leading-6">{companyName}</p>
 
         <span className="text-xs text-slate-700 leading-6">
           {from ? format(new Date(from), "MMM yyyy") : "-"} {" - "}

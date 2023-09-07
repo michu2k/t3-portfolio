@@ -1,11 +1,10 @@
-import React, {Fragment} from "react";
+import React from "react";
 import type {ContactMethod} from "@prisma/client";
 import Link from "next/link";
 import {Plus, Pencil} from "lucide-react";
-import {Button} from "~/components/ui/Button";
+import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
 import {api} from "~/utils/api";
-import {capitalize} from "~/utils/capitalize";
 
 const ContactItems = () => {
   const {data: contactMethods = []} = api.contact.getContactMethods.useQuery();
@@ -37,22 +36,17 @@ const ContactItems = () => {
   );
 };
 
-const ContactMethodItem = ({id, name, description, type}: ContactMethod) => {
+const ContactMethodItem = ({id, name, description}: ContactMethod) => {
   return (
-    <article className="w-full py-3 flex items-center border-b-[1px] last-of-type:border-0 border-solid border-slate-200">
+    <article className="w-full py-2 flex items-center border-b-[1px] last-of-type:border-0 border-solid border-slate-200">
       <div className="flex-1 mr-4">
-        <p className="font-semibold text-sm text-slate-700 leading-6">{name}</p>
-        <p className="font-medium text-xs text-slate-400 leading-6">{description}</p>
-
-        <span className="text-xs text-slate-700 leading-6">
-          Type: {capitalize(type)}
-        </span>
+        <p className="font-semibold text-sm text-slate-700 leading-8">{name}</p>
+        <p className="font-medium text-xs leading-6">{description}</p>
       </div>
 
-      <Link href={`/dashboard/contact/${id}`}>
-        <Button variant="ghost" size="icon">
-          <Pencil size={16} />
-        </Button>
+      <Link href={`/dashboard/contact/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>
+        <Pencil size={16} />
+        <span className="sr-only">Edit</span>
       </Link>
     </article>
   );
