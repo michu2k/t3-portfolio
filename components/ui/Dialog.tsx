@@ -67,7 +67,7 @@ React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
             "relative rounded-lg border border-slate-200 bg-white flex flex-col p-8 min-h-[10rem]",
             className
           )}>
-          <DialogClose className="absolute right-4 top-4 w-6 h-6 rounded-sm ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:pointer-events-none">
+          <DialogClose className="flex items-center justify-center absolute right-4 top-4 w-6 h-6 rounded-sm ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:pointer-events-none">
             <XIcon size={22} />
             <span className="sr-only">Close</span>
           </DialogClose>
@@ -105,7 +105,7 @@ const DialogFooter = ({
   return (
     <div
       className={cn(
-        "flex items-center justify-center gap-4 mt-6",
+        "flex items-center justify-center gap-2 mt-6",
         className
       )}
       {...props}

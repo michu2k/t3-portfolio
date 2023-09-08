@@ -36,5 +36,13 @@ export const contactRouter = createTRPCRouter({
         where: {id},
         data: input
       });
+    }),
+
+  deleteContactMethod: protectedProcedure
+    .input(z.object({id: z.string()}))
+    .mutation(async ({ctx, input: {id}}) => {
+      return await ctx.prisma.contactMethod.delete({
+        where: {id}
+      });
     })
 });
