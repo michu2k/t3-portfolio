@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import {Plus, Pencil} from "lucide-react";
+import {PlusIcon, PencilIcon} from "lucide-react";
 import {Button} from "~/components/ui/Button";
 import {recentWorkItems} from "~/components/landing-page/RecentWork";
 
@@ -20,7 +20,7 @@ const PortfolioItems = () => {
 
         <Link href="/dashboard/portfolio/new">
           <Button className="mt-8">
-            <Plus size={16} className="mr-1" /> Add new item
+            <PlusIcon size={16} className="mr-1" /> Add new item
           </Button>
         </Link>
       </div>
@@ -65,7 +65,7 @@ const PortfolioItem = ({id, name, description, image}: PortfolioItemProps) => {
 
       <Link href={`/dashboard/portfolio/${id}`}>
         <Button variant="ghost" size="icon">
-          <Pencil size={16} />
+          <PencilIcon size={16} />
         </Button>
       </Link>
     </article>

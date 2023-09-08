@@ -3,24 +3,32 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import {signOut} from "next-auth/react";
 import type {LucideIcon} from "lucide-react";
-import {Settings, Info, Laptop2, Image, Mail, Briefcase, LogOut} from "lucide-react";
+import {
+  SettingsIcon,
+  InfoIcon,
+  Laptop2Icon,
+  ImageIcon,
+  MailIcon,
+  BriefcaseIcon,
+  LogOutIcon
+} from "lucide-react";
 import {Button} from "~/components/ui/Button";
 
 const navigationItems: Array<NavigationItemDef> = [
   {
     text: "General",
     href: "/dashboard",
-    icon: Settings
+    icon: SettingsIcon
   },
   {
     text: "Header",
     href: "/dashboard/header",
-    icon: Laptop2
+    icon: Laptop2Icon
   },
   {
     text: "About",
     href: "/dashboard/about",
-    icon: Info
+    icon: InfoIcon
   },
   {
     text: "Portfolio",
@@ -28,7 +36,7 @@ const navigationItems: Array<NavigationItemDef> = [
       "/dashboard/portfolio",
       "/dashboard/portfolio/[id]"
     ],
-    icon: Image
+    icon: ImageIcon
   },
   {
     text: "Experience",
@@ -36,12 +44,12 @@ const navigationItems: Array<NavigationItemDef> = [
       "/dashboard/experience",
       "/dashboard/experience/[id]"
     ],
-    icon: Briefcase
+    icon: BriefcaseIcon
   },
   {
     text: "Contact",
     href: "/dashboard/contact",
-    icon: Mail
+    icon: MailIcon
   }
 ];
 
@@ -70,7 +78,7 @@ const Navigation = () => {
         variant="ghost"
         className="h-11 w-full justify-start mt-auto mb-4 hover:text-primary"
         onClick={() => void signOut()}>
-        <LogOut size={16} className="mr-2" /> Log Out
+        <LogOutIcon size={16} className="mr-2" /> Log Out
       </Button>
     </nav>
   );

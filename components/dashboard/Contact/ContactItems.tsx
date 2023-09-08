@@ -1,7 +1,7 @@
 import React from "react";
 import type {ContactMethod} from "@prisma/client";
 import Link from "next/link";
-import {Plus, Pencil} from "lucide-react";
+import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
 import {api} from "~/utils/api";
@@ -28,7 +28,7 @@ const ContactItems = () => {
 
         <Link href="/dashboard/contact/new">
           <Button className="mt-8">
-            <Plus size={16} className="mr-1" /> Add new item
+            <PlusIcon size={16} className="mr-1" /> Add new item
           </Button>
         </Link>
       </div>
@@ -45,9 +45,10 @@ const ContactMethodItem = ({id, name, description}: ContactMethod) => {
       </div>
 
       <Link href={`/dashboard/contact/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>
-        <Pencil size={16} />
+        <PencilIcon size={16} />
         <span className="sr-only">Edit</span>
       </Link>
+
     </article>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import {format} from "date-fns";
 import Link from "next/link";
-import {Plus, Pencil} from "lucide-react";
+import {PlusIcon, PencilIcon} from "lucide-react";
 import {Button} from "~/components/ui/Button";
 import {experienceItems} from "~/components/landing-page/Experience"; // TEMP
 import {Heading} from "~/components/ui/Heading";
@@ -23,7 +23,7 @@ const ExperienceItems = () => {
 
         <Link href="/dashboard/experience/new">
           <Button className="mt-8">
-            <Plus size={16} className="mr-1" /> Add new item
+            <PlusIcon size={16} className="mr-1" /> Add new item
           </Button>
         </Link>
       </div>
@@ -70,7 +70,7 @@ const ExperienceItem = ({id, from, to, companyName, position, responsibilities}:
 
       <Link href={`/dashboard/experience/${id}`}>
         <Button variant="ghost" size="icon">
-          <Pencil size={16} />
+          <PencilIcon size={16} />
         </Button>
       </Link>
     </article>
