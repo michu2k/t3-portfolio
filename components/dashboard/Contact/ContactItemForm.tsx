@@ -14,7 +14,13 @@ import {
   FormMessage
 } from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/Select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "~/components/ui/Select";
 import {api} from "~/utils/api";
 import {capitalize} from "~/utils/capitalize";
 import {contactMethodSchema} from "~/utils/validations/contact";
@@ -112,7 +118,7 @@ const ContactItemForm = () => {
           )}
         />
 
-        <Button type="submit" className="mt-6">Save changes</Button>
+        <Button type="submit">Save changes</Button>
       </form>
     </FormProvider>
   );

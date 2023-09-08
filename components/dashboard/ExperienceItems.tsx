@@ -4,7 +4,6 @@ import Link from "next/link";
 import {PlusIcon, PencilIcon} from "lucide-react";
 import {Button} from "~/components/ui/Button";
 import {experienceItems} from "~/components/landing-page/Experience"; // TEMP
-import {Heading} from "~/components/ui/Heading";
 
 const ExperienceItems = () => {
 
@@ -15,19 +14,15 @@ const ExperienceItems = () => {
   }
 
   return (
-    <>
-      <Heading as="h3" size="md">Experience items</Heading>
+    <div className="flex flex-col items-start">
+      {displayItems()}
 
-      <div className="mt-6 flex flex-col items-start">
-        {displayItems()}
-
-        <Link href="/dashboard/experience/new">
-          <Button className="mt-8">
-            <PlusIcon size={16} className="mr-1" /> Add new item
-          </Button>
-        </Link>
-      </div>
-    </>
+      <Link href="/dashboard/experience/new">
+        <Button className="mt-8">
+          <PlusIcon size={16} className="mr-1" /> Add new item
+        </Button>
+      </Link>
+    </div>
   );
 };
 
