@@ -60,14 +60,33 @@ model VerificationToken {
 }
 
 model ContactMethod {
-    id          String   @id @default(cuid())
+    id          String            @id @default(cuid())
     type        ContactMethodType
     name        String
     description String
+    createdAt   DateTime          @default(now())
+    updatedAt   DateTime          @updatedAt
 }
 
 enum ContactMethodType {
     ADDRESS
     EMAIL
     PHONE
+}
+
+model Snippet {
+    id          String      @id @default(cuid())
+    type        SnippetType
+    name        String
+    value       String
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+}
+
+enum SnippetType {
+    HEADER
+    ABOUT_ME
+    PORTFOLIO
+    EXPERIENCE
+    CONTACT
 }
