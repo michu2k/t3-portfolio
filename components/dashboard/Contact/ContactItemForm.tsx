@@ -124,12 +124,14 @@ const ContactItemForm = () => {
   );
 };
 
-type FieldPlaceholder = {
-  name: string;
-  description: string;
+type FieldPlaceholders = {
+  [key in ContactMethodType]: {
+    name: string;
+    description: string;
+  }
 }
 
-const fieldPlaceholdersDef: {[key in ContactMethodType]: FieldPlaceholder} = {
+const fieldPlaceholdersDef: FieldPlaceholders = {
   ADDRESS: {
     name: "Country, city",
     description: "Street address"
