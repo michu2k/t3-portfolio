@@ -12,31 +12,44 @@ import {Button} from "~/components/ui/Button";
 import {Textarea} from "~/components/ui/Textarea";
 import {Heading} from "~/components/ui/Heading";
 import {api} from "~/utils/api";
-import type {ContactFormValues} from "./Contact.utils";
-import {contactFormSchema} from "~/utils/validations/contact";
+import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
+import {contactSnippetsSchema} from "~/utils/validations/contact";
+import {transformSnippetsDataIntoFormValues} from "~/utils/transformSnippetsDataIntoFormValues";
 
 const ContactForm = () => {
-  // const {data: contactMethods = []} = api.contact.getAll.useQuery();
+  const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT"});
+  const updateContactSnippet = api.snippet.updateSnippet.useMutation();
+  const createContactSnippet = api.snippet.createSnippet.useMutation();
 
-  const formMethods = useForm<ContactFormValues>({
+  const formMethods = useForm<ContactSnippetsFormValues>({
     defaultValues: {
       description: ""
     },
-    values: {
-      description: ""
-    },
-    resolver: zodResolver(contactFormSchema)
+    values: transformSnippetsDataIntoFormValues(data, ["description"]),
+    resolver: zodResolver(contactSnippetsSchema)
   });
 
   const {control, handleSubmit} = formMethods;
 
-  async function handleFormSubmit({description}: ContactFormValues) {
+  async function handleFormSubmit(snippets: ContactSnippetsFormValues, e?: React.BaseSyntheticEvent) {
+    e?.preventDefault();
 
+    const promises = Object.entries(snippets).map(async ([key, value]) => {
+      const snippetId = data.find((snippet) => snippet.name === key)?.id;
+
+      if (snippetId) {
+        return await updateContactSnippet.mutateAsync({id: snippetId, value});
+      }
+
+      return await createContactSnippet.mutateAsync({type: "CONTACT", name: key, value});
+    });
+
+    await Promise.all(promises);
   }
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
+      <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
         <Heading as="h3" size="md">General settings</Heading>
 
         <FormField

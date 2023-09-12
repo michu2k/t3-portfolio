@@ -10,11 +10,15 @@ const contactMethodSchema = z.object({
   description: z.string().min(3, "Description must be at least 3 characters long")
 });
 
-const contactFormSchema = z.object({
+type ContactSnippetsFormValues = z.infer<typeof contactSnippetsSchema>;
+
+const contactSnippetsSchema = z.object({
   description: z.string().optional()
 });
 
+export type {ContactSnippetsFormValues};
+
 export {
   contactMethodSchema,
-  contactFormSchema
+  contactSnippetsSchema
 };

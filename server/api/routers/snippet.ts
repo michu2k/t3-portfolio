@@ -26,7 +26,7 @@ export const snippetRouter = createTRPCRouter({
     }),
 
   updateSnippet: protectedProcedure
-    .input(snippetSchema)
+    .input(snippetSchema.partial())
     .mutation(async ({ctx, input: {id, ...input}}) => {
       return await ctx.prisma.snippet.update({
         where: {id},

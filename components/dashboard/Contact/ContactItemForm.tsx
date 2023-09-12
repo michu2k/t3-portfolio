@@ -30,7 +30,7 @@ const ContactItemForm = () => {
   const utils = api.useContext();
   const contactMethodId = query.id as string;
 
-  const {data} = api.contact.getContactMethod.useQuery({id: contactMethodId}, {});
+  const {data} = api.contact.getContactMethod.useQuery({id: contactMethodId});
   const createContactMutation = api.contact.createContactMethod.useMutation();
   const updateContactMutation = api.contact.updateContactMethod.useMutation();
 
