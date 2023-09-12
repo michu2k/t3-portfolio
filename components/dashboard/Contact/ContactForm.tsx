@@ -17,6 +17,8 @@ import {contactSnippetsSchema} from "~/utils/validations/contact";
 import {transformSnippetsDataIntoFormValues} from "~/utils/transformSnippetsDataIntoFormValues";
 
 const ContactForm = () => {
+  const utils = api.useContext();
+
   const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT"});
   const updateContactSnippet = api.snippet.updateSnippet.useMutation();
   const createContactSnippet = api.snippet.createSnippet.useMutation();
@@ -44,7 +46,9 @@ const ContactForm = () => {
       return await createContactSnippet.mutateAsync({type: "CONTACT", name: key, value});
     });
 
-    await Promise.all(promises);
+    await Promise.all(promises).then(async () => {
+      await utils.snippet.getSnippets.invalidate();
+    });
   }
 
   return (
