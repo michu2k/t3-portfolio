@@ -7,7 +7,7 @@ const snippetSchema = z.object({
     required_error: "Snippet type is required"
   }),
   name: z.string().min(3, "Name must be at least 3 characters long"),
-  value: z.string().min(3, "Value must be at least 3 characters long")
+  value: z.string()
 });
 
 export {snippetSchema};
