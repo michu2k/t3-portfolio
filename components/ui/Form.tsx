@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useId} from "react";
 import * as LabelPrimitive from "@radix-ui/react-label";
 import {Slot} from "@radix-ui/react-slot";
 import type {
@@ -46,11 +46,11 @@ const FormItem = React.forwardRef<
 HTMLDivElement,
 React.HTMLAttributes<HTMLDivElement>
 >(({className, ...props}, ref) => {
-  const id = React.useId();
+  const id = useId();
 
   return (
     <FormItemContext.Provider value={{id}}>
-      <div ref={ref} className={cn("space-y-2 mt-6 mb-2", className)} {...props} />
+      <div ref={ref} className={cn("space-y-2 mt-4 mb-8", className)} {...props} />
     </FormItemContext.Provider>
   );
 });
@@ -66,7 +66,7 @@ React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
   return <LabelPrimitive.Root
     ref={ref}
     htmlFor={formItemId}
-    className={cn("font-medium text-sm text-slate-700 leading-none block mb-2", className)}
+    className={cn("font-medium text-sm text-slate-700 leading-none block mb-3", className)}
     {...props} />;
 });
 
@@ -125,7 +125,7 @@ React.HTMLAttributes<HTMLParagraphElement>
     <p
       ref={ref}
       id={formMessageId}
-      className={cn("text-sm font-medium text-red-500", className)}
+      className={cn("text-xs font-medium text-red-500", className)}
       {...props}>
       {body}
     </p>

@@ -31,7 +31,9 @@ const GeneralForm = () => {
                 <FormControl>
                   <Input {...field} placeholder="Portfolio, personal website, etc." />
                 </FormControl>
-                <FormDescription>Defines the document&apos;s title that is shown in a browser&apos;s title bar or a page&apos;s tab</FormDescription>
+                <FormDescription>
+                  Defines the document&apos;s title that is shown in a browser&apos;s title bar or a page&apos;s tab.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

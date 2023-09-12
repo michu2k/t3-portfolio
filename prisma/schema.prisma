@@ -11,12 +11,6 @@ datasource db {
     relationMode = "prisma"
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-}
-
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -63,4 +57,36 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model ContactMethod {
+    id          String            @id @default(cuid())
+    type        ContactMethodType
+    name        String
+    description String
+    createdAt   DateTime          @default(now())
+    updatedAt   DateTime          @updatedAt
+}
+
+enum ContactMethodType {
+    ADDRESS
+    EMAIL
+    PHONE
+}
+
+model Snippet {
+    id          String      @id @default(cuid())
+    type        SnippetType
+    name        String
+    value       String
+    createdAt   DateTime    @default(now())
+    updatedAt   DateTime    @updatedAt
+}
+
+enum SnippetType {
+    HEADER
+    ABOUT_ME
+    PORTFOLIO
+    EXPERIENCE
+    CONTACT
 }

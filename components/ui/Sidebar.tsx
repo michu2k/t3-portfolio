@@ -1,6 +1,6 @@
 import type {PropsWithChildren} from "react";
 import React, {useContext, useState} from "react";
-import {X} from "lucide-react";
+import {XIcon} from "lucide-react";
 import type {AnimationProps} from "framer-motion";
 import {AnimatePresence, motion} from "framer-motion";
 import * as Portal from "@radix-ui/react-portal";
@@ -106,7 +106,7 @@ SidebarContentProps
               variant="ghost"
               className="absolute right-4 top-4 w-8 h-8 p-0"
               onClick={toggleExpanded}>
-              <X size={24} />
+              <XIcon size={22} />
             </Button>
 
             {children}

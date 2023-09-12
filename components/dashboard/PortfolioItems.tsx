@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import {Plus, Pencil} from "lucide-react";
+import {PlusIcon, PencilIcon} from "lucide-react";
 import {Button} from "~/components/ui/Button";
 import {recentWorkItems} from "~/components/landing-page/RecentWork";
 
@@ -20,7 +20,7 @@ const PortfolioItems = () => {
 
         <Link href="/dashboard/portfolio/new">
           <Button className="mt-8">
-            <Plus size={16} className="mr-1" /> Add new item
+            <PlusIcon size={16} className="mr-1" /> Add new item
           </Button>
         </Link>
       </div>
@@ -43,7 +43,7 @@ type PortfolioItemProps = {
 
 const PortfolioItem = ({id, name, description, image}: PortfolioItemProps) => {
   return (
-    <article className="w-full py-3 flex items-center border-b-[1px] last-of-type:border-0 border-solid border-slate-200">
+    <article className="w-full py-2 flex items-center border-b-[1px] last-of-type:border-0 border-solid border-slate-200">
       <div className="w-16 h-16 rounded bg-slate-100 shrink-0 relative mr-4">
         <Image
           src={image.thumbnail}
@@ -65,7 +65,7 @@ const PortfolioItem = ({id, name, description, image}: PortfolioItemProps) => {
 
       <Link href={`/dashboard/portfolio/${id}`}>
         <Button variant="ghost" size="icon">
-          <Pencil size={16} />
+          <PencilIcon size={16} />
         </Button>
       </Link>
     </article>

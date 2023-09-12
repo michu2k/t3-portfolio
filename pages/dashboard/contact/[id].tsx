@@ -2,8 +2,8 @@ import type {GetServerSidePropsContext} from "next";
 import {type NextPage} from "next";
 import Head from "next/head";
 
-import {ContactForm} from "~/components/dashboard/ContactForm";
 import {Layout} from "~/components/dashboard/Layout";
+import {ContactItemForm} from "~/components/dashboard/Contact/ContactItemForm";
 import {authRedirectToSignInPage} from "~/utils/authRedirect";
 
 const Page: NextPage = () => {
@@ -13,8 +13,8 @@ const Page: NextPage = () => {
         <title>T3 Portfolio: Contact</title>
       </Head>
 
-      <Layout heading="Contact" description="Contact section settings">
-        <ContactForm />
+      <Layout heading="Edit item" description="Create a new contact record or edit an existing one.">
+        <ContactItemForm />
       </Layout>
     </>
   );
