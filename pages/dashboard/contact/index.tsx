@@ -2,8 +2,8 @@ import type {GetServerSidePropsContext} from "next";
 import {type NextPage} from "next";
 import Head from "next/head";
 
-import {ContactForm} from "~/components/dashboard/Contact/ContactForm";
-import {ContactItems} from "~/components/dashboard/Contact/ContactItems";
+import {ContactForm} from "~/components/dashboard/ContactForm";
+import {ContactItems} from "~/components/dashboard/ContactItems";
 import {Layout} from "~/components/dashboard/Layout";
 import {Separator} from "~/components/ui/Separator";
 import {authRedirectToSignInPage} from "~/utils/authRedirect";

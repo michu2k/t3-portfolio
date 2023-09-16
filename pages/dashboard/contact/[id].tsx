@@ -3,7 +3,7 @@ import {type NextPage} from "next";
 import Head from "next/head";
 
 import {Layout} from "~/components/dashboard/Layout";
-import {ContactItemForm} from "~/components/dashboard/Contact/ContactItemForm";
+import {ContactItemForm} from "~/components/dashboard/ContactItemForm";
 import {authRedirectToSignInPage} from "~/utils/authRedirect";
 
 const Page: NextPage = () => {
