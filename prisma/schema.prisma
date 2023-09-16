@@ -90,3 +90,25 @@ enum SnippetType {
     EXPERIENCE
     CONTACT
 }
+
+model ExperienceItem {
+    id               String                         @id @default(cuid())
+    position         String
+    company          String
+    startDate        DateTime?
+    endDate          DateTime?
+    createdAt        DateTime                       @default(now())
+    updatedAt        DateTime                       @updatedAt
+    responsibilities ExperienceItemResponsibility[]
+}
+
+model ExperienceItemResponsibility {
+    id               String         @id @default(cuid())
+    name             String
+    experienceItemId String
+    createdAt        DateTime       @default(now())
+    updatedAt        DateTime       @updatedAt
+    experienceItem   ExperienceItem @relation(fields: [experienceItemId], references: [id], onDelete: Cascade)
+
+    @@index([experienceItemId])
+}
