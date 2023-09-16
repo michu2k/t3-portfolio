@@ -1,12 +1,9 @@
 import {z} from "zod";
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure
-} from "~/server/api/trpc";
+import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
 import {contactMethodSchema} from "~/utils/validations/contact";
 
+// prettier-ignore
 export const contactRouter = createTRPCRouter({
   getContactMethods: publicProcedure
     .query(async ({ctx}) => {

@@ -6,11 +6,8 @@ import {Button} from "~/components/ui/Button";
 import {experienceItems} from "~/components/landing-page/Experience"; // TEMP
 
 const ExperienceItems = () => {
-
   function displayItems() {
-    return experienceItems.map((item) => (
-      <ExperienceItem key={item.id} {...item} />
-    ));
+    return experienceItems.map((item) => <ExperienceItem key={item.id} {...item} />);
   }
 
   return (
@@ -33,16 +30,16 @@ type ExperienceItemProps = {
   companyName: string;
   position: string;
   responsibilities?: Array<string>;
-}
+};
 
 const ExperienceItem = ({id, from, to, companyName, position, responsibilities}: ExperienceItemProps) => {
   return (
-    <article className="w-full py-2 flex items-center border-b-[1px] last-of-type:border-0 border-solid border-slate-200">
-      <div className="flex-1 mr-4">
-        <p className="font-semibold text-sm text-slate-700 leading-8">{position}</p>
-        <p className="font-medium text-xs leading-6">{companyName}</p>
+    <article className="flex w-full items-center border-b-[1px] border-solid border-slate-200 py-2 last-of-type:border-0">
+      <div className="mr-4 flex-1">
+        <p className="text-sm font-semibold leading-8 text-slate-700">{position}</p>
+        <p className="text-xs font-medium leading-6">{companyName}</p>
 
-        <span className="text-xs text-slate-700 leading-6">
+        <span className="text-xs leading-6 text-slate-700">
           {from ? format(new Date(from), "MMM yyyy") : "-"} {" - "}
           {to ? format(new Date(to), "MMM yyyy") : "Now"}
         </span>
@@ -50,13 +47,7 @@ const ExperienceItem = ({id, from, to, companyName, position, responsibilities}:
         <ul className="hidden">
           {responsibilities?.map((item, idx) => (
             <li key={idx} className="flex items-start gap-2">
-              <span className="
-                before:w-1
-                before:h-1
-                before:rounded-full
-                before:bg-slate-500
-                before:mt-3.5
-                before:block" />
+              <span className="before:mt-3.5 before:block before:h-1 before:w-1 before:rounded-full before:bg-slate-500" />
               <p className="text-sm leading-8">{item}</p>
             </li>
           ))}

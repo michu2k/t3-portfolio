@@ -1,7 +1,4 @@
-function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(
-  func: T,
-  waitForMs: number
-){
+function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(func: T, waitForMs: number) {
   let timeoutId: ReturnType<typeof setTimeout>;
 
   return (...args: Parameters<T>) => {

@@ -4,13 +4,7 @@ import type {DateRange} from "react-day-picker";
 import {format} from "date-fns";
 import {CalendarIcon} from "lucide-react";
 import {Button} from "~/components/ui/Button";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "~/components/ui/Form";
+import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/Popover";
 import {Calendar} from "~/components/ui/Calendar";
@@ -67,10 +61,7 @@ const ExperienceItemForm = () => {
 
           <Popover>
             <PopoverTrigger asChild>
-              <Button
-                type="button"
-                variant="outline"
-                className="font-normal min-w-[12rem]">
+              <Button type="button" variant="outline" className="min-w-[12rem] font-normal">
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 <span className="flex-1">{displaySelectedDate()}</span>
               </Button>
@@ -103,7 +94,9 @@ const ExperienceItemForm = () => {
           )}
         />
 
-        <Button type="submit" className="mt-6">Save changes</Button>
+        <Button type="submit" className="mt-6">
+          Save changes
+        </Button>
       </form>
     </FormProvider>
   );

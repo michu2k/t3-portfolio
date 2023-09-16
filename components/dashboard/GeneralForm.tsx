@@ -1,13 +1,6 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "~/components/ui/Form";
+import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Heading} from "~/components/ui/Heading";
 import {Input} from "~/components/ui/Input";
 import {Button} from "~/components/ui/Button";
@@ -18,7 +11,9 @@ const GeneralForm = () => {
 
   return (
     <>
-      <Heading as="h3" size="md">SEO</Heading>
+      <Heading as="h3" size="md">
+        SEO
+      </Heading>
 
       <FormProvider {...formMethods}>
         <form>
@@ -41,7 +36,9 @@ const GeneralForm = () => {
 
           {/* Edit: social media icons */}
 
-          <Button type="submit" className="mt-6">Save changes</Button>
+          <Button type="submit" className="mt-6">
+            Save changes
+          </Button>
         </form>
       </FormProvider>
     </>

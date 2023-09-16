@@ -5,8 +5,8 @@ import {cn} from "~/utils/className";
 
 const buttonVariants = cva(
   `font-medium text-sm
-  inline-flex items-center justify-center rounded-md ring-offset-white
-  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2
+  inline-flex justify-center rounded-md ring-offset-white
+  focus-visible:outline-none items-center focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2
   disabled:pointer-events-none disabled:opacity-50
   transition-colors`,
   {
@@ -31,16 +31,10 @@ const buttonVariants = cva(
   }
 );
 
-type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;
 
-const Button = React.forwardRef<
-HTMLButtonElement,
-ButtonProps
->(({className, variant, size, ...props}, ref) => {
-  return <button
-    ref={ref}
-    className={cn(buttonVariants({variant, size}), className)}
-    {...props} />;
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({className, variant, size, ...props}, ref) => {
+  return <button ref={ref} className={cn(buttonVariants({variant, size}), className)} {...props} />;
 });
 
 Button.displayName = "Button";

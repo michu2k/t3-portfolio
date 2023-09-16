@@ -3,15 +3,7 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import {signOut} from "next-auth/react";
 import type {LucideIcon} from "lucide-react";
-import {
-  SettingsIcon,
-  InfoIcon,
-  Laptop2Icon,
-  ImageIcon,
-  MailIcon,
-  BriefcaseIcon,
-  LogOutIcon
-} from "lucide-react";
+import {SettingsIcon, InfoIcon, Laptop2Icon, ImageIcon, MailIcon, BriefcaseIcon, LogOutIcon} from "lucide-react";
 import {Button} from "~/components/ui/Button";
 
 const navigationItems: Array<NavigationItemDef> = [
@@ -32,18 +24,12 @@ const navigationItems: Array<NavigationItemDef> = [
   },
   {
     text: "Portfolio",
-    href: [
-      "/dashboard/portfolio",
-      "/dashboard/portfolio/[id]"
-    ],
+    href: ["/dashboard/portfolio", "/dashboard/portfolio/[id]"],
     icon: ImageIcon
   },
   {
     text: "Experience",
-    href: [
-      "/dashboard/experience",
-      "/dashboard/experience/[id]"
-    ],
+    href: ["/dashboard/experience", "/dashboard/experience/[id]"],
     icon: BriefcaseIcon
   },
   {
@@ -58,25 +44,21 @@ const Navigation = () => {
 
   function displayNavigationItems() {
     return navigationItems.map(({href, ...item}) => {
-      const mainHref = Array.isArray(href) ? href[0] as string : href;
+      const mainHref = Array.isArray(href) ? (href[0] as string) : href;
 
-      const isActive = Array.isArray(href)
-        ? !!href.find((href) => href === pathname)
-        : (href === pathname);
+      const isActive = Array.isArray(href) ? !!href.find((href) => href === pathname) : href === pathname;
 
       return <NavigationItem key={mainHref} isActive={isActive} href={href} {...item} />;
     });
   }
 
   return (
-    <nav className="flex flex-col flex-grow">
-      <ul className="flex flex-col gap-3">
-        {displayNavigationItems()}
-      </ul>
+    <nav className="flex flex-grow flex-col">
+      <ul className="flex flex-col gap-3">{displayNavigationItems()}</ul>
 
       <Button
         variant="ghost"
-        className="h-11 w-full justify-start mt-auto mb-4 hover:text-primary"
+        className="mb-4 mt-auto h-11 w-full justify-start hover:text-primary"
         onClick={() => void signOut()}>
         <LogOutIcon size={16} className="mr-2" /> Log Out
       </Button>
@@ -88,28 +70,23 @@ type NavigationItemDef = {
   text: string;
   icon: LucideIcon;
   href: string | Array<string>;
-}
+};
 
 type NavigationItemProps = NavigationItemDef & {
   isActive: boolean;
-}
+};
 
 const NavigationItem = ({text, href, icon: Icon, isActive}: NavigationItemProps) => {
-  const url = Array.isArray(href) ? href[0] as string : href;
+  const url = Array.isArray(href) ? (href[0] as string) : href;
 
   return (
     <li>
       <Link
         href={url}
         className={`
-          font-medium leading-5 text-sm
-          py-3 px-3
-          flex items-center gap-3
-          rounded-lg
+          flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium leading-5
           ${isActive ? "bg-slate-100 text-primary" : "text-slate-700"}
-          hover:text-primary
-          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2
-          transition-colors
+          transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2
         `}>
         <Icon size={16} />
         {text}

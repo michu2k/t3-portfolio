@@ -7,9 +7,7 @@ const path = require("path");
 module.exports = {
   overrides: [
     {
-      extends: [
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
-      ],
+      extends: ["plugin:@typescript-eslint/recommended-requiring-type-checking"],
       files: ["*.ts", "*.tsx"],
       parserOptions: {
         project: path.join(__dirname, "tsconfig.json")
@@ -21,19 +19,16 @@ module.exports = {
     project: path.join(__dirname, "tsconfig.json")
   },
   plugins: ["@typescript-eslint", "unused-imports"],
-  extends: [
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended"
-  ],
+  extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
   rules: {
     "@typescript-eslint/consistent-type-imports": "warn",
     "indent": "off",
-    "@typescript-eslint/indent": ["error", 2],
+    // "@typescript-eslint/indent": ["error", 2],
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "semi": ["warn", "always"],
-    "quotes": ["error", "double", {"allowTemplateLiterals": true}],
-    "no-multiple-empty-lines": ["error", {"max": 1, "maxEOF": 0}],
+    "quotes": ["error", "double", {allowTemplateLiterals: true}],
+    "no-multiple-empty-lines": ["error", {max: 1, maxEOF: 0}],
     "arrow-parens": ["error", "always"],
     "array-bracket-spacing": ["error", "never"],
     "object-curly-spacing": ["error", "never"],
@@ -44,7 +39,7 @@ module.exports = {
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",
-      {"vars": "all", "varsIgnorePattern": "^_", "args": "after-used", "argsIgnorePattern": "^_"}
+      {vars: "all", varsIgnorePattern: "^_", args: "after-used", argsIgnorePattern: "^_"}
     ]
   }
 };

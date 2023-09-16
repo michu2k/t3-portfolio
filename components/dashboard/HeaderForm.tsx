@@ -1,12 +1,6 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "~/components/ui/Form";
+import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
 import {Button} from "~/components/ui/Button";
 import {Textarea} from "~/components/ui/Textarea";
@@ -19,7 +13,9 @@ const HeaderForm = () => {
   return (
     <FormProvider {...formMethods}>
       <form>
-        <Heading as="h3" size="md">General settings</Heading>
+        <Heading as="h3" size="md">
+          General settings
+        </Heading>
 
         <FormField
           control={control}
@@ -51,7 +47,9 @@ const HeaderForm = () => {
 
         {/* Edit: Header image */}
 
-        <Button type="submit" className="mt-6">Save changes</Button>
+        <Button type="submit" className="mt-6">
+          Save changes
+        </Button>
       </form>
     </FormProvider>
   );

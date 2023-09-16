@@ -1,13 +1,7 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {Button} from "~/components/ui/Button";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "~/components/ui/Form";
+import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
 import {Textarea} from "~/components/ui/Textarea";
 
@@ -60,7 +54,9 @@ const PortfolioItemForm = () => {
           )}
         />
 
-        <Button type="submit" className="mt-6">Save changes</Button>
+        <Button type="submit" className="mt-6">
+          Save changes
+        </Button>
       </form>
     </FormProvider>
   );

@@ -9,7 +9,6 @@ import {cn} from "~/utils/className";
 import pkg from "~/package.json";
 
 const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({providers}) => {
-
   function displaySignInProviders() {
     return Object.values(providers).map((provider) => (
       <Button key={provider.name} variant="primary" onClick={() => void signIn(provider.id)}>
@@ -24,16 +23,16 @@ const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
         <title>T3 Portfolio: Sign In</title>
       </Head>
 
-      <main className="mx-auto min-h-full px-4 flex items-center justify-center">
+      <main className="mx-auto flex min-h-full items-center justify-center px-4">
         <section className="w-full max-w-[20rem]">
           <header className="flex flex-col items-center">
-            <Heading as="h1" size="xl">Sign In</Heading>
-            <p className="text-sm text-center text-slate-500">
-              Sign In to the dashboard
-            </p>
+            <Heading as="h1" size="xl">
+              Sign In
+            </Heading>
+            <p className="text-center text-sm text-slate-500">Sign In to the dashboard</p>
           </header>
 
-          <div className="flex flex-col justify-center gap-4 pt-8 pb-12">
+          <div className="flex flex-col justify-center gap-4 pb-12 pt-8">
             {displaySignInProviders()}
 
             <div className="relative mx-10">
@@ -42,9 +41,7 @@ const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
               </div>
 
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-2 text-slate-500">
-                  Or
-                </span>
+                <span className="bg-white px-2 text-slate-500">Or</span>
               </div>
             </div>
 
