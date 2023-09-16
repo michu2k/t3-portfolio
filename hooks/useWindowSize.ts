@@ -5,7 +5,7 @@ import {isClientSide} from "~/utils/isClientSide";
 type WindowSize = {
   width: number;
   height: number;
-}
+};
 
 const useWindowSize = (debounceMs = 100) => {
   const [windowSize, setWindowSize] = useState<WindowSize>(getSize());

@@ -30,7 +30,6 @@ const config = {
     ]
   },
   webpack(config) {
-
     // Convert *.svg imports to React components
     config.module.rules.push({
       test: /\.svg$/,

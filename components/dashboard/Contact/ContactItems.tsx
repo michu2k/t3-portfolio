@@ -25,12 +25,15 @@ const ContactItems = () => {
 
   async function handleDeleteContactMethod() {
     if (selectedContactMethod?.id) {
-      await deleteContactMethod.mutateAsync({id: selectedContactMethod.id}, {
-        async onSuccess() {
-          await utils.contact.getContactMethods.invalidate();
-          setSelectedContactMethod(null);
+      await deleteContactMethod.mutateAsync(
+        {id: selectedContactMethod.id},
+        {
+          async onSuccess() {
+            await utils.contact.getContactMethods.invalidate();
+            setSelectedContactMethod(null);
+          }
         }
-      });
+      );
     }
   }
 
@@ -42,9 +45,11 @@ const ContactItems = () => {
 
   return (
     <Dialog>
-      <Heading as="h3" size="md">Contact methods</Heading>
+      <Heading as="h3" size="md">
+        Contact methods
+      </Heading>
 
-      <p className="text-xs text-slate-500 leading-5 mb-4">
+      <p className="mb-4 text-xs leading-5 text-slate-500">
         List of items that will be displayed in the contact section.
       </p>
 
@@ -65,14 +70,13 @@ const ContactItems = () => {
 
         <DialogDescription>Are you sure you want to delete this item?</DialogDescription>
         <DialogDescription>
-          Selected <strong>{(selectedContactMethod?.type || "Method").toLowerCase()}</strong> will be permanently deleted.
+          Selected <strong>{(selectedContactMethod?.type || "Method").toLowerCase()}</strong> will be permanently
+          deleted.
         </DialogDescription>
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="outline">
-              Cancel
-            </Button>
+            <Button variant="outline">Cancel</Button>
           </DialogClose>
 
           <DialogClose asChild>
@@ -89,14 +93,14 @@ const ContactItems = () => {
 
 type ContactMethodItemProps = ContactMethod & {
   onDelete: (e: React.MouseEvent) => void;
-}
+};
 
 const ContactMethodItem = ({id, name, description, onDelete}: ContactMethodItemProps) => {
   return (
-    <article className="w-full py-2 flex items-center border-b-[1px] last-of-type:border-0 border-solid border-slate-200">
-      <div className="flex-1 mr-4">
-        <p className="font-semibold text-sm text-slate-700 leading-8">{name}</p>
-        <p className="font-medium text-xs leading-6">{description}</p>
+    <article className="flex w-full items-center border-b-[1px] border-solid border-slate-200 py-2 last-of-type:border-0">
+      <div className="mr-4 flex-1">
+        <p className="text-sm font-semibold leading-8 text-slate-700">{name}</p>
+        <p className="text-xs font-medium leading-6">{description}</p>
       </div>
 
       <Link href={`/dashboard/contact/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>

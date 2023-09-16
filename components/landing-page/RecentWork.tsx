@@ -8,7 +8,8 @@ const recentWorkItems: Array<RecentWorkItemProps> = [
   {
     id: 1,
     name: "Lorem",
-    description: "Consistency across products with a design system. Improved developer experience and more efficient engineering.",
+    description:
+      "Consistency across products with a design system. Improved developer experience and more efficient engineering.",
     tags: ["React", "Tailwind", "Typescript"],
     image: {
       thumbnail: "https://picsum.photos/id/14/600/400",
@@ -68,18 +69,13 @@ const recentWorkItems: Array<RecentWorkItemProps> = [
 ];
 
 const RecentWork = () => {
-
   function displayRecentWorkItems() {
-    return recentWorkItems.map((item) => (
-      <RecentWorkItem key={item.id} {...item} />
-    ));
+    return recentWorkItems.map((item) => <RecentWorkItem key={item.id} {...item} />);
   }
 
   return (
     <PageSection id="recent-work" heading="Recent Work Showcases" subheading="Portfolio">
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {displayRecentWorkItems()}
-      </div>
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">{displayRecentWorkItems()}</div>
     </PageSection>
   );
 };
@@ -87,7 +83,7 @@ const RecentWork = () => {
 type RecentWorkItemImage = {
   thumbnail: string;
   full: string;
-}
+};
 
 type RecentWorkItemProps = {
   id: number;
@@ -95,48 +91,27 @@ type RecentWorkItemProps = {
   description: string;
   tags: Array<string>;
   image: RecentWorkItemImage;
-}
+};
 
 const RecentWorkItem = ({id, name, description, image}: RecentWorkItemProps) => {
   const itemPageUrl = `/portfolio/${id}`;
 
   return (
-    <article className="group break-inside-avoid-column w-auto shrink-0">
-      <div className="w-auto h-64 rounded bg-slate-100 shrink-0 relative">
-        <Image
-          src={image.thumbnail}
-          fill
-          className="rounded"
-          style={{objectFit: "cover"}}
-          alt="" />
+    <article className="group w-auto shrink-0 break-inside-avoid-column">
+      <div className="relative h-64 w-auto shrink-0 rounded bg-slate-100">
+        <Image src={image.thumbnail} fill className="rounded" style={{objectFit: "cover"}} alt="" />
       </div>
 
       <div className="flex flex-col items-start py-4">
-        <Link href={itemPageUrl} className="flex items-center justify-between w-full mb-4">
-          <p className="
-            font-semibold text-lg text-slate-700
-            mr-2
-          group-hover:text-primary
-            transition-colors">
-            {name}
-          </p>
+        <Link href={itemPageUrl} className="mb-4 flex w-full items-center justify-between">
+          <p className="mr-2 text-lg font-semibold text-slate-700 transition-colors group-hover:text-primary">{name}</p>
 
-          <span className="
-            w-10 h-10 rounded-full
-            border-slate-300 border border-solid
-            bg-white
-            flex items-center justify-center shrink-0
-            group-hover:border-primary
-            transition-colors">
-            <ĄrrowUpRightSvg
-              className="w-4 h-4 fill-slate-700"
-              aria-hidden="true" />
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-solid border-slate-300 bg-white transition-colors group-hover:border-primary">
+            <ĄrrowUpRightSvg className="h-4 w-4 fill-slate-700" aria-hidden="true" />
           </span>
         </Link>
 
-        <p className="text-sm leading-6">
-          {description}
-        </p>
+        <p className="text-sm leading-6">{description}</p>
       </div>
     </article>
   );

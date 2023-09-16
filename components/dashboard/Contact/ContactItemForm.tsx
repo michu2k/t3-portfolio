@@ -5,22 +5,9 @@ import type {ContactMethod} from "@prisma/client";
 import {ContactMethodType} from "@prisma/client";
 import {FormProvider, useForm} from "react-hook-form";
 import {Button} from "~/components/ui/Button";
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "~/components/ui/Form";
+import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "~/components/ui/Select";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/Select";
 import {api} from "~/utils/api";
 import {capitalize} from "~/utils/capitalize";
 import {contactMethodSchema} from "~/utils/validations/contact";
@@ -78,13 +65,13 @@ const ContactItemForm = () => {
 
                 <SelectContent>
                   {Object.values(ContactMethodType).map((type) => (
-                    <SelectItem key={type} value={type}>{capitalize(type)}</SelectItem>
+                    <SelectItem key={type} value={type}>
+                      {capitalize(type)}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
-              <FormDescription>
-                Relevant icon will be displayed based on the type.
-              </FormDescription>
+              <FormDescription>Relevant icon will be displayed based on the type.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -128,8 +115,8 @@ type FieldPlaceholders = {
   [key in ContactMethodType]: {
     name: string;
     description: string;
-  }
-}
+  };
+};
 
 const fieldPlaceholdersDef: FieldPlaceholders = {
   ADDRESS: {

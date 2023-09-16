@@ -30,13 +30,11 @@ const socialMedia: Array<SocialMediaItemProps> = [
 
 type SocialMediaProps = {
   className?: string;
-}
+};
 
 const SocialMedia = memo(({className}: SocialMediaProps) => {
   function displaySocialMediaIcons() {
-    return socialMedia.map((item) => (
-      <SocialMediaItem key={item.name} {...item} />
-    ));
+    return socialMedia.map((item) => <SocialMediaItem key={item.name} {...item} />);
   }
 
   return (
@@ -52,23 +50,20 @@ type SocialMediaItemProps = {
   name: string;
   url: string;
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
-}
+};
 
 const SocialMediaItem = ({name, url, icon: Icon}: SocialMediaItemProps) => {
   return (
     <li>
       <a
         href={url}
-        className="group flex items-center justify-center w-6 h-6"
+        className="group flex h-6 w-6 items-center justify-center"
         rel="noopener noreferrer"
         target="_blank">
         <Icon
-          className="
-            w-4 h-4
-            fill-slate-700
-            group-hover:fill-primary group-focus:fill-primary
-            transition-colors"
-          aria-hidden="true" />
+          className="h-4 w-4 fill-slate-700 transition-colors group-hover:fill-primary group-focus:fill-primary"
+          aria-hidden="true"
+        />
         <span className="sr-only">{name}</span>
       </a>
     </li>

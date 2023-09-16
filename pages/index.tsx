@@ -11,8 +11,6 @@ import {KeepInTouch} from "~/components/landing-page/KeepInTouch";
 import {Footer} from "~/components/landing-page/Footer";
 
 const Page: NextPage = () => {
-  // const hello = api.example.hello.useQuery({text: "from tRPC"});
-
   return (
     <>
       <Head>
@@ -31,7 +29,6 @@ const Page: NextPage = () => {
         <Separator />
         <KeepInTouch />
         <Footer />
-        {/*   {hello.data ? hello.data.greeting : "Loading tRPC query..."} */}
       </main>
     </>
   );

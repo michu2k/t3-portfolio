@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 html {
-  height: 100%
+  height: 100%;
 }
 
 body {
   @apply bg-white;
   @apply text-slate-600;
-  height: 100%
+  height: 100%;
 }
 
 #__next {

@@ -18,7 +18,4 @@ const contactSnippetsSchema = z.object({
 
 export type {ContactSnippetsFormValues};
 
-export {
-  contactMethodSchema,
-  contactSnippetsSchema
-};
+export {contactMethodSchema, contactSnippetsSchema};

@@ -13,21 +13,22 @@ const headingVariants = cva("text-slate-900", {
   }
 });
 
-type HeadingProps = PropsWithChildren<{
-  as: "h1" | "h2" | "h3";
-  className?: string;
-} & VariantProps<typeof headingVariants>>
+type HeadingProps = PropsWithChildren<
+  {
+    as: "h1" | "h2" | "h3";
+    className?: string;
+  } & VariantProps<typeof headingVariants>
+>;
 
-const Heading = React.forwardRef<
-HTMLHeadingElement,
-HeadingProps
->(({as: Component, size, className, children}, ref) => {
-  return (
-    <Component ref={ref} className={cn(headingVariants({size}), className)}>
-      {children}
-    </Component>
-  );
-});
+const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
+  ({as: Component, size, className, children}, ref) => {
+    return (
+      <Component ref={ref} className={cn(headingVariants({size}), className)}>
+        {children}
+      </Component>
+    );
+  }
+);
 
 Heading.displayName = "Heading";
 

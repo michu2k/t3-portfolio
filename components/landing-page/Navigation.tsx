@@ -51,37 +51,32 @@ const Navigation = () => {
         isActive={item.id === activeItemId}
         setActiveItemId={setActiveItemId}
         scrollY={scrollY}
-        {...item} />
+        {...item}
+      />
     ));
   }
 
   return (
     <Sidebar>
-      <div className="
-        px-4 md:px-6
-        w-full h-16 md:h-[4.5rem]
-        mx-auto
-        bg-white
-        sticky z-40
-        top-0 left-0 right-0">
-        <nav className="section-container flex items-center justify-between gap-4 h-full">
+      <div className="sticky left-0 right-0 top-0 z-40 mx-auto h-16 w-full bg-white px-4 md:h-[4.5rem] md:px-6">
+        <nav className="section-container flex h-full items-center justify-between gap-4">
           <SidebarTrigger />
 
-          {!isMobile && <ul className="section-container flex flex-1 gap-8 items-center">
-            {displayNavigationItems()}
-          </ul>}
+          {!isMobile && (
+            <ul className="section-container flex flex-1 items-center gap-8">{displayNavigationItems()}</ul>
+          )}
 
           <SocialMedia />
         </nav>
       </div>
 
-      {isMobile && <SidebarContent>
-        <ul className="section-container flex flex-col flex-1 gap-3">
-          {displayNavigationItems()}
-        </ul>
+      {isMobile && (
+        <SidebarContent>
+          <ul className="section-container flex flex-1 flex-col gap-3">{displayNavigationItems()}</ul>
 
-        <SocialMedia className="h-11 mb-4" />
-      </SidebarContent>}
+          <SocialMedia className="mb-4 h-11" />
+        </SidebarContent>
+      )}
     </Sidebar>
   );
 };
@@ -90,26 +85,19 @@ type NavigationItemDef = {
   id: number;
   text: string;
   href: string;
-}
+};
 
 type NavigationItemProps = NavigationItemDef & {
   isActive: boolean;
   setActiveItemId: React.Dispatch<React.SetStateAction<number | null>>;
   scrollY: MotionValue<number>;
-}
+};
 
 // For better UX, offset the scroll position by a few pixels
 const OFFSET_TOP_MOBILE = 24;
 const OFFSET_TOP_DESKTOP = 48;
 
-const NavigationItem = ({
-  id,
-  href,
-  text,
-  isActive,
-  setActiveItemId,
-  scrollY
-}: NavigationItemProps) => {
+const NavigationItem = ({id, href, text, isActive, setActiveItemId, scrollY}: NavigationItemProps) => {
   const isMobile = useIsMobile();
   const {toggleExpanded} = useContext(SidebarContext);
 
@@ -117,7 +105,7 @@ const NavigationItem = ({
   const viewOffsetTop = isMobile ? OFFSET_TOP_MOBILE : OFFSET_TOP_DESKTOP;
 
   useMotionValueEvent(scrollY, "change", (latestPos) => {
-    const sectionOffsetTop = Math.max((sectionEl?.offsetTop || 0), 0);
+    const sectionOffsetTop = Math.max(sectionEl?.offsetTop || 0, 0);
     const halfWindowHeight = window.innerHeight / 2;
 
     // If the section is in the middle of the screen, set it as active
@@ -143,28 +131,19 @@ const NavigationItem = ({
       <Link
         href={href}
         onClick={handleNavigationItemClick}
-        className={`
-          font-medium leading-8 text-sm
-          py-1.5 block
+        className={`block py-1.5 text-sm font-medium leading-8
           ${isActive ? "text-primary" : "text-slate-700"}
-          transition-colors
-        `}>
+          transition-colors`}>
         {text}
       </Link>
 
-      {isActive ? <motion.div
-        key="item-underline"
-        layoutId="underline"
-        className={`
-          hidden md:block
-          rounded-full
-          w-6 md:w-4 h-0.5
-          bg-primary
-          absolute
-          left-0 md:mx-auto
-          bottom-0 md:right-0
-          mb-1 md:mb-0
-        `} /> : null}
+      {isActive ? (
+        <motion.div
+          key="item-underline"
+          layoutId="underline"
+          className="absolute bottom-0 left-0 mb-1 hidden h-0.5 w-6 rounded-full bg-primary md:right-0 md:mx-auto md:mb-0 md:block md:w-4"
+        />
+      ) : null}
     </li>
   );
 };

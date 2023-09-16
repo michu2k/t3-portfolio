@@ -1,13 +1,10 @@
 import {SnippetType} from "@prisma/client";
 import {z} from "zod";
 
-import {
-  createTRPCRouter,
-  protectedProcedure,
-  publicProcedure
-} from "~/server/api/trpc";
+import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
 import {snippetSchema} from "~/utils/validations/snippet";
 
+// prettier-ignore
 export const snippetRouter = createTRPCRouter({
   getSnippets: publicProcedure
     .input(z.object({type: z.nativeEnum(SnippetType)}))
