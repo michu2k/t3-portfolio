@@ -1,8 +1,9 @@
 import {ContactMethodType} from "@prisma/client";
 import {z} from "zod";
 
+type ContactMethodFormValues = z.infer<typeof contactMethodSchema>;
+
 const contactMethodSchema = z.object({
-  id: z.string().optional(),
   type: z.nativeEnum(ContactMethodType, {
     required_error: "Contact method type is required"
   }),
@@ -16,6 +17,6 @@ const contactSnippetsSchema = z.object({
   description: z.string().optional()
 });
 
-export type {ContactSnippetsFormValues};
+export type {ContactMethodFormValues, ContactSnippetsFormValues};
 
 export {contactMethodSchema, contactSnippetsSchema};

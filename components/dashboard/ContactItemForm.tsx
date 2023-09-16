@@ -1,7 +1,6 @@
 import React from "react";
 import {useRouter} from "next/router";
 import {zodResolver} from "@hookform/resolvers/zod";
-import type {ContactMethod} from "@prisma/client";
 import {ContactMethodType} from "@prisma/client";
 import {FormProvider, useForm} from "react-hook-form";
 import {Button} from "~/components/ui/Button";
@@ -10,6 +9,7 @@ import {Input} from "~/components/ui/Input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/Select";
 import {api} from "~/utils/api";
 import {capitalize} from "~/utils/capitalize";
+import type {ContactMethodFormValues} from "~/utils/validations/contact";
 import {contactMethodSchema} from "~/utils/validations/contact";
 
 const ContactItemForm = () => {
@@ -21,7 +21,7 @@ const ContactItemForm = () => {
   const createContactMutation = api.contact.createContactMethod.useMutation();
   const updateContactMutation = api.contact.updateContactMethod.useMutation();
 
-  const formMethods = useForm<ContactMethod>({
+  const formMethods = useForm<ContactMethodFormValues>({
     defaultValues: {
       name: "",
       description: "",
@@ -34,17 +34,27 @@ const ContactItemForm = () => {
   const {control, handleSubmit, watch} = formMethods;
   const type = watch("type");
 
-  const contactMutation = contactMethodId === "new" ? createContactMutation : updateContactMutation;
   const fieldPlaceholder = type ? fieldPlaceholdersDef[type] : null;
 
-  async function handleFormSubmit(contactMethod: ContactMethod, e?: React.BaseSyntheticEvent) {
+  async function handleFormSubmit(formValues: ContactMethodFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    await contactMutation.mutateAsync(contactMethod, {
-      async onSuccess() {
-        await utils.contact.getContactMethod.invalidate();
-      }
-    });
+    if (data?.id) {
+      await updateContactMutation.mutateAsync(
+        {id: data.id, ...formValues},
+        {
+          async onSuccess() {
+            await utils.contact.getContactMethod.invalidate();
+          }
+        }
+      );
+    } else {
+      await createContactMutation.mutateAsync(formValues, {
+        async onSuccess() {
+          await utils.contact.getContactMethod.invalidate();
+        }
+      });
+    }
 
     await push("/dashboard/contact");
   }
