@@ -58,7 +58,8 @@ const ContactItems = () => {
 
         <Link href="/dashboard/contact/new">
           <Button className="mt-8">
-            <PlusIcon size={16} className="mr-1" /> Add new item
+            <PlusIcon size={16} className="mr-1" />
+            Add new item
           </Button>
         </Link>
       </div>

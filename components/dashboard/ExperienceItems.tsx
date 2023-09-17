@@ -16,7 +16,8 @@ const ExperienceItems = () => {
 
       <Link href="/dashboard/experience/new">
         <Button className="mt-8">
-          <PlusIcon size={16} className="mr-1" /> Add new item
+          <PlusIcon size={16} className="mr-1" />
+          Add new item
         </Button>
       </Link>
     </div>
@@ -57,6 +58,7 @@ const ExperienceItem = ({id, from, to, companyName, position, responsibilities}:
       <Link href={`/dashboard/experience/${id}`}>
         <Button variant="ghost" size="icon">
           <PencilIcon size={16} />
+          <span className="sr-only">Edit</span>
         </Button>
       </Link>
     </article>

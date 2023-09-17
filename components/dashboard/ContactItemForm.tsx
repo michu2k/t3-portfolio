@@ -2,7 +2,7 @@ import React from "react";
 import {useRouter} from "next/router";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ContactMethodType} from "@prisma/client";
-import {FormProvider, useForm} from "react-hook-form";
+import {FormProvider, useForm, useWatch} from "react-hook-form";
 import {Button} from "~/components/ui/Button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
@@ -15,9 +15,9 @@ import {contactMethodSchema} from "~/utils/validations/contact";
 const ContactItemForm = () => {
   const {query, push} = useRouter();
   const utils = api.useContext();
-  const contactMethodId = query.id as string;
+  const itemId = query.id as string;
 
-  const {data} = api.contact.getContactMethod.useQuery({id: contactMethodId});
+  const {data} = api.contact.getContactMethod.useQuery({id: itemId});
   const createContactMutation = api.contact.createContactMethod.useMutation();
   const updateContactMutation = api.contact.updateContactMethod.useMutation();
 
@@ -31,8 +31,8 @@ const ContactItemForm = () => {
     resolver: zodResolver(contactMethodSchema)
   });
 
-  const {control, handleSubmit, watch} = formMethods;
-  const type = watch("type");
+  const {control, handleSubmit} = formMethods;
+  const type = useWatch({control, name: "type"});
 
   const fieldPlaceholder = type ? fieldPlaceholdersDef[type] : null;
 

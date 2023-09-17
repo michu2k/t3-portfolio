@@ -17,7 +17,8 @@ const PortfolioItems = () => {
 
         <Link href="/dashboard/portfolio/new">
           <Button className="mt-8">
-            <PlusIcon size={16} className="mr-1" /> Add new item
+            <PlusIcon size={16} className="mr-1" />
+            Add new item
           </Button>
         </Link>
       </div>
@@ -53,6 +54,7 @@ const PortfolioItem = ({id, name, description, image}: PortfolioItemProps) => {
       <Link href={`/dashboard/portfolio/${id}`}>
         <Button variant="ghost" size="icon">
           <PencilIcon size={16} />
+          <span className="sr-only">Edit</span>
         </Button>
       </Link>
     </article>
