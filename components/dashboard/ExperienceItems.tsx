@@ -2,8 +2,9 @@ import React from "react";
 import {format} from "date-fns";
 import Link from "next/link";
 import {PlusIcon, PencilIcon} from "lucide-react";
-import {Button} from "~/components/ui/Button";
+import {Button, buttonVariants} from "~/components/ui/Button";
 import {experienceItems} from "~/components/landing-page/Experience"; // TEMP
+import {cn} from "~/utils/className";
 
 const ExperienceItems = () => {
   function displayItems() {
@@ -14,11 +15,9 @@ const ExperienceItems = () => {
     <div className="flex flex-col items-start">
       {displayItems()}
 
-      <Link href="/dashboard/experience/new">
-        <Button className="mt-8">
-          <PlusIcon size={16} className="mr-1" />
-          Add new item
-        </Button>
+      <Link href="/dashboard/experience/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
+        <PlusIcon size={16} className="mr-1" />
+        Add new item
       </Link>
     </div>
   );

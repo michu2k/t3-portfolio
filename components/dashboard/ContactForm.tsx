@@ -66,7 +66,9 @@ const ContactForm = () => {
           )}
         />
 
-        <Button type="submit">Save changes</Button>
+        <Button type="submit" className="mt-6">
+          Save changes
+        </Button>
       </form>
     </FormProvider>
   );

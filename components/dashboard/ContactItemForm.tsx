@@ -66,7 +66,7 @@ const ContactItemForm = () => {
           control={control}
           name="type"
           render={({field: {name, value, onChange}}) => (
-            <FormItem className="mt-1">
+            <FormItem>
               <FormLabel>Type</FormLabel>
               <Select name={name} value={value} onValueChange={onChange}>
                 <SelectTrigger className="w-[12rem]">
@@ -115,7 +115,9 @@ const ContactItemForm = () => {
           )}
         />
 
-        <Button type="submit">Save changes</Button>
+        <Button type="submit" className="mt-6">
+          Save changes
+        </Button>
       </form>
     </FormProvider>
   );

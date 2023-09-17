@@ -40,7 +40,7 @@ const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
 
     return (
       <FormItemContext.Provider value={{id}}>
-        <div ref={ref} className={cn("mb-8 mt-4 space-y-2", className)} {...props} />
+        <div ref={ref} className={cn("py-4", className)} {...props} />
       </FormItemContext.Provider>
     );
   }
@@ -89,7 +89,12 @@ const FormDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttribu
     const {formDescriptionId} = useFormField();
 
     return (
-      <p ref={ref} id={formDescriptionId} className={cn("text-xs leading-5 text-slate-500", className)} {...props} />
+      <p
+        ref={ref}
+        id={formDescriptionId}
+        className={cn("mt-2 text-xs leading-5 text-slate-500", className)}
+        {...props}
+      />
     );
   }
 );
@@ -106,7 +111,7 @@ const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<
     }
 
     return (
-      <p ref={ref} id={formMessageId} className={cn("text-xs font-medium text-red-500", className)} {...props}>
+      <p ref={ref} id={formMessageId} className={cn("pt-2 text-xs font-medium text-red-500", className)} {...props}>
         {body}
       </p>
     );

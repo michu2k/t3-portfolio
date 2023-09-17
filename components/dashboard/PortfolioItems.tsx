@@ -2,8 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 import {PlusIcon, PencilIcon} from "lucide-react";
-import {Button} from "~/components/ui/Button";
+import {Button, buttonVariants} from "~/components/ui/Button";
 import {recentWorkItems} from "~/components/landing-page/RecentWork";
+import {cn} from "~/utils/className";
 
 const PortfolioItems = () => {
   function displayItems() {
@@ -15,11 +16,9 @@ const PortfolioItems = () => {
       <div className="flex flex-col items-start">
         {displayItems()}
 
-        <Link href="/dashboard/portfolio/new">
-          <Button className="mt-8">
-            <PlusIcon size={16} className="mr-1" />
-            Add new item
-          </Button>
+        <Link href="/dashboard/portfolio/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
+          <PlusIcon size={16} className="mr-1" />
+          Add new item
         </Link>
       </div>
     </>

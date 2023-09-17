@@ -15,6 +15,7 @@ import {
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
 import {api} from "~/utils/api";
+import {cn} from "~/utils/className";
 
 const ContactItems = () => {
   const [selectedContactMethod, setSelectedContactMethod] = useState<ContactMethod | null>(null);
@@ -52,11 +53,9 @@ const ContactItems = () => {
       <div className="flex flex-col items-start">
         {displayItems()}
 
-        <Link href="/dashboard/contact/new">
-          <Button className="mt-8">
-            <PlusIcon size={16} className="mr-1" />
-            Add new item
-          </Button>
+        <Link href="/dashboard/contact/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
+          <PlusIcon size={16} className="mr-1" />
+          Add new item
         </Link>
       </div>
 
