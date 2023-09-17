@@ -41,14 +41,14 @@ type PortfolioItemProps = {
 
 const PortfolioItem = ({id, name, description, image}: PortfolioItemProps) => {
   return (
-    <article className="flex w-full items-center border-b-[1px] border-solid border-slate-200 py-2 last-of-type:border-0">
+    <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-2 last-of-type:border-0">
       <div className="relative mr-4 h-16 w-16 shrink-0 rounded bg-slate-100">
         <Image src={image.thumbnail} fill className="rounded" style={{objectFit: "cover"}} alt="" />
       </div>
 
       <div className="mr-4 flex flex-1 flex-col items-start">
-        <p className="mr-2 text-sm font-semibold leading-6 text-slate-700">{name}</p>
-        <p className="text-xs leading-6">{description}</p>
+        <p className="mr-2 text-sm font-semibold leading-6">{name}</p>
+        <p className="text-xs leading-6 text-slate-500">{description}</p>
       </div>
 
       <Link href={`/dashboard/portfolio/${id}`}>

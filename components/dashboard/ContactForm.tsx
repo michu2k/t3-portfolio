@@ -59,16 +59,14 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} placeholder="Enter section description here" />
+                <Textarea {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <Button type="submit" className="mt-6">
-          Save changes
-        </Button>
+        <Button type="submit">Save changes</Button>
       </form>
     </FormProvider>
   );

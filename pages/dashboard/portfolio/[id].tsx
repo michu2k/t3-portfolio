@@ -13,7 +13,7 @@ const Page: NextPage = () => {
         <title>T3 Portfolio: Portfolio</title>
       </Head>
 
-      <Layout heading="Edit item" description="Create a new portfolio item or edit an existing one.">
+      <Layout heading="Edit item" description="Create a new record or edit an existing one.">
         <PortfolioItemForm />
       </Layout>
     </>
