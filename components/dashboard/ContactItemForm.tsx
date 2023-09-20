@@ -68,6 +68,8 @@ const ContactItemForm = () => {
           render={({field: {name, value, onChange}}) => (
             <FormItem>
               <FormLabel>Type</FormLabel>
+              <FormDescription>Relevant icon will be displayed based on the type.</FormDescription>
+
               <Select name={name} value={value} onValueChange={onChange}>
                 <SelectTrigger className="w-[12rem]">
                   <SelectValue placeholder="Select type..." />
@@ -81,7 +83,6 @@ const ContactItemForm = () => {
                   ))}
                 </SelectContent>
               </Select>
-              <FormDescription>Relevant icon will be displayed based on the type.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
