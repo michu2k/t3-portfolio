@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import type {ExperienceItem} from "@prisma/client";
-import {format} from "date-fns";
+import {differenceInDays, format} from "date-fns";
 import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
@@ -8,6 +8,7 @@ import {Button, buttonVariants} from "~/components/ui/Button";
 import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
 import {cn} from "~/utils/className";
 import {api} from "~/utils/api";
+import {sortExperienceItemsByEndDate} from "~/utils/sortExperienceItemsByEndDate";
 
 const ExperienceItems = () => {
   const {data: experienceItems = []} = api.experience.getItems.useQuery();
@@ -32,7 +33,9 @@ const ExperienceItems = () => {
   }
 
   function displayItems() {
-    return experienceItems.map((item) => (
+    const sortedItems = sortExperienceItemsByEndDate(experienceItems);
+
+    return sortedItems.map((item) => (
       <SingleExperienceItem key={item.id} onDelete={() => setSelectedExperienceItem(item)} {...item} />
     ));
   }
@@ -67,11 +70,11 @@ const SingleExperienceItem = ({id, company, startDate, endDate, position, onDele
       <div className="mr-4 flex-1">
         <p className="text-sm font-semibold leading-8 ">{position}</p>
         <p className="text-xs font-medium leading-6 text-slate-500">{company}</p>
-
         <span className="text-xs leading-6">
-          {startDate ? format(new Date(startDate), "MMM yyyy") : "-"} {" - "}
-          {endDate ? format(new Date(endDate), "MMM yyyy") : "Now"}
+          {startDate ? format(startDate, "MMM yyyy") : "-"} {" - "}
+          {endDate ? format(endDate, "MMM yyyy") : "Now"}
         </span>
+        {endDate && differenceInDays(new Date(), endDate)} d. ago
       </div>
 
       <Link href={`/dashboard/experience/${id}`}>

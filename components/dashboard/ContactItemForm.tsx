@@ -2,7 +2,7 @@ import React from "react";
 import {useRouter} from "next/router";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {ContactMethodType} from "@prisma/client";
-import {FormProvider, useForm, useWatch} from "react-hook-form";
+import {FormProvider, useForm} from "react-hook-form";
 import {Button} from "~/components/ui/Button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
@@ -31,8 +31,8 @@ const ContactItemForm = () => {
     resolver: zodResolver(contactMethodSchema)
   });
 
-  const {control, handleSubmit} = formMethods;
-  const type = useWatch({control, name: "type"});
+  const {control, handleSubmit, watch} = formMethods;
+  const type = watch("type");
 
   const fieldPlaceholder = type ? fieldPlaceholdersDef[type] : null;
 

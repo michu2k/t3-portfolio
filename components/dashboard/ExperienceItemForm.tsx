@@ -1,5 +1,5 @@
 import React from "react";
-import {FormProvider, useFieldArray, useForm, useWatch} from "react-hook-form";
+import {FormProvider, useFieldArray, useForm} from "react-hook-form";
 import type {DateRange} from "react-day-picker";
 import {format} from "date-fns";
 import {CalendarIcon, PlusIcon, Trash2Icon} from "lucide-react";
@@ -36,8 +36,8 @@ const ExperienceItemForm = () => {
     resolver: zodResolver(experienceItemSchema)
   });
 
-  const {control, handleSubmit, setValue} = formMethods;
-  const [startDate, endDate] = useWatch({control, name: ["startDate", "endDate"]});
+  const {control, handleSubmit, setValue, watch} = formMethods;
+  const [startDate, endDate] = watch(["startDate", "endDate"]);
   const calendarDate: DateRange = {from: startDate || undefined, to: endDate || undefined};
 
   const {fields, append, remove} = useFieldArray({
@@ -50,8 +50,6 @@ const ExperienceItemForm = () => {
 
     // Filter out empty responsibilities
     const responsibilities = formValues.responsibilities.filter(({name}) => !!name);
-
-    console.log({responsibilities});
 
     if (data?.id) {
       await updateItemMutation.mutateAsync(
