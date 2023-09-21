@@ -23,7 +23,7 @@ const DeleteEntityDialog = ({title, entityName, onClickDeleteBtn}: DeleteEntityD
         <DialogTitle>{title}</DialogTitle>
       </DialogHeader>
 
-      <div className="flex flex-1 flex-col justify-center">
+      <div className="flex flex-1 flex-col justify-center px-2">
         <DialogDescription className="mb-2">Are you sure you want to delete this item?</DialogDescription>
         <DialogDescription>
           Selected <strong>{entityName}</strong> will be permanently deleted.

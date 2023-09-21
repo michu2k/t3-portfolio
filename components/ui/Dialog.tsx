@@ -51,7 +51,7 @@ const DialogContent = React.forwardRef<
         {...props}>
         <div
           className={cn(
-            "relative flex min-h-[20rem] flex-col rounded-lg border border-slate-200 bg-white p-8",
+            "relative flex min-h-[18rem] flex-col rounded-lg border border-slate-200 bg-white p-8",
             className
           )}>
           <DialogClose className="absolute right-4 top-4 flex h-6 w-6 items-center justify-center rounded-sm ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:pointer-events-none">
