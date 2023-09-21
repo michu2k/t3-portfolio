@@ -2,26 +2,17 @@ import React, {useState} from "react";
 import type {ContactMethod} from "@prisma/client";
 import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "~/components/ui/Dialog";
+import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
 import {Button, buttonVariants} from "~/components/ui/Button";
+import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
 import {Heading} from "~/components/ui/Heading";
 import {api} from "~/utils/api";
 import {cn} from "~/utils/className";
 
 const ContactItems = () => {
-  const [selectedContactMethod, setSelectedContactMethod] = useState<ContactMethod | null>(null);
-
   const {data: contactMethods = []} = api.contact.getItems.useQuery();
   const deleteContactMethod = api.contact.deleteItem.useMutation();
+  const [selectedContactMethod, setSelectedContactMethod] = useState<ContactMethod | null>(null);
   const utils = api.useContext();
 
   async function handleDeleteContactMethod() {
@@ -59,30 +50,11 @@ const ContactItems = () => {
         </Link>
       </div>
 
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Delete contact method</DialogTitle>
-        </DialogHeader>
-
-        <DialogDescription>Are you sure you want to delete this item?</DialogDescription>
-        <DialogDescription>
-          Selected <strong>{(selectedContactMethod?.type || "Method").toLowerCase()}</strong> will be permanently
-          deleted.
-        </DialogDescription>
-
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DialogClose>
-
-          <DialogClose asChild>
-            <Button variant="destructive" onClick={() => void handleDeleteContactMethod()}>
-              <TrashIcon size={16} className="mr-2" />
-              Delete
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
+      <DeleteEntityDialog
+        title="Delete contact method"
+        entityName={(selectedContactMethod?.type || "Method").toLowerCase()}
+        onClickDeleteBtn={() => void handleDeleteContactMethod()}
+      />
     </Dialog>
   );
 };
