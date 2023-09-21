@@ -20,8 +20,8 @@ import {cn} from "~/utils/className";
 const ContactItems = () => {
   const [selectedContactMethod, setSelectedContactMethod] = useState<ContactMethod | null>(null);
 
-  const {data: contactMethods = []} = api.contact.getContactMethods.useQuery();
-  const deleteContactMethod = api.contact.deleteContactMethod.useMutation();
+  const {data: contactMethods = []} = api.contact.getItems.useQuery();
+  const deleteContactMethod = api.contact.deleteItem.useMutation();
   const utils = api.useContext();
 
   async function handleDeleteContactMethod() {
@@ -30,7 +30,7 @@ const ContactItems = () => {
         {id: selectedContactMethod.id},
         {
           async onSuccess() {
-            await utils.contact.getContactMethods.invalidate();
+            await utils.contact.getItems.invalidate();
             setSelectedContactMethod(null);
           }
         }
@@ -40,7 +40,7 @@ const ContactItems = () => {
 
   function displayItems() {
     return contactMethods.map((item) => (
-      <ContactMethodItem key={item.id} onDelete={() => setSelectedContactMethod(item)} {...item} />
+      <SingleContactMethod key={item.id} onDelete={() => setSelectedContactMethod(item)} {...item} />
     ));
   }
 
@@ -87,11 +87,11 @@ const ContactItems = () => {
   );
 };
 
-type ContactMethodItemProps = ContactMethod & {
+type SingleContactMethodProps = ContactMethod & {
   onDelete: (e: React.MouseEvent) => void;
 };
 
-const ContactMethodItem = ({id, name, description, onDelete}: ContactMethodItemProps) => {
+const SingleContactMethod = ({id, name, description, onDelete}: SingleContactMethodProps) => {
   return (
     <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-2 last-of-type:border-0">
       <div className="mr-4 flex-1">

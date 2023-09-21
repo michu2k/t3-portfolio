@@ -5,12 +5,17 @@ import {experienceItemSchema} from "~/utils/validations/experience";
 
 // prettier-ignore
 export const experienceRouter = createTRPCRouter({
-  getExperienceItems: publicProcedure
-    .query(async ({ctx}) => {
-      return await ctx.prisma.experienceItem.findMany();
+  getItems: publicProcedure
+    .input(z.object({
+      include: z.object({responsibilities: z.boolean()})
+    }).optional())
+    .query(async ({ctx, input: {include} = {}}) => {
+      return await ctx.prisma.experienceItem.findMany({
+        include
+      });
     }),
 
-  getExperienceItem: protectedProcedure
+  getItem: protectedProcedure
     .input(z.object({id: z.string()}))
     .query(async ({ctx, input: {id}}) => {
       return await ctx.prisma.experienceItem.findUnique({
@@ -19,7 +24,7 @@ export const experienceRouter = createTRPCRouter({
       });
     }),
 
-  createExperienceItem: protectedProcedure
+  createItem: protectedProcedure
     .input(experienceItemSchema)
     .mutation(async ({ctx, input: {responsibilities, ...input}}) => {
       return await ctx.prisma.experienceItem.create({
@@ -35,7 +40,7 @@ export const experienceRouter = createTRPCRouter({
       });
     }),
 
-  updateExperienceItem: protectedProcedure
+  updateItem: protectedProcedure
     .input(z.object({id: z.string()}).merge(experienceItemSchema))
     .mutation(async ({ctx, input: {id, responsibilities, ...input}}) => {
 
@@ -64,7 +69,7 @@ export const experienceRouter = createTRPCRouter({
       });
     }),
 
-  deleteExperienceItem: protectedProcedure
+  deleteItem: protectedProcedure
     .input(z.object({id: z.string()}))
     .mutation(async ({ctx, input: {id}}) => {
       return await ctx.prisma.experienceItem.delete({

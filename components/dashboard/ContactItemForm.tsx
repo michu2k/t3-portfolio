@@ -17,9 +17,9 @@ const ContactItemForm = () => {
   const utils = api.useContext();
   const itemId = query.id as string;
 
-  const {data} = api.contact.getContactMethod.useQuery({id: itemId});
-  const createItemMutation = api.contact.createContactMethod.useMutation();
-  const updateItemMutation = api.contact.updateContactMethod.useMutation();
+  const {data} = api.contact.getItem.useQuery({id: itemId});
+  const createItemMutation = api.contact.createItem.useMutation();
+  const updateItemMutation = api.contact.updateItem.useMutation();
 
   const formMethods = useForm<ContactMethodFormValues>({
     defaultValues: {
@@ -44,14 +44,14 @@ const ContactItemForm = () => {
         {id: data.id, ...formValues},
         {
           async onSuccess() {
-            await utils.contact.getContactMethod.invalidate();
+            await utils.contact.getItem.invalidate();
           }
         }
       );
     } else {
       await createItemMutation.mutateAsync(formValues, {
         async onSuccess() {
-          await utils.contact.getContactMethod.invalidate();
+          await utils.contact.getItem.invalidate();
         }
       });
     }
