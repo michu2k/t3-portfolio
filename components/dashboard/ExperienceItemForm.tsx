@@ -1,33 +1,90 @@
-import React, {useState} from "react";
-import {FormProvider, useForm} from "react-hook-form";
-import type {DateRange} from "react-day-picker";
+import React from "react";
+import {FormProvider, useFieldArray, useForm} from "react-hook-form";
 import {format} from "date-fns";
-import {CalendarIcon} from "lucide-react";
+import {CalendarIcon, PlusIcon, Trash2Icon} from "lucide-react";
 import {Button} from "~/components/ui/Button";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
+import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/Popover";
 import {Calendar} from "~/components/ui/Calendar";
+import {Heading} from "~/components/ui/Heading";
+import {useRouter} from "next/router";
+import {api} from "~/utils/api";
+import type {ExperienceItemFormValues} from "~/utils/validations/experience";
+import {experienceItemSchema} from "~/utils/validations/experience";
+import {zodResolver} from "@hookform/resolvers/zod";
 
 const ExperienceItemForm = () => {
-  const formMethods = useForm({});
-  const [date, setDate] = useState<DateRange | undefined>(undefined);
+  const {query, push} = useRouter();
+  const utils = api.useContext();
+  const itemId = query.id as string;
+  const newResponsibilityItem = {id: undefined, name: ""};
 
-  const {control} = formMethods;
+  const {data} = api.experience.getItem.useQuery({id: itemId});
+  const createItemMutation = api.experience.createItem.useMutation();
+  const updateItemMutation = api.experience.updateItem.useMutation();
 
-  function displaySelectedDate() {
-    if (!date?.from) {
-      return "Pick a date";
+  const formMethods = useForm<ExperienceItemFormValues>({
+    defaultValues: {
+      company: "",
+      position: "",
+      startDate: undefined,
+      endDate: undefined,
+      responsibilities: [newResponsibilityItem]
+    },
+    values: data
+      ? {...data, responsibilities: data.responsibilities.length ? data.responsibilities : [newResponsibilityItem]}
+      : undefined,
+    resolver: zodResolver(experienceItemSchema)
+  });
+
+  const {control, handleSubmit, setValue, watch} = formMethods;
+  const [startDate, endDate] = watch(["startDate", "endDate"]);
+
+  const {fields, append, remove} = useFieldArray({
+    control,
+    name: "responsibilities"
+  });
+
+  async function handleFormSubmit(
+    {responsibilities: formResponsibilities, ...formValues}: ExperienceItemFormValues,
+    e?: React.BaseSyntheticEvent
+  ) {
+    e?.preventDefault();
+
+    // Filter out empty responsibilities
+    const responsibilities = formResponsibilities.filter(({name}) => !!name);
+
+    if (data?.id) {
+      await updateItemMutation.mutateAsync(
+        {id: data.id, ...formValues, responsibilities},
+        {
+          async onSuccess() {
+            await utils.experience.getItem.invalidate();
+          }
+        }
+      );
+    } else {
+      await createItemMutation.mutateAsync(
+        {...formValues, responsibilities},
+        {
+          async onSuccess() {
+            await utils.experience.getItem.invalidate();
+          }
+        }
+      );
     }
 
-    return date.to
-      ? `${format(date.from, "LLL dd, y")} - ${format(date.to, "LLL dd, y")}`
-      : format(date.from, "LLL dd, y");
+    await push("/dashboard/experience");
   }
 
   return (
     <FormProvider {...formMethods}>
-      <form>
+      <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
+        <Heading as="h2" size="md">
+          General
+        </Heading>
+
         <FormField
           control={control}
           name="position"
@@ -44,7 +101,7 @@ const ExperienceItemForm = () => {
 
         <FormField
           control={control}
-          name="companyName"
+          name="company"
           render={({field}) => (
             <FormItem>
               <FormLabel>Company name</FormLabel>
@@ -56,43 +113,95 @@ const ExperienceItemForm = () => {
           )}
         />
 
+        <div className="sm:flex sm:items-center sm:gap-4">
+          <FormItem className="max-w-[16rem] flex-1">
+            <FormLabel>From</FormLabel>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <FormControl>
+                  <Button variant="outline" className="w-full font-normal">
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    <span className="flex-1">{startDate ? format(startDate, "LLL dd, y") : "Pick start date"}</span>
+                  </Button>
+                </FormControl>
+              </PopoverTrigger>
+
+              <PopoverContent className="w-auto p-0" align="start" side="bottom">
+                <Calendar
+                  initialFocus
+                  captionLayout="dropdown"
+                  mode="single"
+                  defaultMonth={startDate || undefined}
+                  selected={startDate || undefined}
+                  onSelect={(date) => setValue("startDate", date)}
+                />
+              </PopoverContent>
+            </Popover>
+          </FormItem>
+
+          <FormItem className="max-w-[16rem] flex-1">
+            <FormLabel>To</FormLabel>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <FormControl>
+                  <Button variant="outline" className="w-full font-normal">
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    <span className="flex-1">{endDate ? format(endDate, "LLL dd, y") : "Pick end date"}</span>
+                  </Button>
+                </FormControl>
+              </PopoverTrigger>
+
+              <PopoverContent className="w-auto p-0" align="start" side="bottom">
+                <Calendar
+                  initialFocus
+                  mode="single"
+                  defaultMonth={endDate || undefined}
+                  selected={endDate || undefined}
+                  onSelect={(date) => setValue("endDate", date)}
+                  disabled={{after: new Date()}}
+                />
+              </PopoverContent>
+            </Popover>
+          </FormItem>
+        </div>
+
         <FormItem>
-          <FormLabel>From - To</FormLabel>
+          <Heading as="h2" size="md">
+            Responsibilities
+          </Heading>
+          <FormDescription> Add the responsibilities you had while working at this position.</FormDescription>
 
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button type="button" variant="outline" className="min-w-[12rem] font-normal">
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                <span className="flex-1">{displaySelectedDate()}</span>
-              </Button>
-            </PopoverTrigger>
+          {fields.map(({id}, idx) => (
+            <FormField
+              key={id}
+              control={control}
+              name={`responsibilities.${idx}.name`}
+              render={({field}) => (
+                <FormItem className="py-2">
+                  <div className="flex items-center">
+                    <FormLabel className="sr-only">Responsibility</FormLabel>
+                    <FormControl className="mr-2">
+                      <Input {...field} />
+                    </FormControl>
 
-            <PopoverContent className="w-auto p-0" align="start" side="bottom">
-              <Calendar
-                initialFocus
-                mode="range"
-                defaultMonth={date?.from}
-                selected={date}
-                onSelect={setDate}
-                numberOfMonths={2}
-              />
-            </PopoverContent>
-          </Popover>
+                    <Button variant="ghost" size="icon" onClick={() => remove(idx)}>
+                      <Trash2Icon size={16} />
+                      <span className="sr-only">Delete</span>
+                    </Button>
+                  </div>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          ))}
+
+          <Button variant="secondary" className="mt-2" onClick={() => void append(newResponsibilityItem)}>
+            <PlusIcon size={16} className="mr-1" />
+            Add responsibility
+          </Button>
         </FormItem>
-
-        <FormField
-          control={control}
-          name="responsibilities"
-          render={({field}) => (
-            <FormItem>
-              <FormLabel>Responsibilities</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Enter short description." />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
 
         <Button type="submit" className="mt-6">
           Save changes

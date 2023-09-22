@@ -5,12 +5,12 @@ import {contactMethodSchema} from "~/utils/validations/contact";
 
 // prettier-ignore
 export const contactRouter = createTRPCRouter({
-  getContactMethods: publicProcedure
+  getItems: publicProcedure
     .query(async ({ctx}) => {
       return await ctx.prisma.contactMethod.findMany();
     }),
 
-  getContactMethod: protectedProcedure
+  getItem: protectedProcedure
     .input(z.object({id: z.string()}))
     .query(async ({ctx, input: {id}}) => {
       return await ctx.prisma.contactMethod.findUnique({
@@ -18,7 +18,7 @@ export const contactRouter = createTRPCRouter({
       });
     }),
 
-  createContactMethod: protectedProcedure
+  createItem: protectedProcedure
     .input(contactMethodSchema)
     .mutation(async ({ctx, input}) => {
       return await ctx.prisma.contactMethod.create({
@@ -26,8 +26,8 @@ export const contactRouter = createTRPCRouter({
       });
     }),
 
-  updateContactMethod: protectedProcedure
-    .input(contactMethodSchema.partial())
+  updateItem: protectedProcedure
+    .input(z.object({id: z.string()}).merge(contactMethodSchema))
     .mutation(async ({ctx, input: {id, ...input}}) => {
       return await ctx.prisma.contactMethod.update({
         where: {id},
@@ -35,7 +35,7 @@ export const contactRouter = createTRPCRouter({
       });
     }),
 
-  deleteContactMethod: protectedProcedure
+  deleteItem: protectedProcedure
     .input(z.object({id: z.string()}))
     .mutation(async ({ctx, input: {id}}) => {
       return await ctx.prisma.contactMethod.delete({

@@ -11,7 +11,7 @@ const GeneralForm = () => {
 
   return (
     <>
-      <Heading as="h3" size="md">
+      <Heading as="h2" size="md">
         SEO
       </Heading>
 
@@ -23,7 +23,7 @@ const GeneralForm = () => {
             render={({field}) => (
               <FormItem>
                 <FormLabel>Page title</FormLabel>
-                <FormControl>
+                <FormControl withDescription>
                   <Input {...field} placeholder="Portfolio, personal website, etc." />
                 </FormControl>
                 <FormDescription>

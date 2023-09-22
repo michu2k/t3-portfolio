@@ -48,7 +48,7 @@ const ContactForm = () => {
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
-        <Heading as="h3" size="md">
+        <Heading as="h2" size="md">
           General settings
         </Heading>
 
@@ -59,7 +59,7 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} placeholder="Enter section description here" />
+                <Textarea {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

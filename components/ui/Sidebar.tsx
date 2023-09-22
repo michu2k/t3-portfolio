@@ -82,6 +82,7 @@ const SidebarContent = React.forwardRef<HTMLElement, SidebarContentProps>(({chil
             <motion.aside key="sidebar-content" ref={ref} className={sidebarClassName} {...contentAnimation}>
               <Button variant="ghost" className="absolute right-4 top-4 h-8 w-8 p-0" onClick={toggleExpanded}>
                 <XIcon size={22} />
+                <span className="sr-only">Close</span>
               </Button>
 
               {children}

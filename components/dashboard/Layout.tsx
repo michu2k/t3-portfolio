@@ -26,7 +26,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
         <div className="sticky top-0 z-30 flex h-14 items-center justify-center bg-white px-4 md:hidden">
           <SidebarTrigger className="absolute left-4 top-4" />
           <motion.div style={{opacity: headingOpacity}}>
-            <Heading as="h2" size="md" className="mb-0">
+            <Heading as="h1" size="md" className="mb-0">
               {heading}
             </Heading>
           </motion.div>
@@ -35,7 +35,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
         <SidebarContent>
           <div className="mb-6 flex min-w-0 items-center gap-2 px-2">
             <Avatar>
-              {image && <AvatarImage src={image} alt={name || ""} />}
+              {image && <AvatarImage src={image} alt="" />}
               <AvatarFallback>{getUserInitials(name)}</AvatarFallback>
             </Avatar>
 
