@@ -6,6 +6,7 @@ import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
+import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
 import {api} from "~/utils/api";
 import {sortExperienceItemsByEndDate} from "~/utils/sortExperienceItemsByEndDate";
@@ -42,6 +43,10 @@ const ExperienceItems = () => {
 
   return (
     <Dialog>
+      <Heading as="h2" size="md">
+        Experience items
+      </Heading>
+
       <div className="flex flex-col items-start">
         {displayItems()}
 
