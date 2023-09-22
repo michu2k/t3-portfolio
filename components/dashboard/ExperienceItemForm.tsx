@@ -92,7 +92,7 @@ const ExperienceItemForm = () => {
             <FormItem>
               <FormLabel>Position name</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="Position name you worked at" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -106,7 +106,7 @@ const ExperienceItemForm = () => {
             <FormItem>
               <FormLabel>Company name</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="Company name you worked for" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -171,7 +171,7 @@ const ExperienceItemForm = () => {
           <Heading as="h2" size="md">
             Responsibilities
           </Heading>
-          <FormDescription> Add the responsibilities you had while working at this position.</FormDescription>
+          <FormDescription>Add the responsibilities you had while working at this position.</FormDescription>
 
           {fields.map(({id}, idx) => (
             <FormField
@@ -183,7 +183,7 @@ const ExperienceItemForm = () => {
                   <div className="flex items-center">
                     <FormLabel className="sr-only">Responsibility</FormLabel>
                     <FormControl className="mr-2">
-                      <Input {...field} />
+                      <Input {...field} placeholder="Enter the specific task or responsibility here" />
                     </FormControl>
 
                     <Button variant="ghost" size="icon" onClick={() => remove(idx)}>

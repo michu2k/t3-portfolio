@@ -9,12 +9,11 @@ import {api} from "~/utils/api";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {contactSnippetsSchema} from "~/utils/validations/contact";
 import {transformSnippetsDataIntoFormValues} from "~/utils/transformSnippetsDataIntoFormValues";
+import {useUpdateSnippets} from "~/hooks/useUpdateSnippets";
 
 const ContactForm = () => {
   const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT", keys: ["description"]});
-  const updateSnippet = api.snippet.updateSnippet.useMutation();
-  const createSnippet = api.snippet.createSnippet.useMutation();
-  const utils = api.useContext();
+  const updateSnippets = useUpdateSnippets<ContactSnippetsFormValues>("CONTACT", data);
 
   const formMethods = useForm<ContactSnippetsFormValues>({
     defaultValues: {
@@ -28,20 +27,7 @@ const ContactForm = () => {
 
   async function handleFormSubmit(snippets: ContactSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
-
-    const promises = Object.entries(snippets).map(async ([key, value]) => {
-      const snippetId = data.find((snippet) => snippet.name === key)?.id;
-
-      if (snippetId) {
-        return await updateSnippet.mutateAsync({id: snippetId, value});
-      }
-
-      return await createSnippet.mutateAsync({type: "CONTACT", name: key, value});
-    });
-
-    await Promise.all(promises).then(async () => {
-      await utils.snippet.getSnippets.invalidate();
-    });
+    await updateSnippets(snippets);
   }
 
   return (
@@ -58,7 +44,7 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea {...field} />
+                <Textarea {...field} placeholder="Enter section description here" />
               </FormControl>
               <FormMessage />
             </FormItem>
