@@ -7,10 +7,13 @@ import {snippetSchema} from "~/utils/validations/snippet";
 // prettier-ignore
 export const snippetRouter = createTRPCRouter({
   getSnippets: publicProcedure
-    .input(z.object({type: z.nativeEnum(SnippetType)}))
-    .query(async ({ctx, input: {type}}) => {
+    .input(z.object({
+      type: z.nativeEnum(SnippetType),
+      keys: z.array(z.string())
+    }))
+    .query(async ({ctx, input: {type, keys}}) => {
       return await ctx.prisma.snippet.findMany({
-        where: {type}
+        where: {AND: {type, name: {in: keys}}}
       });
     }),
 

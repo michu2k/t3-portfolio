@@ -114,7 +114,7 @@ const ExperienceItemForm = () => {
         />
 
         <div className="sm:flex sm:items-center sm:gap-4">
-          <FormItem className="max-w-[16rem] flex-1">
+          <FormItem className="max-w-[14rem] flex-1">
             <FormLabel>From</FormLabel>
 
             <Popover>
@@ -140,7 +140,7 @@ const ExperienceItemForm = () => {
             </Popover>
           </FormItem>
 
-          <FormItem className="max-w-[16rem] flex-1">
+          <FormItem className="max-w-[14rem] flex-1">
             <FormLabel>To</FormLabel>
 
             <Popover>

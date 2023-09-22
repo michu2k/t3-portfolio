@@ -11,17 +11,16 @@ import {contactSnippetsSchema} from "~/utils/validations/contact";
 import {transformSnippetsDataIntoFormValues} from "~/utils/transformSnippetsDataIntoFormValues";
 
 const ContactForm = () => {
+  const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT", keys: ["description"]});
+  const updateSnippet = api.snippet.updateSnippet.useMutation();
+  const createSnippet = api.snippet.createSnippet.useMutation();
   const utils = api.useContext();
-
-  const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT"});
-  const updateContactSnippet = api.snippet.updateSnippet.useMutation();
-  const createContactSnippet = api.snippet.createSnippet.useMutation();
 
   const formMethods = useForm<ContactSnippetsFormValues>({
     defaultValues: {
       description: ""
     },
-    values: transformSnippetsDataIntoFormValues(data, ["description"]),
+    values: transformSnippetsDataIntoFormValues(data),
     resolver: zodResolver(contactSnippetsSchema)
   });
 
@@ -34,10 +33,10 @@ const ContactForm = () => {
       const snippetId = data.find((snippet) => snippet.name === key)?.id;
 
       if (snippetId) {
-        return await updateContactSnippet.mutateAsync({id: snippetId, value});
+        return await updateSnippet.mutateAsync({id: snippetId, value});
       }
 
-      return await createContactSnippet.mutateAsync({type: "CONTACT", name: key, value});
+      return await createSnippet.mutateAsync({type: "CONTACT", name: key, value});
     });
 
     await Promise.all(promises).then(async () => {
