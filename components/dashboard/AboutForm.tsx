@@ -12,7 +12,7 @@ const AboutForm = () => {
   return (
     <FormProvider {...formMethods}>
       <form>
-        <Heading as="h3" size="md">
+        <Heading as="h2" size="md">
           General settings
         </Heading>
 

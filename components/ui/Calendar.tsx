@@ -1,18 +1,13 @@
 import * as React from "react";
 import {ChevronLeftIcon, ChevronRightIcon} from "lucide-react";
 import {DayPicker} from "react-day-picker";
-import {cn} from "~/utils/className";
 
-const Calendar = ({
-  className,
-  classNames,
-  showOutsideDays = true,
-  ...props
-}: React.ComponentProps<typeof DayPicker>) => {
+const Calendar = ({classNames, ...props}: React.ComponentProps<typeof DayPicker>) => {
   return (
     <DayPicker
-      showOutsideDays={showOutsideDays}
-      className={cn("p-3", className)}
+      showOutsideDays
+      fixedWeeks
+      className="p-3"
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
@@ -31,7 +26,7 @@ const Calendar = ({
         day: "rounded-md h-9 w-9 p-0 font-normal aria-selected:opacity-100 hover:bg-slate-100",
         day_selected:
           "bg-slate-900 text-slate-50 hover:bg-slate-900 hover:text-slate-50 focus:bg-slate-900 focus:text-slate-50",
-        day_today: "bg-slate-100 text-slate-900",
+        day_today: "bg-slate-100",
         day_outside: "text-slate-500 opacity-50",
         day_disabled: "text-slate-500 opacity-50",
         day_range_middle: "aria-selected:bg-slate-100 aria-selected:text-slate-900",

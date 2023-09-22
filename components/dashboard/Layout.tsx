@@ -35,7 +35,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
         <SidebarContent>
           <div className="mb-6 flex min-w-0 items-center gap-2 px-2">
             <Avatar>
-              {image && <AvatarImage src={image} alt={name || ""} />}
+              {image && <AvatarImage src={image} alt="" />}
               <AvatarFallback>{getUserInitials(name)}</AvatarFallback>
             </Avatar>
 

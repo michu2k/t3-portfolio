@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import type {ExperienceItem} from "@prisma/client";
-import {differenceInDays, format} from "date-fns";
+import {format} from "date-fns";
 import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
@@ -52,7 +52,7 @@ const ExperienceItems = () => {
       </div>
 
       <DeleteEntityDialog
-        title="Delete experience"
+        title="Delete position"
         entityName={position ? `${position} @ ${company || "-"}` : "position"}
         onClickDeleteBtn={() => void handleDeleteExperienceItem()}
       />
@@ -68,13 +68,12 @@ const SingleExperienceItem = ({id, company, startDate, endDate, position, onDele
   return (
     <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-2 last-of-type:border-0">
       <div className="mr-4 flex-1">
-        <p className="text-sm font-semibold leading-8 ">{position}</p>
+        <p className="text-sm font-semibold leading-8">{position}</p>
         <p className="text-xs font-medium leading-6 text-slate-500">{company}</p>
         <span className="text-xs leading-6">
-          {startDate ? format(startDate, "MMM yyyy") : "-"} {" - "}
+          {startDate ? format(startDate, "MMM yyyy") : "Now"} {" - "}
           {endDate ? format(endDate, "MMM yyyy") : "Now"}
         </span>
-        {endDate && differenceInDays(new Date(), endDate)} d. ago
       </div>
 
       <Link href={`/dashboard/experience/${id}`}>

@@ -37,7 +37,7 @@ const ContactItems = () => {
 
   return (
     <Dialog>
-      <Heading as="h3" size="md">
+      <Heading as="h2" size="md">
         Contact methods
       </Heading>
 

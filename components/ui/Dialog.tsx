@@ -75,7 +75,7 @@ const DialogHeader = ({className, ...props}: React.HTMLAttributes<HTMLDivElement
 DialogHeader.displayName = "DialogHeader";
 
 const DialogFooter = ({className, ...props}: React.HTMLAttributes<HTMLDivElement>) => {
-  return <div className={cn("mt-6 flex items-center justify-center gap-2", className)} {...props} />;
+  return <div className={cn("mt-6 flex items-center justify-center gap-3", className)} {...props} />;
 };
 
 DialogFooter.displayName = "DialogFooter";

@@ -6,6 +6,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {Button} from "~/components/ui/Button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
+import {Heading} from "~/components/ui/Heading";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/Select";
 import {api} from "~/utils/api";
 import {capitalize} from "~/utils/capitalize";
@@ -62,18 +63,22 @@ const ContactItemForm = () => {
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
+        <Heading as="h2" size="md">
+          General
+        </Heading>
+
         <FormField
           control={control}
           name="type"
           render={({field: {name, value, onChange}}) => (
             <FormItem>
               <FormLabel>Type</FormLabel>
-              <FormDescription>Relevant icon will be displayed based on the type.</FormDescription>
-
               <Select name={name} value={value} onValueChange={onChange}>
-                <SelectTrigger className="w-[12rem]">
-                  <SelectValue placeholder="Select type..." />
-                </SelectTrigger>
+                <FormControl withDescription>
+                  <SelectTrigger className="w-[12rem]">
+                    <SelectValue placeholder="Select type..." />
+                  </SelectTrigger>
+                </FormControl>
 
                 <SelectContent>
                   {Object.values(ContactMethodType).map((type) => (
@@ -83,6 +88,7 @@ const ContactItemForm = () => {
                   ))}
                 </SelectContent>
               </Select>
+              <FormDescription>Relevant icon will be displayed based on the type.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

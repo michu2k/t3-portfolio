@@ -1,6 +1,5 @@
 import React from "react";
 import {FormProvider, useFieldArray, useForm} from "react-hook-form";
-import type {DateRange} from "react-day-picker";
 import {format} from "date-fns";
 import {CalendarIcon, PlusIcon, Trash2Icon} from "lucide-react";
 import {Button} from "~/components/ui/Button";
@@ -8,6 +7,7 @@ import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessag
 import {Input} from "~/components/ui/Input";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/Popover";
 import {Calendar} from "~/components/ui/Calendar";
+import {Heading} from "~/components/ui/Heading";
 import {useRouter} from "next/router";
 import {api} from "~/utils/api";
 import type {ExperienceItemFormValues} from "~/utils/validations/experience";
@@ -28,28 +28,32 @@ const ExperienceItemForm = () => {
     defaultValues: {
       company: "",
       position: "",
-      startDate: null,
-      endDate: null,
+      startDate: undefined,
+      endDate: undefined,
       responsibilities: [newResponsibilityItem]
     },
-    values: data ?? undefined,
+    values: data
+      ? {...data, responsibilities: data.responsibilities.length ? data.responsibilities : [newResponsibilityItem]}
+      : undefined,
     resolver: zodResolver(experienceItemSchema)
   });
 
   const {control, handleSubmit, setValue, watch} = formMethods;
   const [startDate, endDate] = watch(["startDate", "endDate"]);
-  const calendarDate: DateRange = {from: startDate || undefined, to: endDate || undefined};
 
   const {fields, append, remove} = useFieldArray({
     control,
     name: "responsibilities"
   });
 
-  async function handleFormSubmit(formValues: ExperienceItemFormValues, e?: React.BaseSyntheticEvent) {
+  async function handleFormSubmit(
+    {responsibilities: formResponsibilities, ...formValues}: ExperienceItemFormValues,
+    e?: React.BaseSyntheticEvent
+  ) {
     e?.preventDefault();
 
     // Filter out empty responsibilities
-    const responsibilities = formValues.responsibilities.filter(({name}) => !!name);
+    const responsibilities = formResponsibilities.filter(({name}) => !!name);
 
     if (data?.id) {
       await updateItemMutation.mutateAsync(
@@ -74,24 +78,13 @@ const ExperienceItemForm = () => {
     await push("/dashboard/experience");
   }
 
-  function handleSelectCalendarDate(range?: DateRange) {
-    setValue("startDate", range?.from ?? null);
-    setValue("endDate", range?.to ?? null);
-  }
-
-  function displaySelectedDate() {
-    if (!startDate) {
-      return "Pick a date";
-    }
-
-    return endDate
-      ? `${format(startDate, "LLL dd, y")} - ${format(endDate, "LLL dd, y")}`
-      : format(startDate, "LLL dd, y");
-  }
-
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
+        <Heading as="h2" size="md">
+          General
+        </Heading>
+
         <FormField
           control={control}
           name="position"
@@ -120,33 +113,65 @@ const ExperienceItemForm = () => {
           )}
         />
 
+        <div className="sm:flex sm:items-center sm:gap-4">
+          <FormItem className="max-w-[16rem] flex-1">
+            <FormLabel>From</FormLabel>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <FormControl>
+                  <Button variant="outline" className="w-full font-normal">
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    <span className="flex-1">{startDate ? format(startDate, "LLL dd, y") : "Pick start date"}</span>
+                  </Button>
+                </FormControl>
+              </PopoverTrigger>
+
+              <PopoverContent className="w-auto p-0" align="start" side="bottom">
+                <Calendar
+                  initialFocus
+                  captionLayout="dropdown"
+                  mode="single"
+                  defaultMonth={startDate || undefined}
+                  selected={startDate || undefined}
+                  onSelect={(date) => setValue("startDate", date)}
+                />
+              </PopoverContent>
+            </Popover>
+          </FormItem>
+
+          <FormItem className="max-w-[16rem] flex-1">
+            <FormLabel>To</FormLabel>
+
+            <Popover>
+              <PopoverTrigger asChild>
+                <FormControl>
+                  <Button variant="outline" className="w-full font-normal">
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    <span className="flex-1">{endDate ? format(endDate, "LLL dd, y") : "Pick end date"}</span>
+                  </Button>
+                </FormControl>
+              </PopoverTrigger>
+
+              <PopoverContent className="w-auto p-0" align="start" side="bottom">
+                <Calendar
+                  initialFocus
+                  mode="single"
+                  defaultMonth={endDate || undefined}
+                  selected={endDate || undefined}
+                  onSelect={(date) => setValue("endDate", date)}
+                  disabled={{after: new Date()}}
+                />
+              </PopoverContent>
+            </Popover>
+          </FormItem>
+        </div>
+
         <FormItem>
-          <FormLabel>From - To</FormLabel>
-
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button variant="outline" className="min-w-[12rem] font-normal">
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                <span className="flex-1">{displaySelectedDate()}</span>
-              </Button>
-            </PopoverTrigger>
-
-            <PopoverContent className="w-auto p-0" align="start" side="bottom">
-              <Calendar
-                initialFocus
-                mode="range"
-                defaultMonth={calendarDate.from}
-                selected={calendarDate}
-                onSelect={handleSelectCalendarDate}
-                numberOfMonths={2}
-              />
-            </PopoverContent>
-          </Popover>
-        </FormItem>
-
-        <FormItem>
-          <FormLabel>Responsibilities</FormLabel>
-          <FormDescription>Add the responsibilities you had while working at this position.</FormDescription>
+          <Heading as="h2" size="md">
+            Responsibilities
+          </Heading>
+          <FormDescription> Add the responsibilities you had while working at this position.</FormDescription>
 
           {fields.map(({id}, idx) => (
             <FormField
