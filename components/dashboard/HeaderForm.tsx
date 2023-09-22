@@ -1,18 +1,40 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
 import {Button} from "~/components/ui/Button";
 import {Textarea} from "~/components/ui/Textarea";
 import {Heading} from "~/components/ui/Heading";
+import {api} from "~/utils/api";
+import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
+import {headerSnippetsSchema} from "~/utils/validations/header";
+import {transformSnippetsDataIntoFormValues} from "~/utils/transformSnippetsDataIntoFormValues";
+import {useUpdateSnippets} from "~/hooks/useUpdateSnippets";
 
 const HeaderForm = () => {
-  const formMethods = useForm({});
-  const {control} = formMethods;
+  const {data = []} = api.snippet.getSnippets.useQuery({type: "HEADER", keys: ["heading", "description"]});
+  const updateSnippets = useUpdateSnippets<HeaderSnippetsFormValues>("HEADER", data);
+
+  const formMethods = useForm<HeaderSnippetsFormValues>({
+    defaultValues: {
+      heading: "",
+      description: ""
+    },
+    values: transformSnippetsDataIntoFormValues(data),
+    resolver: zodResolver(headerSnippetsSchema)
+  });
+
+  const {control, handleSubmit} = formMethods;
+
+  async function handleFormSubmit(snippets: HeaderSnippetsFormValues, e?: React.BaseSyntheticEvent) {
+    e?.preventDefault();
+    await updateSnippets(snippets);
+  }
 
   return (
     <FormProvider {...formMethods}>
-      <form>
+      <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
         <Heading as="h2" size="md">
           General settings
         </Heading>

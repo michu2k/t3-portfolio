@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useWindowSize} from "./useWindowSize";
 import theme from "tailwindcss/defaultTheme";
 
-const useIsMobile = (): boolean => {
+const useIsMobile = () => {
   const windowSize = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
   const maxMobileWidth = parseInt(theme.screens.md);
