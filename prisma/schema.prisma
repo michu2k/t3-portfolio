@@ -112,3 +112,11 @@ model ExperienceItemResponsibility {
 
     @@index([experienceItemId])
 }
+
+model SocialMediaIcon {
+    id        String   @id @default(cuid())
+    url       String
+    iconName  String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
