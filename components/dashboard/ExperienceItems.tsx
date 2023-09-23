@@ -43,7 +43,7 @@ const ExperienceItems = () => {
 
   return (
     <Dialog>
-      <Heading as="h2" size="md">
+      <Heading as="h2" size="sm">
         Experience items
       </Heading>
 

@@ -6,7 +6,6 @@ import {FormProvider, useForm} from "react-hook-form";
 import {Button} from "~/components/ui/Button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
-import {Heading} from "~/components/ui/Heading";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/Select";
 import {api} from "~/utils/api";
 import {capitalize} from "~/utils/capitalize";
@@ -55,10 +54,6 @@ const ContactItemForm = () => {
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
-        <Heading as="h2" size="md">
-          General
-        </Heading>
-
         <FormField
           control={control}
           name="type"

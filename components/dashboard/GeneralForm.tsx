@@ -11,7 +11,7 @@ const GeneralForm = () => {
 
   return (
     <>
-      <Heading as="h2" size="md">
+      <Heading as="h2" size="sm">
         SEO
       </Heading>
 
