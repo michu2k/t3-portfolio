@@ -8,7 +8,6 @@ import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
 import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
 import {api} from "~/utils/api";
-import type {SocialMediaIconKeys} from "~/utils/getSocialMediaIcons";
 import {getSocialMediaIcon} from "~/utils/getSocialMediaIcons";
 
 const SocialMediaItems = () => {
@@ -68,7 +67,7 @@ type SingleSocialMediaItemProps = SocialMediaLink & {
 };
 
 const SingleSocialMediaItem = ({id, icon, url, onDelete}: SingleSocialMediaItemProps) => {
-  const Icon = getSocialMediaIcon(icon as SocialMediaIconKeys);
+  const Icon = getSocialMediaIcon(icon);
 
   return (
     <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-2 last-of-type:border-0">

@@ -8,12 +8,12 @@ type SocialMediaIconKeys = keyof typeof socialMediaIconsDef;
 const socialMediaIconsDef = {
   github: GithubSvg,
   twitter: TwitterSvg,
-  linkedin: LinkedInSvg,
+  linkedIn: LinkedInSvg,
   instagram: InstagramSvg
 } as const;
 
-function getSocialMediaIcon(key: SocialMediaIconKeys) {
-  return socialMediaIconsDef[key];
+function getSocialMediaIcon(key: string) {
+  return socialMediaIconsDef[key as SocialMediaIconKeys];
 }
 
 export type {SocialMediaIconKeys};
