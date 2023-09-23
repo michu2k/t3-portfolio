@@ -1,12 +1,15 @@
 import {z} from "zod";
 
-type SocialMediaItemFormValues = z.infer<typeof socialMediaItemSchema>;
+type SocialMediaLinkFormValues = z.infer<typeof socialMediaLinkSchema>;
 
-const socialMediaItemSchema = z.object({
-  url: z.string().url("URL must be a valid URL"),
-  iconName: z.string().min(3, "Name must be at least 3 characters long")
+const socialMediaLinkSchema = z.object({
+  id: z.string().optional(),
+  url: z.string().url("Provided URL is not valid"),
+  icon: z.string({
+    required_error: "Select social media icon"
+  })
 });
 
-export type {SocialMediaItemFormValues};
+export type {SocialMediaLinkFormValues};
 
-export {socialMediaItemSchema};
+export {socialMediaLinkSchema};

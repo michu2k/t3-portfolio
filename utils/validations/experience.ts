@@ -8,6 +8,7 @@ const experienceItemResponsibilitySchema = z.object({
 });
 
 const experienceItemSchema = z.object({
+  id: z.string().optional(),
   position: z.string().min(3, "Position name must be at least 3 characters long"),
   company: z.string().min(3, "Company name must be at least 3 characters long"),
   startDate: z.date().nullable().optional(),

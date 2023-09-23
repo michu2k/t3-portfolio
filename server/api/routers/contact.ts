@@ -27,7 +27,7 @@ export const contactRouter = createTRPCRouter({
     }),
 
   updateItem: protectedProcedure
-    .input(z.object({id: z.string()}).merge(contactMethodSchema))
+    .input(contactMethodSchema)
     .mutation(async ({ctx, input: {id, ...input}}) => {
       return await ctx.prisma.contactMethod.update({
         where: {id},

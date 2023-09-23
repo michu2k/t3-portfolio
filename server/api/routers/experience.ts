@@ -41,7 +41,7 @@ export const experienceRouter = createTRPCRouter({
     }),
 
   updateItem: protectedProcedure
-    .input(z.object({id: z.string()}).merge(experienceItemSchema))
+    .input(experienceItemSchema)
     .mutation(async ({ctx, input: {id, responsibilities, ...input}}) => {
 
       const updatedResponsibilities = responsibilities.filter(({id}) => !!id);

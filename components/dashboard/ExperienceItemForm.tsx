@@ -55,25 +55,16 @@ const ExperienceItemForm = () => {
     // Filter out empty responsibilities
     const responsibilities = formResponsibilities.filter(({name}) => !!name);
 
-    if (data?.id) {
-      await updateItemMutation.mutateAsync(
-        {id: data.id, ...formValues, responsibilities},
-        {
-          async onSuccess() {
-            await utils.experience.getItem.invalidate();
-          }
-        }
-      );
-    } else {
-      await createItemMutation.mutateAsync(
-        {...formValues, responsibilities},
-        {
-          async onSuccess() {
-            await utils.experience.getItem.invalidate();
-          }
-        }
-      );
-    }
+    const mutation = data?.id ? updateItemMutation : createItemMutation;
+    const mutationVariables = data?.id
+      ? {id: data.id, ...formValues, responsibilities}
+      : {...formValues, responsibilities};
+
+    await mutation.mutateAsync(mutationVariables, {
+      async onSuccess() {
+        await utils.experience.getItem.invalidate();
+      }
+    });
 
     await push("/dashboard/experience");
   }
@@ -171,7 +162,9 @@ const ExperienceItemForm = () => {
           <Heading as="h2" size="md">
             Responsibilities
           </Heading>
-          <FormDescription>Add the responsibilities you had while working at this position.</FormDescription>
+          <FormDescription className="mb-2">
+            Add the responsibilities you had while working at this position.
+          </FormDescription>
 
           {fields.map(({id}, idx) => (
             <FormField
