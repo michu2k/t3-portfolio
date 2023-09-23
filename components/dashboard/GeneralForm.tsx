@@ -11,7 +11,7 @@ const GeneralForm = () => {
 
   return (
     <>
-      <Heading as="h2" size="md">
+      <Heading as="h2" size="sm">
         SEO
       </Heading>
 
@@ -26,10 +26,10 @@ const GeneralForm = () => {
                 <FormControl withDescription>
                   <Input {...field} placeholder="Portfolio, personal website, etc." />
                 </FormControl>
+                <FormMessage />
                 <FormDescription>
                   Defines the document&apos;s title that is shown in a browser&apos;s title bar or a page&apos;s tab.
                 </FormDescription>
-                <FormMessage />
               </FormItem>
             )}
           />

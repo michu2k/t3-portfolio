@@ -33,7 +33,7 @@ const AboutForm = () => {
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
-        <Heading as="h2" size="md">
+        <Heading as="h2" size="sm">
           General settings
         </Heading>
 

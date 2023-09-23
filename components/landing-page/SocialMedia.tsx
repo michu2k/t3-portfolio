@@ -1,30 +1,24 @@
 import React, {memo} from "react";
-import GithubSvg from "~/public/svgs/socialMedia/github.svg";
-import TwitterSvg from "~/public/svgs/socialMedia/twitter.svg";
-import LinkedInSvg from "~/public/svgs/socialMedia/linkedin.svg";
-import InstagramSvg from "~/public/svgs/socialMedia/instagram.svg";
 import {cn} from "~/utils/className";
+import {capitalize} from "~/utils/capitalize";
+import {getSocialMediaIcon} from "~/utils/getSocialMediaIcons";
 
 const socialMedia: Array<SocialMediaItemProps> = [
   {
-    name: "Github",
-    url: "https://github.com/",
-    icon: GithubSvg
+    icon: "github",
+    url: "https://github.com/"
   },
   {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/",
-    icon: LinkedInSvg
+    icon: "linkedIn",
+    url: "https://www.linkedin.com/"
   },
   {
-    name: "Twitter",
-    url: "https://twitter.com/",
-    icon: TwitterSvg
+    icon: "twitter",
+    url: "https://twitter.com/"
   },
   {
-    name: "Instagram",
-    url: "https://www.instagram.com/",
-    icon: InstagramSvg
+    icon: "instagram",
+    url: "https://www.instagram.com/"
   }
 ];
 
@@ -34,7 +28,7 @@ type SocialMediaProps = {
 
 const SocialMedia = memo(({className}: SocialMediaProps) => {
   function displaySocialMediaIcons() {
-    return socialMedia.map((item) => <SocialMediaItem key={item.name} {...item} />);
+    return socialMedia.map((item, idx) => <SocialMediaItem key={idx} {...item} />);
   }
 
   return (
@@ -47,12 +41,13 @@ const SocialMedia = memo(({className}: SocialMediaProps) => {
 SocialMedia.displayName = "SocialMedia";
 
 type SocialMediaItemProps = {
-  name: string;
+  icon: string;
   url: string;
-  icon: React.FC<React.SVGProps<SVGSVGElement>>;
 };
 
-const SocialMediaItem = ({name, url, icon: Icon}: SocialMediaItemProps) => {
+const SocialMediaItem = ({icon, url}: SocialMediaItemProps) => {
+  const Icon = getSocialMediaIcon(icon);
+
   return (
     <li>
       <a
@@ -64,7 +59,7 @@ const SocialMediaItem = ({name, url, icon: Icon}: SocialMediaItemProps) => {
           className="h-4 w-4 fill-slate-700 transition-colors group-hover:fill-primary group-focus:fill-primary"
           aria-hidden="true"
         />
-        <span className="sr-only">{name}</span>
+        <span className="sr-only">{capitalize(icon)}</span>
       </a>
     </li>
   );

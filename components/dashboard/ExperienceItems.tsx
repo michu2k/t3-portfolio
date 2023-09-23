@@ -19,7 +19,7 @@ const ExperienceItems = () => {
 
   const {position, company} = selectedExperienceItem || {};
 
-  async function handleDeleteExperienceItem() {
+  async function handleDeleteItem() {
     if (selectedExperienceItem?.id) {
       await deleteExperienceItem.mutateAsync(
         {id: selectedExperienceItem.id},
@@ -43,7 +43,7 @@ const ExperienceItems = () => {
 
   return (
     <Dialog>
-      <Heading as="h2" size="md">
+      <Heading as="h2" size="sm">
         Experience items
       </Heading>
 
@@ -59,7 +59,7 @@ const ExperienceItems = () => {
       <DeleteEntityDialog
         title="Delete position"
         entityName={position ? `${position} @ ${company || "-"}` : "position"}
-        onClickDeleteBtn={() => void handleDeleteExperienceItem()}
+        onClickDeleteBtn={() => void handleDeleteItem()}
       />
     </Dialog>
   );

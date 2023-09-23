@@ -7,7 +7,6 @@ import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessag
 import {Input} from "~/components/ui/Input";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/Popover";
 import {Calendar} from "~/components/ui/Calendar";
-import {Heading} from "~/components/ui/Heading";
 import {useRouter} from "next/router";
 import {api} from "~/utils/api";
 import type {ExperienceItemFormValues} from "~/utils/validations/experience";
@@ -55,25 +54,16 @@ const ExperienceItemForm = () => {
     // Filter out empty responsibilities
     const responsibilities = formResponsibilities.filter(({name}) => !!name);
 
-    if (data?.id) {
-      await updateItemMutation.mutateAsync(
-        {id: data.id, ...formValues, responsibilities},
-        {
-          async onSuccess() {
-            await utils.experience.getItem.invalidate();
-          }
-        }
-      );
-    } else {
-      await createItemMutation.mutateAsync(
-        {...formValues, responsibilities},
-        {
-          async onSuccess() {
-            await utils.experience.getItem.invalidate();
-          }
-        }
-      );
-    }
+    const mutation = data?.id ? updateItemMutation : createItemMutation;
+    const mutationVariables = data?.id
+      ? {id: data.id, ...formValues, responsibilities}
+      : {...formValues, responsibilities};
+
+    await mutation.mutateAsync(mutationVariables, {
+      async onSuccess() {
+        await utils.experience.getItem.invalidate();
+      }
+    });
 
     await push("/dashboard/experience");
   }
@@ -81,10 +71,6 @@ const ExperienceItemForm = () => {
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
-        <Heading as="h2" size="md">
-          General
-        </Heading>
-
         <FormField
           control={control}
           name="position"
@@ -168,10 +154,10 @@ const ExperienceItemForm = () => {
         </div>
 
         <FormItem>
-          <Heading as="h2" size="md">
-            Responsibilities
-          </Heading>
-          <FormDescription>Add the responsibilities you had while working at this position.</FormDescription>
+          <p className="mb-3 block text-sm font-medium leading-none text-slate-700">Responsibilities</p>
+          <FormDescription className="mb-2">
+            Add the responsibilities you had while working at this position.
+          </FormDescription>
 
           {fields.map(({id}, idx) => (
             <FormField

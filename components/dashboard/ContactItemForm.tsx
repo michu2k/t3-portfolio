@@ -6,7 +6,6 @@ import {FormProvider, useForm} from "react-hook-form";
 import {Button} from "~/components/ui/Button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
-import {Heading} from "~/components/ui/Heading";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/Select";
 import {api} from "~/utils/api";
 import {capitalize} from "~/utils/capitalize";
@@ -40,22 +39,14 @@ const ContactItemForm = () => {
   async function handleFormSubmit(formValues: ContactMethodFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    if (data?.id) {
-      await updateItemMutation.mutateAsync(
-        {id: data.id, ...formValues},
-        {
-          async onSuccess() {
-            await utils.contact.getItem.invalidate();
-          }
-        }
-      );
-    } else {
-      await createItemMutation.mutateAsync(formValues, {
-        async onSuccess() {
-          await utils.contact.getItem.invalidate();
-        }
-      });
-    }
+    const mutation = data?.id ? updateItemMutation : createItemMutation;
+    const mutationVariables = data?.id ? {id: data.id, ...formValues} : formValues;
+
+    await mutation.mutateAsync(mutationVariables, {
+      async onSuccess() {
+        await utils.contact.getItem.invalidate();
+      }
+    });
 
     await push("/dashboard/contact");
   }
@@ -63,10 +54,6 @@ const ContactItemForm = () => {
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
-        <Heading as="h2" size="md">
-          General
-        </Heading>
-
         <FormField
           control={control}
           name="type"
@@ -75,7 +62,7 @@ const ContactItemForm = () => {
               <FormLabel>Type</FormLabel>
               <Select name={name} value={value} onValueChange={onChange}>
                 <FormControl withDescription>
-                  <SelectTrigger className="w-[12rem]">
+                  <SelectTrigger className="w-[14rem]">
                     <SelectValue placeholder="Select type..." />
                   </SelectTrigger>
                 </FormControl>
@@ -88,8 +75,8 @@ const ContactItemForm = () => {
                   ))}
                 </SelectContent>
               </Select>
-              <FormDescription>Relevant icon will be displayed based on the type.</FormDescription>
               <FormMessage />
+              <FormDescription>Relevant icon will be displayed based on the type.</FormDescription>
             </FormItem>
           )}
         />

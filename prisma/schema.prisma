@@ -112,3 +112,9 @@ model ExperienceItemResponsibility {
 
     @@index([experienceItemId])
 }
+
+model SocialMediaLink {
+    id        String   @id @default(cuid())
+    url       String
+    icon      String
+}

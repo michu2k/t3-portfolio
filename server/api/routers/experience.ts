@@ -41,11 +41,11 @@ export const experienceRouter = createTRPCRouter({
     }),
 
   updateItem: protectedProcedure
-    .input(z.object({id: z.string()}).merge(experienceItemSchema))
+    .input(experienceItemSchema)
     .mutation(async ({ctx, input: {id, responsibilities, ...input}}) => {
 
-      const currentResponsibilities = responsibilities.filter(({id}) => !!id).map(({id}) => ({id}));
       const updatedResponsibilities = responsibilities.filter(({id}) => !!id);
+      const currentResponsibilities = updatedResponsibilities.map(({id}) => ({id}));
       const newResponsibilities = responsibilities.filter(({id}) => !id);
 
       return await ctx.prisma.experienceItem.update({

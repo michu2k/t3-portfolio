@@ -15,7 +15,7 @@ const ContactItems = () => {
   const [selectedContactMethod, setSelectedContactMethod] = useState<ContactMethod | null>(null);
   const utils = api.useContext();
 
-  async function handleDeleteContactMethod() {
+  async function handleDeleteItem() {
     if (selectedContactMethod?.id) {
       await deleteContactMethod.mutateAsync(
         {id: selectedContactMethod.id},
@@ -37,7 +37,7 @@ const ContactItems = () => {
 
   return (
     <Dialog>
-      <Heading as="h2" size="md">
+      <Heading as="h2" size="sm">
         Contact methods
       </Heading>
 
@@ -53,7 +53,7 @@ const ContactItems = () => {
       <DeleteEntityDialog
         title="Delete contact method"
         entityName={(selectedContactMethod?.type || "Method").toLowerCase()}
-        onClickDeleteBtn={() => void handleDeleteContactMethod()}
+        onClickDeleteBtn={() => void handleDeleteItem()}
       />
     </Dialog>
   );
