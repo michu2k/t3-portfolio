@@ -3,7 +3,16 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import {signOut} from "next-auth/react";
 import type {LucideIcon} from "lucide-react";
-import {SettingsIcon, InfoIcon, Laptop2Icon, ImageIcon, MailIcon, BriefcaseIcon, LogOutIcon} from "lucide-react";
+import {
+  SettingsIcon,
+  ImageIcon,
+  MailIcon,
+  BriefcaseIcon,
+  LogOutIcon,
+  HeartIcon,
+  User2Icon,
+  WallpaperIcon
+} from "lucide-react";
 import {Button} from "~/components/ui/Button";
 
 const navigationItems: Array<NavigationItemDef> = [
@@ -13,14 +22,19 @@ const navigationItems: Array<NavigationItemDef> = [
     icon: SettingsIcon
   },
   {
+    text: "Social Media",
+    href: "/dashboard/social-media",
+    icon: HeartIcon
+  },
+  {
     text: "Header",
     href: "/dashboard/header",
-    icon: Laptop2Icon
+    icon: WallpaperIcon
   },
   {
     text: "About",
     href: "/dashboard/about",
-    icon: InfoIcon
+    icon: User2Icon
   },
   {
     text: "Portfolio",
