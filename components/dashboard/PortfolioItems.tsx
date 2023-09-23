@@ -1,9 +1,10 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
 import {PlusIcon, PencilIcon} from "lucide-react";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {recentWorkItems} from "~/components/landing-page/RecentWork";
+import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
 
 const PortfolioItems = () => {
@@ -13,6 +14,10 @@ const PortfolioItems = () => {
 
   return (
     <>
+      <Heading as="h2" size="sm">
+        Portfolio items
+      </Heading>
+
       <div className="flex flex-col items-start">
         {displayItems()}
 

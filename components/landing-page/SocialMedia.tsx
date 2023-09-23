@@ -4,25 +4,26 @@ import TwitterSvg from "~/public/svgs/socialMedia/twitter.svg";
 import LinkedInSvg from "~/public/svgs/socialMedia/linkedin.svg";
 import InstagramSvg from "~/public/svgs/socialMedia/instagram.svg";
 import {cn} from "~/utils/className";
+import {capitalize} from "~/utils/capitalize";
 
 const socialMedia: Array<SocialMediaItemProps> = [
   {
-    name: "Github",
+    name: "github",
     url: "https://github.com/",
     icon: GithubSvg
   },
   {
-    name: "LinkedIn",
+    name: "linkedIn",
     url: "https://www.linkedin.com/",
     icon: LinkedInSvg
   },
   {
-    name: "Twitter",
+    name: "twitter",
     url: "https://twitter.com/",
     icon: TwitterSvg
   },
   {
-    name: "Instagram",
+    name: "instagram",
     url: "https://www.instagram.com/",
     icon: InstagramSvg
   }
@@ -64,7 +65,7 @@ const SocialMediaItem = ({name, url, icon: Icon}: SocialMediaItemProps) => {
           className="h-4 w-4 fill-slate-700 transition-colors group-hover:fill-primary group-focus:fill-primary"
           aria-hidden="true"
         />
-        <span className="sr-only">{name}</span>
+        <span className="sr-only">{capitalize(name)}</span>
       </a>
     </li>
   );
