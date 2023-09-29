@@ -118,3 +118,15 @@ model SocialMediaLink {
     url       String
     icon      String
 }
+
+model PortfolioItem {
+    id               String   @id @default(cuid())
+    name             String
+    description      String
+    shortDescription String
+    url              String
+    image            String
+    coverImage       String
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+}
