@@ -3,18 +3,18 @@ import {type NextPage} from "next";
 import Head from "next/head";
 
 import {Layout} from "~/components/dashboard/Layout";
-import {PortfolioItems} from "~/components/dashboard/PortfolioItems";
+import {ProjectItems} from "~/components/dashboard/ProjectItems";
 import {authRedirectToSignInPage} from "~/utils/authRedirect";
 
 const Page: NextPage = () => {
   return (
     <>
       <Head>
-        <title>T3 Portfolio: Portfolio</title>
+        <title>T3 Portfolio: Projects</title>
       </Head>
 
-      <Layout heading="Portfolio" description="Portfolio section settings">
-        <PortfolioItems />
+      <Layout heading="Projects" description="Project section settings">
+        <ProjectItems />
       </Layout>
     </>
   );

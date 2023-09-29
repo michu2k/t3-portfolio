@@ -74,7 +74,7 @@ const RecentWork = () => {
   }
 
   return (
-    <PageSection id="recent-work" heading="Recent Work Showcases" subheading="Portfolio">
+    <PageSection id="recent-work" heading="Recent Work Showcases" subheading="Projects">
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">{displayRecentWorkItems()}</div>
     </PageSection>
   );
@@ -94,7 +94,7 @@ type RecentWorkItemProps = {
 };
 
 const RecentWorkItem = ({id, name, description, image}: RecentWorkItemProps) => {
-  const itemPageUrl = `/portfolio/${id}`;
+  const itemPageUrl = `/projects/${id}`;
 
   return (
     <article className="group w-auto shrink-0 break-inside-avoid-column">

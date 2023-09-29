@@ -86,7 +86,7 @@ model Snippet {
 enum SnippetType {
     HEADER
     ABOUT_ME
-    PORTFOLIO
+    PROJECTS
     EXPERIENCE
     CONTACT
 }
@@ -119,12 +119,11 @@ model SocialMediaLink {
     icon      String
 }
 
-model PortfolioItem {
+model ProjectItem {
     id               String   @id @default(cuid())
     name             String
     description      String
     shortDescription String
-    url              String
     image            String
     coverImage       String
     createdAt        DateTime @default(now())

@@ -23,7 +23,7 @@ const navigationItems: Array<NavigationItemDef> = [
   },
   {
     text: "Social Media",
-    href: "/dashboard/social-media",
+    href: ["/dashboard/social-media", "/dashboard/social-media/[id]"],
     icon: HeartIcon
   },
   {
@@ -37,8 +37,8 @@ const navigationItems: Array<NavigationItemDef> = [
     icon: User2Icon
   },
   {
-    text: "Portfolio",
-    href: ["/dashboard/portfolio", "/dashboard/portfolio/[id]"],
+    text: "Projects",
+    href: ["/dashboard/projects", "/dashboard/projects/[id]"],
     icon: ImageIcon
   },
   {
