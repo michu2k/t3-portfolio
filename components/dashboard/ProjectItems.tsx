@@ -61,7 +61,7 @@ type ProjectItemProps = ProjectItem & {
   onDelete: (e: React.MouseEvent) => void;
 };
 
-const ProjectItem = ({id, name, description, onDelete}: ProjectItemProps) => {
+const ProjectItem = ({id, name, shortDescription, onDelete}: ProjectItemProps) => {
   return (
     <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-2 last-of-type:border-0">
       {/*       <div className="relative mr-4 h-16 w-16 shrink-0 rounded bg-slate-100">
@@ -70,7 +70,7 @@ const ProjectItem = ({id, name, description, onDelete}: ProjectItemProps) => {
 
       <div className="mr-4 flex flex-1 flex-col items-start">
         <p className="mr-2 text-sm font-semibold leading-6">{name}</p>
-        <p className="text-xs leading-6 text-slate-500">{description}</p>
+        <p className="text-xs leading-6 text-slate-500">{shortDescription}</p>
       </div>
 
       <Link href={`/dashboard/projects/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>

@@ -27,7 +27,7 @@ const ProjectItemForm = () => {
       image: "",
       coverImage: ""
     },
-    values: undefined,
+    values: data ?? undefined,
     resolver: zodResolver(projectItemSchema)
   });
 
