@@ -1,17 +1,55 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
+import {useRouter} from "next/router";
+import {zodResolver} from "@hookform/resolvers/zod";
 import {Button} from "~/components/ui/Button";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
 import {Textarea} from "~/components/ui/Textarea";
+import type {ProjectItemFormValues} from "~/utils/validations/project";
+import {projectItemSchema} from "~/utils/validations/project";
+import {api} from "~/utils/api";
 
-const PortfolioItemForm = () => {
-  const formMethods = useForm({});
-  const {control} = formMethods;
+const ProjectItemForm = () => {
+  const {query, push} = useRouter();
+  const utils = api.useContext();
+  const itemId = query.id as string;
+
+  const {data} = api.project.getItem.useQuery({id: itemId});
+  const createItemMutation = api.project.createItem.useMutation();
+  const updateItemMutation = api.project.updateItem.useMutation();
+
+  const formMethods = useForm<ProjectItemFormValues>({
+    defaultValues: {
+      name: "",
+      shortDescription: "",
+      description: "",
+      image: "",
+      coverImage: ""
+    },
+    values: data ?? undefined,
+    resolver: zodResolver(projectItemSchema)
+  });
+
+  const {control, handleSubmit} = formMethods;
+  async function handleFormSubmit(formValues: ProjectItemFormValues, e?: React.BaseSyntheticEvent) {
+    e?.preventDefault();
+
+    const mutation = data?.id ? updateItemMutation : createItemMutation;
+    const mutationVariables = data?.id ? {id: data.id, ...formValues} : formValues;
+
+    await mutation.mutateAsync(mutationVariables, {
+      async onSuccess() {
+        await utils.project.getItem.invalidate();
+      }
+    });
+
+    await push("/dashboard/projects");
+  }
 
   return (
     <FormProvider {...formMethods}>
-      <form>
+      <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
         <FormField
           control={control}
           name="name"
@@ -19,7 +57,7 @@ const PortfolioItemForm = () => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="Project name" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -28,7 +66,7 @@ const PortfolioItemForm = () => {
 
         <FormField
           control={control}
-          name="short-description"
+          name="shortDescription"
           render={({field}) => (
             <FormItem>
               <FormLabel>Short description</FormLabel>
@@ -62,4 +100,4 @@ const PortfolioItemForm = () => {
   );
 };
 
-export {PortfolioItemForm};
+export {ProjectItemForm};

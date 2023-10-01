@@ -51,7 +51,7 @@ const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
           </div>
 
           <footer className="flex flex-col items-center">
-            <span className="text-xs text-slate-500">Portfolio Dashboard v{pkg.version}</span>
+            <span className="text-xs text-slate-500">Dashboard v{pkg.version}</span>
           </footer>
         </section>
       </main>

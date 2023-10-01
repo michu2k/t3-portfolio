@@ -12,7 +12,7 @@ import {getSocialMediaIcon} from "~/utils/getSocialMediaIcons";
 
 const SocialMediaItems = () => {
   const {data: socialMediaItems = []} = api.socialMedia.getItems.useQuery();
-  const deleteSocialMediaItem = api.socialMedia.deleteItem.useMutation();
+  const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
   const [selectedSocialMediaLink, setSelectedSocialMediaLink] = useState<SocialMediaLink | null>(null);
   const utils = api.useContext();
 
@@ -20,7 +20,7 @@ const SocialMediaItems = () => {
 
   async function handleDeleteItem() {
     if (selectedSocialMediaLink?.id) {
-      await deleteSocialMediaItem.mutateAsync(
+      await deleteItemMutation.mutateAsync(
         {id: selectedSocialMediaLink.id},
         {
           async onSuccess() {
@@ -77,11 +77,9 @@ const SingleSocialMediaItem = ({id, icon, url, onDelete}: SingleSocialMediaItemP
         <p className="text-sm leading-6">{url}</p>
       </div>
 
-      <Link href={`/dashboard/social-media/${id}`}>
-        <Button variant="ghost" size="icon">
-          <PencilIcon size={16} />
-          <span className="sr-only">Edit</span>
-        </Button>
+      <Link href={`/dashboard/social-media/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>
+        <PencilIcon size={16} />
+        <span className="sr-only">Edit</span>
       </Link>
 
       <DialogTrigger asChild>

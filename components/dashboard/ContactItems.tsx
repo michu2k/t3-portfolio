@@ -11,13 +11,13 @@ import {cn} from "~/utils/className";
 
 const ContactItems = () => {
   const {data: contactMethods = []} = api.contact.getItems.useQuery();
-  const deleteContactMethod = api.contact.deleteItem.useMutation();
+  const deleteItemMutation = api.contact.deleteItem.useMutation();
   const [selectedContactMethod, setSelectedContactMethod] = useState<ContactMethod | null>(null);
   const utils = api.useContext();
 
   async function handleDeleteItem() {
     if (selectedContactMethod?.id) {
-      await deleteContactMethod.mutateAsync(
+      await deleteItemMutation.mutateAsync(
         {id: selectedContactMethod.id},
         {
           async onSuccess() {

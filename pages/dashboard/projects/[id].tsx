@@ -3,18 +3,18 @@ import {type NextPage} from "next";
 import Head from "next/head";
 
 import {Layout} from "~/components/dashboard/Layout";
-import {PortfolioItemForm} from "~/components/dashboard/PortfolioItemForm";
+import {ProjectItemForm} from "~/components/dashboard/ProjectItemForm";
 import {authRedirectToSignInPage} from "~/utils/authRedirect";
 
 const Page: NextPage = () => {
   return (
     <>
       <Head>
-        <title>T3 Portfolio: Portfolio</title>
+        <title>T3 Portfolio: Projects</title>
       </Head>
 
       <Layout heading="Edit item" description="Create a new record or edit an existing one.">
-        <PortfolioItemForm />
+        <ProjectItemForm />
       </Layout>
     </>
   );

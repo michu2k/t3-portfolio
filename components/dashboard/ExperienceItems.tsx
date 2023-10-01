@@ -13,7 +13,7 @@ import {sortExperienceItemsByEndDate} from "~/utils/sortExperienceItemsByEndDate
 
 const ExperienceItems = () => {
   const {data: experienceItems = []} = api.experience.getItems.useQuery();
-  const deleteExperienceItem = api.experience.deleteItem.useMutation();
+  const deleteItemMutation = api.experience.deleteItem.useMutation();
   const [selectedExperienceItem, setSelectedExperienceItem] = useState<ExperienceItem | null>(null);
   const utils = api.useContext();
 
@@ -21,7 +21,7 @@ const ExperienceItems = () => {
 
   async function handleDeleteItem() {
     if (selectedExperienceItem?.id) {
-      await deleteExperienceItem.mutateAsync(
+      await deleteItemMutation.mutateAsync(
         {id: selectedExperienceItem.id},
         {
           async onSuccess() {
@@ -57,7 +57,7 @@ const ExperienceItems = () => {
       </div>
 
       <DeleteEntityDialog
-        title="Delete position"
+        title="Delete experience"
         entityName={position ? `${position} @ ${company || "-"}` : "position"}
         onClickDeleteBtn={() => void handleDeleteItem()}
       />
@@ -81,11 +81,9 @@ const SingleExperienceItem = ({id, company, startDate, endDate, position, onDele
         </span>
       </div>
 
-      <Link href={`/dashboard/experience/${id}`}>
-        <Button variant="ghost" size="icon">
-          <PencilIcon size={16} />
-          <span className="sr-only">Edit</span>
-        </Button>
+      <Link href={`/dashboard/experience/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>
+        <PencilIcon size={16} />
+        <span className="sr-only">Edit</span>
       </Link>
 
       <DialogTrigger asChild>
