@@ -3,6 +3,7 @@ import {contactRouter} from "./routers/contact";
 import {snippetRouter} from "./routers/snippet";
 import {experienceRouter} from "./routers/experience";
 import {socialMediaRouter} from "./routers/socialMedia";
+import {projectRouter} from "./routers/project";
 
 /**
  * This is the primary router for your server.
@@ -13,7 +14,8 @@ export const appRouter = createTRPCRouter({
   contact: contactRouter,
   snippet: snippetRouter,
   experience: experienceRouter,
-  socialMedia: socialMediaRouter
+  socialMedia: socialMediaRouter,
+  project: projectRouter
 });
 
 // export type definition of API
