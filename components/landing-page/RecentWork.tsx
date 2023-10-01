@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {PageSection} from "~/components/ui/PageSection";
-import ĄrrowUpRightSvg from "~/public/svgs/arrow-up-right.svg";
+import ArrowUpRightSvg from "~/public/svgs/arrow-up-right.svg";
 
 const recentWorkItems: Array<RecentWorkItemProps> = [
   {
@@ -107,7 +107,7 @@ const RecentWorkItem = ({id, name, description, image}: RecentWorkItemProps) => 
           <p className="mr-2 text-lg font-semibold text-slate-700 transition-colors group-hover:text-primary">{name}</p>
 
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-solid border-slate-300 bg-white transition-colors group-hover:border-primary">
-            <ĄrrowUpRightSvg className="h-4 w-4 fill-slate-700" aria-hidden="true" />
+            <ArrowUpRightSvg className="h-4 w-4 fill-slate-700" aria-hidden="true" />
           </span>
         </Link>
 
