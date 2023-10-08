@@ -19,7 +19,7 @@ const buttonVariants = cva(
         destructive: "bg-red-500 text-slate-50 hover:bg-red-600"
       },
       size: {
-        sm: "h-8 px-2",
+        sm: "h-8 px-2 text-xs",
         md: "h-10 px-4",
         icon: "h-10 w-10"
       }
