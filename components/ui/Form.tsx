@@ -58,9 +58,12 @@ const FormLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive.Root>,
       <LabelPrimitive.Root
         ref={ref}
         htmlFor={formItemId}
-        className={cn("mb-3 block text-sm font-medium leading-none text-slate-700", className)}
+        className={cn("mb-3 block text-sm font-medium leading-5 text-slate-700", className)}
         {...props}>
-        {children} {isOptional && <span className="pl-1 text-xs font-normal italic text-slate-400">optional</span>}
+        {children}
+        {isOptional && (
+          <span className="inline-block pl-2 text-xs font-normal italic leading-5 text-slate-400">optional</span>
+        )}
       </LabelPrimitive.Root>
     );
   }
