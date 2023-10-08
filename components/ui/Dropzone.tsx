@@ -44,7 +44,7 @@ const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, ac
     <div
       {...getRootProps()}
       className={cn(
-        "flex min-h-[5.5rem] cursor-pointer items-center gap-6 rounded-md border-2 border-dashed px-3 py-4 transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2",
+        "flex min-h-[6rem] cursor-pointer items-center gap-6 rounded-md border-2 border-dashed px-3 py-4 transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2",
         {"cursor-not-allowed opacity-50": disabled}
       )}>
       <input {...props} {...getInputProps({name})} />
