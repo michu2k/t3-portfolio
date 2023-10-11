@@ -70,7 +70,7 @@ const ExperienceItemForm = () => {
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
+      <form onSubmit={(e) => handleSubmit(handleFormSubmit)(e)}>
         <FormField
           control={control}
           name="position"
@@ -183,7 +183,7 @@ const ExperienceItemForm = () => {
             />
           ))}
 
-          <Button variant="secondary" className="mt-2" onClick={() => void append(newResponsibilityItem)}>
+          <Button variant="secondary" className="mt-2" onClick={() => append(newResponsibilityItem)}>
             <PlusIcon size={16} className="mr-1" />
             Add responsibility
           </Button>

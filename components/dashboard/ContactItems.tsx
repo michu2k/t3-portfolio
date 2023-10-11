@@ -53,7 +53,7 @@ const ContactItems = () => {
       <DeleteEntityDialog
         title="Delete contact method"
         entityName={(selectedContactMethod?.type || "Method").toLowerCase()}
-        onClickDeleteBtn={() => void handleDeleteItem()}
+        onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>
   );

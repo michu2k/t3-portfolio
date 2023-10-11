@@ -51,7 +51,7 @@ const ProjectItems = () => {
       <DeleteEntityDialog
         title="Delete project"
         entityName={(selectedProject?.name || "Project").toLowerCase()}
-        onClickDeleteBtn={() => void handleDeleteItem()}
+        onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>
   );
