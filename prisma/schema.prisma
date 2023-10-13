@@ -123,7 +123,7 @@ model ProjectItem {
     id               String   @id @default(cuid())
     name             String
     description      String
-    shortDescription String
+    shortDescription String?
     image            String
     coverImage       String
     createdAt        DateTime @default(now())
