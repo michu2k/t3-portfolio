@@ -17,7 +17,12 @@ function convertBytesToMB(bytes: number) {
   return `${parseFloat((bytes / (1024 * 1024)).toFixed(2))}MB`;
 }
 
-async function convertFileToBase64(file: File) {
+function getFileExtension(file: FileObj | string) {
+  const _file = typeof file === "string" ? file : file.type;
+  return _file.match(/\w*$/gi)?.[0].toLowerCase() || "";
+}
+
+async function _convertFileToBase64(file: File) {
   return new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -32,10 +37,10 @@ async function transformFileToFileObj(file: File): Promise<FileObj> {
     name: file.name,
     sizeKb: Math.round(file.size / 1024),
     type: file.type,
-    base64: await convertFileToBase64(file)
+    base64: await _convertFileToBase64(file)
   };
 }
 
 export type {FileObj};
 
-export {MAX_FILE_SIZE, acceptedImageTypes, transformFileToFileObj, convertBytesToMB};
+export {MAX_FILE_SIZE, acceptedImageTypes, getFileExtension, transformFileToFileObj, convertBytesToMB};
