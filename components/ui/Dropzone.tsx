@@ -1,13 +1,14 @@
+import React, {Fragment, useCallback} from "react";
 import {UploadCloudIcon} from "lucide-react";
-import React, {Fragment} from "react";
 import type {Accept} from "react-dropzone";
 import {useDropzone} from "react-dropzone";
-import {MAX_FILE_SIZE, convertBytesToMB} from "~/utils/file";
+import type {FileObj} from "~/utils/file";
+import {MAX_FILE_SIZE, convertBytesToMB, transformFileToFileObj} from "~/utils/file";
 import {cn} from "~/utils/className";
 
 type DropzoneProps = {
   name: string;
-  onDrop: (acceptedFiles: Array<File>) => void;
+  onDrop: (acceptedFiles: Array<FileObj>) => void;
   accept: Accept;
   maxSize?: number;
   multiple?: boolean;
@@ -15,8 +16,19 @@ type DropzoneProps = {
 };
 
 const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, accept, ...props}: DropzoneProps) => {
+  const onFileDrop = useCallback(
+    async (acceptedFiles: Array<File>) => {
+      const result = await Promise.all<FileObj>(
+        acceptedFiles.map((file) => new Promise<FileObj>((resolve) => resolve(transformFileToFileObj(file))))
+      );
+
+      onDrop(result);
+    },
+    [onDrop]
+  );
+
   const {getRootProps, getInputProps, isDragActive} = useDropzone({
-    onDrop,
+    onDrop: (args) => void onFileDrop(args),
     multiple,
     maxSize,
     disabled,
