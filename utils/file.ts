@@ -2,9 +2,9 @@ import type {Accept} from "react-dropzone";
 
 type FileObj = {
   name: string;
+  url: string;
   sizeKb: number;
   type: string;
-  base64: string;
 };
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
@@ -35,9 +35,9 @@ async function _convertFileToBase64(file: File) {
 async function transformFileToFileObj(file: File): Promise<FileObj> {
   return {
     name: file.name,
+    url: await _convertFileToBase64(file),
     sizeKb: Math.round(file.size / 1024),
-    type: file.type,
-    base64: await _convertFileToBase64(file)
+    type: file.type
   };
 }
 
