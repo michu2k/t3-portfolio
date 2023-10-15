@@ -26,6 +26,11 @@ const config = {
         protocol: "https",
         hostname: "picsum.photos",
         pathname: "/id/**"
+      },
+      {
+        protocol: "https",
+        hostname: "t3-stack-portfolio-website.s3.eu-central-1.amazonaws.com",
+        pathname: "/**"
       }
     ]
   },
