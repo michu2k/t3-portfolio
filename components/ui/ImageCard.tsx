@@ -1,10 +1,11 @@
 import React from "react";
-import {cn} from "~/utils/className";
 import {FileThumbnail} from "~/components/ui/FileThumbnail";
+import {cn} from "~/utils/className";
+import type {FileObj} from "~/utils/file";
 import {convertBytesToMB} from "~/utils/file";
 
 type ImageCardProps = {
-  file: File;
+  file: FileObj;
   className?: string;
   actions?: React.ReactNode;
 };

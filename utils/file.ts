@@ -3,7 +3,7 @@ import type {Accept} from "react-dropzone";
 type FileObj = {
   name: string;
   url: string;
-  sizeKb: number;
+  size: number;
   type: string;
 };
 
@@ -36,7 +36,7 @@ async function transformFileToFileObj(file: File): Promise<FileObj> {
   return {
     name: file.name,
     url: await _convertFileToBase64(file),
-    sizeKb: Math.round(file.size / 1024),
+    size: file.size,
     type: file.type
   };
 }

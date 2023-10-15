@@ -49,7 +49,7 @@ export async function getPresignedUrl(key: string): Promise<FileObj> {
     return {
       name: key,
       url: presignedUrl,
-      sizeKb: Math.round(ContentLength / 1024),
+      size: ContentLength,
       type: ContentType
     };
   } catch (error) {
