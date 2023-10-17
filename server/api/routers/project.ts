@@ -74,6 +74,10 @@ export const projectRouter = createTRPCRouter({
     .input(projectItemSchema)
     .mutation(async ({ctx, input: {id, ...input}}) => {
       return null;
+      // delete old images from s3
+      // upload new images to s3
+      // update db
+
       /* return await ctx.prisma.projectItem.update({
         where: {id},
         data: input

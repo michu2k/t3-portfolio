@@ -1,13 +1,17 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
+import {FileX2Icon} from "lucide-react";
 import {useRouter} from "next/router";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Button} from "~/components/ui/Button";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
 import {Textarea} from "~/components/ui/Textarea";
+import {Dropzone} from "~/components/ui/Dropzone";
+import {ImageCard} from "~/components/ui/ImageCard";
 import type {ProjectItemFormValues} from "~/utils/validations/project";
 import {projectItemSchema} from "~/utils/validations/project";
+import {acceptedImageTypes} from "~/utils/file";
 import {api} from "~/utils/api";
 
 const ProjectItemForm = () => {
@@ -24,14 +28,17 @@ const ProjectItemForm = () => {
       name: "",
       shortDescription: "",
       description: "",
-      image: "",
-      coverImage: ""
+      image: undefined,
+      coverImage: undefined
     },
     values: data ?? undefined,
     resolver: zodResolver(projectItemSchema)
   });
 
-  const {control, handleSubmit} = formMethods;
+  const {control, handleSubmit, setValue, watch} = formMethods;
+  const coverImage = watch("coverImage");
+  const image = watch("image");
+
   async function handleFormSubmit(formValues: ProjectItemFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
@@ -49,7 +56,40 @@ const ProjectItemForm = () => {
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
+      <form onSubmit={(e) => handleSubmit(handleFormSubmit)(e)} encType="multipart/form-data">
+        <FormField
+          control={control}
+          name="coverImage"
+          render={({field: {name}}) => (
+            <FormItem>
+              <FormLabel>Cover image</FormLabel>
+              {coverImage ? (
+                <ImageCard
+                  file={coverImage}
+                  actions={
+                    <Button
+                      variant="secondary"
+                      onClick={() => {
+                        console.log("click!");
+                        setValue(name, undefined, {shouldValidate: true});
+                      }}>
+                      <FileX2Icon size={16} className="mr-2" />
+                      Delete image
+                    </Button>
+                  }
+                />
+              ) : (
+                <Dropzone
+                  onDrop={(files) => setValue(name, files[0], {shouldValidate: true})}
+                  name={name}
+                  accept={acceptedImageTypes}
+                />
+              )}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={control}
           name="name"
@@ -69,7 +109,7 @@ const ProjectItemForm = () => {
           name="shortDescription"
           render={({field}) => (
             <FormItem>
-              <FormLabel>Short description</FormLabel>
+              <FormLabel isOptional>Short description</FormLabel>
               <FormControl>
                 <Textarea {...field} placeholder="Enter item description here" />
               </FormControl>
@@ -80,10 +120,38 @@ const ProjectItemForm = () => {
 
         <FormField
           control={control}
+          name="image"
+          render={({field: {name}}) => (
+            <FormItem>
+              <FormLabel>Image</FormLabel>
+              {image ? (
+                <ImageCard
+                  file={image}
+                  actions={
+                    <Button variant="secondary" onClick={() => setValue(name, undefined)}>
+                      <FileX2Icon size={16} className="mr-2" />
+                      Delete image
+                    </Button>
+                  }
+                />
+              ) : (
+                <Dropzone
+                  onDrop={(files) => setValue(name, files[0], {shouldValidate: true})}
+                  name={name}
+                  accept={acceptedImageTypes}
+                />
+              )}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
           name="description"
           render={({field}) => (
             <FormItem>
-              <FormLabel>Long description</FormLabel>
+              <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea {...field} placeholder="Enter item description here" />
               </FormControl>
