@@ -4,11 +4,11 @@ import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {ProjectItem} from "~/server/api/routers/project";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
-import {FileThumbnail} from "~/components/ui/FileThumbnail";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
 import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
 import {api} from "~/utils/api";
 import {cn} from "~/utils/className";
+import Image from "next/image";
 
 const ProjectItems = () => {
   const {data: projectItems = []} = api.project.getItems.useQuery();
@@ -71,7 +71,9 @@ const ProjectItem = ({id, name, shortDescription, description, coverImage, onDel
 
   return (
     <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-2 last-of-type:border-0">
-      <FileThumbnail file={coverImage} className="mr-4 h-16 w-16" />
+      <div className="relative mr-4 h-16 w-24 shrink-0 overflow-hidden rounded-md bg-slate-50">
+        {coverImage.url ? <Image src={coverImage.url} fill style={{objectFit: "cover"}} alt="" /> : null}
+      </div>
 
       <div className="mr-4 flex flex-1 flex-col items-start">
         <p className="mr-2 text-sm font-semibold leading-6">{name}</p>
