@@ -67,16 +67,17 @@ export const projectRouter = createTRPCRouter({
           image: imageKey
         }
       });
-    })
+    }),
 
   // WIP
-/*   updateItem: protectedProcedure
+  updateItem: protectedProcedure
     .input(projectItemSchema)
     .mutation(async ({ctx, input: {id, ...input}}) => {
-      return await ctx.prisma.projectItem.update({
+      return null;
+      /* return await ctx.prisma.projectItem.update({
         where: {id},
         data: input
-      });
+      }); */
     }),
 
   // WIP
@@ -86,7 +87,9 @@ export const projectRouter = createTRPCRouter({
       return await ctx.prisma.projectItem.delete({
         where: {id}
       });
-    }) */
+
+      // delete image from s3
+    })
 });
 
 export type {ProjectItem};
