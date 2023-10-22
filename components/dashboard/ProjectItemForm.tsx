@@ -111,7 +111,7 @@ const ProjectItemForm = () => {
             <FormItem>
               <FormLabel isOptional>Short description</FormLabel>
               <FormControl>
-                <Textarea {...field} placeholder="Enter item description here" />
+                <Textarea {...field} value={field.value ?? ""} placeholder="Enter item description here" />
               </FormControl>
               <FormMessage />
             </FormItem>

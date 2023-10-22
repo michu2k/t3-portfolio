@@ -3,7 +3,7 @@ import {TRPCError} from "@trpc/server";
 import type {ProjectItem as PrismaProjectItem} from "@prisma/client";
 
 import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
-import {getPresignedUrl, uploadFileToS3} from "~/server/s3";
+import {deleteFileFromS3, getPresignedUrl, uploadFileToS3} from "~/server/s3";
 import type {FileObj} from "~/utils/file";
 import {projectItemSchema} from "~/utils/validations/project";
 
@@ -57,15 +57,17 @@ export const projectRouter = createTRPCRouter({
         });
       }
 
-      const {key: coverImageKey} = await uploadFileToS3(coverImage, S3_DIRECTORY_NAME);
-      const {key: imageKey} = await uploadFileToS3(image, S3_DIRECTORY_NAME);
+      return await ctx.prisma.$transaction(async (tx) => {
+        const {key: coverImageKey} = await uploadFileToS3(coverImage, S3_DIRECTORY_NAME);
+        const {key: imageKey} = await uploadFileToS3(image, S3_DIRECTORY_NAME);
 
-      return await ctx.prisma.projectItem.create({
-        data: {
-          ...input,
-          coverImage: coverImageKey,
-          image: imageKey
-        }
+        return await tx.projectItem.create({
+          data: {
+            ...input,
+            coverImage: coverImageKey,
+            image: imageKey
+          }
+        });
       });
     }),
 
@@ -84,15 +86,21 @@ export const projectRouter = createTRPCRouter({
       }); */
     }),
 
-  // WIP
   deleteItem: protectedProcedure
     .input(z.object({id: z.string()}))
     .mutation(async ({ctx, input: {id}}) => {
-      return await ctx.prisma.projectItem.delete({
-        where: {id}
-      });
+      return await ctx.prisma.$transaction(async (tx) => {
+        const deletedItem = await tx.projectItem.delete({
+          where: {id}
+        });
 
-      // delete image from s3
+        const {image, coverImage} = deletedItem;
+
+        await deleteFileFromS3(image);
+        await deleteFileFromS3(coverImage);
+
+        return deletedItem;
+      });
     })
 });
 
