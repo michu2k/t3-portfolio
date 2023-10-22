@@ -1,5 +1,4 @@
 import {z} from "zod";
-import {TRPCError} from "@trpc/server";
 import type {ProjectItem as PrismaProjectItem} from "@prisma/client";
 
 import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
@@ -20,11 +19,11 @@ export const projectRouter = createTRPCRouter({
     .query(async ({ctx}) => {
       const items = await ctx.prisma.projectItem.findMany();
 
-      const itemsWithImageObjects = await Promise.all(items.map(async ({coverImage, image, ...item}) => {
-        const coverImageUrl = await getPresignedUrl(coverImage);
-        const imageUrl = await getPresignedUrl(image);
+      const itemsWithImageObjects = await Promise.all(items.map(async (item) => {
+        const coverImage = await getPresignedUrl(item.coverImage);
+        const image = await getPresignedUrl(item.image);
 
-        return {...item, coverImage: coverImageUrl, image: imageUrl};
+        return {...item, coverImage, image};
       }));
 
       return itemsWithImageObjects;
@@ -38,10 +37,10 @@ export const projectRouter = createTRPCRouter({
       });
 
       if (item) {
-        const coverImageUrl = await getPresignedUrl(item.coverImage);
-        const imageUrl = await getPresignedUrl(item.image);
+        const coverImage = await getPresignedUrl(item.coverImage);
+        const image = await getPresignedUrl(item.image);
 
-        return {...item, coverImage: coverImageUrl, image: imageUrl};
+        return {...item, coverImage, image};
       }
 
       return null;
@@ -50,11 +49,8 @@ export const projectRouter = createTRPCRouter({
   createItem: protectedProcedure
     .input(projectItemSchema)
     .mutation(async ({ctx, input: {image, coverImage, ...input}}) => {
-      if (!image || !coverImage ) {
-        throw new TRPCError({
-          code: "BAD_REQUEST",
-          message: "Image and coverImage fields are required"
-        });
+      if (!image || !coverImage) {
+        throw new Error("Image and coverImage fields are required");
       }
 
       return await ctx.prisma.$transaction(async (tx) => {
@@ -71,35 +67,68 @@ export const projectRouter = createTRPCRouter({
       });
     }),
 
-  // WIP
   updateItem: protectedProcedure
     .input(projectItemSchema)
-    .mutation(async ({ctx, input: {id, ...input}}) => {
-      return null;
-      // delete old images from s3
-      // upload new images to s3
-      // update db
+    .mutation(async ({ctx, input: {id, image, coverImage, ...input}}) => {
+      if (!image || !coverImage) {
+        throw new Error("Image and coverImage fields are required");
+      }
 
-      /* return await ctx.prisma.projectItem.update({
-        where: {id},
-        data: input
-      }); */
+      return await ctx.prisma.$transaction(async (tx) => {
+        const item = await ctx.prisma.projectItem.findUnique({
+          where: {id}
+        });
+
+        if (!item) {
+          throw new Error("Item not found");
+        }
+
+        let coverImageKey: string | undefined;
+        let imageKey: string | undefined;
+
+        // If the coverImage has changed, delete the current image and upload the new one
+        if (coverImage.name !== item.coverImage) {
+          await deleteFileFromS3(item.coverImage);
+          const {key} = await uploadFileToS3(coverImage, S3_DIRECTORY_NAME);
+          coverImageKey = key;
+        }
+
+        // If the image has changed, delete the current image and upload the new one
+        if (image.name !== item.image) {
+          await deleteFileFromS3(item.image);
+          const {key} = await uploadFileToS3(image, S3_DIRECTORY_NAME);
+          imageKey = key;
+        }
+
+        return await tx.projectItem.update({
+          where: {id},
+          data: {
+            ...input,
+            coverImage: coverImageKey ?? item.coverImage,
+            image: imageKey ?? item.image
+          }
+        });
+      });
     }),
 
   deleteItem: protectedProcedure
     .input(z.object({id: z.string()}))
     .mutation(async ({ctx, input: {id}}) => {
       return await ctx.prisma.$transaction(async (tx) => {
-        const deletedItem = await tx.projectItem.delete({
+        const item = await tx.projectItem.delete({
           where: {id}
         });
 
-        const {image, coverImage} = deletedItem;
+        if (!item) {
+          throw new Error("Item not found");
+        }
+
+        const {image, coverImage} = item;
 
         await deleteFileFromS3(image);
         await deleteFileFromS3(coverImage);
 
-        return deletedItem;
+        return item;
       });
     })
 });
