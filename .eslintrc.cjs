@@ -40,6 +40,14 @@ module.exports = {
     "unused-imports/no-unused-vars": [
       "warn",
       {vars: "all", varsIgnorePattern: "^_", args: "after-used", argsIgnorePattern: "^_"}
+    ],
+    "@typescript-eslint/no-misused-promises": [
+      2,
+      {
+        checksVoidReturn: {
+          attributes: false
+        }
+      }
     ]
   }
 };

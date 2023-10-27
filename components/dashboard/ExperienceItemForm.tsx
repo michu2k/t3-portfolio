@@ -70,7 +70,7 @@ const ExperienceItemForm = () => {
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
+      <form onSubmit={(e) => handleSubmit(handleFormSubmit)(e)}>
         <FormField
           control={control}
           name="position"
@@ -101,7 +101,7 @@ const ExperienceItemForm = () => {
 
         <div className="sm:flex sm:items-center sm:gap-4">
           <FormItem className="max-w-[14rem] flex-1">
-            <FormLabel>From</FormLabel>
+            <FormLabel isOptional>From</FormLabel>
 
             <Popover>
               <PopoverTrigger asChild>
@@ -127,7 +127,7 @@ const ExperienceItemForm = () => {
           </FormItem>
 
           <FormItem className="max-w-[14rem] flex-1">
-            <FormLabel>To</FormLabel>
+            <FormLabel isOptional>To</FormLabel>
 
             <Popover>
               <PopoverTrigger asChild>
@@ -154,7 +154,7 @@ const ExperienceItemForm = () => {
         </div>
 
         <FormItem>
-          <p className="mb-3 block text-sm font-medium leading-none text-slate-700">Responsibilities</p>
+          <FormLabel isOptional>Responsibilities</FormLabel>
           <FormDescription className="mb-2">
             Add the responsibilities you had while working at this position.
           </FormDescription>
@@ -183,7 +183,7 @@ const ExperienceItemForm = () => {
             />
           ))}
 
-          <Button variant="secondary" className="mt-2" onClick={() => void append(newResponsibilityItem)}>
+          <Button variant="secondary" className="mt-2" onClick={() => append(newResponsibilityItem)}>
             <PlusIcon size={16} className="mr-1" />
             Add responsibility
           </Button>

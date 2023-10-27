@@ -16,7 +16,11 @@ const server = z.object({
     process.env.VERCEL ? z.string() : z.string().url()
   ),
   GOOGLE_CLIENT_ID: z.string().min(1),
-  GOOGLE_CLIENT_SECRET: z.string().min(1)
+  GOOGLE_CLIENT_SECRET: z.string().min(1),
+  AWS_S3_BUCKET: z.string().min(1),
+  AWS_S3_REGION: z.string().min(1),
+  AWS_S3_ACCESS_KEY: z.string().min(1),
+  AWS_S3_SECRET_ACCESS_KEY: z.string().min(1)
 });
 
 /**
@@ -39,8 +43,11 @@ const processEnv = {
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   NEXTAUTH_URL: process.env.NEXTAUTH_URL,
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
-  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET
-  // CORS_ORIGINS: process.env.CORS_ORIGINS
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  AWS_S3_BUCKET: process.env.AWS_S3_BUCKET,
+  AWS_S3_REGION: process.env.AWS_S3_REGION,
+  AWS_S3_ACCESS_KEY: process.env.AWS_S3_ACCESS_KEY,
+  AWS_S3_SECRET_ACCESS_KEY: process.env.AWS_S3_SECRET_ACCESS_KEY
 };
 
 // Don't touch the part below

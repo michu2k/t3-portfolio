@@ -49,13 +49,13 @@ const SocialMediaItemForm = () => {
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
+      <form onSubmit={(e) => handleSubmit(handleFormSubmit)(e)}>
         <FormField
           control={control}
           name="icon"
           render={({field: {value, onChange}}) => (
             <FormItem>
-              <FormLabel htmlFor="">Icon</FormLabel>
+              <FormLabel>Icon</FormLabel>
               <ul className="flex flex-wrap gap-2">
                 {Object.entries(socialMediaIconsDef).map(([key, Icon]) => (
                   <li key={key} value={key}>

@@ -48,21 +48,26 @@ const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
 
 FormItem.displayName = "FormItem";
 
-const FormLabel = React.forwardRef<
-  React.ElementRef<typeof LabelPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
->(({className, ...props}, ref) => {
-  const {formItemId} = useFormField();
+type FormLabelProps = React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & {isOptional?: boolean};
 
-  return (
-    <LabelPrimitive.Root
-      ref={ref}
-      htmlFor={formItemId}
-      className={cn("mb-3 block text-sm font-medium leading-none text-slate-700", className)}
-      {...props}
-    />
-  );
-});
+const FormLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive.Root>, FormLabelProps>(
+  ({className, isOptional, children, ...props}, ref) => {
+    const {formItemId} = useFormField();
+
+    return (
+      <LabelPrimitive.Root
+        ref={ref}
+        htmlFor={formItemId}
+        className={cn("mb-3 block text-sm font-medium leading-5 text-slate-700", className)}
+        {...props}>
+        {children}
+        {isOptional && (
+          <span className="inline-block pl-2 text-xs font-normal italic leading-5 text-slate-400">optional</span>
+        )}
+      </LabelPrimitive.Root>
+    );
+  }
+);
 
 FormLabel.displayName = "Label";
 
@@ -123,4 +128,4 @@ const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<
 
 FormMessage.displayName = "FormMessage";
 
-export {FormItem, FormLabel, FormControl, FormDescription, FormFieldContext, FormItemContext, FormMessage, FormField};
+export {FormField, FormItem, FormLabel, FormControl, FormDescription, FormFieldContext, FormItemContext, FormMessage};

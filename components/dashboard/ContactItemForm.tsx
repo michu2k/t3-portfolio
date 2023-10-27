@@ -53,7 +53,7 @@ const ContactItemForm = () => {
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={(e) => void handleSubmit(handleFormSubmit)(e)}>
+      <form onSubmit={(e) => handleSubmit(handleFormSubmit)(e)}>
         <FormField
           control={control}
           name="type"

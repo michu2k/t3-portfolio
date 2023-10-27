@@ -59,7 +59,7 @@ const ExperienceItems = () => {
       <DeleteEntityDialog
         title="Delete experience"
         entityName={position ? `${position} @ ${company || "-"}` : "position"}
-        onClickDeleteBtn={() => void handleDeleteItem()}
+        onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>
   );

@@ -73,7 +73,7 @@ const Navigation = () => {
       <Button
         variant="ghost"
         className="mb-4 mt-auto h-11 w-full justify-start hover:text-primary"
-        onClick={() => void signOut()}>
+        onClick={() => signOut()}>
         <LogOutIcon size={16} className="mr-2" />
         Log Out
       </Button>

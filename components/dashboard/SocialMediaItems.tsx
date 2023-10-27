@@ -56,7 +56,7 @@ const SocialMediaItems = () => {
       <DeleteEntityDialog
         title="Delete link"
         entityName={`${icon || ""} url`}
-        onClickDeleteBtn={() => void handleDeleteItem()}
+        onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>
   );

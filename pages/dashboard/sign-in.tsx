@@ -11,7 +11,7 @@ import pkg from "~/package.json";
 const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({providers}) => {
   function displaySignInProviders() {
     return Object.values(providers).map((provider) => (
-      <Button key={provider.name} variant="primary" onClick={() => void signIn(provider.id)}>
+      <Button key={provider.name} variant="primary" onClick={() => signIn(provider.id)}>
         Sign in with {provider.name}
       </Button>
     ));

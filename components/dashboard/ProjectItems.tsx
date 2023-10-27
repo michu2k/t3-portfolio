@@ -1,16 +1,17 @@
 import React, {useState} from "react";
 import Link from "next/link";
-import {ProjectItem} from "@prisma/client";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
+import {ProjectItem} from "~/server/api/routers/project";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
 import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
 import {api} from "~/utils/api";
 import {cn} from "~/utils/className";
+import Image from "next/image";
 
 const ProjectItems = () => {
-  const {data: projects = []} = api.project.getItems.useQuery();
+  const {data: projectItems = []} = api.project.getItems.useQuery();
   const deleteItemMutation = api.project.deleteItem.useMutation();
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const utils = api.useContext();
@@ -30,7 +31,9 @@ const ProjectItems = () => {
   }
 
   function displayItems() {
-    return projects.map((item) => <ProjectItem key={item.id} onDelete={() => setSelectedProject(item)} {...item} />);
+    return projectItems.map((item) => (
+      <ProjectItem key={item.id} onDelete={() => setSelectedProject(item)} {...item} />
+    ));
   }
 
   return (
@@ -51,7 +54,7 @@ const ProjectItems = () => {
       <DeleteEntityDialog
         title="Delete project"
         entityName={(selectedProject?.name || "Project").toLowerCase()}
-        onClickDeleteBtn={() => void handleDeleteItem()}
+        onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>
   );
@@ -61,16 +64,23 @@ type ProjectItemProps = ProjectItem & {
   onDelete: (e: React.MouseEvent) => void;
 };
 
-const ProjectItem = ({id, name, shortDescription, onDelete}: ProjectItemProps) => {
+const ProjectItem = ({id, name, shortDescription, description, coverImage, onDelete}: ProjectItemProps) => {
+  const MAX_TEXT_LENGTH = 100;
+  const descriptionLength = shortDescription?.length || description?.length;
+  const itemDescription = (shortDescription || description).slice(0, MAX_TEXT_LENGTH);
+
   return (
     <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-2 last-of-type:border-0">
-      {/*       <div className="relative mr-4 h-16 w-16 shrink-0 rounded bg-slate-100">
-        <Image src={image} fill className="rounded" style={{objectFit: "cover"}} alt="" />
-      </div> */}
+      <div className="relative mr-4 h-16 w-24 shrink-0 overflow-hidden rounded-md bg-slate-50">
+        {coverImage.url ? <Image src={coverImage.url} fill style={{objectFit: "cover"}} alt="" /> : null}
+      </div>
 
       <div className="mr-4 flex flex-1 flex-col items-start">
         <p className="mr-2 text-sm font-semibold leading-6">{name}</p>
-        <p className="text-xs leading-6 text-slate-500">{shortDescription}</p>
+        <p className="text-xs leading-6 text-slate-500">
+          {itemDescription}
+          {descriptionLength > MAX_TEXT_LENGTH && "..."}
+        </p>
       </div>
 
       <Link href={`/dashboard/projects/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>
