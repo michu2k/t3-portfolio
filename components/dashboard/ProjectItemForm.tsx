@@ -35,9 +35,7 @@ const ProjectItemForm = () => {
     resolver: zodResolver(projectItemSchema)
   });
 
-  const {control, handleSubmit, setValue, watch} = formMethods;
-  const coverImage = watch("coverImage");
-  const image = watch("image");
+  const {control, handleSubmit} = formMethods;
 
   async function handleFormSubmit(formValues: ProjectItemFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
@@ -60,30 +58,21 @@ const ProjectItemForm = () => {
         <FormField
           control={control}
           name="coverImage"
-          render={({field: {name}}) => (
+          render={({field: {name, value, onChange}}) => (
             <FormItem>
               <FormLabel>Cover image</FormLabel>
-              {coverImage ? (
+              {value ? (
                 <ImageCard
-                  file={coverImage}
+                  file={value}
                   actions={
-                    <Button
-                      variant="secondary"
-                      onClick={() => {
-                        console.log("click!");
-                        setValue(name, undefined, {shouldValidate: true});
-                      }}>
+                    <Button variant="secondary" onClick={() => onChange(undefined)}>
                       <FileX2Icon size={16} className="mr-2" />
                       Delete image
                     </Button>
                   }
                 />
               ) : (
-                <Dropzone
-                  onDrop={(files) => setValue(name, files[0], {shouldValidate: true})}
-                  name={name}
-                  accept={acceptedImageTypes}
-                />
+                <Dropzone name={name} onDrop={onChange} accept={acceptedImageTypes} />
               )}
               <FormMessage />
             </FormItem>
@@ -121,25 +110,21 @@ const ProjectItemForm = () => {
         <FormField
           control={control}
           name="image"
-          render={({field: {name}}) => (
+          render={({field: {name, value, onChange}}) => (
             <FormItem>
               <FormLabel>Image</FormLabel>
-              {image ? (
+              {value ? (
                 <ImageCard
-                  file={image}
+                  file={value}
                   actions={
-                    <Button variant="secondary" onClick={() => setValue(name, undefined)}>
+                    <Button variant="secondary" onClick={() => onChange(undefined)}>
                       <FileX2Icon size={16} className="mr-2" />
                       Delete image
                     </Button>
                   }
                 />
               ) : (
-                <Dropzone
-                  onDrop={(files) => setValue(name, files[0], {shouldValidate: true})}
-                  name={name}
-                  accept={acceptedImageTypes}
-                />
+                <Dropzone name={name} onDrop={onChange} accept={acceptedImageTypes} />
               )}
               <FormMessage />
             </FormItem>
