@@ -8,12 +8,19 @@ import {cn} from "~/utils/className";
 
 type DropzoneProps = {
   name: string;
-  onDrop: (acceptedFiles: Array<FileObj>) => void;
   accept: Accept;
   maxSize?: number;
-  multiple?: boolean;
   disabled?: boolean;
-};
+} & (
+  | {
+      multiple: true;
+      onDrop: (files: Array<FileObj>) => void;
+    }
+  | {
+      multiple?: false;
+      onDrop: (file: FileObj) => void;
+    }
+);
 
 const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, accept, ...props}: DropzoneProps) => {
   const onFileDrop = useCallback(
@@ -22,9 +29,15 @@ const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, ac
         acceptedFiles.map((file) => new Promise<FileObj>((resolve) => resolve(transformFileToFileObj(file))))
       );
 
-      onDrop(result);
+      if (multiple) {
+        onDrop(result);
+      } else {
+        if (!!result[0]) {
+          onDrop(result[0]);
+        }
+      }
     },
-    [onDrop]
+    [onDrop, multiple]
   );
 
   const {getRootProps, getInputProps, isDragActive} = useDropzone({
