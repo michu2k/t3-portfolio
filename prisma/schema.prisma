@@ -93,7 +93,6 @@ enum SnippetType {
 
 model Image {
     id          String      @id @default(cuid())
-    name        String
     image       String
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
