@@ -7,19 +7,18 @@ import {Textarea} from "~/components/ui/Textarea";
 import {Heading} from "~/components/ui/Heading";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/aboutMe";
 import {aboutMeSnippetsSchema} from "~/utils/validations/aboutMe";
-import {transformSnippetsDataIntoFormValues} from "~/utils/transformSnippetsDataIntoFormValues";
 import {api} from "~/utils/api";
-import {useUpdateSnippets} from "~/hooks/useUpdateSnippets";
+import {useSnippets} from "~/hooks/useSnippets";
 
 const AboutForm = () => {
   const {data = []} = api.snippet.getSnippets.useQuery({type: "ABOUT_ME", keys: ["description"]});
-  const updateSnippets = useUpdateSnippets<AboutMeSnippetsFormValues>("ABOUT_ME", data);
+  const {updateSnippets, snippetValues} = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", data);
 
   const formMethods = useForm<AboutMeSnippetsFormValues>({
     defaultValues: {
       description: ""
     },
-    values: transformSnippetsDataIntoFormValues(data),
+    values: snippetValues,
     resolver: zodResolver(aboutMeSnippetsSchema)
   });
 
