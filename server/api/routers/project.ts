@@ -50,7 +50,7 @@ export const projectRouter = createTRPCRouter({
     .input(projectItemSchema)
     .mutation(async ({ctx, input: {image, coverImage, ...input}}) => {
       if (!image || !coverImage) {
-        throw new Error("Image and coverImage fields are required");
+        throw new Error("Image and coverImage are required");
       }
 
       return await ctx.prisma.$transaction(async (tx) => {
@@ -71,7 +71,7 @@ export const projectRouter = createTRPCRouter({
     .input(projectItemSchema)
     .mutation(async ({ctx, input: {id, image, coverImage, ...input}}) => {
       if (!image || !coverImage) {
-        throw new Error("Image and coverImage fields are required");
+        throw new Error("Image and coverImage are required");
       }
 
       return await ctx.prisma.$transaction(async (tx) => {
@@ -119,14 +119,8 @@ export const projectRouter = createTRPCRouter({
           where: {id}
         });
 
-        if (!item) {
-          throw new Error("Item not found");
-        }
-
-        const {image, coverImage} = item;
-
-        await deleteFileFromS3(image);
-        await deleteFileFromS3(coverImage);
+        await deleteFileFromS3(item.image);
+        await deleteFileFromS3(item.coverImage);
 
         return item;
       });

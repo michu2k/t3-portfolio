@@ -8,18 +8,17 @@ import {Heading} from "~/components/ui/Heading";
 import {api} from "~/utils/api";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {contactSnippetsSchema} from "~/utils/validations/contact";
-import {transformSnippetsDataIntoFormValues} from "~/utils/transformSnippetsDataIntoFormValues";
-import {useUpdateSnippets} from "~/hooks/useUpdateSnippets";
+import {useSnippets} from "~/hooks/useSnippets";
 
 const ContactForm = () => {
   const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT", keys: ["description"]});
-  const updateSnippets = useUpdateSnippets<ContactSnippetsFormValues>("CONTACT", data);
+  const {updateSnippets, snippetValues} = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", data);
 
   const formMethods = useForm<ContactSnippetsFormValues>({
     defaultValues: {
       description: ""
     },
-    values: transformSnippetsDataIntoFormValues(data),
+    values: snippetValues,
     resolver: zodResolver(contactSnippetsSchema)
   });
 
