@@ -48,7 +48,7 @@ const navigationItems: Array<NavigationItemDef> = [
   },
   {
     text: "Contact",
-    href: "/dashboard/contact",
+    href: ["/dashboard/contact", "/dashboard/contact/[id]"],
     icon: MailIcon
   }
 ];
