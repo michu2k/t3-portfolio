@@ -1,32 +1,62 @@
 import React from "react";
+import {FileX2Icon} from "lucide-react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {useSnippets} from "~/hooks/useSnippets";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Button} from "~/components/ui/Button";
 import {Textarea} from "~/components/ui/Textarea";
 import {Heading} from "~/components/ui/Heading";
+import {ImageCard} from "~/components/ui/ImageCard";
+import {Dropzone} from "~/components/ui/Dropzone";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/aboutMe";
 import {aboutMeSnippetsSchema} from "~/utils/validations/aboutMe";
 import {api} from "~/utils/api";
-import {useSnippets} from "~/hooks/useSnippets";
+import {acceptedImageTypes} from "~/utils/file";
 
 const AboutForm = () => {
-  const {data = []} = api.snippet.getSnippets.useQuery({type: "ABOUT_ME", keys: ["description"]});
+  const {data = []} = api.snippet.getSnippets.useQuery({type: "ABOUT_ME", keys: ["description", "image"]});
+
   const {updateSnippets, snippetValues} = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", data);
+  const {description = "", image: imageId} = snippetValues;
+
+  const {data: imageObj} = api.image.getImage.useQuery({id: imageId}, {enabled: !!imageId});
+  const createImage = api.image.createImage.useMutation();
+  const deleteImage = api.image.deleteImage.useMutation();
 
   const formMethods = useForm<AboutMeSnippetsFormValues>({
     defaultValues: {
-      description: ""
+      description: "",
+      image: undefined
     },
-    values: snippetValues,
+    values: {
+      description,
+      image: imageObj ?? undefined
+    },
     resolver: zodResolver(aboutMeSnippetsSchema)
   });
 
   const {control, handleSubmit} = formMethods;
 
-  async function handleFormSubmit(snippets: AboutMeSnippetsFormValues, e?: React.BaseSyntheticEvent) {
+  async function handleFormSubmit({description, image}: AboutMeSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
-    await updateSnippets(snippets);
+
+    await updateSnippets({description});
+
+    if (image?.name === imageObj?.name) return;
+
+    // Delete old image
+    if (imageId) {
+      await deleteImage.mutateAsync({id: imageId});
+    }
+
+    // Create new image if it exists
+    if (image) {
+      const {id} = await createImage.mutateAsync({image});
+      await updateSnippets({image: id});
+    } else {
+      await updateSnippets({image: ""});
+    }
   }
 
   return (
@@ -35,6 +65,30 @@ const AboutForm = () => {
         <Heading as="h2" size="sm">
           General settings
         </Heading>
+
+        <FormField
+          control={control}
+          name="image"
+          render={({field: {name, value, onChange}}) => (
+            <FormItem>
+              <FormLabel isOptional>Image</FormLabel>
+              {value ? (
+                <ImageCard
+                  file={value}
+                  actions={
+                    <Button variant="secondary" onClick={() => onChange(undefined)}>
+                      <FileX2Icon size={16} className="mr-2" />
+                      Delete image
+                    </Button>
+                  }
+                />
+              ) : (
+                <Dropzone name={name} onDrop={onChange} accept={acceptedImageTypes} />
+              )}
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <FormField
           control={control}
