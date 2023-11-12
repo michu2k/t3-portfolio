@@ -5,15 +5,23 @@ import Head from "next/head";
 import {Layout} from "~/components/dashboard/Layout";
 import {ExperienceItemForm} from "~/components/dashboard/ExperienceItemForm";
 import {authRedirectToSignInPage} from "~/utils/authRedirect";
+import {useRouter} from "next/router";
 
 const Page: NextPage = () => {
+  const {query} = useRouter();
+  const itemId = query.id as string;
+
+  const isNew = itemId === "new";
+  const heading = isNew ? "Create" : "Edit";
+  const description = isNew ? "Create a new experience item." : "Edit an existing experience item.";
+
   return (
     <>
       <Head>
         <title>T3 Portfolio: Experience</title>
       </Head>
 
-      <Layout heading="Edit item" description="Create a new record or edit an existing one.">
+      <Layout heading={heading} description={description}>
         <ExperienceItemForm />
       </Layout>
     </>

@@ -13,7 +13,7 @@ const Page: NextPage = () => {
         <title>T3 Portfolio: Header</title>
       </Head>
 
-      <Layout heading="Header" description="Header section headings">
+      <Layout heading="Header" description="Header section settings">
         <HeaderForm />
       </Layout>
     </>

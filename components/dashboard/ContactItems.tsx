@@ -4,13 +4,14 @@ import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
 import {Button, buttonVariants} from "~/components/ui/Button";
+import {EmptySection} from "~/components/ui/EmptySection";
 import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
 import {Heading} from "~/components/ui/Heading";
 import {api} from "~/utils/api";
 import {cn} from "~/utils/className";
 
 const ContactItems = () => {
-  const {data: contactMethods = []} = api.contact.getItems.useQuery();
+  const {data: contactMethods = [], isLoading} = api.contact.getItems.useQuery();
   const deleteItemMutation = api.contact.deleteItem.useMutation();
   const [selectedContactMethod, setSelectedContactMethod] = useState<ContactMethod | null>(null);
   const utils = api.useContext();
@@ -42,7 +43,11 @@ const ContactItems = () => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {displayItems()}
+        {isLoading ? null : contactMethods.length ? (
+          displayItems()
+        ) : (
+          <EmptySection heading="No contact methods found" />
+        )}
 
         <Link href="/dashboard/contact/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />
