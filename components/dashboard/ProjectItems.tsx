@@ -4,6 +4,7 @@ import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {ProjectItem} from "~/server/api/routers/project";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
+import {EmptySection} from "~/components/ui/EmptySection";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
 import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
 import {api} from "~/utils/api";
@@ -11,7 +12,7 @@ import {cn} from "~/utils/className";
 import Image from "next/image";
 
 const ProjectItems = () => {
-  const {data: projectItems = []} = api.project.getItems.useQuery();
+  const {data: projectItems = [], isLoading} = api.project.getItems.useQuery();
   const deleteItemMutation = api.project.deleteItem.useMutation();
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const utils = api.useContext();
@@ -43,7 +44,7 @@ const ProjectItems = () => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {displayItems()}
+        {isLoading ? null : projectItems.length ? displayItems() : <EmptySection heading="No project items found" />}
 
         <Link href="/dashboard/projects/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />

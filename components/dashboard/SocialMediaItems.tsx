@@ -4,6 +4,7 @@ import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
 import {Button, buttonVariants} from "~/components/ui/Button";
+import {EmptySection} from "~/components/ui/EmptySection";
 import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
 import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
@@ -11,7 +12,7 @@ import {api} from "~/utils/api";
 import {getSocialMediaIcon} from "~/utils/getSocialMediaIcons";
 
 const SocialMediaItems = () => {
-  const {data: socialMediaItems = []} = api.socialMedia.getItems.useQuery();
+  const {data: socialMediaItems = [], isLoading} = api.socialMedia.getItems.useQuery();
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
   const [selectedSocialMediaLink, setSelectedSocialMediaLink] = useState<SocialMediaLink | null>(null);
   const utils = api.useContext();
@@ -45,7 +46,7 @@ const SocialMediaItems = () => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {displayItems()}
+        {isLoading ? null : socialMediaItems.length ? displayItems() : <EmptySection heading="No links found" />}
 
         <Link href="/dashboard/social-media/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />

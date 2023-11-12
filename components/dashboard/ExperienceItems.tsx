@@ -6,13 +6,14 @@ import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
+import {EmptySection} from "~/components/ui/EmptySection";
 import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
 import {api} from "~/utils/api";
 import {sortExperienceItemsByEndDate} from "~/utils/sortExperienceItemsByEndDate";
 
 const ExperienceItems = () => {
-  const {data: experienceItems = []} = api.experience.getItems.useQuery();
+  const {data: experienceItems = [], isLoading} = api.experience.getItems.useQuery();
   const deleteItemMutation = api.experience.deleteItem.useMutation();
   const [selectedExperienceItem, setSelectedExperienceItem] = useState<ExperienceItem | null>(null);
   const utils = api.useContext();
@@ -48,7 +49,11 @@ const ExperienceItems = () => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {displayItems()}
+        {isLoading ? null : experienceItems.length ? (
+          displayItems()
+        ) : (
+          <EmptySection heading="No experience items found" />
+        )}
 
         <Link href="/dashboard/experience/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />
