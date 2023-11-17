@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {FormProvider, useFieldArray, useForm} from "react-hook-form";
 import {format} from "date-fns";
 import {useRouter} from "next/router";
@@ -22,6 +22,7 @@ const ExperienceItemForm = () => {
   const {data} = api.experience.getItem.useQuery({id: itemId});
   const createItemMutation = api.experience.createItem.useMutation();
   const updateItemMutation = api.experience.updateItem.useMutation();
+  const {responsibilities = []} = data || {};
 
   const formMethods = useForm<ExperienceItemFormValues>({
     defaultValues: {
@@ -31,19 +32,23 @@ const ExperienceItemForm = () => {
       endDate: undefined,
       responsibilities: [newResponsibilityItem]
     },
-    values: data
-      ? {...data, responsibilities: data.responsibilities.length ? data.responsibilities : [newResponsibilityItem]}
-      : undefined,
+    values: data ?? undefined,
     resolver: zodResolver(experienceItemSchema)
   });
 
-  const {control, handleSubmit, setValue, watch} = formMethods;
-  const [startDate, endDate] = watch(["startDate", "endDate"]);
+  const {control, handleSubmit} = formMethods;
 
-  const {fields, append, remove} = useFieldArray({
+  const {fields, append, remove, replace} = useFieldArray({
     control,
     name: "responsibilities"
   });
+
+  // Pass initial values to form
+  useEffect(() => {
+    if (responsibilities.length) {
+      replace(responsibilities);
+    }
+  }, [responsibilities, replace]);
 
   async function handleFormSubmit(
     {responsibilities: formResponsibilities, ...formValues}: ExperienceItemFormValues,
