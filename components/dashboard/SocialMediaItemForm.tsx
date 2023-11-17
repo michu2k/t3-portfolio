@@ -8,7 +8,7 @@ import {api} from "~/utils/api";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {cn} from "~/utils/className";
 import {capitalize} from "~/utils/capitalize";
-import {socialMediaIconsDef} from "~/utils/getSocialMediaIcons";
+import {socialMediaIconsDef} from "~/utils/getSocialMediaIcon";
 import type {SocialMediaLinkFormValues} from "~/utils/validations/socialMedia";
 import {socialMediaLinkSchema} from "~/utils/validations/socialMedia";
 

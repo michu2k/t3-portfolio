@@ -9,7 +9,7 @@ import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
 import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
 import {api} from "~/utils/api";
-import {getSocialMediaIcon} from "~/utils/getSocialMediaIcons";
+import {getSocialMediaIcon} from "~/utils/getSocialMediaIcon";
 
 const SocialMediaItems = () => {
   const {data: socialMediaItems = [], isLoading} = api.socialMedia.getItems.useQuery();
