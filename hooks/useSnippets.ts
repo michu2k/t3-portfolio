@@ -5,6 +5,15 @@ type SnippetValues<T extends string> = {
   [key in T]: string;
 };
 
+/** Get the snippet values */
+function getSnippetValues<T extends string>(data: Array<Snippet>): Partial<SnippetValues<T>> {
+  if (data.length) {
+    return data.reduce((acc, {name, value}) => ({...acc, [name]: value}), {});
+  }
+
+  return {};
+}
+
 const useSnippets = <T extends string>(type: SnippetType, data: Array<Snippet>) => {
   const updateSnippet = api.snippet.updateSnippet.useMutation();
   const createSnippet = api.snippet.createSnippet.useMutation();
@@ -27,16 +36,7 @@ const useSnippets = <T extends string>(type: SnippetType, data: Array<Snippet>) 
     });
   }
 
-  /** Get the snippet values */
-  function getSnippetValues(): Partial<SnippetValues<T>> {
-    if (data.length) {
-      return data.reduce((acc, {name, value}) => ({...acc, [name]: value}), {});
-    }
-
-    return {};
-  }
-
-  return {updateSnippets, snippetValues: getSnippetValues()};
+  return {updateSnippets, snippetValues: getSnippetValues<T>(data)};
 };
 
-export {useSnippets};
+export {useSnippets, getSnippetValues};
