@@ -32,11 +32,12 @@ const ExperienceItemForm = () => {
       endDate: undefined,
       responsibilities: [newResponsibilityItem]
     },
-    values: data ?? undefined,
+    values: data ? {...data, responsibilities: [newResponsibilityItem]} : undefined,
     resolver: zodResolver(experienceItemSchema)
   });
 
-  const {control, handleSubmit} = formMethods;
+  const {control, handleSubmit, watch} = formMethods;
+  const startDate = watch("startDate");
 
   const {fields, append, remove, replace} = useFieldArray({
     control,
@@ -164,7 +165,7 @@ const ExperienceItemForm = () => {
                       defaultMonth={value || undefined}
                       selected={value || undefined}
                       onSelect={(date) => onChange(date)}
-                      disabled={{before: new Date()}}
+                      disabled={{before: startDate ? new Date(startDate) : new Date()}}
                     />
                   </PopoverContent>
                 </Popover>
