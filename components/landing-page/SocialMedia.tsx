@@ -2,33 +2,18 @@ import React, {memo} from "react";
 import {cn} from "~/utils/className";
 import {capitalize} from "~/utils/capitalize";
 import {getSocialMediaIcon} from "~/utils/getSocialMediaIcons";
-
-const socialMedia: Array<SocialMediaItemProps> = [
-  {
-    icon: "github",
-    url: "https://github.com/"
-  },
-  {
-    icon: "linkedIn",
-    url: "https://www.linkedin.com/"
-  },
-  {
-    icon: "twitter",
-    url: "https://twitter.com/"
-  },
-  {
-    icon: "instagram",
-    url: "https://www.instagram.com/"
-  }
-];
+import {api} from "~/utils/api";
+import type {SocialMediaLink} from "@prisma/client";
 
 type SocialMediaProps = {
   className?: string;
 };
 
 const SocialMedia = memo(({className}: SocialMediaProps) => {
+  const {data: socialMediaItems = []} = api.socialMedia.getItems.useQuery();
+
   function displaySocialMediaIcons() {
-    return socialMedia.map((item, idx) => <SocialMediaItem key={idx} {...item} />);
+    return socialMediaItems.map((item) => <SocialMediaItem key={item.id} {...item} />);
   }
 
   return (
@@ -40,12 +25,7 @@ const SocialMedia = memo(({className}: SocialMediaProps) => {
 
 SocialMedia.displayName = "SocialMedia";
 
-type SocialMediaItemProps = {
-  icon: string;
-  url: string;
-};
-
-const SocialMediaItem = ({icon, url}: SocialMediaItemProps) => {
+const SocialMediaItem = ({icon, url}: SocialMediaLink) => {
   const Icon = getSocialMediaIcon(icon);
 
   return (
