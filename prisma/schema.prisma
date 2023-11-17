@@ -102,7 +102,7 @@ model ExperienceItem {
     id               String                         @id @default(cuid())
     position         String
     company          String
-    startDate        DateTime?
+    startDate        DateTime
     endDate          DateTime?
     createdAt        DateTime                       @default(now())
     updatedAt        DateTime                       @updatedAt
