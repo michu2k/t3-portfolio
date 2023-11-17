@@ -11,7 +11,11 @@ const experienceItemSchema = z.object({
   id: z.string().optional(),
   position: z.string().min(3, "Position name must be at least 3 characters long"),
   company: z.string().min(3, "Company name must be at least 3 characters long"),
-  startDate: z.date().nullable().optional(),
+  startDate: z
+    .date()
+    .nullable()
+    .optional()
+    .refine((date) => !!date, {message: "Start date is required"}),
   endDate: z.date().nullable().optional(),
   responsibilities: z.array(experienceItemResponsibilitySchema)
 });
