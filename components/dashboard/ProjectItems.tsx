@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
-import {ProjectItem} from "~/server/api/routers/project";
+import type {ProjectItem} from "~/server/api/routers/project";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
 import {EmptySection} from "~/components/ui/EmptySection";
@@ -33,7 +33,7 @@ const ProjectItems = () => {
 
   function displayItems() {
     return projectItems.map((item) => (
-      <ProjectItem key={item.id} onDelete={() => setSelectedProject(item)} {...item} />
+      <ProjectCard key={item.id} onDelete={() => setSelectedProject(item)} {...item} />
     ));
   }
 
@@ -61,11 +61,11 @@ const ProjectItems = () => {
   );
 };
 
-type ProjectItemProps = ProjectItem & {
+type ProjectCardProps = ProjectItem & {
   onDelete: (e: React.MouseEvent) => void;
 };
 
-const ProjectItem = ({id, name, shortDescription, description, coverImage, onDelete}: ProjectItemProps) => {
+const ProjectCard = ({id, name, shortDescription, description, coverImage, onDelete}: ProjectCardProps) => {
   const MAX_TEXT_LENGTH = 100;
   const descriptionLength = shortDescription?.length || description?.length;
   const itemDescription = (shortDescription || description).slice(0, MAX_TEXT_LENGTH);

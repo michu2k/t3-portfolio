@@ -14,7 +14,7 @@ const KeepInTouch = () => {
   const {description = ""} = snippetValues;
 
   function displayContactItems() {
-    return contactMethods.map((item) => <ContactItem key={item.id} {...item} />);
+    return contactMethods.map((item) => <ContactMethodListItem key={item.id} {...item} />);
   }
 
   return (
@@ -25,7 +25,7 @@ const KeepInTouch = () => {
   );
 };
 
-const ContactItem = ({name, description, type}: ContactMethod) => {
+const ContactMethodListItem = ({name, description, type}: ContactMethod) => {
   const Icon = getContactIcon(type);
 
   return (

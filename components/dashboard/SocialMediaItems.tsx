@@ -35,7 +35,7 @@ const SocialMediaItems = () => {
 
   function displayItems() {
     return socialMediaItems.map((item) => (
-      <SingleSocialMediaItem key={item.id} onDelete={() => setSelectedSocialMediaLink(item)} {...item} />
+      <SocialMediaCard key={item.id} onDelete={() => setSelectedSocialMediaLink(item)} {...item} />
     ));
   }
 
@@ -63,11 +63,11 @@ const SocialMediaItems = () => {
   );
 };
 
-type SingleSocialMediaItemProps = SocialMediaLink & {
+type SocialMediaCardProps = SocialMediaLink & {
   onDelete: (e: React.MouseEvent) => void;
 };
 
-const SingleSocialMediaItem = ({id, icon, url, onDelete}: SingleSocialMediaItemProps) => {
+const SocialMediaCard = ({id, icon, url, onDelete}: SocialMediaCardProps) => {
   const Icon = getSocialMediaIcon(icon);
 
   return (
