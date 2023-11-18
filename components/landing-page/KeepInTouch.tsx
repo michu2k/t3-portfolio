@@ -33,8 +33,8 @@ const ContactMethodListItem = ({name, description, type}: ContactMethod) => {
       <Icon className="h-5 w-5 fill-slate-600" />
 
       <div className="flex-1">
-        <p className="text-md font-semibold text-slate-700">{name}</p>
-        <p className="text-sm">{description}</p>
+        <p className="text-md font-semibold leading-6 text-slate-700">{name}</p>
+        <p className="text-sm leading-6">{description}</p>
       </div>
     </li>
   );

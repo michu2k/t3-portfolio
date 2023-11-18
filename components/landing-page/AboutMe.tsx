@@ -46,17 +46,17 @@ const AboutMe = () => {
   }
  */
   return (
-    <PageSection id="about" heading="Who Am I?" subheading="About Me">
-      <div className="grid gap-16 md:grid-cols-[20rem_1fr]">
+    <PageSection id="about" heading="Personal Details" subheading="About Me">
+      <div className="flex flex-col gap-16 md:flex-row md:gap-20">
         {imageObj ? (
-          <div className="relative my-auto h-80 rounded-lg after:absolute after:-bottom-2 after:-right-2 after:left-24 after:top-10 after:-z-10 after:rounded-br-2xl after:bg-primary md:h-96">
+          <div className="relative my-auto h-80 flex-shrink-0 rounded-lg after:absolute after:-bottom-2 after:-right-2 after:left-24 after:top-10 after:-z-10 after:rounded-br-2xl after:bg-secondary md:h-96 md:w-80">
             <div className="relative h-full w-full overflow-hidden rounded-lg bg-slate-100">
               <Image src={imageObj.url} fill alt="" style={{objectFit: "cover"}} />
             </div>
           </div>
         ) : null}
 
-        <div>
+        <div className="flex-1">
           <p className="text-md leading-8">{description}</p>
 
           {/* Temporary disabled */}
