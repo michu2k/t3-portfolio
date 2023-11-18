@@ -5,9 +5,9 @@ type ProjectItemFormValues = z.infer<typeof projectItemSchema>;
 
 const projectItemSchema = z.object({
   id: z.string().optional(),
-  name: z.string().min(3, "Name must be at least 3 characters long").max(64, "Name is too long"),
+  name: z.string().min(3, "Name must be at least 3 characters long").max(128, "Name is too long"),
   description: z.string().min(3, "Description must be at least 3 characters long"),
-  shortDescription: z.string().max(480, "Description is too long").nullable().optional(),
+  shortDescription: z.string().max(640, "Description is too long").nullable().optional(),
   image: z
     .custom<FileObj>()
     .optional()
