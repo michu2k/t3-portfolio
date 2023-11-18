@@ -63,7 +63,7 @@ model ContactMethod {
     id          String            @id @default(cuid())
     type        ContactMethodType
     name        String
-    description String
+    description String            @db.Text
     createdAt   DateTime          @default(now())
     updatedAt   DateTime          @updatedAt
 }
@@ -78,7 +78,7 @@ model Snippet {
     id          String      @id @default(cuid())
     type        SnippetType
     name        String
-    value       String
+    value       String      @db.Text
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
 }
@@ -129,8 +129,8 @@ model SocialMediaLink {
 model ProjectItem {
     id               String   @id @default(cuid())
     name             String
-    description      String
-    shortDescription String?
+    description      String   @db.MediumText
+    shortDescription String?  @db.Text
     image            String
     coverImage       String
     createdAt        DateTime @default(now())
