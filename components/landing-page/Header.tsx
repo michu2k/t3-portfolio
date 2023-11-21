@@ -28,11 +28,11 @@ const Header = () => {
           <h1 className="text-4xl font-bold text-slate-900 lg:text-6xl">{heading}</h1>
         </div>
 
-        <p className="text-md md:text-md mb-12 max-w-2xl leading-8">{description}</p>
+        <p className="text-md md:text-md mb-12 max-w-2xl font-medium leading-8">{description}</p>
 
         <Link
           href="#keep-in-touch"
-          className="text-md inline-flex h-12 items-center rounded-full bg-primary px-12 font-semibold text-white transition-colors hover:bg-slate-700">
+          className="text-md inline-flex h-12 items-center rounded-full bg-primary px-12 font-semibold text-white transition-colors hover:bg-secondary hover:text-slate-900">
           Let&apos;s talk
         </Link>
       </div>
