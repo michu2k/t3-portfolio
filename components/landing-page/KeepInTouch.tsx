@@ -34,7 +34,7 @@ const ContactMethodListItem = ({name, description, type}: ContactMethod) => {
 
       <div className="flex-1">
         <p className="text-md font-semibold leading-6 text-slate-700">{name}</p>
-        <p className="text-sm leading-6">{description}</p>
+        <p className="text-xs leading-6">{description}</p>
       </div>
     </li>
   );
