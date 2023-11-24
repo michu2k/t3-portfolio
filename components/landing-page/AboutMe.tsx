@@ -14,18 +14,18 @@ const AboutMe = () => {
   const {data: imageObj} = api.image.getImage.useQuery({id: imageId}, {enabled: !!imageId});
 
   return (
-    <PageSection id="about" heading="Personal Details" subheading="About Me">
-      <div className="flex flex-col gap-16 md:flex-row md:gap-24">
+    <PageSection id="about" heading="Personal Details" subheading="01. About Me">
+      <div className="flex flex-col gap-14 md:flex-row md:items-center">
         {imageObj ? (
-          <div className="relative my-auto h-80 flex-shrink-0 rounded-lg after:absolute after:-bottom-2 after:-right-2 after:left-24 after:top-10 after:-z-10 after:rounded-br-2xl after:bg-secondary md:h-96 md:w-80">
+          <div className="relative my-auto h-48 w-56 flex-shrink-0 rounded-lg after:absolute after:-bottom-2 after:-right-2 after:left-24 after:top-10 after:-z-10 after:rounded-br-2xl after:bg-secondary md:h-80 md:w-72">
             <div className="relative h-full w-full overflow-hidden rounded-lg bg-slate-100">
               <Image src={imageObj.url} fill alt="" style={{objectFit: "cover"}} />
             </div>
           </div>
         ) : null}
 
-        <div className="flex-1">
-          <p className="text-sm leading-8">{description}</p>
+        <div className="max-w-md flex-1">
+          <p className="text-sm leading-7">{description}</p>
         </div>
       </div>
     </PageSection>

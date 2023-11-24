@@ -81,8 +81,8 @@ const ExperienceCard = ({id, company, startDate, endDate, position, onDelete}: E
         <p className="text-sm font-semibold leading-8">{position}</p>
         <p className="text-xs font-medium leading-6 text-slate-500">{company}</p>
         <span className="text-xs leading-6">
-          {startDate ? format(startDate, "MMM yyyy") : "Now"} {" - "}
-          {endDate ? format(endDate, "MMM yyyy") : "Now"}
+          {format(startDate, "MMM yyyy")} {" - "}
+          {endDate ? format(endDate, "MMM yyyy") : "Present"}
         </span>
       </div>
 

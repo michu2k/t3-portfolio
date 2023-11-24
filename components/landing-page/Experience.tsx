@@ -14,7 +14,7 @@ const Experience = () => {
   }
 
   return (
-    <PageSection id="experience" heading="Professional Experience" subheading="Experience">
+    <PageSection id="experience" heading="Professional Experience" subheading="03. Experience">
       <ul className="flex flex-col gap-14">{displayExperience()}</ul>
     </PageSection>
   );
@@ -29,14 +29,14 @@ const ExperienceListItem = ({startDate, endDate, company, position, responsibili
     <li className="flex flex-col items-start gap-4 md:flex-row md:gap-8">
       <div className="flex flex-col justify-center md:min-h-[4rem]">
         <span className="flex-inline min-w-[10rem] rounded-full bg-secondary px-4 py-2 text-center text-xs font-medium text-slate-700">
-          {format(new Date(startDate), "MMM yyyy")} {" - "}
-          {endDate ? format(new Date(endDate), "MMM yyyy") : <strong className="text-primary">Now</strong>}
+          {format(startDate, "MMM yyyy")} {" - "}
+          {endDate ? format(endDate, "MMM yyyy") : <span className="text-primary">Present</span>}
         </span>
       </div>
 
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         <div className="flex flex-col justify-center md:min-h-[4rem]">
-          <p className="text-lg font-semibold leading-8 text-slate-700">{position}</p>
+          <p className="text-lg font-semibold leading-7 text-slate-700">{position}</p>
           <p className="text-sm font-semibold leading-7 text-slate-400">{company}</p>
         </div>
 

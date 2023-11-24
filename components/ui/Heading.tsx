@@ -9,7 +9,7 @@ const headingVariants = cva("text-slate-900", {
       sm: ["font-semibold", "text-sm", "mb-2"],
       md: ["font-semibold", "text-md", "mb-2"],
       lg: ["font-semibold", "text-2xl", "mb-2"],
-      xl: ["font-bold", "text-3xl", "mb-4"]
+      xl: ["font-bold", "text-2xl", "md:text-3xl", "mb-4"]
     }
   }
 });

@@ -18,7 +18,7 @@ const PageSection = ({id, heading, subheading, className, children}: PageSection
         <Heading as="h2" size="xl">
           {heading}
         </Heading>
-        <hr className="mb-12 h-1 w-10 rounded-md border-0 bg-primary" />
+        <hr className="mb-12 h-0.5 w-8 rounded-md border-0 bg-primary" />
         {children}
       </div>
     </section>
