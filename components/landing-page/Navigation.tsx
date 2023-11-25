@@ -131,9 +131,10 @@ const NavigationItem = ({id, href, text, isActive, setActiveItemId, scrollY}: Na
       <Link
         href={href}
         onClick={handleNavigationItemClick}
-        className={`block py-1.5 text-sm font-medium leading-8
+        className={`block rounded-md py-1.5 font-poppins text-sm font-medium leading-8
           ${isActive ? "text-primary" : "text-slate-700"}
-          transition-colors`}>
+          transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400
+          focus-visible:ring-offset-2`}>
         {text}
       </Link>
 

@@ -12,9 +12,9 @@ type PageSectionProps = PropsWithChildren<{
 
 const PageSection = ({id, heading, subheading, className, children}: PageSectionProps) => {
   return (
-    <section id={id} className={cn("rounded px-4 py-16 md:px-6 md:py-24", className)}>
+    <section id={id} className={cn("px-4 py-16 md:px-6 md:py-24", className)}>
       <div className="section-container">
-        <p className="text-md mb-2 font-semibold text-primary">{subheading}</p>
+        <p className="text-md mb-2 font-poppins font-semibold text-primary">{subheading}</p>
         <Heading as="h2" size="xl">
           {heading}
         </Heading>

@@ -19,7 +19,7 @@ const KeepInTouch = () => {
 
   return (
     <PageSection id="keep-in-touch" heading="Have Some Questions?" subheading="04. Keep in touch">
-      <p className="mb-10 max-w-xl text-sm leading-7">{description}</p>
+      <p className="text-md mb-10 max-w-xl leading-7">{description}</p>
       <ul className="flex flex-col gap-8">{displayContactItems()}</ul>
     </PageSection>
   );
@@ -33,8 +33,8 @@ const ContactMethodListItem = ({name, description, type}: ContactMethod) => {
       <Icon className="h-5 w-5 fill-slate-600" />
 
       <div className="flex-1">
-        <p className="text-md font-semibold leading-6 text-slate-700">{name}</p>
-        <p className="text-xs leading-6">{description}</p>
+        <p className="text-md font-poppins font-semibold leading-7 text-slate-700">{name}</p>
+        <p className="text-sm leading-7">{description}</p>
       </div>
     </li>
   );

@@ -3,7 +3,7 @@ import React from "react";
 import {cva, type VariantProps} from "class-variance-authority";
 import {cn} from "~/utils/className";
 
-const headingVariants = cva("text-slate-900", {
+const headingVariants = cva("font-poppins text-slate-900", {
   variants: {
     size: {
       sm: ["font-semibold", "text-sm", "mb-2"],

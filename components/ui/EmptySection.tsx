@@ -13,7 +13,7 @@ const EmptySection = React.forwardRef<HTMLDivElement, EmptySectionProps>(({headi
         <ScrollIcon size={56} strokeWidth={1} />
 
         <div className="flex flex-1 flex-col gap-2">
-          <p className="text-sm font-semibold">{heading}</p>
+          <p className="font-poppins text-sm font-semibold">{heading}</p>
           <p className="text-xs leading-5 text-slate-500">
             {description ?? "You don't have any items yet. Add new items by clicking the action below."}
           </p>

@@ -77,7 +77,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onDel
       </div>
 
       <div className="mr-4 flex flex-1 flex-col items-start">
-        <p className="mr-2 text-sm font-semibold leading-6">{name}</p>
+        <p className="mr-2 font-poppins text-sm font-semibold leading-6">{name}</p>
         <p className="text-xs leading-6 text-slate-500">
           {itemDescription}
           {descriptionLength > MAX_TEXT_LENGTH && "..."}

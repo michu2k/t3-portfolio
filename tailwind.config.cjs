@@ -9,7 +9,8 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Poppins", ...defaultTheme.fontFamily.sans]
+        sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
+        poppins: ["var(--font-poppins)", ...defaultTheme.fontFamily.sans]
       },
       colors: {
         primary: "#3b82f6", // blue.500

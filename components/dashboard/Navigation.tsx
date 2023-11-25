@@ -99,7 +99,7 @@ const NavigationItem = ({text, href, icon: Icon, isActive}: NavigationItemProps)
       <Link
         href={url}
         className={`
-          flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium leading-5
+          flex items-center gap-3 rounded-lg px-3 py-3 font-poppins text-sm font-medium leading-5
           ${isActive ? "bg-slate-100 text-primary" : "text-slate-700"}
           transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2
         `}>
