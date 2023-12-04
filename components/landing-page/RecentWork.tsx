@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import {ArrowUpRightIcon} from "lucide-react";
 import Link from "next/link";
+import {ArrowUpRightIcon} from "lucide-react";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {PageSection} from "~/components/ui/PageSection";
 import {buttonVariants} from "~/components/ui/Button";
@@ -17,7 +17,7 @@ const RecentWork = () => {
 
   return (
     <PageSection id="recent-work" heading="My Recent Work" subheading="02. Projects">
-      <div className="grid gap-8 md:gap-x-10 lg:grid-cols-3">{displayRecentWorkItems()}</div>
+      <div className="flex flex-col gap-14 md:gap-20">{displayRecentWorkItems()}</div>
     </PageSection>
   );
 };
@@ -26,24 +26,21 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
   const projectUrl = `/projects/${id}`;
 
   return (
-    <article className="group flex w-auto max-w-2xl shrink-0 break-inside-avoid-column flex-col gap-4">
-      <div className="relative h-48 w-full shrink-0 overflow-hidden rounded-lg bg-slate-100 md:h-44 md:w-full">
-        <Image src={coverImage.url} fill style={{objectFit: "cover"}} alt="" />
+    <article className="group flex w-auto shrink-0 break-inside-avoid-column flex-col gap-12 sm:flex-row md:gap-16">
+      <div className="relative h-52 w-full max-w-md shrink-0 rounded-lg bg-slate-100 after:absolute after:left-3 after:top-3 after:-z-10 after:h-full after:w-full after:rounded-lg after:border-2 after:border-secondary sm:w-60 md:h-64 md:w-80 md:after:left-5 md:after:top-5">
+        <Image src={coverImage.url} fill style={{objectFit: "cover"}} className="rounded-lg" alt="" />
       </div>
 
-      <div className="flex flex-col items-start gap-4">
+      <div className="flex h-full w-full flex-1 flex-col justify-center gap-4 py-2 md:py-6">
         <p className="font-poppins text-lg font-semibold text-slate-700">{name}</p>
 
-        <p className="line-clamp-4 overflow-hidden text-ellipsis text-sm leading-7">
+        <p className="line-clamp-4 max-w-lg overflow-hidden text-ellipsis text-sm leading-7">
           {shortDescription || description}
         </p>
 
         <Link
           href={projectUrl}
-          className={cn(
-            buttonVariants({variant: "outline", size: "sm"}),
-            "h-8 gap-2 rounded-full px-4 group-hover:text-primary"
-          )}>
+          className={cn(buttonVariants({variant: "secondary", size: "md"}), "mt-auto w-32 gap-2 rounded-full px-4")}>
           <ArrowUpRightIcon className="h-4 w-4" aria-hidden="true" />
           <span className="font-poppins text-sm font-medium">Preview</span>
         </Link>

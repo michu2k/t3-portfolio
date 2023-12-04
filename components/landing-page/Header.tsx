@@ -14,12 +14,14 @@ const Header = () => {
 
   return (
     <header id="top" className="px-4 pb-14 pt-10 md:px-6">
-      <div className="section-container flex min-h-[30rem] flex-col items-start justify-center">
+      <div className="section-container flex min-h-[32rem] flex-col items-start justify-center">
         <div className="mb-8 flex w-full flex-col gap-8 md:flex-row md:items-center">
-          <h1 className="font-poppins text-4xl font-bold text-slate-900 md:text-5xl lg:text-6xl">{heading}</h1>
+          <h1 className="font-poppins text-5xl font-bold leading-tight text-slate-900 md:text-6xl lg:text-7xl">
+            {heading}
+          </h1>
         </div>
 
-        <p className="text-md mb-12 max-w-2xl leading-7">{description}</p>
+        <p className="text-md mb-12 max-w-2xl leading-8">{description}</p>
 
         <Link
           href="#keep-in-touch"
