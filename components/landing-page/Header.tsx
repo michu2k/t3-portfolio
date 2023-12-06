@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import {MoveRightIcon} from "lucide-react";
 import {api} from "~/utils/api";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {getSnippetValues} from "~/hooks/useSnippets";
@@ -23,10 +24,9 @@ const Header = () => {
 
         <p className="text-md mb-12 max-w-2xl leading-8">{description}</p>
 
-        <Link
-          href="#keep-in-touch"
-          className={cn(buttonVariants({variant: "lp-primary", size: "md"}), "text-md h-12 px-12")}>
-          Let&apos;s talk
+        <Link href="#recent-work" className={cn(buttonVariants({variant: "secondary", size: "md"}), "h-12 gap-6 px-8")}>
+          See my work
+          <MoveRightIcon size={20} />
         </Link>
       </div>
     </header>

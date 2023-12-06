@@ -27,7 +27,7 @@ const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
       <main
         className={`${inter.variable} ${poppins.variable} mx-auto flex min-h-full items-center justify-center px-4`}>
         <section className="w-full max-w-[20rem]">
-          <header className="flex flex-col items-center">
+          <header className="flex flex-col items-center gap-4">
             <Heading as="h1" size="xl">
               Sign In
             </Heading>

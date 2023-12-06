@@ -19,7 +19,7 @@ const KeepInTouch = () => {
 
   return (
     <PageSection id="keep-in-touch" heading="Have Some Questions?" subheading="04. Keep in touch">
-      <p className="text-md mb-10 max-w-xl leading-8">{description}</p>
+      <p className="text-md mb-10 max-w-2xl leading-8">{description}</p>
       <ul className="flex flex-col gap-8">{displayContactItems()}</ul>
     </PageSection>
   );

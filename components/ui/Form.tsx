@@ -58,7 +58,7 @@ const FormLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive.Root>,
       <LabelPrimitive.Root
         ref={ref}
         htmlFor={formItemId}
-        className={cn("mb-3 block font-poppins text-sm font-semibold leading-5 text-slate-700", className)}
+        className={cn("block pb-3 font-poppins text-sm font-semibold leading-5 text-slate-700", className)}
         {...props}>
         {children}
         {isOptional && (
@@ -100,7 +100,7 @@ const FormDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttribu
       <p
         ref={ref}
         id={formDescriptionId}
-        className={cn("mt-2 text-xs leading-5 text-slate-500", className)}
+        className={cn("pt-3 text-xs leading-5 text-slate-500", className)}
         {...props}
       />
     );

@@ -53,14 +53,14 @@ const Layout = ({heading, description, children}: LayoutProps) => {
       </Sidebar>
 
       <section className="flex-1 px-4 pb-10 pt-2 md:p-10">
-        <header className="border-b-[1px] border-slate-200 lg:max-w-2xl">
+        <header className="border-b border-slate-200 lg:max-w-2xl">
           <Heading as="h1" size="lg">
             {heading}
           </Heading>
-          <p className="mb-6 text-sm leading-6 text-slate-500">{description}</p>
+          <p className="pb-6 text-sm leading-6 text-slate-500">{description}</p>
         </header>
 
-        <div className="mt-6 flex flex-col lg:flex-row lg:gap-12">
+        <div className="flex flex-col pt-6 lg:flex-row lg:gap-12">
           <div className="flex-1 lg:max-w-2xl">{children}</div>
         </div>
       </section>

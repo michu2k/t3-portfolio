@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {ArrowUpRightIcon} from "lucide-react";
+import {MoveRightIcon} from "lucide-react";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {PageSection} from "~/components/ui/PageSection";
 import {buttonVariants} from "~/components/ui/Button";
@@ -26,23 +26,21 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
   const projectUrl = `/projects/${id}`;
 
   return (
-    <article className="group flex w-auto shrink-0 break-inside-avoid-column flex-col gap-12 sm:flex-row md:gap-16">
-      <div className="relative h-52 w-full max-w-md shrink-0 rounded-lg bg-slate-100 after:absolute after:left-3 after:top-3 after:-z-10 after:h-full after:w-full after:rounded-lg after:border-2 after:border-secondary sm:w-60 md:h-64 md:w-80 md:after:left-5 md:after:top-5">
+    <article className="group flex w-auto max-w-4xl shrink-0 break-inside-avoid-column flex-col gap-14 sm:flex-row">
+      <div className="relative h-52 w-full max-w-md shrink-0 rounded-lg sm:h-48 sm:w-64">
         <Image src={coverImage.url} fill style={{objectFit: "cover"}} className="rounded-lg" alt="" />
       </div>
 
-      <div className="flex h-full w-full flex-1 flex-col justify-center gap-4 py-2 md:py-6">
-        <p className="font-poppins text-lg font-semibold text-slate-700">{name}</p>
+      <div className="flex h-full w-full flex-1 flex-col justify-center gap-4">
+        <p className="font-poppins text-xl font-semibold text-slate-700">{name}</p>
 
-        <p className="line-clamp-4 max-w-lg overflow-hidden text-ellipsis text-sm leading-7">
+        <p className="text-md line-clamp-4 overflow-hidden text-ellipsis leading-8">
           {shortDescription || description}
         </p>
 
-        <Link
-          href={projectUrl}
-          className={cn(buttonVariants({variant: "secondary", size: "md"}), "mt-auto w-32 gap-2 rounded-full px-4")}>
-          <ArrowUpRightIcon className="h-4 w-4" aria-hidden="true" />
-          <span className="font-poppins text-sm font-medium">Preview</span>
+        <Link href={projectUrl} className={cn(buttonVariants({variant: "secondary", size: "md"}), "w-32 gap-6")}>
+          Preview
+          <MoveRightIcon size={20} />
         </Link>
       </div>
     </article>

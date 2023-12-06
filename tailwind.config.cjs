@@ -13,8 +13,7 @@ const config = {
         poppins: ["var(--font-poppins)", ...defaultTheme.fontFamily.sans]
       },
       colors: {
-        primary: "#3b82f6", // blue.500
-        secondary: "#dbeafe" // blue.100
+        primary: "#3b82f6" // blue.500
       }
     }
   },

@@ -176,7 +176,7 @@ const ExperienceItemForm = () => {
 
         <FormItem>
           <FormLabel isOptional>Responsibilities</FormLabel>
-          <FormDescription className="mb-2">
+          <FormDescription className="pb-3 pt-0">
             Add the responsibilities you had while working at this position.
           </FormDescription>
 
