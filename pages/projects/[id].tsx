@@ -11,6 +11,7 @@ import {cn} from "~/utils/className";
 import {buttonVariants} from "~/components/ui/Button";
 import {Footer} from "~/components/landing-page/Footer";
 import {Navigation} from "~/components/landing-page/Navigation";
+import {inter, poppins} from "../_app";
 
 const Page: NextPage = () => {
   const {query} = useRouter();
@@ -22,7 +23,7 @@ const Page: NextPage = () => {
 
   const {name, image, description} = data || {};
   const githubUrl = "";
-  const websiteUrl = "";
+  // const websiteUrl = "";
 
   return (
     <>
@@ -30,17 +31,17 @@ const Page: NextPage = () => {
         <title>T3 Portfolio: {name}</title>
       </Head>
 
-      <main className="mx-auto min-h-full">
+      <main className={`${inter.variable} ${poppins.variable} mx-auto min-h-full`}>
         <Navigation />
 
         <header id="top" className="px-4 pb-14 pt-10 md:px-6">
-          <div className="mx-auto flex w-full max-w-3xl flex-col items-start justify-center gap-8 md:min-h-[16rem]">
+          <div className="section-container flex flex-col items-start justify-center gap-8 md:min-h-[16rem]">
             <h1 className="font-poppins text-4xl font-bold text-slate-900 md:text-5xl lg:text-6xl">{name}</h1>
           </div>
         </header>
 
         <section className="px-4 md:px-6">
-          <div className="section-container w-full max-w-3xl">
+          <div className="section-container">
             <div className="relative h-[20rem] shrink-0 overflow-hidden rounded-lg bg-slate-100 md:h-[30rem]">
               {image && (
                 <Image
@@ -56,7 +57,7 @@ const Page: NextPage = () => {
         </section>
 
         <section className="px-4 py-14 md:px-6">
-          <div className="mx-auto w-full max-w-3xl">
+          <div className="section-container">
             <Heading as="h2" size="lg" className="mb-8">
               Description
             </Heading>
@@ -65,15 +66,15 @@ const Page: NextPage = () => {
         </section>
 
         <section className="px-4 pb-14 md:px-6">
-          <div className="mx-auto w-full max-w-3xl">
+          <div className="section-container">
             <Heading as="h2" size="lg" className="mb-8">
               See live
             </Heading>
 
-            <div className="mx-auto flex w-full max-w-3xl gap-4">
+            <div className="mx-auto flex w-full gap-4">
               <a
                 href={githubUrl}
-                className={cn(buttonVariants({variant: "lp-primary", size: "md"}), "gap-3 px-6")}
+                className={cn(buttonVariants({variant: "secondary", size: "md"}), "gap-3 px-8")}
                 target="_blank"
                 rel="noopener noreferrer">
                 <GithubSvg className="h-4 w-4" aria-hidden="true" />
@@ -82,7 +83,7 @@ const Page: NextPage = () => {
 
               <a
                 href={githubUrl}
-                className={cn(buttonVariants({variant: "lp-primary", size: "md"}), "gap-3 px-6")}
+                className={cn(buttonVariants({variant: "secondary", size: "md"}), "gap-3 px-8")}
                 target="_blank"
                 rel="noopener noreferrer">
                 <GlobeIcon className="h-4 w-4" aria-hidden="true" />
@@ -92,7 +93,7 @@ const Page: NextPage = () => {
           </div>
         </section>
 
-        <Footer className="max-w-3xl" />
+        <Footer />
       </main>
     </>
   );
