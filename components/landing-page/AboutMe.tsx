@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import {PageSection} from "~/components/ui/PageSection";
-import {api} from "~/utils/api";
 import {getSnippetValues} from "~/hooks/useSnippets";
+import {api} from "~/utils/api";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/aboutMe";
 
 const AboutMe = () => {

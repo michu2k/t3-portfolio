@@ -1,8 +1,8 @@
 import React from "react";
-import {PageSection} from "~/components/ui/PageSection";
 import {format} from "date-fns";
-import {api} from "~/utils/api";
 import type {ExperienceItem, ExperienceItemResponsibility} from "@prisma/client";
+import {PageSection} from "~/components/ui/PageSection";
+import {api} from "~/utils/api";
 
 const Experience = () => {
   const {data: experienceItems = []} = api.experience.getItems.useQuery({

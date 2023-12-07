@@ -1,9 +1,9 @@
 import React from "react";
-import {PageSection} from "~/components/ui/PageSection";
-import {api} from "~/utils/api";
 import type {ContactMethod} from "@prisma/client";
-import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
+import {PageSection} from "~/components/ui/PageSection";
 import {getSnippetValues} from "~/hooks/useSnippets";
+import {api} from "~/utils/api";
+import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {getContactIcon} from "~/utils/getContactIcon";
 
 const KeepInTouch = () => {

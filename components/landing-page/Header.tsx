@@ -4,7 +4,7 @@ import {MoveRightIcon} from "lucide-react";
 import {api} from "~/utils/api";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {getSnippetValues} from "~/hooks/useSnippets";
-import {buttonVariants} from "../ui/Button";
+import {buttonVariants} from "~/components/ui/Button";
 import {cn} from "~/utils/className";
 
 const Header = () => {
