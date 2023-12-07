@@ -1,34 +1,19 @@
 import React, {memo} from "react";
+import type {SocialMediaLink} from "@prisma/client";
 import {cn} from "~/utils/className";
 import {capitalize} from "~/utils/capitalize";
-import {getSocialMediaIcon} from "~/utils/getSocialMediaIcons";
-
-const socialMedia: Array<SocialMediaItemProps> = [
-  {
-    icon: "github",
-    url: "https://github.com/"
-  },
-  {
-    icon: "linkedIn",
-    url: "https://www.linkedin.com/"
-  },
-  {
-    icon: "twitter",
-    url: "https://twitter.com/"
-  },
-  {
-    icon: "instagram",
-    url: "https://www.instagram.com/"
-  }
-];
+import {getSocialMediaIcon} from "~/utils/getSocialMediaIcon";
+import {api} from "~/utils/api";
 
 type SocialMediaProps = {
   className?: string;
 };
 
 const SocialMedia = memo(({className}: SocialMediaProps) => {
+  const {data: socialMediaItems = []} = api.socialMedia.getItems.useQuery();
+
   function displaySocialMediaIcons() {
-    return socialMedia.map((item, idx) => <SocialMediaItem key={idx} {...item} />);
+    return socialMediaItems.map((item) => <SocialMediaItem key={item.id} {...item} />);
   }
 
   return (
@@ -40,19 +25,14 @@ const SocialMedia = memo(({className}: SocialMediaProps) => {
 
 SocialMedia.displayName = "SocialMedia";
 
-type SocialMediaItemProps = {
-  icon: string;
-  url: string;
-};
-
-const SocialMediaItem = ({icon, url}: SocialMediaItemProps) => {
+const SocialMediaItem = ({icon, url}: SocialMediaLink) => {
   const Icon = getSocialMediaIcon(icon);
 
   return (
     <li>
       <a
         href={url}
-        className="group flex h-6 w-6 items-center justify-center"
+        className="group flex h-6 w-6 items-center justify-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
         rel="noopener noreferrer"
         target="_blank">
         <Icon

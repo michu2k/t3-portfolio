@@ -5,14 +5,12 @@ import defaultTheme from "tailwindcss/defaultTheme";
  */
 const config = {
   darkMode: "class",
-  content: [
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}"
-  ],
+  content: ["./components/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Poppins", ...defaultTheme.fontFamily.sans]
+        sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
+        poppins: ["var(--font-poppins)", ...defaultTheme.fontFamily.sans]
       },
       colors: {
         primary: "#3b82f6" // blue.500

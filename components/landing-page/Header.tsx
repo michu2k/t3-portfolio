@@ -1,32 +1,32 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-
-const image = "https://picsum.photos/id/821/4403/2476";
+import {MoveRightIcon} from "lucide-react";
+import {api} from "~/utils/api";
+import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
+import {getSnippetValues} from "~/hooks/useSnippets";
+import {buttonVariants} from "~/components/ui/Button";
+import {cn} from "~/utils/className";
 
 const Header = () => {
-  return (
-    <header id="top" className="px-4 pb-16 pt-10 md:px-6">
-      <div className="section-container flex min-h-[34rem] flex-col items-start justify-center">
-        <div className="mb-8 flex w-full flex-col gap-8 md:flex-row md:items-center">
-          <div className="relative my-auto flex h-28 w-28 items-center justify-center after:absolute after:-left-2 after:-top-2 after:-z-10 after:h-32 after:w-32 after:rounded-full after:border-8 after:border-transparent after:border-r-primary after:border-t-primary">
-            <div className="relative h-28 w-28 overflow-hidden rounded-full bg-slate-100">
-              <Image src={image} fill alt="" style={{objectFit: "cover"}} />
-            </div>
-          </div>
+  const {data = []} = api.snippet.getSnippets.useQuery({type: "HEADER", keys: ["heading", "description"]});
 
-          <h1 className="text-4xl font-bold text-slate-900 lg:text-6xl">Hi! I&apos;m Allison</h1>
+  const snippetValues = getSnippetValues<keyof HeaderSnippetsFormValues>(data);
+  const {heading = "", description = ""} = snippetValues;
+
+  return (
+    <header id="top" className="px-4 pb-14 pt-10 md:px-6">
+      <div className="section-container flex min-h-[32rem] flex-col items-start justify-center">
+        <div className="mb-8 flex w-full flex-col gap-8 md:flex-row md:items-center">
+          <h1 className="font-poppins text-5xl font-bold leading-tight text-slate-900 md:text-6xl lg:text-7xl">
+            {heading}
+          </h1>
         </div>
 
-        <p className="text-md mb-12 max-w-3xl leading-8">
-          Full-time <strong>JavaScript</strong> developer specialized in creating dynamic and user-friendly web
-          applications using modern techniques and tools.
-        </p>
+        <p className="text-md mb-12 max-w-2xl leading-8">{description}</p>
 
-        <Link
-          href="#keep-in-touch"
-          className="text-md inline-flex h-12 items-center rounded-full bg-primary px-12 font-semibold text-white transition-colors hover:bg-slate-700">
-          Let&apos;s talk
+        <Link href="#recent-work" className={cn(buttonVariants({variant: "secondary", size: "md"}), "h-12 gap-6 px-8")}>
+          See my work
+          <MoveRightIcon size={20} />
         </Link>
       </div>
     </header>

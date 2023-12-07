@@ -3,6 +3,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import {XIcon} from "lucide-react";
 
 import {cn} from "~/utils/className";
+import {poppins} from "~/pages/_app";
 
 const Dialog = DialogPrimitive.Root;
 
@@ -41,6 +42,7 @@ const DialogContent = React.forwardRef<
       <DialogPrimitive.Content
         ref={ref}
         className={cn(
+          poppins.variable,
           "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] fixed left-[50%] top-[50%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] p-4",
           className
         )}
@@ -83,7 +85,7 @@ const DialogTitle = React.forwardRef<
   return (
     <DialogPrimitive.Title
       ref={ref}
-      className={cn("text-lg font-semibold tracking-tight text-slate-900", className)}
+      className={cn("font-poppins text-lg font-semibold tracking-tight text-slate-900", className)}
       {...props}
     />
   );

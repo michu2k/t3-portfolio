@@ -4,7 +4,7 @@ import {FileX2Icon} from "lucide-react";
 import {useRouter} from "next/router";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Button} from "~/components/ui/Button";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
+import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
 import {Textarea} from "~/components/ui/Textarea";
 import {Dropzone} from "~/components/ui/Dropzone";
@@ -103,6 +103,7 @@ const ProjectItemForm = () => {
                 <Textarea {...field} value={field.value ?? ""} placeholder="Enter item description here" />
               </FormControl>
               <FormMessage />
+              <FormDescription>If not provided, a description will be used instead.</FormDescription>
             </FormItem>
           )}
         />

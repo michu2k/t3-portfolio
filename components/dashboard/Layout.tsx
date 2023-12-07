@@ -7,6 +7,7 @@ import {Navigation} from "~/components/dashboard/Navigation";
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/Avatar";
 import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/Sidebar";
 import {getUserInitials} from "~/utils/getUserInitials";
+import {inter, poppins} from "~/pages/_app";
 
 type LayoutProps = PropsWithChildren<{
   heading: string;
@@ -21,7 +22,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
   const {name, image, email} = sessionData?.user || {};
 
   return (
-    <main className="mx-auto min-h-full md:flex">
+    <main className={`${inter.variable} ${poppins.variable} mx-auto min-h-full md:flex`}>
       <Sidebar>
         <div className="sticky top-0 z-30 flex h-14 items-center justify-center bg-white px-4 md:hidden">
           <SidebarTrigger className="absolute left-4 top-4" />
@@ -40,7 +41,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
             </Avatar>
 
             <div className="min-w-0">
-              <p className="overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium text-slate-700">
+              <p className="overflow-hidden text-ellipsis whitespace-nowrap font-poppins text-sm font-medium text-slate-700">
                 {name}
               </p>
               <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs text-slate-500">{email}</p>
@@ -52,14 +53,14 @@ const Layout = ({heading, description, children}: LayoutProps) => {
       </Sidebar>
 
       <section className="flex-1 px-4 pb-10 pt-2 md:p-10">
-        <header className="border-b-[1px] border-slate-200 lg:max-w-2xl">
+        <header className="border-b border-slate-200 lg:max-w-2xl">
           <Heading as="h1" size="lg">
             {heading}
           </Heading>
-          <p className="mb-6 text-sm leading-6 text-slate-500">{description}</p>
+          <p className="pb-6 text-sm leading-6 text-slate-500">{description}</p>
         </header>
 
-        <div className="mt-6 flex flex-col lg:flex-row lg:gap-12">
+        <div className="flex flex-col pt-6 lg:flex-row lg:gap-12">
           <div className="flex-1 lg:max-w-2xl">{children}</div>
         </div>
       </section>

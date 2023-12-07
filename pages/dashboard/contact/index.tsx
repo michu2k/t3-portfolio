@@ -17,7 +17,7 @@ const Page: NextPage = () => {
 
       <Layout heading="Contact" description="Contact section settings">
         <ContactForm />
-        <Separator className="my-8" />
+        <Separator className="my-8 h-px" />
         <ContactItems />
       </Layout>
     </>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {FormProvider, useFieldArray, useForm} from "react-hook-form";
 import {format} from "date-fns";
 import {useRouter} from "next/router";
@@ -22,6 +22,7 @@ const ExperienceItemForm = () => {
   const {data} = api.experience.getItem.useQuery({id: itemId});
   const createItemMutation = api.experience.createItem.useMutation();
   const updateItemMutation = api.experience.updateItem.useMutation();
+  const {responsibilities = []} = data || {};
 
   const formMethods = useForm<ExperienceItemFormValues>({
     defaultValues: {
@@ -31,19 +32,24 @@ const ExperienceItemForm = () => {
       endDate: undefined,
       responsibilities: [newResponsibilityItem]
     },
-    values: data
-      ? {...data, responsibilities: data.responsibilities.length ? data.responsibilities : [newResponsibilityItem]}
-      : undefined,
+    values: data ? {...data, responsibilities: [newResponsibilityItem]} : undefined,
     resolver: zodResolver(experienceItemSchema)
   });
 
-  const {control, handleSubmit, setValue, watch} = formMethods;
-  const [startDate, endDate] = watch(["startDate", "endDate"]);
+  const {control, handleSubmit, watch} = formMethods;
+  const startDate = watch("startDate");
 
-  const {fields, append, remove} = useFieldArray({
+  const {fields, append, remove, replace} = useFieldArray({
     control,
     name: "responsibilities"
   });
+
+  // Pass initial values to form
+  useEffect(() => {
+    if (responsibilities.length) {
+      replace(responsibilities);
+    }
+  }, [responsibilities, replace]);
 
   async function handleFormSubmit(
     {responsibilities: formResponsibilities, ...formValues}: ExperienceItemFormValues,
@@ -99,63 +105,78 @@ const ExperienceItemForm = () => {
           )}
         />
 
-        <div className="sm:flex sm:items-center sm:gap-4">
-          <FormItem className="max-w-[14rem] flex-1">
-            <FormLabel isOptional>From</FormLabel>
+        <div className="sm:flex sm:gap-4">
+          <FormField
+            control={control}
+            name="startDate"
+            render={({field: {value, onChange}}) => (
+              <FormItem className="max-w-[14rem] flex-1">
+                <FormLabel>From</FormLabel>
 
-            <Popover>
-              <PopoverTrigger asChild>
-                <FormControl>
-                  <Button variant="outline" className="w-full font-normal">
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    <span className="flex-1">{startDate ? format(startDate, "LLL dd, y") : "Pick start date"}</span>
-                  </Button>
-                </FormControl>
-              </PopoverTrigger>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button variant="outline" className="w-full font-normal">
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        <span className="flex-1">{value ? format(value, "LLL dd, y") : "Pick start date"}</span>
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
 
-              <PopoverContent className="w-auto p-0" align="start" side="bottom">
-                <Calendar
-                  initialFocus
-                  captionLayout="dropdown"
-                  mode="single"
-                  defaultMonth={startDate || undefined}
-                  selected={startDate || undefined}
-                  onSelect={(date) => setValue("startDate", date)}
-                />
-              </PopoverContent>
-            </Popover>
-          </FormItem>
+                  <FormMessage />
+                  <PopoverContent className="w-auto p-0" align="start" side="bottom">
+                    <Calendar
+                      initialFocus
+                      captionLayout="dropdown"
+                      mode="single"
+                      defaultMonth={value || undefined}
+                      selected={value || undefined}
+                      onSelect={(date) => onChange(date)}
+                    />
+                  </PopoverContent>
+                </Popover>
+              </FormItem>
+            )}
+          />
 
-          <FormItem className="max-w-[14rem] flex-1">
-            <FormLabel isOptional>To</FormLabel>
+          <FormField
+            control={control}
+            name="endDate"
+            render={({field: {value, onChange}}) => (
+              <FormItem className="max-w-[14rem] flex-1">
+                <FormLabel isOptional>To</FormLabel>
 
-            <Popover>
-              <PopoverTrigger asChild>
-                <FormControl>
-                  <Button variant="outline" className="w-full font-normal">
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    <span className="flex-1">{endDate ? format(endDate, "LLL dd, y") : "Pick end date"}</span>
-                  </Button>
-                </FormControl>
-              </PopoverTrigger>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button variant="outline" className="w-full font-normal">
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        <span className="flex-1">{value ? format(value, "LLL dd, y") : "Pick end date"}</span>
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
 
-              <PopoverContent className="w-auto p-0" align="start" side="bottom">
-                <Calendar
-                  initialFocus
-                  mode="single"
-                  defaultMonth={endDate || undefined}
-                  selected={endDate || undefined}
-                  onSelect={(date) => setValue("endDate", date)}
-                  disabled={{after: new Date()}}
-                />
-              </PopoverContent>
-            </Popover>
-          </FormItem>
+                  <FormMessage />
+                  <PopoverContent className="w-auto p-0" align="start" side="bottom">
+                    <Calendar
+                      initialFocus
+                      captionLayout="dropdown"
+                      mode="single"
+                      defaultMonth={value || undefined}
+                      selected={value || undefined}
+                      onSelect={(date) => onChange(date)}
+                      disabled={{before: startDate ? new Date(startDate) : new Date()}}
+                    />
+                  </PopoverContent>
+                </Popover>
+              </FormItem>
+            )}
+          />
         </div>
 
         <FormItem>
           <FormLabel isOptional>Responsibilities</FormLabel>
-          <FormDescription className="mb-2">
+          <FormDescription className="pb-3 pt-0">
             Add the responsibilities you had while working at this position.
           </FormDescription>
 
