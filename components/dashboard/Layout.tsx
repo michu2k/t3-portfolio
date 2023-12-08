@@ -44,7 +44,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
               <p className="overflow-hidden text-ellipsis whitespace-nowrap font-poppins text-sm font-medium text-slate-700">
                 {name}
               </p>
-              <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs text-slate-500">{email}</p>
+              <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs">{email}</p>
             </div>
           </div>
 
@@ -57,7 +57,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
           <Heading as="h1" size="lg">
             {heading}
           </Heading>
-          <p className="pb-6 text-sm leading-6 text-slate-500">{description}</p>
+          <p className="pb-6 text-sm leading-6">{description}</p>
         </header>
 
         <div className="flex flex-col pt-6 lg:flex-row lg:gap-12">

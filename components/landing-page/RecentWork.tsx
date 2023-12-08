@@ -27,7 +27,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
 
   return (
     <article className="group flex w-auto max-w-4xl shrink-0 break-inside-avoid-column flex-col gap-14 sm:flex-row">
-      <div className="relative h-52 w-full max-w-md shrink-0 rounded-lg sm:h-48 sm:w-64">
+      <div className="relative h-52 w-full max-w-md shrink-0 rounded-lg sm:w-64 md:w-72">
         <Image src={coverImage.url} fill style={{objectFit: "cover"}} className="rounded-lg" alt="" />
       </div>
 

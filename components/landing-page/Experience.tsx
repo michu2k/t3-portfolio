@@ -28,7 +28,7 @@ const ExperienceListItem = ({startDate, endDate, company, position, responsibili
   return (
     <li className="flex flex-col items-start gap-2 md:flex-row md:gap-8">
       <div className="flex flex-col justify-center md:min-h-[2rem]">
-        <span className="flex-inline min-w-[10rem] font-poppins text-sm font-semibold text-slate-500">
+        <span className="flex-inline min-w-[10rem] font-poppins text-sm font-semibold">
           {format(startDate, "MMM yyyy")} {" - "}
           {endDate ? format(endDate, "MMM yyyy") : "Present"}
         </span>

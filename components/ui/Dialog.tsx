@@ -67,13 +67,13 @@ const DialogContent = React.forwardRef<
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
 const DialogHeader = ({className, ...props}: React.HTMLAttributes<HTMLDivElement>) => {
-  return <div className={cn("mb-6 flex flex-col justify-center space-y-4 text-center", className)} {...props} />;
+  return <div className={cn("flex flex-col justify-center space-y-4 pb-6 text-center", className)} {...props} />;
 };
 
 DialogHeader.displayName = "DialogHeader";
 
 const DialogFooter = ({className, ...props}: React.HTMLAttributes<HTMLDivElement>) => {
-  return <div className={cn("mt-6 flex items-center justify-center gap-3", className)} {...props} />;
+  return <div className={cn("flex items-center justify-center gap-3 pt-6", className)} {...props} />;
 };
 
 DialogFooter.displayName = "DialogFooter";

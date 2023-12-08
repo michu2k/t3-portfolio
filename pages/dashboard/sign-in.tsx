@@ -31,7 +31,7 @@ const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
             <Heading as="h1" size="xl">
               Sign In
             </Heading>
-            <p className="text-center text-sm text-slate-500">Sign In to the dashboard</p>
+            <p className="text-center text-sm">Sign In to the dashboard</p>
           </header>
 
           <div className="flex flex-col justify-center gap-4 pb-12 pt-8">
@@ -43,7 +43,7 @@ const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
               </div>
 
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-white px-2 text-slate-500">Or</span>
+                <span className="bg-white px-2">Or</span>
               </div>
             </div>
 
@@ -53,7 +53,7 @@ const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
           </div>
 
           <footer className="flex flex-col items-center">
-            <span className="text-xs text-slate-500">Dashboard v{pkg.version}</span>
+            <span className="text-xs text-slate-400">Dashboard v{pkg.version}</span>
           </footer>
         </section>
       </main>
