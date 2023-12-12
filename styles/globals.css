@@ -21,6 +21,6 @@ body {
     @apply w-full;
     @apply max-w-xl;
     @apply mx-auto;
-    @apply md:max-w-5xl;
+    @apply md:max-w-6xl;
   }
 }

@@ -24,7 +24,7 @@ const AboutMe = () => {
           </div>
         ) : null}
 
-        <div className="flex-1">
+        <div className="max-w-lg flex-1">
           <p className="text-md leading-8">{description}</p>
         </div>
       </div>
