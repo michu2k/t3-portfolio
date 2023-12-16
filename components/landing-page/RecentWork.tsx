@@ -23,8 +23,8 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
   const projectUrl = `/projects/${id}`;
 
   return (
-    <article className="group flex w-auto shrink-0 break-inside-avoid-column flex-col gap-6 lg:flex-row">
-      <Link href={projectUrl}>
+    <article className="group w-auto shrink-0">
+      <Link href={projectUrl} className="flex flex-col gap-6 lg:flex-row">
         <div className="relative h-52 w-full shrink-0 overflow-hidden rounded-lg lg:w-60">
           <Image
             src={coverImage.url}
@@ -34,24 +34,22 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
             alt={`${name} preview`}
           />
         </div>
-      </Link>
 
-      <div className="flex h-full w-full flex-1 flex-col gap-4">
-        <Link href={projectUrl}>
+        <div className="flex h-full w-full flex-1 flex-col gap-4">
           <p className="font-poppins text-xl font-semibold text-slate-700 transition-colors group-hover:text-primary">
             {name}
           </p>
-        </Link>
 
-        <p className="line-clamp-4 overflow-hidden text-ellipsis text-sm leading-7">
-          {shortDescription || description}
-        </p>
+          <p className="line-clamp-4 overflow-hidden text-ellipsis text-sm leading-7">
+            {shortDescription || description}
+          </p>
 
-        {/*  <Link href={projectUrl} className={cn(buttonVariants({variant: "secondary", size: "md"}), "w-32 gap-6")}>
+          {/*  <Link href={projectUrl} className={cn(buttonVariants({variant: "secondary", size: "md"}), "w-32 gap-6")}>
           Preview
           <MoveRightIcon size={20} />
         </Link> */}
-      </div>
+        </div>
+      </Link>
     </article>
   );
 };
