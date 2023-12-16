@@ -7,7 +7,6 @@ import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
 import pkg from "~/package.json";
-import {inter, poppins} from "../_app";
 
 const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = ({providers}) => {
   function displaySignInProviders() {
@@ -24,8 +23,7 @@ const Page: NextPage<InferGetServerSidePropsType<typeof getServerSideProps>> = (
         <title>T3 Portfolio: Sign In</title>
       </Head>
 
-      <main
-        className={`${inter.variable} ${poppins.variable} mx-auto flex min-h-full items-center justify-center px-4`}>
+      <main className="mx-auto flex min-h-full items-center justify-center px-4">
         <section className="w-full max-w-[20rem]">
           <header className="flex flex-col items-center gap-4">
             <Heading as="h1" size="xl">

@@ -10,13 +10,15 @@ import "~/styles/globals.css";
 export const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",
-  weight: ["500", "600", "700"]
+  weight: ["500", "600", "700"],
+  display: "swap"
 });
 
 export const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  weight: ["400"]
+  weight: ["400"],
+  display: "swap"
 });
 
 const MyApp: AppType<{session: Session | null}> = ({Component, pageProps: {session, ...pageProps}}) => {
@@ -29,7 +31,9 @@ const MyApp: AppType<{session: Session | null}> = ({Component, pageProps: {sessi
       `}</style>
 
       <SessionProvider session={session}>
-        <Component {...pageProps} />
+        <div className={`${inter.variable} ${poppins.variable}`}>
+          <Component {...pageProps} />
+        </div>
       </SessionProvider>
     </>
   );

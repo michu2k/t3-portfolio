@@ -31,7 +31,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
             fill
             style={{objectFit: "cover"}}
             className="rounded-lg transition-transform group-hover:scale-110"
-            alt=""
+            alt={`${name} preview`}
           />
         </div>
       </Link>
@@ -43,7 +43,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
           </p>
         </Link>
 
-        <p className="text-md line-clamp-4 overflow-hidden text-ellipsis leading-8">
+        <p className="line-clamp-4 overflow-hidden text-ellipsis text-sm leading-7">
           {shortDescription || description}
         </p>
 

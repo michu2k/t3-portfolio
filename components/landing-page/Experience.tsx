@@ -45,7 +45,7 @@ const ExperienceListItem = ({startDate, endDate, company, position, responsibili
             {responsibilities.map(({id, name}) => (
               <li key={id} className="flex items-start gap-3">
                 <span className="before:mt-3 before:block before:h-1 before:w-1 before:rounded-full before:bg-slate-500" />
-                <p className="text-md leading-8">{name}</p>
+                <p className="text-sm leading-7">{name}</p>
               </li>
             ))}
           </ul>

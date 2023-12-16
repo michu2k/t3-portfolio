@@ -22,7 +22,7 @@ const Header = () => {
           </h1>
         </div>
 
-        <p className="text-md mb-12 max-w-2xl leading-8">{description}</p>
+        <p className="mb-12 max-w-2xl text-sm leading-7">{description}</p>
 
         <Link href="#recent-work" className={cn(buttonVariants({variant: "secondary", size: "md"}), "h-12 gap-6 px-8")}>
           See my work

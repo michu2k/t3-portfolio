@@ -7,7 +7,6 @@ import {Navigation} from "~/components/dashboard/Navigation";
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/Avatar";
 import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/Sidebar";
 import {getUserInitials} from "~/utils/getUserInitials";
-import {inter, poppins} from "~/pages/_app";
 
 type LayoutProps = PropsWithChildren<{
   heading: string;
@@ -22,7 +21,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
   const {name, image, email} = sessionData?.user || {};
 
   return (
-    <main className={`${inter.variable} ${poppins.variable} mx-auto min-h-full md:flex`}>
+    <main className="mx-auto min-h-full md:flex">
       <Sidebar>
         <div className="sticky top-0 z-30 flex h-14 items-center justify-center bg-white px-4 md:hidden">
           <SidebarTrigger className="absolute left-4 top-4" />
