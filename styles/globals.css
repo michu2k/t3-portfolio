@@ -15,12 +15,3 @@ body {
 #__next {
   height: 100%;
 }
-
-@layer components {
-  .section-container {
-    @apply w-full;
-    @apply max-w-xl;
-    @apply mx-auto;
-    @apply md:max-w-6xl;
-  }
-}

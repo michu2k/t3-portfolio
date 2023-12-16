@@ -1,3 +1,4 @@
+import plugin from "tailwindcss/plugin";
 import defaultTheme from "tailwindcss/defaultTheme";
 
 /**
@@ -17,7 +18,21 @@ const config = {
       }
     }
   },
-  plugins: []
+  plugins: [
+    plugin(function ({addComponents, theme}) {
+      addComponents({
+        ".section-container": {
+          width: theme("width.full"),
+          maxWidth: theme("maxWidth.xl"),
+          marginLeft: theme("margin.auto"),
+          marginRight: theme("margin.auto"),
+          [`@media (min-width: ${theme("screens.md")})`]: {
+            maxWidth: theme("maxWidth.6xl")
+          }
+        }
+      });
+    })
+  ]
 };
 
 module.exports = config;
