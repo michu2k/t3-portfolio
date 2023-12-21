@@ -1,14 +1,14 @@
 import React from "react";
-import Link from "next/link";
 import {MoveRightIcon} from "lucide-react";
+import {getSnippetValues} from "~/hooks/useSnippets";
 import {api} from "~/utils/api";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
-import {getSnippetValues} from "~/hooks/useSnippets";
-import {buttonVariants} from "~/components/ui/Button";
-import {cn} from "~/utils/className";
+import {Button} from "~/components/ui/Button";
+import {useSmoothScroll} from "~/hooks/useSmoothScroll";
 
 const Header = () => {
   const {data = []} = api.snippet.getSnippets.useQuery({type: "HEADER", keys: ["heading", "description"]});
+  const {scrollToTarget} = useSmoothScroll("#recent-work");
 
   const snippetValues = getSnippetValues<keyof HeaderSnippetsFormValues>(data);
   const {heading = "", description = ""} = snippetValues;
@@ -22,12 +22,12 @@ const Header = () => {
           </h1>
         </div>
 
-        <p className="text-md mb-12 max-w-2xl leading-8">{description}</p>
+        <p className="mb-12 max-w-2xl text-sm leading-7">{description}</p>
 
-        <Link href="#recent-work" className={cn(buttonVariants({variant: "secondary", size: "md"}), "h-12 gap-6 px-8")}>
+        <Button variant="secondary" onClick={scrollToTarget} className="h-12 gap-6 px-8">
           See my work
           <MoveRightIcon size={20} />
-        </Link>
+        </Button>
       </div>
     </header>
   );

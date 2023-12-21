@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Link from "next/link";
-import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
+import {PlusIcon, PencilIcon, TrashIcon, EyeIcon} from "lucide-react";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
@@ -77,8 +77,8 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onDel
       </div>
 
       <div className="mr-4 flex flex-1 flex-col items-start">
-        <p className="mr-2 font-poppins text-sm font-semibold leading-6">{name}</p>
-        <p className="text-xs leading-6 text-slate-500">
+        <p className="mr-2 font-poppins text-sm font-semibold leading-6 text-slate-600">{name}</p>
+        <p className="text-xs leading-6">
           {itemDescription}
           {descriptionLength > MAX_TEXT_LENGTH && "..."}
         </p>
@@ -87,6 +87,11 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onDel
       <Link href={`/dashboard/projects/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>
         <PencilIcon size={16} />
         <span className="sr-only">Edit</span>
+      </Link>
+
+      <Link href={`/projects/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})} target="_blank">
+        <EyeIcon size={16} />
+        <span className="sr-only">Show preview</span>
       </Link>
 
       <DialogTrigger asChild>

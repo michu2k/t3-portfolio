@@ -59,7 +59,6 @@ const Navigation = () => {
   function displayNavigationItems() {
     return navigationItems.map(({href, ...item}) => {
       const mainHref = Array.isArray(href) ? (href[0] as string) : href;
-
       const isActive = Array.isArray(href) ? !!href.find((href) => href === pathname) : href === pathname;
 
       return <NavigationItem key={mainHref} isActive={isActive} href={href} {...item} />;
@@ -72,7 +71,7 @@ const Navigation = () => {
 
       <Button
         variant="ghost"
-        className="mb-4 mt-auto h-11 w-full justify-start hover:text-primary"
+        className="mb-4 mt-auto h-11 w-full justify-start hover:bg-transparent hover:text-slate-900"
         onClick={() => signOut()}>
         <LogOutIcon size={16} className="mr-2" />
         Log Out
@@ -99,7 +98,7 @@ const NavigationItem = ({text, href, icon: Icon, isActive}: NavigationItemProps)
       <Link
         href={url}
         className={`
-          flex items-center gap-3 rounded-lg px-3 py-3 font-poppins text-sm font-medium leading-5
+          flex items-center gap-3 rounded-lg px-3 py-2 font-poppins text-sm font-medium leading-5
           ${isActive ? "text-primary" : "text-slate-700"}
           transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2
         `}>

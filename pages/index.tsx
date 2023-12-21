@@ -9,7 +9,6 @@ import {RecentWork} from "~/components/landing-page/RecentWork";
 import {Experience} from "~/components/landing-page/Experience";
 import {KeepInTouch} from "~/components/landing-page/KeepInTouch";
 import {Footer} from "~/components/landing-page/Footer";
-import {inter, poppins} from "./_app";
 
 const Page: NextPage = () => {
   return (
@@ -18,7 +17,7 @@ const Page: NextPage = () => {
         <title>T3 Portfolio</title>
       </Head>
 
-      <main className={`${inter.variable} ${poppins.variable} mx-auto min-h-full`}>
+      <main className="mx-auto min-h-full">
         <Navigation />
         <Header />
         <Separator />

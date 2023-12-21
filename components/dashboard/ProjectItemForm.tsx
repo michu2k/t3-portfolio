@@ -28,10 +28,19 @@ const ProjectItemForm = () => {
       name: "",
       shortDescription: "",
       description: "",
+      websiteUrl: "",
+      repositoryUrl: "",
       image: undefined,
       coverImage: undefined
     },
-    values: data ?? undefined,
+    values: data
+      ? {
+          ...data,
+          shortDescription: data.shortDescription ?? "",
+          websiteUrl: data.websiteUrl ?? "",
+          repositoryUrl: data.repositoryUrl ?? ""
+        }
+      : undefined,
     resolver: zodResolver(projectItemSchema)
   });
 
@@ -140,6 +149,34 @@ const ProjectItemForm = () => {
               <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea {...field} placeholder="Enter item description here" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="websiteUrl"
+          render={({field}) => (
+            <FormItem>
+              <FormLabel isOptional>Website URL</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="Enter url to the website" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={control}
+          name="repositoryUrl"
+          render={({field}) => (
+            <FormItem>
+              <FormLabel isOptional>Repository URL</FormLabel>
+              <FormControl>
+                <Input {...field} placeholder="Enter url to the repository" />
               </FormControl>
               <FormMessage />
             </FormItem>

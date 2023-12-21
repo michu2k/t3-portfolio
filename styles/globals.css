@@ -8,19 +8,10 @@ html {
 
 body {
   @apply bg-white;
-  @apply text-slate-600;
+  @apply text-slate-500;
   height: 100%;
 }
 
 #__next {
   height: 100%;
-}
-
-@layer components {
-  .section-container {
-    @apply w-full;
-    @apply max-w-xl;
-    @apply mx-auto;
-    @apply md:max-w-5xl;
-  }
 }

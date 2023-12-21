@@ -7,7 +7,6 @@ import {Navigation} from "~/components/dashboard/Navigation";
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/Avatar";
 import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/Sidebar";
 import {getUserInitials} from "~/utils/getUserInitials";
-import {inter, poppins} from "~/pages/_app";
 
 type LayoutProps = PropsWithChildren<{
   heading: string;
@@ -22,12 +21,12 @@ const Layout = ({heading, description, children}: LayoutProps) => {
   const {name, image, email} = sessionData?.user || {};
 
   return (
-    <main className={`${inter.variable} ${poppins.variable} mx-auto min-h-full md:flex`}>
+    <main className="mx-auto min-h-full md:flex">
       <Sidebar>
         <div className="sticky top-0 z-30 flex h-14 items-center justify-center bg-white px-4 md:hidden">
           <SidebarTrigger className="absolute left-4 top-4" />
           <motion.div style={{opacity: headingOpacity}}>
-            <Heading as="h1" size="md" className="mb-0">
+            <Heading as="h1" size="md" className="pb-0">
               {heading}
             </Heading>
           </motion.div>
@@ -44,7 +43,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
               <p className="overflow-hidden text-ellipsis whitespace-nowrap font-poppins text-sm font-medium text-slate-700">
                 {name}
               </p>
-              <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs text-slate-500">{email}</p>
+              <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs">{email}</p>
             </div>
           </div>
 
@@ -57,7 +56,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
           <Heading as="h1" size="lg">
             {heading}
           </Heading>
-          <p className="pb-6 text-sm leading-6 text-slate-500">{description}</p>
+          <p className="pb-6 text-sm leading-6">{description}</p>
         </header>
 
         <div className="flex flex-col pt-6 lg:flex-row lg:gap-12">

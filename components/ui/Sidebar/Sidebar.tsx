@@ -1,5 +1,5 @@
 import type {PropsWithChildren} from "react";
-import React, {useContext, useState} from "react";
+import React from "react";
 import {XIcon} from "lucide-react";
 import type {AnimationProps} from "framer-motion";
 import {AnimatePresence, motion} from "framer-motion";
@@ -7,22 +7,10 @@ import * as Portal from "@radix-ui/react-portal";
 import {Button} from "~/components/ui/Button";
 import {useIsMobile} from "~/hooks/useIsMobile";
 import {cn} from "~/utils/className";
-
-type SidebarContextValue = {
-  isExpanded: boolean;
-  toggleExpanded: () => void;
-};
-
-const SidebarContext = React.createContext<SidebarContextValue>({} as SidebarContextValue);
+import {SidebarContextProvider, useSidebarContext} from "./SidebarContext";
 
 const Sidebar = ({children}: PropsWithChildren) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  function toggleExpanded() {
-    setIsExpanded(!isExpanded);
-  }
-
-  return <SidebarContext.Provider value={{isExpanded, toggleExpanded}}>{children}</SidebarContext.Provider>;
+  return <SidebarContextProvider>{children}</SidebarContextProvider>;
 };
 
 type SidebarOverlayProps = {
@@ -30,7 +18,7 @@ type SidebarOverlayProps = {
 };
 
 const SidebarOverlay = React.forwardRef<HTMLDivElement, SidebarOverlayProps>(({className}, ref) => {
-  const {toggleExpanded} = useContext(SidebarContext);
+  const {toggleSidebar} = useSidebarContext();
 
   const overlayAnimation: AnimationProps = {
     transition: {duration: 0.2, ease: "easeInOut"},
@@ -44,7 +32,7 @@ const SidebarOverlay = React.forwardRef<HTMLDivElement, SidebarOverlayProps>(({c
       <motion.div
         key="sidebar-overlay"
         ref={ref}
-        onClick={toggleExpanded}
+        onClick={toggleSidebar}
         className={cn("bg-background/80 fixed inset-0 z-40 backdrop-blur-sm", className)}
         {...overlayAnimation}
       />
@@ -59,7 +47,7 @@ type SidebarContentProps = PropsWithChildren<{
 }>;
 
 const SidebarContent = React.forwardRef<HTMLElement, SidebarContentProps>(({children, className}, ref) => {
-  const {isExpanded, toggleExpanded} = useContext(SidebarContext);
+  const {isExpanded, toggleSidebar} = useSidebarContext();
   const isMobile = useIsMobile();
 
   const contentAnimation: AnimationProps = {
@@ -80,7 +68,7 @@ const SidebarContent = React.forwardRef<HTMLElement, SidebarContentProps>(({chil
         {isExpanded && (
           <>
             <motion.aside key="sidebar-content" ref={ref} className={sidebarClassName} {...contentAnimation}>
-              <Button variant="ghost" className="absolute right-4 top-4 h-8 w-8 p-0" onClick={toggleExpanded}>
+              <Button variant="ghost" className="absolute right-4 top-4 h-8 w-8 p-0" onClick={toggleSidebar}>
                 <XIcon size={22} />
                 <span className="sr-only">Close</span>
               </Button>
@@ -111,13 +99,13 @@ type SidebarTriggerProps = {
 
 const SidebarTrigger = React.forwardRef<HTMLButtonElement, SidebarTriggerProps>(
   ({className, onClick = () => null}, ref) => {
-    const {toggleExpanded} = useContext(SidebarContext);
+    const {toggleSidebar} = useSidebarContext();
 
     const innerLineStyles = "w-8 h-0.5 bg-slate-900 absolute top-0 left-0 bottom-0 m-auto";
     const outerLineStyles = "w-6 h-0.5 bg-slate-900 flex";
 
     function handleBtnClick(e: React.MouseEvent) {
-      toggleExpanded();
+      toggleSidebar();
       onClick(e);
     }
 
@@ -137,4 +125,4 @@ const SidebarTrigger = React.forwardRef<HTMLButtonElement, SidebarTriggerProps>(
 
 SidebarTrigger.displayName = "SidebarTrigger";
 
-export {SidebarContext, Sidebar, SidebarContent, SidebarTrigger};
+export {Sidebar, SidebarContent, SidebarTrigger};

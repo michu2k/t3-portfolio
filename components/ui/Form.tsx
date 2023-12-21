@@ -96,14 +96,7 @@ const FormDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttribu
   ({className, ...props}, ref) => {
     const {formDescriptionId} = useFormField();
 
-    return (
-      <p
-        ref={ref}
-        id={formDescriptionId}
-        className={cn("pt-3 text-xs leading-5 text-slate-500", className)}
-        {...props}
-      />
-    );
+    return <p ref={ref} id={formDescriptionId} className={cn("pt-3 text-xs leading-5", className)} {...props} />;
   }
 );
 
