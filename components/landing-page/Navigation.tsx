@@ -1,58 +1,65 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import Link from "next/link";
-import type {MotionValue} from "framer-motion";
 import {motion, useMotionValueEvent, useScroll} from "framer-motion";
-import {Sidebar, SidebarContent, SidebarContext, SidebarTrigger} from "~/components/ui/Sidebar";
+import {Sidebar, SidebarContent, SidebarTrigger, useSidebarContext} from "~/components/ui/Sidebar";
 import {SocialMedia} from "./SocialMedia";
 import {useIsMobile} from "~/hooks/useIsMobile";
 import {isClientSide} from "~/utils/isClientSide";
+import {useSmoothScroll} from "~/hooks/useSmoothScroll";
 
 const navigationItems: Array<NavigationItemDef> = [
   {
-    id: 1,
-    text: "Top",
-    href: "#top"
-  },
-  {
-    id: 2,
+    id: "about",
     text: "About",
-    href: "#about"
+    href: "/#about"
   },
   {
-    id: 3,
+    id: "recent-work",
     text: "Recent work",
-    href: "#recent-work"
+    href: "/#recent-work"
   },
   {
-    id: 4,
+    id: "experience",
     text: "Experience",
-    href: "#experience"
+    href: "/#experience"
   },
   {
-    id: 5,
+    id: "keep-in-touch",
     text: "Contact",
-    href: "#keep-in-touch"
+    href: "/#keep-in-touch"
   }
 ];
 
+type TargetElement = {
+  id: string;
+  target: HTMLElement;
+};
+
 const Navigation = () => {
-  const [activeItemId, setActiveItemId] = useState<number | null>(null);
+  const [activeTargetId, setActiveTargetId] = useState<string | null>(null);
   const {scrollY} = useScroll();
   const isMobile = useIsMobile();
 
-  function displayNavigationItems() {
-    if (!activeItemId && navigationItems[0]) {
-      setActiveItemId(navigationItems[0].id);
-    }
+  function getTargetList() {
+    return navigationItems.reduce<Array<TargetElement>>((acc, {id}: NavigationItemDef) => {
+      const target = isClientSide() ? document.getElementById(id) : null;
+      return target ? [...acc, {id, target}] : acc;
+    }, []);
+  }
 
-    return navigationItems.map((item) => (
-      <NavigationItem
-        key={item.id}
-        isActive={item.id === activeItemId}
-        setActiveItemId={setActiveItemId}
-        scrollY={scrollY}
-        {...item}
-      />
+  useMotionValueEvent(scrollY, "change", (latestPos) => {
+    const halfWindowHeight = window.innerHeight / 2;
+
+    const targetList = getTargetList();
+    const highlightedElements = targetList.filter(({target}) => target.offsetTop - halfWindowHeight <= latestPos);
+    const lastHighlightedElement = highlightedElements[highlightedElements.length - 1];
+
+    setActiveTargetId(lastHighlightedElement ? lastHighlightedElement.id : null);
+  });
+
+  function displayNavigationItems() {
+    return navigationItems.map((item: NavigationItemDef) => (
+      <NavigationItem key={item.id} isActive={item.id === activeTargetId} {...item} />
     ));
   }
 
@@ -82,47 +89,24 @@ const Navigation = () => {
 };
 
 type NavigationItemDef = {
-  id: number;
+  id: string;
   text: string;
   href: string;
 };
 
 type NavigationItemProps = NavigationItemDef & {
   isActive: boolean;
-  setActiveItemId: React.Dispatch<React.SetStateAction<number | null>>;
-  scrollY: MotionValue<number>;
 };
 
-// For better UX, offset the scroll position by a few pixels
-const OFFSET_TOP_MOBILE = 24;
-const OFFSET_TOP_DESKTOP = 48;
-
-const NavigationItem = ({id, href, text, isActive, setActiveItemId, scrollY}: NavigationItemProps) => {
-  const isMobile = useIsMobile();
-  const {toggleExpanded} = useContext(SidebarContext);
-
-  const sectionEl = isClientSide() ? document.getElementById(href.replace("#", "")) : null;
-  const viewOffsetTop = isMobile ? OFFSET_TOP_MOBILE : OFFSET_TOP_DESKTOP;
-
-  useMotionValueEvent(scrollY, "change", (latestPos) => {
-    const sectionOffsetTop = Math.max(sectionEl?.offsetTop || 0, 0);
-    const halfWindowHeight = window.innerHeight / 2;
-
-    // If the section is in the middle of the screen, set it as active
-    if (latestPos >= sectionOffsetTop - halfWindowHeight) {
-      setActiveItemId(id);
-    }
-  });
+const NavigationItem = ({href, text, isActive}: NavigationItemProps) => {
+  const {hideSidebar} = useSidebarContext();
+  const {scrollToTarget, target} = useSmoothScroll(href.replace("/", ""));
 
   function handleNavigationItemClick(e: React.MouseEvent) {
-    e.preventDefault();
-    toggleExpanded();
-
-    if (sectionEl) {
-      window.scrollTo({
-        top: sectionEl.offsetTop - viewOffsetTop,
-        behavior: "smooth"
-      });
+    if (target) {
+      e.preventDefault();
+      hideSidebar();
+      scrollToTarget();
     }
   }
 
@@ -133,16 +117,16 @@ const NavigationItem = ({id, href, text, isActive, setActiveItemId, scrollY}: Na
         onClick={handleNavigationItemClick}
         className={`block rounded-md py-1.5 font-poppins text-sm font-medium leading-8
           ${isActive ? "text-primary" : "text-slate-700"}
-          transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400
+          transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400
           focus-visible:ring-offset-2`}>
         {text}
       </Link>
 
       {isActive ? (
         <motion.div
-          key="item-underline"
           layoutId="underline"
-          className="absolute bottom-0 left-0 mb-1 hidden h-0.5 w-6 rounded-full bg-primary md:right-0 md:mx-auto md:mb-0 md:block md:w-4"
+          style={{originY: "0px"}}
+          className="absolute bottom-0 left-0 right-0 mx-auto hidden h-0.5 w-4 rounded-full bg-primary md:block"
         />
       ) : null}
     </li>
