@@ -26,7 +26,7 @@ const Layout = ({heading, description, children}: LayoutProps) => {
         <div className="sticky top-0 z-30 flex h-14 items-center justify-center bg-white px-4 md:hidden">
           <SidebarTrigger className="absolute left-4 top-4" />
           <motion.div style={{opacity: headingOpacity}}>
-            <Heading as="h1" size="md" className="mb-0">
+            <Heading as="h1" size="md" className="pb-0">
               {heading}
             </Heading>
           </motion.div>

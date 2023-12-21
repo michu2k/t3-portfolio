@@ -2,28 +2,21 @@ import {type NextPage} from "next";
 import Head from "next/head";
 import Image from "next/image";
 import {useRouter} from "next/router";
-import {GlobeIcon} from "lucide-react";
+import {CodeIcon, GlobeIcon} from "lucide-react";
 
 import {api} from "~/utils/api";
 import {Heading} from "~/components/ui/Heading";
 import {buttonVariants} from "~/components/ui/Button";
 import {Footer} from "~/components/landing-page/Footer";
 import {Navigation} from "~/components/landing-page/Navigation";
-import {Separator} from "~/components/ui/Separator";
 import {cn} from "~/utils/className";
-import GithubSvg from "~/public/svgs/socialMedia/github.svg";
 
 const Page: NextPage = () => {
   const {query} = useRouter();
   const itemId = query.id as string;
 
   const {data} = api.project.getItem.useQuery({id: itemId});
-
-  console.log({data});
-
-  const {name, image, description} = data || {};
-  const githubUrl = "";
-  // const websiteUrl = "";
+  const {name, image, description, repositoryUrl, websiteUrl} = data || {};
 
   return (
     <>
@@ -59,33 +52,41 @@ const Page: NextPage = () => {
 
               <div className="w-full md:flex-1">
                 <div className="pb-14">
-                  <Heading as="h2" size="lg" className="mb-4">
+                  <Heading as="h2" size="lg" className="pb-6">
                     Description
                   </Heading>
 
                   <p className="whitespace-pre-wrap text-sm leading-7">{description}</p>
                 </div>
 
-                <Separator />
+                <div className="mx-auto flex w-full gap-4">
+                  {websiteUrl ? (
+                    <a
+                      href={websiteUrl}
+                      className={cn(
+                        buttonVariants({variant: "primary", size: "md"}),
+                        "max-w-[12rem] flex-1 gap-3 px-8"
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      <GlobeIcon className="h-4 w-4" aria-hidden="true" />
+                      Website
+                    </a>
+                  ) : null}
 
-                <div className="mx-auto flex w-full gap-4 py-10">
-                  <a
-                    href={githubUrl}
-                    className={cn(buttonVariants({variant: "primary", size: "md"}), "max-w-[12rem] flex-1 gap-3 px-8")}
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <GlobeIcon className="h-4 w-4" aria-hidden="true" />
-                    Website
-                  </a>
-
-                  <a
-                    href={githubUrl}
-                    className={cn(buttonVariants({variant: "outline", size: "md"}), "max-w-[12rem] flex-1 gap-3 px-8")}
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <GithubSvg className="h-4 w-4" aria-hidden="true" />
-                    Github
-                  </a>
+                  {repositoryUrl ? (
+                    <a
+                      href={repositoryUrl}
+                      className={cn(
+                        buttonVariants({variant: "outline", size: "md"}),
+                        "max-w-[12rem] flex-1 gap-3 px-8"
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer">
+                      <CodeIcon className="h-4 w-4" aria-hidden="true" />
+                      Repository
+                    </a>
+                  ) : null}
                 </div>
               </div>
             </div>

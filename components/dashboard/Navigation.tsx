@@ -72,7 +72,7 @@ const Navigation = () => {
 
       <Button
         variant="ghost"
-        className="mb-4 mt-auto h-11 w-full justify-start hover:text-primary"
+        className="mb-4 mt-auto h-11 w-full justify-start hover:bg-transparent hover:text-slate-900"
         onClick={() => signOut()}>
         <LogOutIcon size={16} className="mr-2" />
         Log Out

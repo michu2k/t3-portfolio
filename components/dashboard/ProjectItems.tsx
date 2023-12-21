@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import Link from "next/link";
-import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
+import {PlusIcon, PencilIcon, TrashIcon, EyeIcon} from "lucide-react";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
@@ -87,6 +87,11 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onDel
       <Link href={`/dashboard/projects/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>
         <PencilIcon size={16} />
         <span className="sr-only">Edit</span>
+      </Link>
+
+      <Link href={`/projects/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})} target="_blank">
+        <EyeIcon size={16} />
+        <span className="sr-only">Show preview</span>
       </Link>
 
       <DialogTrigger asChild>
