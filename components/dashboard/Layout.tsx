@@ -32,8 +32,8 @@ const Layout = ({heading, description, children}: LayoutProps) => {
           </motion.div>
         </div>
 
-        <SidebarContent>
-          <div className="mb-6 flex min-w-0 items-center gap-2 px-2">
+        <SidebarContent className="gap-10">
+          <div className="flex min-w-0 items-center gap-2 px-2">
             <Avatar>
               {image && <AvatarImage src={image} alt="" />}
               <AvatarFallback>{getUserInitials(name)}</AvatarFallback>

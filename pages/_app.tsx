@@ -31,7 +31,7 @@ const MyApp: AppType<{session: Session | null}> = ({Component, pageProps: {sessi
       `}</style>
 
       <SessionProvider session={session}>
-        <div className={`${inter.variable} ${poppins.variable}`}>
+        <div className={`${inter.variable} ${poppins.variable} h-full`}>
           <Component {...pageProps} />
         </div>
       </SessionProvider>
