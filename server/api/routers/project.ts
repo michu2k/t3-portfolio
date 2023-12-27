@@ -29,7 +29,7 @@ export const projectRouter = createTRPCRouter({
       return itemsWithImageObjects;
     }),
 
-  getItem: protectedProcedure
+  getItem: publicProcedure
     .input(z.object({id: z.string()}))
     .query(async ({ctx, input: {id}}) => {
       const item = await ctx.prisma.projectItem.findUnique({
