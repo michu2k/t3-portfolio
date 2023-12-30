@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import {PageSection} from "~/components/ui/PageSection";
 import {getSnippetValues} from "~/hooks/useSnippets";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/aboutMe";
 
 const AboutMe = () => {

@@ -1,3 +1,5 @@
+"use client";
+
 import React, {useState} from "react";
 import type {ContactMethod} from "@prisma/client";
 import Link from "next/link";
@@ -7,14 +9,17 @@ import {Button, buttonVariants} from "~/components/ui/Button";
 import {EmptySection} from "~/components/ui/EmptySection";
 import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
 import {Heading} from "~/components/ui/Heading";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 import {cn} from "~/utils/className";
 
-const ContactItems = () => {
-  const {data: contactMethods = [], isLoading} = api.contact.getItems.useQuery();
+type ContactItemsProps = {
+  contactMethods: Array<ContactMethod>;
+};
+
+const ContactItems = ({contactMethods}: ContactItemsProps) => {
   const deleteItemMutation = api.contact.deleteItem.useMutation();
   const [selectedContactMethod, setSelectedContactMethod] = useState<ContactMethod | null>(null);
-  const utils = api.useContext();
+  const utils = api.useUtils();
 
   async function handleDeleteItem() {
     if (selectedContactMethod?.id) {
@@ -43,11 +48,7 @@ const ContactItems = () => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {isLoading ? null : contactMethods.length ? (
-          displayItems()
-        ) : (
-          <EmptySection heading="No contact methods found" />
-        )}
+        {contactMethods.length ? displayItems() : <EmptySection heading="No contact methods found" />}
 
         <Link href="/dashboard/contact/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />

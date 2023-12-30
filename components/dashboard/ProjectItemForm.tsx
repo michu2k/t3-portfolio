@@ -1,7 +1,9 @@
+"use client";
+
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {FileX2Icon} from "lucide-react";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Button} from "~/components/ui/Button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
@@ -10,16 +12,19 @@ import {Textarea} from "~/components/ui/Textarea";
 import {Dropzone} from "~/components/ui/Dropzone";
 import {ImageCard} from "~/components/ui/ImageCard";
 import type {ProjectItemFormValues} from "~/utils/validations/project";
+import type {ProjectItem} from "~/server/api/routers/project";
 import {projectItemSchema} from "~/utils/validations/project";
 import {acceptedImageTypes} from "~/utils/file";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 
-const ProjectItemForm = () => {
-  const {query, push} = useRouter();
-  const utils = api.useContext();
-  const itemId = query.id as string;
+type ProjectItemFormProps = {
+  data: ProjectItem | null;
+};
 
-  const {data} = api.project.getItem.useQuery({id: itemId});
+const ProjectItemForm = ({data}: ProjectItemFormProps) => {
+  const router = useRouter();
+  const utils = api.useUtils();
+
   const createItemMutation = api.project.createItem.useMutation();
   const updateItemMutation = api.project.updateItem.useMutation();
 
@@ -58,7 +63,7 @@ const ProjectItemForm = () => {
       }
     });
 
-    await push("/dashboard/projects");
+    router.push("/dashboard/projects");
   }
 
   return (

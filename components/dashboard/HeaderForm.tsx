@@ -1,19 +1,23 @@
+"use client";
+
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
+import type {Snippet} from "@prisma/client";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
 import {Button} from "~/components/ui/Button";
 import {Textarea} from "~/components/ui/Textarea";
 import {Heading} from "~/components/ui/Heading";
-import {api} from "~/utils/api";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {headerSnippetsSchema} from "~/utils/validations/header";
 import {useSnippets} from "~/hooks/useSnippets";
 
-const HeaderForm = () => {
-  const {data = []} = api.snippet.getSnippets.useQuery({type: "HEADER", keys: ["heading", "description", "image"]});
+type HeaderFormProps = {
+  data: Array<Snippet>;
+};
 
+const HeaderForm = ({data}: HeaderFormProps) => {
   const {updateSnippets, snippetValues} = useSnippets<keyof HeaderSnippetsFormValues>("HEADER", data);
   const {heading = "", description = ""} = snippetValues;
 

@@ -3,7 +3,7 @@ import type {SocialMediaLink} from "@prisma/client";
 import {cn} from "~/utils/className";
 import {capitalize} from "~/utils/capitalize";
 import {getSocialMediaIcon} from "~/utils/getSocialMediaIcon";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 
 type SocialMediaProps = {
   className?: string;

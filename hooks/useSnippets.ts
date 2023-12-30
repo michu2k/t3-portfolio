@@ -1,5 +1,5 @@
 import type {Snippet, SnippetType} from "@prisma/client";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 
 type SnippetValues<T extends string> = {
   [key in T]: string;
@@ -17,7 +17,7 @@ function getSnippetValues<T extends string>(data: Array<Snippet>): Partial<Snipp
 const useSnippets = <T extends string>(type: SnippetType, data: Array<Snippet>) => {
   const updateSnippet = api.snippet.updateSnippet.useMutation();
   const createSnippet = api.snippet.createSnippet.useMutation();
-  const utils = api.useContext();
+  const utils = api.useUtils();
 
   /** Bulk update section snippets for the given type */
   async function updateSnippets(snippets: Partial<SnippetValues<T>>) {

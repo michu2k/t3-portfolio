@@ -1,25 +1,30 @@
+"use client";
+
 import React, {useEffect} from "react";
 import {FormProvider, useFieldArray, useForm} from "react-hook-form";
+import {useRouter} from "next/navigation";
 import {format} from "date-fns";
-import {useRouter} from "next/router";
 import {CalendarIcon, PlusIcon, Trash2Icon} from "lucide-react";
 import {zodResolver} from "@hookform/resolvers/zod";
+import type {ExperienceItemWithResponsibilities} from "~/server/api/routers/experience";
 import {Button} from "~/components/ui/Button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/Popover";
 import {Calendar} from "~/components/ui/Calendar";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 import type {ExperienceItemFormValues} from "~/utils/validations/experience";
 import {experienceItemSchema} from "~/utils/validations/experience";
 
-const ExperienceItemForm = () => {
-  const {query, push} = useRouter();
-  const utils = api.useContext();
-  const itemId = query.id as string;
+type ExperienceItemFormProps = {
+  data: ExperienceItemWithResponsibilities | null;
+};
+
+const ExperienceItemForm = ({data}: ExperienceItemFormProps) => {
+  const router = useRouter();
+  const utils = api.useUtils();
   const newResponsibilityItem = {id: undefined, name: ""};
 
-  const {data} = api.experience.getItem.useQuery({id: itemId});
   const createItemMutation = api.experience.createItem.useMutation();
   const updateItemMutation = api.experience.updateItem.useMutation();
   const {responsibilities = []} = data || {};
@@ -71,7 +76,7 @@ const ExperienceItemForm = () => {
       }
     });
 
-    await push("/dashboard/experience");
+    router.push("/dashboard/experience");
   }
 
   return (

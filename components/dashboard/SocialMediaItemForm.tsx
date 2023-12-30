@@ -1,10 +1,13 @@
+"use client";
+
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
+import type {SocialMediaLink} from "@prisma/client";
+import {useRouter} from "next/navigation";
 import {Button} from "~/components/ui/Button";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
-import {useRouter} from "next/router";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {cn} from "~/utils/className";
 import {capitalize} from "~/utils/capitalize";
@@ -12,12 +15,14 @@ import {socialMediaIconsDef} from "~/utils/getSocialMediaIcon";
 import type {SocialMediaLinkFormValues} from "~/utils/validations/socialMedia";
 import {socialMediaLinkSchema} from "~/utils/validations/socialMedia";
 
-const SocialMediaItemForm = () => {
-  const {query, push} = useRouter();
-  const utils = api.useContext();
-  const itemId = query.id as string;
+type SocialMediaItemFormProps = {
+  data: SocialMediaLink | null;
+};
 
-  const {data} = api.socialMedia.getItem.useQuery({id: itemId});
+const SocialMediaItemForm = ({data}: SocialMediaItemFormProps) => {
+  const router = useRouter();
+  const utils = api.useUtils();
+
   const createItemMutation = api.socialMedia.createItem.useMutation();
   const updateItemMutation = api.socialMedia.updateItem.useMutation();
 
@@ -44,7 +49,7 @@ const SocialMediaItemForm = () => {
       }
     });
 
-    await push("/dashboard/social-media");
+    router.push("/dashboard/social-media");
   }
 
   return (

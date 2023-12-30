@@ -1,17 +1,22 @@
+"use client";
+
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
+import type {Snippet} from "@prisma/client";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Button} from "~/components/ui/Button";
 import {Textarea} from "~/components/ui/Textarea";
 import {Heading} from "~/components/ui/Heading";
-import {api} from "~/utils/api";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {contactSnippetsSchema} from "~/utils/validations/contact";
 import {useSnippets} from "~/hooks/useSnippets";
 
-const ContactForm = () => {
-  const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT", keys: ["description"]});
+type ContactFormProps = {
+  data: Array<Snippet>;
+};
+
+const ContactForm = ({data}: ContactFormProps) => {
   const {updateSnippets, snippetValues} = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", data);
 
   const formMethods = useForm<ContactSnippetsFormValues>({

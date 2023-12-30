@@ -1,3 +1,5 @@
+"use client";
+
 import React, {useState} from "react";
 import type {SocialMediaLink} from "@prisma/client";
 import Link from "next/link";
@@ -8,14 +10,17 @@ import {EmptySection} from "~/components/ui/EmptySection";
 import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
 import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 import {getSocialMediaIcon} from "~/utils/getSocialMediaIcon";
 
-const SocialMediaItems = () => {
-  const {data: socialMediaItems = [], isLoading} = api.socialMedia.getItems.useQuery();
+type SocialMediaItemsProps = {
+  socialMediaItems: Array<SocialMediaLink>;
+};
+
+const SocialMediaItems = ({socialMediaItems}: SocialMediaItemsProps) => {
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
   const [selectedSocialMediaLink, setSelectedSocialMediaLink] = useState<SocialMediaLink | null>(null);
-  const utils = api.useContext();
+  const utils = api.useUtils();
 
   const {icon} = selectedSocialMediaLink || {};
 
@@ -46,7 +51,7 @@ const SocialMediaItems = () => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {isLoading ? null : socialMediaItems.length ? displayItems() : <EmptySection heading="No links found" />}
+        {socialMediaItems.length ? displayItems() : <EmptySection heading="No links found" />}
 
         <Link href="/dashboard/social-media/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />

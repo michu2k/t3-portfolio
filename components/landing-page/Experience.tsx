@@ -2,7 +2,7 @@ import React from "react";
 import {format} from "date-fns";
 import type {ExperienceItem, ExperienceItemResponsibility} from "@prisma/client";
 import {PageSection} from "~/components/ui/PageSection";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 
 const Experience = () => {
   const {data: experienceItems = []} = api.experience.getItems.useQuery({

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {PageSection} from "~/components/ui/PageSection";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 
 const RecentWork = () => {
   const {data: projectItems = []} = api.project.getItems.useQuery();

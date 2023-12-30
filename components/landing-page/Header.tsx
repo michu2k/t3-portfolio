@@ -1,7 +1,7 @@
 import React from "react";
 import {MoveRightIcon} from "lucide-react";
 import {getSnippetValues} from "~/hooks/useSnippets";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {Button} from "~/components/ui/Button";
 import {useSmoothScroll} from "~/hooks/useSmoothScroll";

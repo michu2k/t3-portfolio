@@ -1,23 +1,28 @@
+"use client";
+
 import React from "react";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 import {zodResolver} from "@hookform/resolvers/zod";
+import type {ContactMethod} from "@prisma/client";
 import {ContactMethodType} from "@prisma/client";
 import {FormProvider, useForm} from "react-hook-form";
 import {Button} from "~/components/ui/Button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
 import {Input} from "~/components/ui/Input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/Select";
-import {api} from "~/utils/api";
+import {api} from "~/trpc/react";
 import {capitalize} from "~/utils/capitalize";
 import type {ContactMethodFormValues} from "~/utils/validations/contact";
 import {contactMethodSchema} from "~/utils/validations/contact";
 
-const ContactItemForm = () => {
-  const {query, push} = useRouter();
-  const utils = api.useContext();
-  const itemId = query.id as string;
+type ContactItemFormProps = {
+  data: ContactMethod | null;
+};
 
-  const {data} = api.contact.getItem.useQuery({id: itemId});
+const ContactItemForm = ({data}: ContactItemFormProps) => {
+  const router = useRouter();
+  const utils = api.useUtils();
+
   const createItemMutation = api.contact.createItem.useMutation();
   const updateItemMutation = api.contact.updateItem.useMutation();
 
@@ -34,6 +39,8 @@ const ContactItemForm = () => {
   const {control, handleSubmit, watch} = formMethods;
   const type = watch("type");
 
+  console.log({data, type});
+
   const fieldPlaceholder = type ? fieldPlaceholdersDef[type] : null;
 
   async function handleFormSubmit(formValues: ContactMethodFormValues, e?: React.BaseSyntheticEvent) {
@@ -48,7 +55,7 @@ const ContactItemForm = () => {
       }
     });
 
-    await push("/dashboard/contact");
+    router.push("/dashboard/contact");
   }
 
   return (
@@ -60,7 +67,7 @@ const ContactItemForm = () => {
           render={({field: {name, value, onChange}}) => (
             <FormItem>
               <FormLabel>Type</FormLabel>
-              <Select name={name} value={value} onValueChange={onChange}>
+              <Select name={name} value={value} onValueChange={(newVal) => (newVal ? onChange(newVal) : undefined)}>
                 <FormControl withDescription>
                   <SelectTrigger className="w-[14rem]">
                     <SelectValue placeholder="Select type..." />

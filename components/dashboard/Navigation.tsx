@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import {useRouter} from "next/router";
 import {signOut} from "next-auth/react";
 import type {LucideIcon} from "lucide-react";
 import {
@@ -14,6 +13,7 @@ import {
   WallpaperIcon
 } from "lucide-react";
 import {Button} from "~/components/ui/Button";
+import {usePathname} from "next/navigation";
 
 const navigationItems: Array<NavigationItemDef> = [
   {
@@ -23,7 +23,7 @@ const navigationItems: Array<NavigationItemDef> = [
   },
   {
     text: "Social Media",
-    href: ["/dashboard/social-media", "/dashboard/social-media/[id]"],
+    href: "/dashboard/social-media", //["/dashboard/social-media", "/dashboard/social-media/[id]"],
     icon: HeartIcon
   },
   {
@@ -38,23 +38,23 @@ const navigationItems: Array<NavigationItemDef> = [
   },
   {
     text: "Projects",
-    href: ["/dashboard/projects", "/dashboard/projects/[id]"],
+    href: "/dashboard/projects", //["/dashboard/projects", "/dashboard/projects/[id]"],
     icon: ImageIcon
   },
   {
     text: "Experience",
-    href: ["/dashboard/experience", "/dashboard/experience/[id]"],
+    href: "/dashboard/experience", //["/dashboard/experience", "/dashboard/experience/[id]"],
     icon: BriefcaseIcon
   },
   {
     text: "Contact",
-    href: ["/dashboard/contact", "/dashboard/contact/[id]"],
+    href: "/dashboard/contact", //["/dashboard/contact", "/dashboard/contact/[id]"],
     icon: MailIcon
   }
 ];
 
 const Navigation = () => {
-  const {pathname} = useRouter();
+  const pathname = usePathname();
 
   function displayNavigationItems() {
     return navigationItems.map(({href, ...item}) => {

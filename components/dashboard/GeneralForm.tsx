@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
