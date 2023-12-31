@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {debounce} from "~/utils/debounce";
-import {isClientSide} from "~/utils/isClientSide";
+import {isClientSide} from "~/utils/is-client-side";
 
 type WindowSize = {
   width: number;

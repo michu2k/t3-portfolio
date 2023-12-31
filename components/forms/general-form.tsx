@@ -3,9 +3,9 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
-import {Heading} from "~/components/ui/Heading";
+import {Heading} from "~/components/ui/heading";
 import {Input} from "~/components/ui/input";
-import {Button} from "~/components/ui/Button";
+import {Button} from "~/components/ui/button";
 
 const GeneralForm = () => {
   const formMethods = useForm({});

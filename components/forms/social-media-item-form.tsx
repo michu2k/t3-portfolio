@@ -4,16 +4,16 @@ import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import type {SocialMediaLink} from "@prisma/client";
 import {useRouter} from "next/navigation";
-import {Button} from "~/components/ui/Button";
+import {Button} from "~/components/ui/button";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
 import {api} from "~/trpc/react";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {cn} from "~/utils/className";
 import {capitalize} from "~/utils/capitalize";
-import {socialMediaIconsDef} from "~/utils/getSocialMediaIcon";
-import type {SocialMediaLinkFormValues} from "~/utils/validations/socialMedia";
-import {socialMediaLinkSchema} from "~/utils/validations/socialMedia";
+import {socialMediaIconsDef} from "~/utils/get-social-media-icon";
+import type {SocialMediaLinkFormValues} from "~/utils/validations/social-media";
+import {socialMediaLinkSchema} from "~/utils/validations/social-media";
 
 type SocialMediaItemFormProps = {
   data: SocialMediaLink | null;

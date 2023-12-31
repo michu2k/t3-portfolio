@@ -1,5 +1,5 @@
 import {useIsMobile} from "./use-is-mobile";
-import {isClientSide} from "~/utils/isClientSide";
+import {isClientSide} from "~/utils/is-client-side";
 
 // For better UX, offset the scroll position by a few pixels
 const OFFSET_TOP_MOBILE = 24;

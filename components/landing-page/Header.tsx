@@ -3,7 +3,7 @@ import {MoveRightIcon} from "lucide-react";
 import {getSnippetValues} from "~/hooks/use-snippets";
 import {api} from "~/trpc/react";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
-import {Button} from "~/components/ui/Button";
+import {Button} from "~/components/ui/button";
 import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
 
 const Header = () => {

@@ -5,7 +5,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {FileX2Icon} from "lucide-react";
 import {useRouter} from "next/navigation";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {Button} from "~/components/ui/Button";
+import {Button} from "~/components/ui/button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
 import {Textarea} from "~/components/ui/textarea";

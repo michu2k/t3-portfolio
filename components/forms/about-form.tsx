@@ -7,13 +7,13 @@ import type {Snippet} from "@prisma/client";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useSnippets} from "~/hooks/use-snippets";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
-import {Button} from "~/components/ui/Button";
+import {Button} from "~/components/ui/button";
 import {Textarea} from "~/components/ui/textarea";
-import {Heading} from "~/components/ui/Heading";
+import {Heading} from "~/components/ui/heading";
 import {ImageCard} from "~/components/ui/image-card";
 import {Dropzone} from "~/components/ui/dropzone";
-import type {AboutMeSnippetsFormValues} from "~/utils/validations/aboutMe";
-import {aboutMeSnippetsSchema} from "~/utils/validations/aboutMe";
+import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
+import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
 import {api} from "~/trpc/react";
 import {acceptedImageTypes} from "~/utils/file";
 

@@ -5,7 +5,7 @@ import {useSession} from "next-auth/react";
 import {SidebarNavigation} from "~/components/layouts/sidebar-navigation";
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
 import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
-import {getUserInitials} from "~/utils/getUserInitials";
+import {getUserInitials} from "~/utils/get-user-initials";
 
 const DashboardSidebar = () => {
   const {data: sessionData} = useSession();

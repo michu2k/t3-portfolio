@@ -5,14 +5,14 @@ import type {ExperienceItem} from "@prisma/client";
 import {format} from "date-fns";
 import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
-import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
-import {Button, buttonVariants} from "~/components/ui/Button";
+import {Dialog, DialogTrigger} from "~/components/ui/dialog";
+import {Button, buttonVariants} from "~/components/ui/button";
 import {DeleteEntityDialog} from "~/components/dialogs/delete-entity-dialog";
 import {EmptySection} from "~/components/ui/empty-section";
-import {Heading} from "~/components/ui/Heading";
+import {Heading} from "~/components/ui/heading";
 import {cn} from "~/utils/className";
 import {api} from "~/trpc/react";
-import {sortExperienceItemsByEndDate} from "~/utils/sortExperienceItemsByEndDate";
+import {sortExperienceByEndDate} from "~/utils/sort-experience-by-end-date";
 
 type ExperienceListProps = {
   experience: Array<ExperienceItem>;
@@ -40,7 +40,7 @@ const ExperienceList = ({experience}: ExperienceListProps) => {
   }
 
   function displayItems() {
-    const sortedItems = sortExperienceItemsByEndDate(experience);
+    const sortedItems = sortExperienceByEndDate(experience);
 
     return sortedItems.map((item) => (
       <ExperienceCard key={item.id} onDelete={() => setSelectedExperienceItem(item)} {...item} />

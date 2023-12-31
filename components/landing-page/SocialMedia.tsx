@@ -2,7 +2,7 @@ import React, {memo} from "react";
 import type {SocialMediaLink} from "@prisma/client";
 import {cn} from "~/utils/className";
 import {capitalize} from "~/utils/capitalize";
-import {getSocialMediaIcon} from "~/utils/getSocialMediaIcon";
+import {getSocialMediaIcon} from "~/utils/get-social-media-icon";
 import {api} from "~/trpc/react";
 
 type SocialMediaProps = {

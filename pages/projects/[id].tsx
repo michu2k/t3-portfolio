@@ -5,8 +5,8 @@ import {useRouter} from "next/router";
 import {CodeIcon, GlobeIcon} from "lucide-react";
 
 import {api} from "~/trpc/react";
-import {Heading} from "~/components/ui/Heading";
-import {buttonVariants} from "~/components/ui/Button";
+import {Heading} from "~/components/ui/heading";
+import {buttonVariants} from "~/components/ui/button";
 import {Footer} from "~/components/landing-page/Footer";
 import {Navigation} from "~/components/landing-page/Navigation";
 import {cn} from "~/utils/className";

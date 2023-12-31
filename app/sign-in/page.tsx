@@ -1,9 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import {getProviders} from "next-auth/react";
-import {buttonVariants} from "~/components/ui/Button";
-import {Heading} from "~/components/ui/Heading";
-import {SignInProviders} from "./SignInProviders";
+import {buttonVariants} from "~/components/ui/button";
+import {Heading} from "~/components/ui/heading";
+import {SignInProviders} from "./sign-in-providers";
 import {cn} from "~/utils/className";
 import pkg from "~/package.json";
 

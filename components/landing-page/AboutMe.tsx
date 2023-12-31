@@ -3,7 +3,7 @@ import Image from "next/image";
 import {PageSection} from "~/components/ui/page-section";
 import {getSnippetValues} from "~/hooks/use-snippets";
 import {api} from "~/trpc/react";
-import type {AboutMeSnippetsFormValues} from "~/utils/validations/aboutMe";
+import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 
 const AboutMe = () => {
   const {data = []} = api.snippet.getSnippets.useQuery({type: "ABOUT_ME", keys: ["description", "image"]});

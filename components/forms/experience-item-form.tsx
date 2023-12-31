@@ -7,7 +7,7 @@ import {format} from "date-fns";
 import {CalendarIcon, PlusIcon, Trash2Icon} from "lucide-react";
 import {zodResolver} from "@hookform/resolvers/zod";
 import type {ExperienceItemWithResponsibilities} from "~/server/api/routers/experience";
-import {Button} from "~/components/ui/Button";
+import {Button} from "~/components/ui/button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";

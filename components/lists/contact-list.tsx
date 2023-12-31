@@ -4,11 +4,11 @@ import React, {useState} from "react";
 import type {ContactMethod} from "@prisma/client";
 import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
-import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
-import {Button, buttonVariants} from "~/components/ui/Button";
+import {Dialog, DialogTrigger} from "~/components/ui/dialog";
+import {Button, buttonVariants} from "~/components/ui/button";
 import {EmptySection} from "~/components/ui/empty-section";
 import {DeleteEntityDialog} from "~/components/dialogs/delete-entity-dialog";
-import {Heading} from "~/components/ui/Heading";
+import {Heading} from "~/components/ui/heading";
 import {api} from "~/trpc/react";
 import {cn} from "~/utils/className";
 

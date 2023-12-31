@@ -1,5 +1,5 @@
 import React from "react";
-import {Heading} from "~/components/ui/Heading";
+import {Heading} from "~/components/ui/heading";
 
 type DashboardHeaderProps = {
   heading: string;
@@ -9,7 +9,7 @@ type DashboardHeaderProps = {
 const DashboardHeader = ({heading, description}: DashboardHeaderProps) => {
   return (
     <>
-      <div className="sticky top-0 z-30 flex h-14 items-center justify-center bg-white px-4 md:hidden">
+      <div className="sticky top-0 z-30 flex h-14 items-center justify-center bg-white px-4 md:relative md:hidden">
         <Heading as="h1" size="md" className="pb-0">
           {heading}
         </Heading>

@@ -1,7 +1,7 @@
 import type {ExperienceItem} from "@prisma/client";
 import {differenceInDays} from "date-fns";
 
-function sortExperienceItemsByEndDate(experienceItems: Array<ExperienceItem>) {
+function sortExperienceByEndDate(experienceItems: Array<ExperienceItem>) {
   return experienceItems.sort((a, b) => {
     if (!a.endDate) {
       return 0;
@@ -15,4 +15,4 @@ function sortExperienceItemsByEndDate(experienceItems: Array<ExperienceItem>) {
   });
 }
 
-export {sortExperienceItemsByEndDate};
+export {sortExperienceByEndDate};

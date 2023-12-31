@@ -4,7 +4,7 @@ import {PageSection} from "~/components/ui/page-section";
 import {getSnippetValues} from "~/hooks/use-snippets";
 import {api} from "~/trpc/react";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
-import {getContactIcon} from "~/utils/getContactIcon";
+import {getContactIcon} from "~/utils/get-contact-icon";
 
 const KeepInTouch = () => {
   const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT", keys: ["description"]});
