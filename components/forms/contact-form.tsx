@@ -10,7 +10,7 @@ import {Textarea} from "~/components/ui/textarea";
 import {Heading} from "~/components/ui/Heading";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {contactSnippetsSchema} from "~/utils/validations/contact";
-import {useSnippets} from "~/hooks/useSnippets";
+import {useSnippets} from "~/hooks/use-snippets";
 
 type ContactFormProps = {
   data: Array<Snippet>;

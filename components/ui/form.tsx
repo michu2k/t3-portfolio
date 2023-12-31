@@ -4,7 +4,7 @@ import {Slot} from "@radix-ui/react-slot";
 import type {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
 import {Controller} from "react-hook-form";
 import {cn} from "~/utils/className";
-import {useFormField} from "~/hooks/useFormField";
+import {useFormField} from "~/hooks/use-form-field";
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,

@@ -3,9 +3,9 @@ import Link from "next/link";
 import {motion, useMotionValueEvent, useScroll} from "framer-motion";
 import {Sidebar, SidebarContent, SidebarTrigger, useSidebarContext} from "~/components/ui/sidebar";
 import {SocialMedia} from "./SocialMedia";
-import {useIsMobile} from "~/hooks/useIsMobile";
+import {useIsMobile} from "~/hooks/use-is-mobile";
 import {isClientSide} from "~/utils/isClientSide";
-import {useSmoothScroll} from "~/hooks/useSmoothScroll";
+import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
 
 const navigationItems: Array<NavigationItemDef> = [
   {

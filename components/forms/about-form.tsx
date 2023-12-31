@@ -5,7 +5,7 @@ import {FileX2Icon} from "lucide-react";
 import {FormProvider, useForm} from "react-hook-form";
 import type {Snippet} from "@prisma/client";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useSnippets} from "~/hooks/useSnippets";
+import {useSnippets} from "~/hooks/use-snippets";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Button} from "~/components/ui/Button";
 import {Textarea} from "~/components/ui/textarea";

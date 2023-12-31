@@ -1,4 +1,4 @@
-import {useIsMobile} from "./useIsMobile";
+import {useIsMobile} from "./use-is-mobile";
 import {isClientSide} from "~/utils/isClientSide";
 
 // For better UX, offset the scroll position by a few pixels

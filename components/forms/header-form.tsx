@@ -11,7 +11,7 @@ import {Textarea} from "~/components/ui/textarea";
 import {Heading} from "~/components/ui/Heading";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {headerSnippetsSchema} from "~/utils/validations/header";
-import {useSnippets} from "~/hooks/useSnippets";
+import {useSnippets} from "~/hooks/use-snippets";
 
 type HeaderFormProps = {
   data: Array<Snippet>;

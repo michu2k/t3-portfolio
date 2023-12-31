@@ -5,7 +5,7 @@ import type {AnimationProps} from "framer-motion";
 import {AnimatePresence, motion} from "framer-motion";
 import * as Portal from "@radix-ui/react-portal";
 import {Button} from "~/components/ui/Button";
-import {useIsMobile} from "~/hooks/useIsMobile";
+import {useIsMobile} from "~/hooks/use-is-mobile";
 import {cn} from "~/utils/className";
 import {SidebarContextProvider, useSidebarContext} from "./sidebar-context";
 

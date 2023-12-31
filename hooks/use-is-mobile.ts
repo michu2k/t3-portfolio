@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {useWindowSize} from "./useWindowSize";
+import {useWindowSize} from "./use-window-size";
 import theme from "tailwindcss/defaultTheme";
 
 const useIsMobile = () => {

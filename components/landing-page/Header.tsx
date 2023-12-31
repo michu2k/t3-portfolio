@@ -1,10 +1,10 @@
 import React from "react";
 import {MoveRightIcon} from "lucide-react";
-import {getSnippetValues} from "~/hooks/useSnippets";
+import {getSnippetValues} from "~/hooks/use-snippets";
 import {api} from "~/trpc/react";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {Button} from "~/components/ui/Button";
-import {useSmoothScroll} from "~/hooks/useSmoothScroll";
+import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
 
 const Header = () => {
   const {data = []} = api.snippet.getSnippets.useQuery({type: "HEADER", keys: ["heading", "description"]});
