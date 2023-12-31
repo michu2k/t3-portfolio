@@ -1,7 +1,7 @@
 import {redirect} from "next/navigation";
 import React from "react";
 import type {PropsWithChildren} from "react";
-import {DashboardSidebar} from "~/components/dashboard/DashboardSidebar";
+import {DashboardSidebar} from "~/components/layouts/dashboard-sidebar";
 import {getServerAuthSession} from "~/server/auth";
 
 export default async function DashboardLayout({children}: PropsWithChildren) {

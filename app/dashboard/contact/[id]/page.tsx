@@ -1,7 +1,8 @@
 import React from "react";
 import {api} from "~/trpc/server";
-import {PageContent, PageHeader} from "~/components/dashboard/DashboardPage";
-import {ContactItemForm} from "~/components/dashboard/ContactItemForm";
+import {DashboardHeader} from "~/components/layouts/dashboard-header";
+import {DashboardContent} from "~/components/layouts/dashboard-content";
+import {ContactItemForm} from "~/components/forms/contact-item-form";
 
 type PageProps = {
   params: {
@@ -18,10 +19,10 @@ export default async function Page({params: {id}}: PageProps) {
 
   return (
     <>
-      <PageHeader heading={heading} description={description} />
-      <PageContent>
+      <DashboardHeader heading={heading} description={description} />
+      <DashboardContent>
         <ContactItemForm data={data} />
-      </PageContent>
+      </DashboardContent>
     </>
   );
 }

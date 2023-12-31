@@ -6,17 +6,17 @@ import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
 import {Button, buttonVariants} from "~/components/ui/Button";
-import {EmptySection} from "~/components/ui/EmptySection";
-import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
+import {EmptySection} from "~/components/ui/empty-section";
+import {DeleteEntityDialog} from "~/components/dialogs/delete-entity-dialog";
 import {Heading} from "~/components/ui/Heading";
 import {api} from "~/trpc/react";
 import {cn} from "~/utils/className";
 
-type ContactItemsProps = {
+type ContactListProps = {
   contactMethods: Array<ContactMethod>;
 };
 
-const ContactItems = ({contactMethods}: ContactItemsProps) => {
+const ContactList = ({contactMethods}: ContactListProps) => {
   const deleteItemMutation = api.contact.deleteItem.useMutation();
   const [selectedContactMethod, setSelectedContactMethod] = useState<ContactMethod | null>(null);
   const utils = api.useUtils();
@@ -92,4 +92,4 @@ const ContactMethodCard = ({id, name, description, onDelete}: ContactMethodCardP
   );
 };
 
-export {ContactItems};
+export {ContactList};

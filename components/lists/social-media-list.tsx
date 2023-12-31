@@ -6,18 +6,18 @@ import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
 import {Button, buttonVariants} from "~/components/ui/Button";
-import {EmptySection} from "~/components/ui/EmptySection";
-import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
+import {EmptySection} from "~/components/ui/empty-section";
+import {DeleteEntityDialog} from "~/components/dialogs/delete-entity-dialog";
 import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
 import {api} from "~/trpc/react";
 import {getSocialMediaIcon} from "~/utils/getSocialMediaIcon";
 
-type SocialMediaItemsProps = {
-  socialMediaItems: Array<SocialMediaLink>;
+type SocialMediaListProps = {
+  socialMediaLinks: Array<SocialMediaLink>;
 };
 
-const SocialMediaItems = ({socialMediaItems}: SocialMediaItemsProps) => {
+const SocialMediaList = ({socialMediaLinks}: SocialMediaListProps) => {
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
   const [selectedSocialMediaLink, setSelectedSocialMediaLink] = useState<SocialMediaLink | null>(null);
   const utils = api.useUtils();
@@ -39,7 +39,7 @@ const SocialMediaItems = ({socialMediaItems}: SocialMediaItemsProps) => {
   }
 
   function displayItems() {
-    return socialMediaItems.map((item) => (
+    return socialMediaLinks.map((item) => (
       <SocialMediaCard key={item.id} onDelete={() => setSelectedSocialMediaLink(item)} {...item} />
     ));
   }
@@ -51,7 +51,7 @@ const SocialMediaItems = ({socialMediaItems}: SocialMediaItemsProps) => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {socialMediaItems.length ? displayItems() : <EmptySection heading="No links found" />}
+        {socialMediaLinks.length ? displayItems() : <EmptySection heading="No links found" />}
 
         <Link href="/dashboard/social-media/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />
@@ -98,4 +98,4 @@ const SocialMediaCard = ({id, icon, url, onDelete}: SocialMediaCardProps) => {
   );
 };
 
-export {SocialMediaItems};
+export {SocialMediaList};

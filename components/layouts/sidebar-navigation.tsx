@@ -53,7 +53,7 @@ const navigationItems: Array<NavigationItemDef> = [
   }
 ];
 
-const Navigation = () => {
+const SidebarNavigation = () => {
   const pathname = usePathname();
 
   function displayNavigationItems() {
@@ -109,4 +109,4 @@ const NavigationItem = ({text, href, icon: Icon, isActive}: NavigationItemProps)
   );
 };
 
-export {Navigation};
+export {SidebarNavigation};

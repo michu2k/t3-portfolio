@@ -1,14 +1,15 @@
 import React from "react";
-import {PageContent, PageHeader} from "~/components/dashboard/DashboardPage";
-import {GeneralForm} from "~/components/dashboard/GeneralForm";
+import {DashboardHeader} from "~/components/layouts/dashboard-header";
+import {DashboardContent} from "~/components/layouts/dashboard-content";
+import {GeneralForm} from "~/components/forms/general-form";
 
 export default function Page() {
   return (
     <>
-      <PageHeader heading="General" description="General page settings" />
-      <PageContent>
+      <DashboardHeader heading="General" description="General page settings" />
+      <DashboardContent>
         <GeneralForm />
-      </PageContent>
+      </DashboardContent>
     </>
   );
 }

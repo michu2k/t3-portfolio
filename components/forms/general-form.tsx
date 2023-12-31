@@ -2,9 +2,9 @@
 
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/Form";
+import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/Heading";
-import {Input} from "~/components/ui/Input";
+import {Input} from "~/components/ui/input";
 import {Button} from "~/components/ui/Button";
 
 const GeneralForm = () => {

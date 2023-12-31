@@ -3,7 +3,7 @@ import type {Metadata} from "next";
 import {Inter, Poppins} from "next/font/google";
 import {cookies} from "next/headers";
 import {TRPCReactProvider} from "~/trpc/react";
-import {NextAuthProvider} from "./NextAuthProvider";
+import {NextAuthProvider} from "./next-auth-provider";
 
 import "~/styles/globals.css";
 

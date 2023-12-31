@@ -1,17 +1,18 @@
 import React from "react";
 import {api} from "~/trpc/server";
-import {PageContent, PageHeader} from "~/components/dashboard/DashboardPage";
-import {ProjectItems} from "~/components/dashboard/ProjectItems";
+import {DashboardHeader} from "~/components/layouts/dashboard-header";
+import {DashboardContent} from "~/components/layouts/dashboard-content";
+import {ProjectList} from "~/components/lists/project-list";
 
 export default async function Page() {
   const data = await api.project.getItems.query();
 
   return (
     <>
-      <PageHeader heading="Projects" description="Project section settings" />
-      <PageContent>
-        <ProjectItems projectItems={data} />
-      </PageContent>
+      <DashboardHeader heading="Projects" description="Project section settings" />
+      <DashboardContent>
+        <ProjectList projects={data} />
+      </DashboardContent>
     </>
   );
 }

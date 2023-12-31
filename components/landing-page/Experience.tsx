@@ -1,7 +1,7 @@
 import React from "react";
 import {format} from "date-fns";
 import type {ExperienceItem, ExperienceItemResponsibility} from "@prisma/client";
-import {PageSection} from "~/components/ui/PageSection";
+import {PageSection} from "~/components/ui/page-section";
 import {api} from "~/trpc/react";
 
 const Experience = () => {

@@ -1,7 +1,8 @@
 import React from "react";
 import {api} from "~/trpc/server";
-import {PageContent, PageHeader} from "~/components/dashboard/DashboardPage";
-import {ExperienceItemForm} from "~/components/dashboard/ExperienceItemForm";
+import {DashboardHeader} from "~/components/layouts/dashboard-header";
+import {DashboardContent} from "~/components/layouts/dashboard-content";
+import {ExperienceItemForm} from "~/components/forms/experience-item-form";
 
 type PageProps = {
   params: {
@@ -18,10 +19,10 @@ export default async function Page({params: {id}}: PageProps) {
 
   return (
     <>
-      <PageHeader heading={heading} description={description} />
-      <PageContent>
+      <DashboardHeader heading={heading} description={description} />
+      <DashboardContent>
         <ExperienceItemForm data={data} />
-      </PageContent>
+      </DashboardContent>
     </>
   );
 }

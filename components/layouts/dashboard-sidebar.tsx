@@ -2,9 +2,9 @@
 
 import React from "react";
 import {useSession} from "next-auth/react";
-import {Navigation} from "~/components/dashboard/Navigation";
-import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/Avatar";
-import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/Sidebar";
+import {SidebarNavigation} from "~/components/layouts/sidebar-navigation";
+import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
+import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
 import {getUserInitials} from "~/utils/getUserInitials";
 
 const DashboardSidebar = () => {
@@ -30,7 +30,7 @@ const DashboardSidebar = () => {
           </div>
         </div>
 
-        <Navigation />
+        <SidebarNavigation />
       </SidebarContent>
     </Sidebar>
   );

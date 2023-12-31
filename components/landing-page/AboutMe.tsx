@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import {PageSection} from "~/components/ui/PageSection";
+import {PageSection} from "~/components/ui/page-section";
 import {getSnippetValues} from "~/hooks/useSnippets";
 import {api} from "~/trpc/react";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/aboutMe";

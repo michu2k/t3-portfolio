@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type {ProjectItem} from "~/server/api/routers/project";
-import {PageSection} from "~/components/ui/PageSection";
+import {PageSection} from "~/components/ui/page-section";
 import {api} from "~/trpc/react";
 
 const RecentWork = () => {

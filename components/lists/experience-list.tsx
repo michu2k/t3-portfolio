@@ -7,18 +7,18 @@ import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
 import {Button, buttonVariants} from "~/components/ui/Button";
-import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
-import {EmptySection} from "~/components/ui/EmptySection";
+import {DeleteEntityDialog} from "~/components/dialogs/delete-entity-dialog";
+import {EmptySection} from "~/components/ui/empty-section";
 import {Heading} from "~/components/ui/Heading";
 import {cn} from "~/utils/className";
 import {api} from "~/trpc/react";
 import {sortExperienceItemsByEndDate} from "~/utils/sortExperienceItemsByEndDate";
 
-type ExperienceItemsProps = {
-  experienceItems: Array<ExperienceItem>;
+type ExperienceListProps = {
+  experience: Array<ExperienceItem>;
 };
 
-const ExperienceItems = ({experienceItems}: ExperienceItemsProps) => {
+const ExperienceList = ({experience}: ExperienceListProps) => {
   const deleteItemMutation = api.experience.deleteItem.useMutation();
   const [selectedExperienceItem, setSelectedExperienceItem] = useState<ExperienceItem | null>(null);
   const utils = api.useUtils();
@@ -40,7 +40,7 @@ const ExperienceItems = ({experienceItems}: ExperienceItemsProps) => {
   }
 
   function displayItems() {
-    const sortedItems = sortExperienceItemsByEndDate(experienceItems);
+    const sortedItems = sortExperienceItemsByEndDate(experience);
 
     return sortedItems.map((item) => (
       <ExperienceCard key={item.id} onDelete={() => setSelectedExperienceItem(item)} {...item} />
@@ -54,7 +54,7 @@ const ExperienceItems = ({experienceItems}: ExperienceItemsProps) => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {experienceItems.length ? displayItems() : <EmptySection heading="No experience items found" />}
+        {experience.length ? displayItems() : <EmptySection heading="No experience items found" />}
 
         <Link href="/dashboard/experience/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />
@@ -102,4 +102,4 @@ const ExperienceCard = ({id, company, startDate, endDate, position, onDelete}: E
   );
 };
 
-export {ExperienceItems};
+export {ExperienceList};

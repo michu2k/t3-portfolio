@@ -7,7 +7,7 @@ import * as Portal from "@radix-ui/react-portal";
 import {Button} from "~/components/ui/Button";
 import {useIsMobile} from "~/hooks/useIsMobile";
 import {cn} from "~/utils/className";
-import {SidebarContextProvider, useSidebarContext} from "./SidebarContext";
+import {SidebarContextProvider, useSidebarContext} from "./sidebar-context";
 
 const Sidebar = ({children}: PropsWithChildren) => {
   return <SidebarContextProvider>{children}</SidebarContextProvider>;

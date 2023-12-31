@@ -1,9 +1,10 @@
 import React from "react";
 import {api} from "~/trpc/server";
-import {PageContent, PageHeader} from "~/components/dashboard/DashboardPage";
-import {ContactForm} from "~/components/dashboard/ContactForm";
-import {ContactItems} from "~/components/dashboard/ContactItems";
-import {Separator} from "~/components/ui/Separator";
+import {DashboardHeader} from "~/components/layouts/dashboard-header";
+import {DashboardContent} from "~/components/layouts/dashboard-content";
+import {ContactForm} from "~/components/forms/contact-form";
+import {ContactList} from "~/components/lists/contact-list";
+import {Separator} from "~/components/ui/separator";
 
 export default async function Page() {
   const snippets = await api.snippet.getSnippets.query({type: "CONTACT", keys: ["description"]});
@@ -11,12 +12,12 @@ export default async function Page() {
 
   return (
     <>
-      <PageHeader heading="Contact" description="Contact section settings" />
-      <PageContent>
+      <DashboardHeader heading="Contact" description="Contact section settings" />
+      <DashboardContent>
         <ContactForm data={snippets} />
         <Separator className="my-8 h-px" />
-        <ContactItems contactMethods={contactMethods} />
-      </PageContent>
+        <ContactList contactMethods={contactMethods} />
+      </DashboardContent>
     </>
   );
 }

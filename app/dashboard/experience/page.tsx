@@ -1,17 +1,18 @@
 import React from "react";
 import {api} from "~/trpc/server";
-import {PageContent, PageHeader} from "~/components/dashboard/DashboardPage";
-import {ExperienceItems} from "~/components/dashboard/ExperienceItems";
+import {DashboardHeader} from "~/components/layouts/dashboard-header";
+import {DashboardContent} from "~/components/layouts/dashboard-content";
+import {ExperienceList} from "~/components/lists/experience-list";
 
 export default async function Page() {
   const data = await api.experience.getItems.query();
 
   return (
     <>
-      <PageHeader heading="Experience" description="Experience section settings" />
-      <PageContent>
-        <ExperienceItems experienceItems={data} />
-      </PageContent>
+      <DashboardHeader heading="Experience" description="Experience section settings" />
+      <DashboardContent>
+        <ExperienceList experience={data} />
+      </DashboardContent>
     </>
   );
 }

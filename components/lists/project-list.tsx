@@ -6,18 +6,18 @@ import {PlusIcon, PencilIcon, TrashIcon, EyeIcon} from "lucide-react";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {Button, buttonVariants} from "~/components/ui/Button";
 import {Heading} from "~/components/ui/Heading";
-import {EmptySection} from "~/components/ui/EmptySection";
+import {EmptySection} from "~/components/ui/empty-section";
 import {Dialog, DialogTrigger} from "~/components/ui/Dialog";
-import {DeleteEntityDialog} from "~/components/dialogs/DeleteEntityDialog";
+import {DeleteEntityDialog} from "~/components/dialogs/delete-entity-dialog";
 import {api} from "~/trpc/react";
 import {cn} from "~/utils/className";
 import Image from "next/image";
 
-type ProjectItemsProps = {
-  projectItems: Array<ProjectItem>;
+type ProjectListProps = {
+  projects: Array<ProjectItem>;
 };
 
-const ProjectItems = ({projectItems}: ProjectItemsProps) => {
+const ProjectList = ({projects}: ProjectListProps) => {
   const deleteItemMutation = api.project.deleteItem.useMutation();
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const utils = api.useUtils();
@@ -37,9 +37,7 @@ const ProjectItems = ({projectItems}: ProjectItemsProps) => {
   }
 
   function displayItems() {
-    return projectItems.map((item) => (
-      <ProjectCard key={item.id} onDelete={() => setSelectedProject(item)} {...item} />
-    ));
+    return projects.map((item) => <ProjectCard key={item.id} onDelete={() => setSelectedProject(item)} {...item} />);
   }
 
   return (
@@ -49,7 +47,7 @@ const ProjectItems = ({projectItems}: ProjectItemsProps) => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {projectItems.length ? displayItems() : <EmptySection heading="No project items found" />}
+        {projects.length ? displayItems() : <EmptySection heading="No project items found" />}
 
         <Link href="/dashboard/projects/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />
@@ -109,4 +107,4 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onDel
   );
 };
 
-export {ProjectItems};
+export {ProjectList};
