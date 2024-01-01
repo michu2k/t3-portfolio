@@ -1,14 +1,18 @@
 import React from "react";
 import type {Metadata} from "next";
 import {redirect} from "next/navigation";
-import type {PropsWithChildren} from "react";
 import {getServerAuthSession} from "~/server/auth";
 
 export const metadata: Metadata = {
-  title: "Dashboard: Sign in"
+  title: "Dashboard: Sign in",
+  description: "Simple, user-friendly interface for portfolio management"
 };
 
-export default async function SignInLayout({children}: PropsWithChildren) {
+type SignInLayoutProps = {
+  children: React.ReactNode;
+};
+
+export default async function SignInLayout({children}: SignInLayoutProps) {
   const session = await getServerAuthSession();
 
   if (session?.user) {

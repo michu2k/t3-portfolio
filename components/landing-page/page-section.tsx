@@ -1,6 +1,6 @@
 import React from "react";
 import type {PropsWithChildren} from "react";
-import {Heading} from "./Heading";
+import {Heading} from "~/components/ui/heading";
 
 type PageSectionProps = PropsWithChildren<{
   id: string;

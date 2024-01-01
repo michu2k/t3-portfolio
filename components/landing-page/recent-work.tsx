@@ -2,11 +2,11 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import type {ProjectItem} from "~/server/api/routers/project";
-import {PageSection} from "~/components/ui/page-section";
-import {api} from "~/trpc/react";
+import {api} from "~/trpc/server";
+import {PageSection} from "./page-section";
 
-const RecentWork = () => {
-  const {data: projectItems = []} = api.project.getItems.useQuery();
+const RecentWork = async () => {
+  const projectItems = await api.project.getItems.query();
 
   function displayRecentWorkItems() {
     return projectItems.map((item) => <ProjectCard key={item.id} {...item} />);
@@ -43,11 +43,6 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
           <p className="line-clamp-4 overflow-hidden text-ellipsis text-sm leading-7">
             {shortDescription || description}
           </p>
-
-          {/*  <Link href={projectUrl} className={cn(buttonVariants({variant: "secondary", size: "md"}), "w-32 gap-6")}>
-          Preview
-          <MoveRightIcon size={20} />
-        </Link> */}
         </div>
       </Link>
     </article>

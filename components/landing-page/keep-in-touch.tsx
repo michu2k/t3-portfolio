@@ -1,14 +1,14 @@
 import React from "react";
 import type {ContactMethod} from "@prisma/client";
-import {PageSection} from "~/components/ui/page-section";
 import {getSnippetValues} from "~/hooks/use-snippets";
-import {api} from "~/trpc/react";
+import {api} from "~/trpc/server";
+import {PageSection} from "./page-section";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {getContactIcon} from "~/utils/get-contact-icon";
 
-const KeepInTouch = () => {
-  const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT", keys: ["description"]});
-  const {data: contactMethods = []} = api.contact.getItems.useQuery();
+const KeepInTouch = async () => {
+  const data = await api.snippet.getSnippets.query({type: "CONTACT", keys: ["description"]});
+  const contactMethods = await api.contact.getItems.query();
 
   const snippetValues = getSnippetValues<keyof ContactSnippetsFormValues>(data);
   const {description = ""} = snippetValues;

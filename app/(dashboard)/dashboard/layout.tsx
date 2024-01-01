@@ -1,10 +1,19 @@
+import type {Metadata} from "next";
 import {redirect} from "next/navigation";
 import React from "react";
-import type {PropsWithChildren} from "react";
 import {DashboardSidebar} from "~/components/layouts/dashboard-sidebar";
 import {getServerAuthSession} from "~/server/auth";
 
-export default async function DashboardLayout({children}: PropsWithChildren) {
+export const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Simple, user-friendly interface for portfolio management"
+};
+
+type DashboardLayoutProps = {
+  children: React.ReactNode;
+};
+
+export default async function DashboardLayout({children}: DashboardLayoutProps) {
   const session = await getServerAuthSession();
 
   if (!session?.user) {

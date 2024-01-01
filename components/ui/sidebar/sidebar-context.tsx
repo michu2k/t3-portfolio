@@ -1,4 +1,3 @@
-import type {PropsWithChildren} from "react";
 import React, {useContext, useState} from "react";
 
 type SidebarContextProps = {
@@ -9,7 +8,11 @@ type SidebarContextProps = {
 
 const SidebarContext = React.createContext({} as SidebarContextProps);
 
-const SidebarContextProvider = ({children}: PropsWithChildren) => {
+type SidebarContextProviderProps = {
+  children: React.ReactNode;
+};
+
+const SidebarContextProvider = ({children}: SidebarContextProviderProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   function toggleSidebar() {

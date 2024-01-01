@@ -1,13 +1,13 @@
 import React from "react";
 import {format} from "date-fns";
-import type {ExperienceItem, ExperienceItemResponsibility} from "@prisma/client";
-import {PageSection} from "~/components/ui/page-section";
-import {api} from "~/trpc/react";
+import {api} from "~/trpc/server";
+import type {ExperienceItemWithResponsibilities} from "~/server/api/routers/experience";
+import {PageSection} from "./page-section";
 
-const Experience = () => {
-  const {data: experienceItems = []} = api.experience.getItems.useQuery({
+const Experience = async () => {
+  const experienceItems = (await api.experience.getItems.query({
     include: {responsibilities: true}
-  });
+  })) as Array<ExperienceItemWithResponsibilities>;
 
   function displayExperience() {
     return experienceItems.map((item) => <ExperienceListItem key={item.id} {...item} />);
@@ -20,11 +20,13 @@ const Experience = () => {
   );
 };
 
-type ExperienceListItemProps = ExperienceItem & {
-  responsibilities?: Array<ExperienceItemResponsibility>;
-};
-
-const ExperienceListItem = ({startDate, endDate, company, position, responsibilities}: ExperienceListItemProps) => {
+const ExperienceListItem = ({
+  startDate,
+  endDate,
+  company,
+  position,
+  responsibilities
+}: ExperienceItemWithResponsibilities) => {
   return (
     <li className="flex flex-col items-start gap-2 md:flex-row md:gap-8">
       <div className="flex flex-col justify-center md:min-h-[2rem]">

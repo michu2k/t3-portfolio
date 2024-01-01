@@ -3,7 +3,7 @@ import Link from "next/link";
 import {getProviders} from "next-auth/react";
 import {buttonVariants} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
-import {SignInProviders} from "./sign-in-providers";
+import {SignInProviders} from "~/components/auth/sign-in-providers";
 import {cn} from "~/utils/className";
 import pkg from "~/package.json";
 

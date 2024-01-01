@@ -1,4 +1,3 @@
-import type {PropsWithChildren} from "react";
 import type {Metadata} from "next";
 import {Inter, Poppins} from "next/font/google";
 import {cookies} from "next/headers";
@@ -22,14 +21,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Simple, user-friendly interface for portfolio management",
+  title: "T3 Portfolio",
   icons: {
     icon: "/favicon.ico"
   }
 };
 
-export default function RootLayout({children}: PropsWithChildren) {
+type RootLayoutProps = {
+  children: React.ReactNode;
+};
+
+export default function RootLayout({children}: RootLayoutProps) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body>

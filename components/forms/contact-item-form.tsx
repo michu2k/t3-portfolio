@@ -39,8 +39,6 @@ const ContactItemForm = ({data}: ContactItemFormProps) => {
   const {control, handleSubmit, watch} = formMethods;
   const type = watch("type");
 
-  console.log({data, type});
-
   const fieldPlaceholder = type ? fieldPlaceholdersDef[type] : null;
 
   async function handleFormSubmit(formValues: ContactMethodFormValues, e?: React.BaseSyntheticEvent) {

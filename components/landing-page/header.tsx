@@ -1,14 +1,11 @@
 import React from "react";
-import {MoveRightIcon} from "lucide-react";
 import {getSnippetValues} from "~/hooks/use-snippets";
-import {api} from "~/trpc/react";
+import {api} from "~/trpc/server";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
-import {Button} from "~/components/ui/button";
-import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
+import {HeaderButton} from "./header-button";
 
-const Header = () => {
-  const {data = []} = api.snippet.getSnippets.useQuery({type: "HEADER", keys: ["heading", "description"]});
-  const {scrollToTarget} = useSmoothScroll("#recent-work");
+const Header = async () => {
+  const data = await api.snippet.getSnippets.query({type: "HEADER", keys: ["heading", "description"]});
 
   const snippetValues = getSnippetValues<keyof HeaderSnippetsFormValues>(data);
   const {heading = "", description = ""} = snippetValues;
@@ -24,10 +21,7 @@ const Header = () => {
 
         <p className="mb-12 max-w-2xl text-sm leading-7">{description}</p>
 
-        <Button variant="secondary" onClick={scrollToTarget} className="h-12 gap-6 px-8">
-          See my work
-          <MoveRightIcon size={20} />
-        </Button>
+        <HeaderButton />
       </div>
     </header>
   );

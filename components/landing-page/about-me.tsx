@@ -1,17 +1,17 @@
 import React from "react";
 import Image from "next/image";
-import {PageSection} from "~/components/ui/page-section";
 import {getSnippetValues} from "~/hooks/use-snippets";
-import {api} from "~/trpc/react";
+import {api} from "~/trpc/server";
+import {PageSection} from "./page-section";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 
-const AboutMe = () => {
-  const {data = []} = api.snippet.getSnippets.useQuery({type: "ABOUT_ME", keys: ["description", "image"]});
+const AboutMe = async () => {
+  const data = await api.snippet.getSnippets.query({type: "ABOUT_ME", keys: ["description", "image"]});
 
   const snippetValues = getSnippetValues<keyof AboutMeSnippetsFormValues>(data);
   const {description = "", image: imageId} = snippetValues;
 
-  const {data: imageObj} = api.image.getImage.useQuery({id: imageId}, {enabled: !!imageId});
+  const imageObj = imageId ? await api.image.getImage.query({id: imageId}) : null;
 
   return (
     <PageSection id="about" heading="Personal Details" subheading="01. About Me">

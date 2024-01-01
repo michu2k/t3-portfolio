@@ -1,11 +1,11 @@
+"use client";
+
 import React, {useState} from "react";
 import Link from "next/link";
 import {motion, useMotionValueEvent, useScroll} from "framer-motion";
 import {Sidebar, SidebarContent, SidebarTrigger, useSidebarContext} from "~/components/ui/sidebar";
-import {SocialMedia} from "./SocialMedia";
-import {useIsMobile} from "~/hooks/use-is-mobile";
-import {isClientSide} from "~/utils/is-client-side";
 import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
+import {isClientSide} from "~/utils/is-client-side";
 
 const navigationItems: Array<NavigationItemDef> = [
   {
@@ -35,10 +35,13 @@ type TargetElement = {
   target: HTMLElement;
 };
 
-const Navigation = () => {
+type NavigationProps = {
+  children: React.ReactNode;
+};
+
+const Navigation = ({children}: NavigationProps) => {
   const [activeTargetId, setActiveTargetId] = useState<string | null>(null);
   const {scrollY} = useScroll();
-  const isMobile = useIsMobile();
 
   function getTargetList() {
     return navigationItems.reduce<Array<TargetElement>>((acc, {id}: NavigationItemDef) => {
@@ -68,22 +71,15 @@ const Navigation = () => {
       <div className="sticky left-0 right-0 top-0 z-40 mx-auto h-16 w-full bg-white px-4 md:h-[4.5rem] md:px-6">
         <nav className="section-container flex h-full items-center justify-between gap-4">
           <SidebarTrigger />
-
-          {!isMobile && (
-            <ul className="section-container flex flex-1 items-center gap-8">{displayNavigationItems()}</ul>
-          )}
-
-          <SocialMedia />
+          <ul className="section-container hidden flex-1 items-center gap-8 md:flex">{displayNavigationItems()}</ul>
+          {children}
         </nav>
       </div>
 
-      {isMobile && (
-        <SidebarContent>
-          <ul className="section-container flex flex-1 flex-col gap-3">{displayNavigationItems()}</ul>
-
-          <SocialMedia className="mb-4 h-11" />
-        </SidebarContent>
-      )}
+      <SidebarContent className="md:hidden">
+        <ul className="section-container flex flex-1 flex-col gap-3">{displayNavigationItems()}</ul>
+        <div className="pb-4">{children}</div>
+      </SidebarContent>
     </Sidebar>
   );
 };
