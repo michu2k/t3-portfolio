@@ -11,15 +11,15 @@ import {Textarea} from "~/components/ui/textarea";
 import {Heading} from "~/components/ui/heading";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {headerSnippetsSchema} from "~/utils/validations/header";
-import {useSnippets} from "~/hooks/use-snippets";
+import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
 
 type HeaderFormProps = {
   data: Array<Snippet>;
 };
 
 const HeaderForm = ({data}: HeaderFormProps) => {
-  const {updateSnippets, snippetValues} = useSnippets<keyof HeaderSnippetsFormValues>("HEADER", data);
-  const {heading = "", description = ""} = snippetValues;
+  const updateSnippets = useSnippets<keyof HeaderSnippetsFormValues>("HEADER", data);
+  const {heading = "", description = ""} = getSnippetValues<keyof HeaderSnippetsFormValues>(data);
 
   const formMethods = useForm<HeaderSnippetsFormValues>({
     defaultValues: {

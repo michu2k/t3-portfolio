@@ -10,14 +10,15 @@ import {Textarea} from "~/components/ui/textarea";
 import {Heading} from "~/components/ui/heading";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {contactSnippetsSchema} from "~/utils/validations/contact";
-import {useSnippets} from "~/hooks/use-snippets";
+import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
 
 type ContactFormProps = {
   data: Array<Snippet>;
 };
 
 const ContactForm = ({data}: ContactFormProps) => {
-  const {updateSnippets, snippetValues} = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", data);
+  const updateSnippets = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", data);
+  const snippetValues = getSnippetValues<keyof ContactSnippetsFormValues>(data);
 
   const formMethods = useForm<ContactSnippetsFormValues>({
     defaultValues: {

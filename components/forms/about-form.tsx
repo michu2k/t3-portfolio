@@ -5,7 +5,8 @@ import {FileX2Icon} from "lucide-react";
 import {FormProvider, useForm} from "react-hook-form";
 import type {Snippet} from "@prisma/client";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useSnippets} from "~/hooks/use-snippets";
+import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import {api} from "~/trpc/react";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Button} from "~/components/ui/button";
 import {Textarea} from "~/components/ui/textarea";
@@ -14,7 +15,6 @@ import {ImageCard} from "~/components/ui/image-card";
 import {Dropzone} from "~/components/ui/dropzone";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
-import {api} from "~/trpc/react";
 import {acceptedImageTypes} from "~/utils/file";
 
 type AboutFormProps = {
@@ -22,8 +22,8 @@ type AboutFormProps = {
 };
 
 const AboutForm = ({data}: AboutFormProps) => {
-  const {updateSnippets, snippetValues} = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", data);
-  const {description = "", image: imageId} = snippetValues;
+  const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", data);
+  const {description = "", image: imageId} = getSnippetValues<keyof AboutMeSnippetsFormValues>(data);
 
   const {data: imageObj} = api.image.getImage.useQuery({id: imageId}, {enabled: !!imageId});
   const createImage = api.image.createImage.useMutation();

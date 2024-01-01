@@ -36,7 +36,7 @@ const useSnippets = <T extends string>(type: SnippetType, data: Array<Snippet>) 
     });
   }
 
-  return {updateSnippets, snippetValues: getSnippetValues<T>(data)};
+  return updateSnippets;
 };
 
 export {useSnippets, getSnippetValues};
