@@ -1,8 +1,13 @@
 import React from "react";
+import type {Metadata} from "next";
 import {api} from "~/trpc/server";
 import {DashboardHeader} from "~/components/layouts/dashboard-header";
 import {DashboardContent} from "~/components/layouts/dashboard-content";
 import {ProjectItemForm} from "~/components/forms/project-item-form";
+
+export const metadata: Metadata = {
+  title: "Dashboard: Projects"
+};
 
 type PageProps = {
   params: {
