@@ -1,9 +1,8 @@
 import React from "react";
 import type {Metadata} from "next";
-import {api} from "~/trpc/server";
-import {DashboardHeader} from "~/components/layouts/dashboard-header";
-import {DashboardContent} from "~/components/layouts/dashboard-content";
-import {ProjectItemForm} from "~/components/forms/project-item-form";
+import {DashboardHeader} from "~/components/dashboard/layouts/dashboard-header";
+import {DashboardContent} from "~/components/dashboard/layouts/dashboard-content";
+import {ProjectItemForm} from "~/components/dashboard/forms/project-item-form";
 
 export const metadata: Metadata = {
   title: "Dashboard: Projects"
@@ -15,18 +14,16 @@ type PageProps = {
   };
 };
 
-export default async function Page({params: {id}}: PageProps) {
+export default function Page({params: {id}}: PageProps) {
   const isNew = id === "new";
   const heading = isNew ? "Create" : "Edit";
   const description = isNew ? "Create a new project item." : "Edit an existing project item.";
-
-  const data = await api.project.getItem.query({id});
 
   return (
     <>
       <DashboardHeader heading={heading} description={description} />
       <DashboardContent>
-        <ProjectItemForm data={data} />
+        <ProjectItemForm id={id} />
       </DashboardContent>
     </>
   );

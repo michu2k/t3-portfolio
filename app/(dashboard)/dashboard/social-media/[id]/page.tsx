@@ -1,9 +1,8 @@
 import React from "react";
 import type {Metadata} from "next";
-import {api} from "~/trpc/server";
-import {DashboardHeader} from "~/components/layouts/dashboard-header";
-import {DashboardContent} from "~/components/layouts/dashboard-content";
-import {SocialMediaItemForm} from "~/components/forms/social-media-item-form";
+import {DashboardHeader} from "~/components/dashboard/layouts/dashboard-header";
+import {DashboardContent} from "~/components/dashboard/layouts/dashboard-content";
+import {SocialMediaItemForm} from "~/components/dashboard/forms/social-media-item-form";
 
 export const metadata: Metadata = {
   title: "Dashboard: Social media"
@@ -15,18 +14,16 @@ type PageProps = {
   };
 };
 
-export default async function Page({params: {id}}: PageProps) {
+export default function Page({params: {id}}: PageProps) {
   const isNew = id === "new";
   const heading = isNew ? "Create" : "Edit";
   const description = isNew ? "Create a new social media link." : "Edit an existing link.";
-
-  const data = await api.socialMedia.getItem.query({id});
 
   return (
     <>
       <DashboardHeader heading={heading} description={description} />
       <DashboardContent>
-        <SocialMediaItemForm data={data} />
+        <SocialMediaItemForm id={id} />
       </DashboardContent>
     </>
   );

@@ -1,9 +1,8 @@
 import React from "react";
 import type {Metadata} from "next";
-import {api} from "~/trpc/server";
-import {DashboardHeader} from "~/components/layouts/dashboard-header";
-import {DashboardContent} from "~/components/layouts/dashboard-content";
-import {ContactItemForm} from "~/components/forms/contact-item-form";
+import {DashboardHeader} from "~/components/dashboard/layouts/dashboard-header";
+import {DashboardContent} from "~/components/dashboard/layouts/dashboard-content";
+import {ContactItemForm} from "~/components/dashboard/forms/contact-item-form";
 
 export const metadata: Metadata = {
   title: "Dashboard: Contact"
@@ -15,18 +14,16 @@ type PageProps = {
   };
 };
 
-export default async function Page({params: {id}}: PageProps) {
+export default function Page({params: {id}}: PageProps) {
   const isNew = id === "new";
   const heading = isNew ? "Create" : "Edit";
   const description = isNew ? "Create a new contact method." : "Edit an existing contact method.";
-
-  const data = await api.contact.getItem.query({id});
 
   return (
     <>
       <DashboardHeader heading={heading} description={description} />
       <DashboardContent>
-        <ContactItemForm data={data} />
+        <ContactItemForm id={id} />
       </DashboardContent>
     </>
   );

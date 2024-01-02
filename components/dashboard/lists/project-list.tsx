@@ -2,22 +2,19 @@
 
 import React, {useState} from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {PlusIcon, PencilIcon, TrashIcon, EyeIcon} from "lucide-react";
 import type {ProjectItem} from "~/server/api/routers/project";
+import {api} from "~/trpc/react";
 import {Button, buttonVariants} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
 import {EmptySection} from "~/components/ui/empty-section";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
-import {DeleteEntityDialog} from "~/components/dialogs/delete-entity-dialog";
-import {api} from "~/trpc/react";
+import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
 import {cn} from "~/utils/className";
-import Image from "next/image";
 
-type ProjectListProps = {
-  projects: Array<ProjectItem>;
-};
-
-const ProjectList = ({projects}: ProjectListProps) => {
+const ProjectList = () => {
+  const {data: projects = [], isLoading} = api.project.getItems.useQuery();
   const deleteItemMutation = api.project.deleteItem.useMutation();
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const utils = api.useUtils();
@@ -47,7 +44,7 @@ const ProjectList = ({projects}: ProjectListProps) => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {projects.length ? displayItems() : <EmptySection heading="No project items found" />}
+        {isLoading ? null : projects.length ? displayItems() : <EmptySection heading="No project items found" />}
 
         <Link href="/dashboard/projects/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />

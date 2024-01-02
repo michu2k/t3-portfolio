@@ -5,20 +5,17 @@ import type {ExperienceItem} from "@prisma/client";
 import {format} from "date-fns";
 import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
+import {api} from "~/trpc/react";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {Button, buttonVariants} from "~/components/ui/button";
-import {DeleteEntityDialog} from "~/components/dialogs/delete-entity-dialog";
+import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
 import {EmptySection} from "~/components/ui/empty-section";
 import {Heading} from "~/components/ui/heading";
 import {cn} from "~/utils/className";
-import {api} from "~/trpc/react";
 import {sortExperienceByEndDate} from "~/utils/sort-experience-by-end-date";
 
-type ExperienceListProps = {
-  experience: Array<ExperienceItem>;
-};
-
-const ExperienceList = ({experience}: ExperienceListProps) => {
+const ExperienceList = () => {
+  const {data: experience = [], isLoading} = api.experience.getItems.useQuery();
   const deleteItemMutation = api.experience.deleteItem.useMutation();
   const [selectedExperienceItem, setSelectedExperienceItem] = useState<ExperienceItem | null>(null);
   const utils = api.useUtils();
@@ -54,7 +51,7 @@ const ExperienceList = ({experience}: ExperienceListProps) => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {experience.length ? displayItems() : <EmptySection heading="No experience items found" />}
+        {isLoading ? null : experience.length ? displayItems() : <EmptySection heading="No experience items found" />}
 
         <Link href="/dashboard/experience/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />

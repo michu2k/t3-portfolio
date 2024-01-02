@@ -6,25 +6,25 @@ import {useRouter} from "next/navigation";
 import {format} from "date-fns";
 import {CalendarIcon, PlusIcon, Trash2Icon} from "lucide-react";
 import {zodResolver} from "@hookform/resolvers/zod";
-import type {ExperienceItemWithResponsibilities} from "~/server/api/routers/experience";
+import {api} from "~/trpc/react";
 import {Button} from "~/components/ui/button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {Calendar} from "~/components/ui/calendar";
-import {api} from "~/trpc/react";
 import type {ExperienceItemFormValues} from "~/utils/validations/experience";
 import {experienceItemSchema} from "~/utils/validations/experience";
 
 type ExperienceItemFormProps = {
-  data: ExperienceItemWithResponsibilities | null;
+  id: string;
 };
 
-const ExperienceItemForm = ({data}: ExperienceItemFormProps) => {
+const ExperienceItemForm = ({id}: ExperienceItemFormProps) => {
   const router = useRouter();
   const utils = api.useUtils();
   const newResponsibilityItem = {id: undefined, name: ""};
 
+  const {data} = api.experience.getItem.useQuery({id});
   const createItemMutation = api.experience.createItem.useMutation();
   const updateItemMutation = api.experience.updateItem.useMutation();
   const {responsibilities = []} = data || {};

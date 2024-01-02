@@ -7,7 +7,7 @@ import {useMotionValueEvent, useScroll} from "framer-motion";
 import {Sidebar, SidebarContent, SidebarTrigger, useSidebarContext} from "~/components/ui/sidebar";
 import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
 
-const mainNavigationItems: Array<NavigationItemDef> = [
+const homeNavigationItems: Array<NavigationItemDef> = [
   {
     id: "about",
     text: "About",
@@ -83,7 +83,7 @@ const HomeNavigation = ({children}: {children: React.ReactNode}) => {
   const {scrollY} = useScroll();
 
   function getTargetList() {
-    return mainNavigationItems.reduce<Array<TargetElement>>((acc, {id}: NavigationItemDef) => {
+    return homeNavigationItems.reduce<Array<TargetElement>>((acc, {id}: NavigationItemDef) => {
       const target = document.getElementById(id);
       return target ? [...acc, {id, target}] : acc;
     }, []);
@@ -100,7 +100,7 @@ const HomeNavigation = ({children}: {children: React.ReactNode}) => {
   });
 
   return (
-    <Navigation navItems={mainNavigationItems} isItemActive={({id}) => id === activeTargetId}>
+    <Navigation navItems={homeNavigationItems} isItemActive={({id}) => id === activeTargetId}>
       {children}
     </Navigation>
   );

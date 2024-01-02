@@ -4,19 +4,16 @@ import React, {useState} from "react";
 import type {ContactMethod} from "@prisma/client";
 import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
+import {api} from "~/trpc/react";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {Button, buttonVariants} from "~/components/ui/button";
 import {EmptySection} from "~/components/ui/empty-section";
-import {DeleteEntityDialog} from "~/components/dialogs/delete-entity-dialog";
+import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
 import {Heading} from "~/components/ui/heading";
-import {api} from "~/trpc/react";
 import {cn} from "~/utils/className";
 
-type ContactListProps = {
-  contactMethods: Array<ContactMethod>;
-};
-
-const ContactList = ({contactMethods}: ContactListProps) => {
+const ContactList = () => {
+  const {data: contactMethods = [], isLoading} = api.contact.getItems.useQuery();
   const deleteItemMutation = api.contact.deleteItem.useMutation();
   const [selectedContactMethod, setSelectedContactMethod] = useState<ContactMethod | null>(null);
   const utils = api.useUtils();
@@ -48,7 +45,11 @@ const ContactList = ({contactMethods}: ContactListProps) => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {contactMethods.length ? displayItems() : <EmptySection heading="No contact methods found" />}
+        {isLoading ? null : contactMethods.length ? (
+          displayItems()
+        ) : (
+          <EmptySection heading="No contact methods found" />
+        )}
 
         <Link href="/dashboard/contact/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
           <PlusIcon size={16} className="mr-1" />

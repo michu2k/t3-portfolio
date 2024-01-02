@@ -5,6 +5,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {FileX2Icon} from "lucide-react";
 import {useRouter} from "next/navigation";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {api} from "~/trpc/react";
 import {Button} from "~/components/ui/button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
@@ -12,19 +13,18 @@ import {Textarea} from "~/components/ui/textarea";
 import {Dropzone} from "~/components/ui/dropzone";
 import {ImageCard} from "~/components/ui/image-card";
 import type {ProjectItemFormValues} from "~/utils/validations/project";
-import type {ProjectItem} from "~/server/api/routers/project";
 import {projectItemSchema} from "~/utils/validations/project";
 import {acceptedImageTypes} from "~/utils/file";
-import {api} from "~/trpc/react";
 
 type ProjectItemFormProps = {
-  data: ProjectItem | null;
+  id: string;
 };
 
-const ProjectItemForm = ({data}: ProjectItemFormProps) => {
+const ProjectItemForm = ({id}: ProjectItemFormProps) => {
   const router = useRouter();
   const utils = api.useUtils();
 
+  const {data} = api.project.getItem.useQuery({id});
   const createItemMutation = api.project.createItem.useMutation();
   const updateItemMutation = api.project.updateItem.useMutation();
 

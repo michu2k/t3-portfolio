@@ -1,22 +1,19 @@
 import React from "react";
 import type {Metadata} from "next";
-import {api} from "~/trpc/server";
-import {DashboardHeader} from "~/components/layouts/dashboard-header";
-import {DashboardContent} from "~/components/layouts/dashboard-content";
-import {ExperienceList} from "~/components/lists/experience-list";
+import {DashboardHeader} from "~/components/dashboard/layouts/dashboard-header";
+import {DashboardContent} from "~/components/dashboard/layouts/dashboard-content";
+import {ExperienceList} from "~/components/dashboard/lists/experience-list";
 
 export const metadata: Metadata = {
   title: "Dashboard: Experience"
 };
 
-export default async function Page() {
-  const data = await api.experience.getItems.query();
-
+export default function Page() {
   return (
     <>
       <DashboardHeader heading="Experience" description="Experience section settings" />
       <DashboardContent>
-        <ExperienceList experience={data} />
+        <ExperienceList />
       </DashboardContent>
     </>
   );

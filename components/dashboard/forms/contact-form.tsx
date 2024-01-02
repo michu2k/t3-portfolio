@@ -2,8 +2,8 @@
 
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
-import type {Snippet} from "@prisma/client";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {api} from "~/trpc/react";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Button} from "~/components/ui/button";
 import {Textarea} from "~/components/ui/textarea";
@@ -12,11 +12,8 @@ import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {contactSnippetsSchema} from "~/utils/validations/contact";
 import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
 
-type ContactFormProps = {
-  data: Array<Snippet>;
-};
-
-const ContactForm = ({data}: ContactFormProps) => {
+const ContactForm = () => {
+  const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT", keys: ["description"]});
   const updateSnippets = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", data);
   const snippetValues = getSnippetValues<keyof ContactSnippetsFormValues>(data);
 

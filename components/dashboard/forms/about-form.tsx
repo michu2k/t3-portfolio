@@ -3,10 +3,9 @@
 import React from "react";
 import {FileX2Icon} from "lucide-react";
 import {FormProvider, useForm} from "react-hook-form";
-import type {Snippet} from "@prisma/client";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
 import {api} from "~/trpc/react";
+import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Button} from "~/components/ui/button";
 import {Textarea} from "~/components/ui/textarea";
@@ -17,11 +16,8 @@ import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
 import {acceptedImageTypes} from "~/utils/file";
 
-type AboutFormProps = {
-  data: Array<Snippet>;
-};
-
-const AboutForm = ({data}: AboutFormProps) => {
+const AboutForm = () => {
+  const {data = []} = api.snippet.getSnippets.useQuery({type: "ABOUT_ME", keys: ["description", "image"]});
   const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", data);
   const {description = "", image: imageId} = getSnippetValues<keyof AboutMeSnippetsFormValues>(data);
 

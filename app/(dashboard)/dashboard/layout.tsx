@@ -1,7 +1,7 @@
 import type {Metadata} from "next";
 import {redirect} from "next/navigation";
 import React from "react";
-import {DashboardSidebar} from "~/components/layouts/dashboard-sidebar";
+import {DashboardSidebar} from "~/components/dashboard/layouts/dashboard-sidebar";
 import {getServerAuthSession} from "~/server/auth";
 
 export const metadata: Metadata = {

@@ -1,22 +1,19 @@
 import React from "react";
 import type {Metadata} from "next";
-import {api} from "~/trpc/server";
-import {DashboardHeader} from "~/components/layouts/dashboard-header";
-import {DashboardContent} from "~/components/layouts/dashboard-content";
-import {SocialMediaList} from "~/components/lists/social-media-list";
+import {DashboardHeader} from "~/components/dashboard/layouts/dashboard-header";
+import {DashboardContent} from "~/components/dashboard/layouts/dashboard-content";
+import {SocialMediaList} from "~/components/dashboard/lists/social-media-list";
 
 export const metadata: Metadata = {
   title: "Dashboard: Social media"
 };
 
-export default async function Page() {
-  const data = await api.socialMedia.getItems.query();
-
+export default function Page() {
   return (
     <>
       <DashboardHeader heading="Social media" description="Social media settings" />
       <DashboardContent>
-        <SocialMediaList socialMediaLinks={data} />
+        <SocialMediaList />
       </DashboardContent>
     </>
   );

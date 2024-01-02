@@ -3,26 +3,26 @@
 import React from "react";
 import {useRouter} from "next/navigation";
 import {zodResolver} from "@hookform/resolvers/zod";
-import type {ContactMethod} from "@prisma/client";
 import {ContactMethodType} from "@prisma/client";
 import {FormProvider, useForm} from "react-hook-form";
+import {api} from "~/trpc/react";
 import {Button} from "~/components/ui/button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
-import {api} from "~/trpc/react";
 import {capitalize} from "~/utils/capitalize";
 import type {ContactMethodFormValues} from "~/utils/validations/contact";
 import {contactMethodSchema} from "~/utils/validations/contact";
 
 type ContactItemFormProps = {
-  data: ContactMethod | null;
+  id: string;
 };
 
-const ContactItemForm = ({data}: ContactItemFormProps) => {
+const ContactItemForm = ({id}: ContactItemFormProps) => {
   const router = useRouter();
   const utils = api.useUtils();
 
+  const {data} = api.contact.getItem.useQuery({id});
   const createItemMutation = api.contact.createItem.useMutation();
   const updateItemMutation = api.contact.updateItem.useMutation();
 
