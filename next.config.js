@@ -5,7 +5,7 @@
 await import("./env.js");
 
 /**
- * @type {import('next').NextConfig}
+ * @type {import("next").NextConfig}
  */
 const config = {
   reactStrictMode: true,
