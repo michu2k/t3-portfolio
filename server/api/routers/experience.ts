@@ -1,7 +1,12 @@
+import type {ExperienceItem, ExperienceItemResponsibility} from "@prisma/client";
 import {z} from "zod";
 
 import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
 import {experienceItemSchema} from "~/utils/validations/experience";
+
+type ExperienceItemWithResponsibilities = ExperienceItem & {
+  responsibilities: Array<ExperienceItemResponsibility>;
+};
 
 // prettier-ignore
 export const experienceRouter = createTRPCRouter({
@@ -78,3 +83,5 @@ export const experienceRouter = createTRPCRouter({
       });
     })
 });
+
+export type {ExperienceItemWithResponsibilities};

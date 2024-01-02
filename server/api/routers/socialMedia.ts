@@ -1,7 +1,7 @@
 import {z} from "zod";
 
 import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
-import {socialMediaLinkSchema} from "~/utils/validations/socialMedia";
+import {socialMediaLinkSchema} from "~/utils/validations/social-media";
 
 // prettier-ignore
 export const socialMediaRouter = createTRPCRouter({
