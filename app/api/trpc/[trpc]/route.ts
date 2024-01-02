@@ -23,12 +23,4 @@ const handler = (req: NextRequest) =>
         : undefined
   });
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: "4mb"
-    }
-  }
-};
-
 export {handler as GET, handler as POST};
