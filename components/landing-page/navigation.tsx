@@ -1,13 +1,13 @@
 "use client";
 
+import type {PropsWithChildren} from "react";
 import React, {useState} from "react";
 import Link from "next/link";
-import {motion, useMotionValueEvent, useScroll} from "framer-motion";
+import {useMotionValueEvent, useScroll} from "framer-motion";
 import {Sidebar, SidebarContent, SidebarTrigger, useSidebarContext} from "~/components/ui/sidebar";
 import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
-import {isClientSide} from "~/utils/is-client-side";
 
-const navigationItems: Array<NavigationItemDef> = [
+const mainNavigationItems: Array<NavigationItemDef> = [
   {
     id: "about",
     text: "About",
@@ -30,39 +30,28 @@ const navigationItems: Array<NavigationItemDef> = [
   }
 ];
 
-type TargetElement = {
-  id: string;
-  target: HTMLElement;
-};
-
-type NavigationProps = {
-  children: React.ReactNode;
-};
-
-const Navigation = ({children}: NavigationProps) => {
-  const [activeTargetId, setActiveTargetId] = useState<string | null>(null);
-  const {scrollY} = useScroll();
-
-  function getTargetList() {
-    return navigationItems.reduce<Array<TargetElement>>((acc, {id}: NavigationItemDef) => {
-      const target = isClientSide() ? document.getElementById(id) : null;
-      return target ? [...acc, {id, target}] : acc;
-    }, []);
+const subpageNavigationItems: Array<NavigationItemDef> = [
+  {
+    id: "Home",
+    text: "Home",
+    href: "/"
+  },
+  {
+    id: "recent-work",
+    text: "Recent work",
+    href: "/#recent-work"
   }
+];
 
-  useMotionValueEvent(scrollY, "change", (latestPos) => {
-    const halfWindowHeight = window.innerHeight / 2;
+type NavigationProps = PropsWithChildren<{
+  navItems: Array<NavigationItemDef>;
+  isItemActive?: (item: NavigationItemDef) => boolean;
+}>;
 
-    const targetList = getTargetList();
-    const highlightedElements = targetList.filter(({target}) => target.offsetTop - halfWindowHeight <= latestPos);
-    const lastHighlightedElement = highlightedElements[highlightedElements.length - 1];
-
-    setActiveTargetId(lastHighlightedElement ? lastHighlightedElement.id : null);
-  });
-
+const Navigation = ({navItems, isItemActive = () => false, children}: NavigationProps) => {
   function displayNavigationItems() {
-    return navigationItems.map((item: NavigationItemDef) => (
-      <NavigationItem key={item.id} isActive={item.id === activeTargetId} {...item} />
+    return navItems.map((item: NavigationItemDef) => (
+      <NavigationItem key={item.id} isActive={isItemActive(item)} {...item} />
     ));
   }
 
@@ -84,6 +73,43 @@ const Navigation = ({children}: NavigationProps) => {
   );
 };
 
+type TargetElement = {
+  id: string;
+  target: HTMLElement;
+};
+
+const HomeNavigation = ({children}: {children: React.ReactNode}) => {
+  const [activeTargetId, setActiveTargetId] = useState<string | null>(null);
+  const {scrollY} = useScroll();
+
+  function getTargetList() {
+    return mainNavigationItems.reduce<Array<TargetElement>>((acc, {id}: NavigationItemDef) => {
+      const target = document.getElementById(id);
+      return target ? [...acc, {id, target}] : acc;
+    }, []);
+  }
+
+  useMotionValueEvent(scrollY, "change", (latestPos) => {
+    const halfWindowHeight = window.innerHeight / 2;
+
+    const targetList = getTargetList();
+    const highlightedElements = targetList.filter(({target}) => target.offsetTop - halfWindowHeight <= latestPos);
+    const lastHighlightedElement = highlightedElements[highlightedElements.length - 1];
+
+    setActiveTargetId(lastHighlightedElement ? lastHighlightedElement.id : null);
+  });
+
+  return (
+    <Navigation navItems={mainNavigationItems} isItemActive={({id}) => id === activeTargetId}>
+      {children}
+    </Navigation>
+  );
+};
+
+const SubpageNavigation = ({children}: {children: React.ReactNode}) => {
+  return <Navigation navItems={subpageNavigationItems}>{children}</Navigation>;
+};
+
 type NavigationItemDef = {
   id: string;
   text: string;
@@ -91,19 +117,16 @@ type NavigationItemDef = {
 };
 
 type NavigationItemProps = NavigationItemDef & {
-  isActive: boolean;
+  isActive?: boolean;
 };
 
 const NavigationItem = ({href, text, isActive}: NavigationItemProps) => {
   const {hideSidebar} = useSidebarContext();
-  const {scrollToTarget, target} = useSmoothScroll(href.replace("/", ""));
+  const scrollToTarget = useSmoothScroll(href.replace("/", ""));
 
   function handleNavigationItemClick(e: React.MouseEvent) {
-    if (target) {
-      e.preventDefault();
-      hideSidebar();
-      scrollToTarget();
-    }
+    hideSidebar();
+    scrollToTarget(e);
   }
 
   return (
@@ -113,20 +136,12 @@ const NavigationItem = ({href, text, isActive}: NavigationItemProps) => {
         onClick={handleNavigationItemClick}
         className={`block rounded-md py-1.5 font-poppins text-sm font-medium leading-8
           ${isActive ? "text-primary" : "text-slate-700"}
-          transition-colors hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400
+          transition-colors hover:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400
           focus-visible:ring-offset-2`}>
         {text}
       </Link>
-
-      {isActive ? (
-        <motion.div
-          layoutId="underline"
-          style={{originY: "0px"}}
-          className="absolute bottom-0 left-0 right-0 mx-auto hidden h-0.5 w-4 rounded-full bg-primary md:block"
-        />
-      ) : null}
     </li>
   );
 };
 
-export {Navigation};
+export {HomeNavigation, SubpageNavigation};

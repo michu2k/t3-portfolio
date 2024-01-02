@@ -27,11 +27,7 @@ export const metadata: Metadata = {
   }
 };
 
-type RootLayoutProps = {
-  children: React.ReactNode;
-};
-
-export default function RootLayout({children}: RootLayoutProps) {
+export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body>

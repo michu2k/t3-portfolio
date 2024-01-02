@@ -9,11 +9,7 @@ export const metadata: Metadata = {
   description: "Simple, user-friendly interface for portfolio management"
 };
 
-type DashboardLayoutProps = {
-  children: React.ReactNode;
-};
-
-export default async function DashboardLayout({children}: DashboardLayoutProps) {
+export default async function DashboardLayout({children}: {children: React.ReactNode}) {
   const session = await getServerAuthSession();
 
   if (!session?.user) {

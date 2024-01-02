@@ -3,7 +3,7 @@ import type {Metadata} from "next";
 import Image from "next/image";
 import {CodeIcon, GlobeIcon} from "lucide-react";
 import {api} from "~/trpc/server";
-import {Navigation} from "~/components/landing-page/navigation";
+import {SubpageNavigation} from "~/components/landing-page/navigation";
 import {SocialMedia} from "~/components/landing-page/social-media";
 import {Footer} from "~/components/landing-page/footer";
 import {Heading} from "~/components/ui/heading";
@@ -34,9 +34,9 @@ export default async function Page({params: {id}}: PageProps) {
 
   return (
     <>
-      <Navigation>
+      <SubpageNavigation>
         <SocialMedia />
-      </Navigation>
+      </SubpageNavigation>
 
       <header id="top" className="px-4 pb-14 pt-10 md:px-6">
         <div className="section-container flex min-h-[6rem] flex-col items-start justify-center gap-8 md:min-h-[10rem] lg:min-h-[12rem]">

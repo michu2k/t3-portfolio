@@ -9,11 +9,7 @@ import {useIsMobile} from "~/hooks/use-is-mobile";
 import {cn} from "~/utils/className";
 import {SidebarContextProvider, useSidebarContext} from "./sidebar-context";
 
-type SidebarProps = {
-  children: React.ReactNode;
-};
-
-const Sidebar = ({children}: SidebarProps) => {
+const Sidebar = ({children}: {children: React.ReactNode}) => {
   return <SidebarContextProvider>{children}</SidebarContextProvider>;
 };
 

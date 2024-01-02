@@ -6,10 +6,6 @@ export const metadata: Metadata = {
   description: "Portofolio website created using the T3 stack"
 };
 
-type LandingPageLayoutProps = {
-  children: React.ReactNode;
-};
-
-export default function LandingPageLayout({children}: LandingPageLayoutProps) {
+export default function LandingPageLayout({children}: {children: React.ReactNode}) {
   return <main className="mx-auto min-h-full">{children}</main>;
 }

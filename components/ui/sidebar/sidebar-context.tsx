@@ -8,11 +8,7 @@ type SidebarContextProps = {
 
 const SidebarContext = React.createContext({} as SidebarContextProps);
 
-type SidebarContextProviderProps = {
-  children: React.ReactNode;
-};
-
-const SidebarContextProvider = ({children}: SidebarContextProviderProps) => {
+const SidebarContextProvider = ({children}: {children: React.ReactNode}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   function toggleSidebar() {

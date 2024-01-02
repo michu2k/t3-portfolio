@@ -1,5 +1,5 @@
 import React from "react";
-import {Navigation} from "~/components/landing-page/navigation";
+import {HomeNavigation} from "~/components/landing-page/navigation";
 import {Header} from "~/components/landing-page/header";
 import {AboutMe} from "~/components/landing-page/about-me";
 import {RecentWork} from "~/components/landing-page/recent-work";
@@ -12,9 +12,9 @@ import {SocialMedia} from "~/components/landing-page/social-media";
 export default function Page() {
   return (
     <>
-      <Navigation>
+      <HomeNavigation>
         <SocialMedia />
-      </Navigation>
+      </HomeNavigation>
       <Header />
       <Separator />
       <AboutMe />

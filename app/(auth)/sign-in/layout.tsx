@@ -8,11 +8,7 @@ export const metadata: Metadata = {
   description: "Simple, user-friendly interface for portfolio management"
 };
 
-type SignInLayoutProps = {
-  children: React.ReactNode;
-};
-
-export default async function SignInLayout({children}: SignInLayoutProps) {
+export default async function SignInLayout({children}: {children: React.ReactNode}) {
   const session = await getServerAuthSession();
 
   if (session?.user) {
