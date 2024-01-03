@@ -58,8 +58,8 @@ export default function Page() {
 
         <p className="pb-8 text-sm leading-7">
           Welcome to the portfolio management dashboard. This is an open-source simple dashboard for your website
-          bootstraped with <strong>T3 Stack</strong>. Use the links in the sidebar to navigate to the section you want
-          to manage.
+          bootstraped with <span className="rounded bg-slate-100 px-1.5 py-0.5">create-t3-app</span>. Use the links in
+          the sidebar to navigate to the section you want to manage.
         </p>
 
         <Heading as="h2" size="sm">
