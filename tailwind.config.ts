@@ -1,9 +1,7 @@
+import {type Config} from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 import defaultTheme from "tailwindcss/defaultTheme";
 
-/**
- * @type {import('tailwindcss').Config}
- */
 const config = {
   darkMode: "class",
   content: ["./components/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}", "./app/**/*.{js,ts,jsx,tsx}"],
@@ -33,6 +31,6 @@ const config = {
       });
     })
   ]
-};
+} satisfies Config;
 
-module.exports = config;
+export default config;

@@ -1,7 +1,7 @@
 import React from "react";
 import type {Metadata} from "next";
-import {DashboardHeader} from "~/components/dashboard/layouts/dashboard-header";
-import {DashboardContent} from "~/components/dashboard/layouts/dashboard-content";
+import {PageHeader} from "~/components/dashboard/layouts/page-header";
+import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {ProjectList} from "~/components/dashboard/lists/project-list";
 
 export const metadata: Metadata = {
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <DashboardHeader heading="Projects" description="Project section settings" />
-      <DashboardContent>
+      <PageHeader heading="Projects" description="Project section settings" />
+      <PageContent>
         <ProjectList />
-      </DashboardContent>
+      </PageContent>
     </>
   );
 }

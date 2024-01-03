@@ -1,18 +1,16 @@
 import React from "react";
 import {Heading} from "~/components/ui/heading";
 
-type DashboardHeaderProps = {
+type PageHeaderProps = {
   heading: string;
   description: string;
 };
 
-const DashboardHeader = ({heading, description}: DashboardHeaderProps) => {
+const PageHeader = ({heading, description}: PageHeaderProps) => {
   return (
     <>
       <div className="sticky top-0 z-30 flex h-14 items-center justify-center bg-white px-4 md:relative md:hidden">
-        <Heading as="h1" size="md" className="pb-0">
-          {heading}
-        </Heading>
+        <span className="text-md font-poppins font-semibold text-slate-900">{heading}</span>
       </div>
 
       <header className="px-4 pt-2 md:px-10 md:pt-10">
@@ -27,4 +25,4 @@ const DashboardHeader = ({heading, description}: DashboardHeaderProps) => {
   );
 };
 
-export {DashboardHeader};
+export {PageHeader};

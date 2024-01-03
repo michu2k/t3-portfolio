@@ -1,7 +1,7 @@
 import React from "react";
 import type {Metadata} from "next";
-import {DashboardHeader} from "~/components/dashboard/layouts/dashboard-header";
-import {DashboardContent} from "~/components/dashboard/layouts/dashboard-content";
+import {PageHeader} from "~/components/dashboard/layouts/page-header";
+import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {ContactItemForm} from "~/components/dashboard/forms/contact-item-form";
 
 export const metadata: Metadata = {
@@ -21,10 +21,10 @@ export default function Page({params: {id}}: PageProps) {
 
   return (
     <>
-      <DashboardHeader heading={heading} description={description} />
-      <DashboardContent>
+      <PageHeader heading={heading} description={description} />
+      <PageContent>
         <ContactItemForm id={id} />
-      </DashboardContent>
+      </PageContent>
     </>
   );
 }
