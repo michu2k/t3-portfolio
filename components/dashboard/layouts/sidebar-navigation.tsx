@@ -19,51 +19,59 @@ import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
 import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
 import {Button} from "~/components/ui/button";
 import {getUserInitials} from "~/utils/get-user-initials";
+import pkg from "~/package.json";
 
 const navigationItems: Array<NavigationItemDef> = [
   {
+    id: "general",
     text: "General",
     href: "/dashboard",
     icon: SettingsIcon
   },
   {
+    id: "social-media",
     text: "Social Media",
     href: "/dashboard/social-media",
     icon: HeartIcon
   },
   {
+    id: "header",
     text: "Header",
     href: "/dashboard/header",
     icon: WallpaperIcon
   },
   {
+    id: "about",
     text: "About",
     href: "/dashboard/about",
     icon: User2Icon
   },
   {
+    id: "projects",
     text: "Projects",
     href: "/dashboard/projects",
     icon: ImageIcon
   },
   {
+    id: "experience",
     text: "Experience",
     href: "/dashboard/experience",
     icon: BriefcaseIcon
   },
   {
+    id: "contact",
     text: "Contact",
     href: "/dashboard/contact",
     icon: MailIcon
   }
 ];
 
-const DashboardSidebar = () => {
+const SidebarNavigation = () => {
   const {data: sessionData} = useSession();
   const {name, image, email} = sessionData?.user || {};
 
   function displayNavigationItems() {
-    return navigationItems.map(({href, ...item}) => <NavigationItem key={href} href={href} {...item} />);
+    return navigationItems.map((item) => <NavigationItem key={item.id} {...item} />);
   }
 
   return (
@@ -90,21 +98,23 @@ const DashboardSidebar = () => {
 
           <Button
             variant="ghost"
-            className="mb-4 mt-auto h-11 w-full justify-start hover:bg-transparent hover:text-slate-900"
+            className="mt-auto h-11 w-full justify-start hover:bg-transparent hover:text-slate-900"
             onClick={() => signOut()}>
             <LogOutIcon size={16} className="mr-2" />
             Log Out
           </Button>
         </nav>
+        <span className="px-3 text-xs text-slate-400">Dashboard v{pkg.version}</span>
       </SidebarContent>
     </Sidebar>
   );
 };
 
 type NavigationItemDef = {
+  id: string;
   text: string;
-  icon: LucideIcon;
   href: string;
+  icon: LucideIcon;
 };
 
 const NavigationItem = ({text, href, icon: Icon}: NavigationItemDef) => {
@@ -129,4 +139,4 @@ const NavigationItem = ({text, href, icon: Icon}: NavigationItemDef) => {
   );
 };
 
-export {DashboardSidebar};
+export {SidebarNavigation};

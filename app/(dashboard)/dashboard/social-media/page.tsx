@@ -1,7 +1,7 @@
 import React from "react";
 import type {Metadata} from "next";
-import {DashboardHeader} from "~/components/dashboard/layouts/dashboard-header";
-import {DashboardContent} from "~/components/dashboard/layouts/dashboard-content";
+import {PageHeader} from "~/components/dashboard/layouts/page-header";
+import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {SocialMediaList} from "~/components/dashboard/lists/social-media-list";
 
 export const metadata: Metadata = {
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <DashboardHeader heading="Social media" description="Social media settings" />
-      <DashboardContent>
+      <PageHeader heading="Social media" description="Social media settings" />
+      <PageContent>
         <SocialMediaList />
-      </DashboardContent>
+      </PageContent>
     </>
   );
 }

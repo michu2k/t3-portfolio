@@ -1,7 +1,7 @@
 import React from "react";
 import type {Metadata} from "next";
-import {DashboardHeader} from "~/components/dashboard/layouts/dashboard-header";
-import {DashboardContent} from "~/components/dashboard/layouts/dashboard-content";
+import {PageHeader} from "~/components/dashboard/layouts/page-header";
+import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {HeaderForm} from "~/components/dashboard/forms/header-form";
 
 export const metadata: Metadata = {
@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <DashboardHeader heading="Header" description="Header section settings" />
-      <DashboardContent>
+      <PageHeader heading="Header" description="Header section settings" />
+      <PageContent>
         <HeaderForm />
-      </DashboardContent>
+      </PageContent>
     </>
   );
 }
