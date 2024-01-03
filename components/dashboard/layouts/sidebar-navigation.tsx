@@ -6,14 +6,14 @@ import {signOut, useSession} from "next-auth/react";
 import {useParams, usePathname} from "next/navigation";
 import type {LucideIcon} from "lucide-react";
 import {
-  SettingsIcon,
-  ImageIcon,
-  MailIcon,
-  BriefcaseIcon,
-  LogOutIcon,
+  LayoutDashboardIcon,
   HeartIcon,
+  WallpaperIcon,
   User2Icon,
-  WallpaperIcon
+  ImageIcon,
+  BriefcaseIcon,
+  MailIcon,
+  LogOutIcon
 } from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
 import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
@@ -26,7 +26,7 @@ const navigationItems: Array<NavigationItemDef> = [
     id: "general",
     text: "General",
     href: "/dashboard",
-    icon: SettingsIcon
+    icon: LayoutDashboardIcon
   },
   {
     id: "social-media",
