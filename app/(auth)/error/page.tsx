@@ -11,19 +11,20 @@ import {cn} from "~/utils/className";
 const errors = {
   AccessDenied: "You do not have permission to sign in.",
   Verification: "Unable to verify your email address.",
-  default: "Unable to sign in."
-} as const;
+  default: "Unable to sign in. Try again later."
+};
 
 export default function Page() {
   const searchParams = useSearchParams();
 
   const error = searchParams.get("error");
+  const errorKeys = Object.keys(errors);
 
   return (
     <>
       <header className="flex w-full flex-col items-center gap-4">
         <Heading as="h1" size="xl">
-          {error ?? "Error"}
+          {error && errorKeys.includes(error) ? error : "Error"}
         </Heading>
         <p className="text-center text-sm">{error && (errors[error as keyof typeof errors] ?? errors.default)}</p>
       </header>
