@@ -39,7 +39,7 @@ const ExperienceListItem = ({
       <div className="relative flex flex-col gap-6">
         <div className="flex flex-col justify-center gap-2 md:min-h-[4rem]">
           <p className="font-poppins text-xl font-semibold leading-7 text-slate-700">{position}</p>
-          <p className="font-poppins text-sm font-semibold leading-8 text-primary">{company}</p>
+          <p className="font-poppins text-sm font-semibold leading-7 text-primary">{company}</p>
         </div>
 
         {responsibilities?.length ? (
@@ -47,7 +47,7 @@ const ExperienceListItem = ({
             {responsibilities.map(({id, name}) => (
               <li key={id} className="flex items-start gap-3">
                 <span className="before:mt-3 before:block before:h-1 before:w-1 before:rounded-full before:bg-slate-500" />
-                <p className="text-sm leading-7">{name}</p>
+                <p className="text-md leading-7">{name}</p>
               </li>
             ))}
           </ul>

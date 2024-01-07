@@ -19,7 +19,7 @@ const Header = async () => {
           </h1>
         </div>
 
-        <p className="mb-12 max-w-2xl text-sm leading-7">{description}</p>
+        <p className="mb-12 max-w-3xl text-lg leading-8 text-slate-900">{description}</p>
 
         <HeaderButton />
       </div>

@@ -73,7 +73,7 @@ const SocialMediaCard = ({id, icon, url, onDelete}: SocialMediaCardProps) => {
   const Icon = getSocialMediaIcon(icon);
 
   return (
-    <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-2 last-of-type:border-0">
+    <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-3 last-of-type:border-0">
       <Icon className="mr-2 h-4 w-4 flex-shrink-0 fill-slate-700" aria-hidden="true" />
 
       <div className="mr-4 flex-1">

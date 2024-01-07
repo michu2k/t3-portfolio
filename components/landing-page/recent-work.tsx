@@ -14,7 +14,7 @@ const RecentWork = async () => {
 
   return (
     <PageSection id="recent-work" heading="My Recent Work" subheading="02. Projects">
-      <div className="grid gap-14 sm:grid-cols-2">{displayRecentWorkItems()}</div>
+      <div className="grid gap-12 sm:grid-cols-2">{displayRecentWorkItems()}</div>
     </PageSection>
   );
 };
@@ -25,7 +25,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
   return (
     <article className="group w-auto shrink-0">
       <Link href={projectUrl} className="flex flex-col gap-6 lg:flex-row">
-        <div className="relative h-52 w-full shrink-0 overflow-hidden rounded-lg lg:w-60">
+        <div className="relative h-48 w-full shrink-0 overflow-hidden rounded-lg lg:w-56">
           <Image
             src={coverImage.url}
             fill
@@ -40,7 +40,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
             {name}
           </p>
 
-          <p className="line-clamp-4 overflow-hidden text-ellipsis text-sm leading-7">
+          <p className="text-md line-clamp-4 overflow-hidden text-ellipsis leading-7">
             {shortDescription || description}
           </p>
         </div>
