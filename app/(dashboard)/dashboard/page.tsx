@@ -1,7 +1,7 @@
 import React from "react";
 import type {Metadata} from "next";
 import type {LucideIcon} from "lucide-react";
-import {CodeIcon, BookTextIcon, GitBranchIcon, RocketIcon} from "lucide-react";
+import {CodeIcon, BookTextIcon, RocketIcon} from "lucide-react";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {buttonVariants} from "~/components/ui/button";
@@ -29,13 +29,6 @@ const projectLinks: Array<UsefulLinkDef> = [
     description: "View the latest releases",
     href: "https://github.com/michu2k/t3-stack-portfolio-website/releases",
     icon: RocketIcon
-  },
-  {
-    id: "roadmap",
-    text: "Roadmap",
-    description: "Read more about upcoming features",
-    href: "#",
-    icon: GitBranchIcon
   }
 ];
 
