@@ -30,6 +30,10 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
+    async signIn({user}) {
+      const isEmailAllowed = env.ALLOWED_EMAIL_ADDRESSES.split(",").find((e) => e.trim() === user.email);
+      return !!isEmailAllowed;
+    },
     session: ({session, user}) => ({
       ...session,
       user: {
@@ -47,7 +51,8 @@ export const authOptions: NextAuthOptions = {
   ],
   debug: env.NODE_ENV === "development",
   pages: {
-    signIn: "/dashboard/sign-in"
+    signIn: "/sign-in",
+    error: "/error"
   }
 };
 
