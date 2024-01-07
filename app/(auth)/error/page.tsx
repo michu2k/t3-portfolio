@@ -18,15 +18,16 @@ export default function Page() {
   const searchParams = useSearchParams();
 
   const error = searchParams.get("error");
-  const errorKeys = Object.keys(errors);
+  const heading = error && Object.keys(errors).includes(error) ? error : "Error";
+  const description = (error && errors[error as keyof typeof errors]) ?? errors.default;
 
   return (
     <>
       <header className="flex w-full flex-col items-center gap-4">
         <Heading as="h1" size="xl">
-          {error && errorKeys.includes(error) ? error : "Error"}
+          {heading}
         </Heading>
-        <p className="text-center text-sm">{error && (errors[error as keyof typeof errors] ?? errors.default)}</p>
+        <p className="text-center text-sm">{description}</p>
       </header>
 
       <div className="flex w-full flex-col justify-center gap-4 pb-12 pt-8">
