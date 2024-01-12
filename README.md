@@ -2,7 +2,7 @@
 
 An open-source portfolio template with a custom admin dashboard bootstrapped with [`create-t3-app`](https://create.t3.gg/).
 
-##### :warning: This project is in early development stage and is not recommended for production use. Various aspects of the application are subject to change.
+#### :warning: This project is in early development stage and is not recommended for production use. Various aspects of the application are subject to change.
 
 ## Tech Stack
 
