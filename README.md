@@ -1,28 +1,71 @@
-# Create T3 App
+# T3 Portfolio
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+An open-source portfolio template with a custom admin dashboard bootstrapped with [`create-t3-app`](https://create.t3.gg/).
 
-## What's next? How do I make an app with this?
+#### :warning: This project is in early development stage and is not recommended for production use. Various aspects of the application are subject to change.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Tech Stack
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- [Next.js](https://nextjs.org) - Framework
+- [NextAuth.js](https://next-auth.js.org) - Authentication
+- [Prisma](https://prisma.io) - Type-safe communication with the database
+- [Tailwind CSS](https://tailwindcss.com) - Styling
+- [shadcn/ui](https://ui.shadcn.com/) - UI components
+- [tRPC](https://trpc.io) - Typesafe API
+- [AWS S3](https://aws.amazon.com/s3/) - File uploading
+- [Zod](https://zod.dev/) - API and forms validation
+- [React Hook Form](https://www.react-hook-form.com/) - Managing forms
+- [Framer motion](https://www.framer.com/motion/) - Animations
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Run the project
 
-## Learn More
+1. Clone the repository and install all dependencies using pnpm
+2. Copy the `.env.example` to the `.env` file and update the variables
+3. Push the prisma schema to the database `pnpm run prisma:push`
+4. Start the development server `pnpm run dev`
+5. If necessary, run prisma studio to check the db data `pnpm run prisma:studio`
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Environment variables
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- Planetscale MySQL database URL. [PlanetScale Documentation](https://planetscale.com/docs/concepts/connection-strings)
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+```
+DATABASE_URL=
+```
+
+- NextAuth.js authentication variables. [NextAuth Documentation](https://next-auth.js.org/configuration/options#environment-variables)
+
+```
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+```
+
+- Google provider keys required to login to the dashboard via Google account. [Google 0Auth Documentation](https://developers.google.com/identity/protocols/oauth2)
+
+```
+GOOGLE_CLIENT_ID =
+GOOGLE_CLIENT_SECRET =
+```
+
+- AWS variables required to support uploading images to S3. [AWS S3 Documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html). More information on the AWS configuration will be available soon in an additional file.
+
+```
+AWS_S3_BUCKET=
+AWS_S3_REGION=
+AWS_S3_ACCESS_KEY=
+AWS_S3_SECRET_ACCESS_KEY=
+```
+
+- Allowed email addresses with access to the dashboard (separated by commas)
+
+```
+ALLOWED_EMAIL_ADDRESSES=
+```
 
 ## How do I deploy this?
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Follow the deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+## License
+
+This project is under the MIT license
