@@ -2,9 +2,9 @@ import React from "react";
 import {HomeNavigation} from "~/components/landing-page/navigation";
 import {Header} from "~/components/landing-page/header";
 import {AboutMe} from "~/components/landing-page/about-me";
-import {RecentWork} from "~/components/landing-page/recent-work";
+import {Projects} from "~/components/landing-page/projects";
 import {Experience} from "~/components/landing-page/experience";
-import {KeepInTouch} from "~/components/landing-page/keep-in-touch";
+import {Contact} from "~/components/landing-page/contact";
 import {Footer} from "~/components/landing-page/footer";
 import {Separator} from "~/components/ui/separator";
 import {SocialMedia} from "~/components/landing-page/social-media";
@@ -19,11 +19,11 @@ export default function Page() {
       <Separator />
       <AboutMe />
       <Separator />
-      <RecentWork />
+      <Projects />
       <Separator />
       <Experience />
       <Separator />
-      <KeepInTouch />
+      <Contact />
       <Footer />
     </>
   );

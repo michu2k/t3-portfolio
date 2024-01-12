@@ -5,16 +5,16 @@ import type {ProjectItem} from "~/server/api/routers/project";
 import {api} from "~/trpc/server";
 import {PageSection} from "./page-section";
 
-const RecentWork = async () => {
+const Projects = async () => {
   const projectItems = await api.project.getItems.query();
 
-  function displayRecentWorkItems() {
+  function displayProjectsItems() {
     return projectItems.map((item) => <ProjectCard key={item.id} {...item} />);
   }
 
   return (
-    <PageSection id="recent-work" heading="My Recent Work" subheading="02. Projects">
-      <div className="grid gap-12 sm:grid-cols-2">{displayRecentWorkItems()}</div>
+    <PageSection id="projects" heading="Featured projects" subheading="02. Projects">
+      <div className="grid gap-12 sm:grid-cols-2">{displayProjectsItems()}</div>
     </PageSection>
   );
 };
@@ -49,4 +49,4 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
   );
 };
 
-export {RecentWork};
+export {Projects};

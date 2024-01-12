@@ -12,7 +12,9 @@ const Header = async () => {
 
   return (
     <header id="top" className="px-4 pb-14 pt-10 md:px-6">
-      <div className="section-container flex min-h-[32rem] flex-col items-start justify-center">
+      <div className="section-container flex min-h-[36rem] flex-col items-start justify-center">
+        <p className="mb-2 font-poppins text-xl font-semibold leading-8 text-primary">Hi there! I&apos;m</p>
+
         <div className="mb-8 flex w-full flex-col gap-8 md:flex-row md:items-center">
           <h1 className="font-poppins text-5xl font-bold leading-tight text-slate-900 md:text-6xl lg:text-7xl">
             {heading}

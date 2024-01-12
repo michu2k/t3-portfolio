@@ -14,7 +14,7 @@ const Experience = async () => {
   }
 
   return (
-    <PageSection id="experience" heading="Professional Experience" subheading="03. Experience">
+    <PageSection id="experience" heading="Where I've worked" subheading="03. Experience">
       <ul className="flex flex-col gap-14 md:gap-20">{displayExperience()}</ul>
     </PageSection>
   );
@@ -28,9 +28,9 @@ const ExperienceListItem = ({
   responsibilities
 }: ExperienceItemWithResponsibilities) => {
   return (
-    <li className="flex flex-col items-start gap-2 md:flex-row md:gap-8">
+    <li className="group flex flex-col items-start gap-2 md:flex-row md:gap-8">
       <div className="flex flex-col justify-center md:min-h-[2rem]">
-        <span className="flex-inline min-w-[10rem] font-poppins text-sm font-semibold">
+        <span className="flex-inline min-w-[10rem] font-poppins text-sm font-semibold transition-colors group-hover:text-primary">
           {format(startDate, "MMM yyyy")} {" - "}
           {endDate ? format(endDate, "MMM yyyy") : "Present"}
         </span>

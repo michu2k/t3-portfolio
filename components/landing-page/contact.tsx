@@ -6,7 +6,7 @@ import {PageSection} from "./page-section";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {getContactIcon} from "~/utils/get-contact-icon";
 
-const KeepInTouch = async () => {
+const Contact = async () => {
   const data = await api.snippet.getSnippets.query({type: "CONTACT", keys: ["description"]});
   const contactMethods = await api.contact.getItems.query();
 
@@ -18,7 +18,7 @@ const KeepInTouch = async () => {
   }
 
   return (
-    <PageSection id="keep-in-touch" heading="Have Some Questions?" subheading="04. Keep in touch">
+    <PageSection id="contact" heading="Get In Touch" subheading="04. Contact">
       <p className="text-md mb-10 max-w-2xl leading-7">{description}</p>
       <ul className="flex flex-col gap-8">{displayContactItems()}</ul>
     </PageSection>
@@ -29,8 +29,8 @@ const ContactMethodListItem = ({name, description, type}: ContactMethod) => {
   const Icon = getContactIcon(type);
 
   return (
-    <li className="flex items-center gap-6">
-      <Icon className="h-6 w-6 fill-slate-600" />
+    <li className="group flex items-center gap-6">
+      <Icon className="h-6 w-6 fill-slate-600 transition-colors group-hover:fill-primary" />
 
       <div className="flex-1">
         <p className="text-md font-poppins font-semibold leading-7 text-slate-700">{name}</p>
@@ -40,4 +40,4 @@ const ContactMethodListItem = ({name, description, type}: ContactMethod) => {
   );
 };
 
-export {KeepInTouch};
+export {Contact};

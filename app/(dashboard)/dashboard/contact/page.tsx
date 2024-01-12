@@ -16,7 +16,7 @@ export default function Page() {
       <PageHeader heading="Contact" description="Contact section settings" />
       <PageContent>
         <ContactForm />
-        <Separator className="my-8 h-px" />
+        <Separator className="my-8" />
         <ContactList />
       </PageContent>
     </>

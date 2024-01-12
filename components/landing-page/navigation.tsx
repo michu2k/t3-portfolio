@@ -10,13 +10,13 @@ import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
 const homeNavigationItems: Array<NavigationItemDef> = [
   {
     id: "about",
-    text: "About",
+    text: "About Me",
     href: "/#about"
   },
   {
-    id: "recent-work",
-    text: "Recent work",
-    href: "/#recent-work"
+    id: "projects",
+    text: "Projects",
+    href: "/#projects"
   },
   {
     id: "experience",
@@ -24,9 +24,9 @@ const homeNavigationItems: Array<NavigationItemDef> = [
     href: "/#experience"
   },
   {
-    id: "keep-in-touch",
+    id: "contact",
     text: "Contact",
-    href: "/#keep-in-touch"
+    href: "/#contact"
   }
 ];
 
@@ -37,9 +37,9 @@ const subpageNavigationItems: Array<NavigationItemDef> = [
     href: "/"
   },
   {
-    id: "recent-work",
-    text: "Recent work",
-    href: "/#recent-work"
+    id: "projects",
+    text: "Projects",
+    href: "/#projects"
   }
 ];
 
