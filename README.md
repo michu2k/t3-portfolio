@@ -2,7 +2,7 @@
 
 An open-source portfolio template with a custom admin dashboard bootstrapped with [`create-t3-app`](https://create.t3.gg/).
 
-:warning: This project is in early development stage and is not recommended for production use. Various aspects of the application are subject to change.
+##### :warning: This project is in early development stage and is not recommended for production use. Various aspects of the application are subject to change.
 
 ## Tech Stack
 
@@ -23,7 +23,7 @@ An open-source portfolio template with a custom admin dashboard bootstrapped wit
 2. Copy the `.env.example` to the `.env` file and update the variables
 3. Push the prisma schema to the database `pnpm run prisma:push`
 4. Start the development server `pnpm run dev`
-5. If necessary, run prisma studio to check the database data `pnpm run prisma:studio`
+5. If necessary, run prisma studio to check the db data `pnpm run prisma:studio`
 
 ## Environment variables
 
@@ -40,14 +40,14 @@ NEXTAUTH_SECRET=
 NEXTAUTH_URL=
 ```
 
-- Google provider keys required to login to the dashboard via your Google account. [Google 0Auth Documentation](https://developers.google.com/identity/protocols/oauth2)
+- Google provider keys required to login to the dashboard via Google account. [Google 0Auth Documentation](https://developers.google.com/identity/protocols/oauth2)
 
 ```
 GOOGLE_CLIENT_ID =
 GOOGLE_CLIENT_SECRET =
 ```
 
-- AWS variables required to support uploading images to S3 [AWS S3 Documentation](https://aws.amazon.com/s3/)
+- AWS variables required to support uploading images to S3 [AWS S3 Documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html). More information on the AWS configuration will be available soon in an additional file.
 
 ```
 AWS_S3_BUCKET=
@@ -61,3 +61,7 @@ AWS_S3_SECRET_ACCESS_KEY=
 ```
 ALLOWED_EMAIL_ADDRESSES=
 ```
+
+## License
+
+This project is under the MIT license
