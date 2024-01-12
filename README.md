@@ -47,7 +47,7 @@ GOOGLE_CLIENT_ID =
 GOOGLE_CLIENT_SECRET =
 ```
 
-- AWS variables required to support uploading images to S3 [AWS S3 Documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html). More information on the AWS configuration will be available soon in an additional file.
+- AWS variables required to support uploading images to S3. [AWS S3 Documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html). More information on the AWS configuration will be available soon in an additional file.
 
 ```
 AWS_S3_BUCKET=
@@ -61,6 +61,10 @@ AWS_S3_SECRET_ACCESS_KEY=
 ```
 ALLOWED_EMAIL_ADDRESSES=
 ```
+
+## How do I deploy this?
+
+Follow the deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
 
 ## License
 
