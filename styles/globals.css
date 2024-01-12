@@ -7,7 +7,6 @@ html {
 }
 
 body {
-  @apply bg-white;
-  @apply text-slate-500;
+  @apply text-slate-600;
   height: 100%;
 }

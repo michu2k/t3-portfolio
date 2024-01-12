@@ -88,7 +88,7 @@ const LinkCard = ({text, description, icon: Icon, href}: UsefulLinkDef) => {
         <Icon size={24} className="text-slate-700 transition-colors group-hover:text-primary" />
         <span className="flex flex-col gap-1">
           <span className="text-sm">{text}</span>
-          <span className="font-sans text-xs font-normal text-slate-500">{description}</span>
+          <span className="font-sans text-xs font-normal">{description}</span>
         </span>
       </a>
     </li>

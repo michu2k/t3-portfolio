@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function LandingPageLayout({children}: {children: React.ReactNode}) {
-  return <main className="mx-auto min-h-full">{children}</main>;
+  return <main className="mx-auto min-h-full bg-white">{children}</main>;
 }

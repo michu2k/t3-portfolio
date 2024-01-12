@@ -18,7 +18,7 @@ const ImageCard = React.forwardRef<HTMLDivElement, ImageCardProps>(({file, class
       </div>
 
       <div className="flex flex-1 flex-col items-start">
-        <p className="font-poppins text-xs font-semibold text-slate-600">{file.name}</p>
+        <p className="font-poppins text-xs font-semibold">{file.name}</p>
         <p className="mb-auto text-xs leading-6">{convertBytesToMB(file.size)}</p>
 
         {actions}
