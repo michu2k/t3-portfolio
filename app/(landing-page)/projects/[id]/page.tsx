@@ -8,6 +8,7 @@ import {SocialMedia} from "~/components/landing-page/social-media";
 import {Footer} from "~/components/landing-page/footer";
 import {Heading} from "~/components/ui/heading";
 import {buttonVariants} from "~/components/ui/button";
+import {Separator} from "~/components/ui/separator";
 import {cn} from "~/utils/className";
 
 type MetadataProps = {
@@ -39,12 +40,15 @@ export default async function Page({params: {id}}: PageProps) {
       </SubpageNavigation>
 
       <header id="top" className="px-4 pb-14 pt-10 md:px-6">
-        <div className="section-container flex min-h-[6rem] flex-col items-start justify-center gap-8 md:min-h-[10rem] lg:min-h-[12rem]">
+        <div className="section-container flex min-h-[8rem] flex-col items-start justify-center gap-2 md:min-h-[10rem] lg:min-h-[12rem]">
+          <p className="font-poppins text-xl font-semibold leading-8 text-primary">Project</p>
           <h1 className="font-poppins text-3xl font-bold text-slate-900 md:text-4xl lg:text-5xl">{name}</h1>
         </div>
       </header>
 
-      <section className="px-4 pb-16 md:px-6 md:pb-24">
+      <Separator />
+
+      <section className="px-4 py-20 md:px-6 md:py-28">
         <div className="section-container">
           <div className="flex flex-col gap-12 md:flex-row">
             <div className="h-fit w-full shrink-0 md:w-1/2">
