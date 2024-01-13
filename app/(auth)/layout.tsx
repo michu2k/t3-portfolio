@@ -17,7 +17,7 @@ export default async function SignInLayout({children}: {children: React.ReactNod
   }
 
   return (
-    <div className="mx-auto flex min-h-full max-w-80 flex-col items-center justify-center px-4">
+    <div className="mx-auto flex min-h-full max-w-80 flex-col items-center justify-center bg-white px-4">
       {children}
 
       <footer className="flex flex-col items-center">
