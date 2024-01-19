@@ -3,6 +3,7 @@ import type {Metadata} from "next";
 import {redirect} from "next/navigation";
 import {getServerAuthSession} from "~/server/auth";
 import {SidebarNavigation} from "~/components/dashboard/layouts/sidebar-navigation";
+import {Toaster} from "~/components/ui/toast";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -20,6 +21,7 @@ export default async function DashboardLayout({children}: {children: React.React
     <main className="mx-auto min-h-full bg-white md:flex">
       <SidebarNavigation />
       <div className="flex-1">{children}</div>
+      <Toaster />
     </main>
   );
 }
