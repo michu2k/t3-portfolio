@@ -17,6 +17,7 @@ const config = {
     }
   },
   plugins: [
+    require("tailwindcss-animate"),
     plugin(function ({addComponents, theme}) {
       addComponents({
         ".section-container": {
