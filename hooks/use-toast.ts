@@ -4,7 +4,7 @@ import {addToast, removeToast, updateToast} from "~/reducers/toast-reducer";
 import {useAppSelector} from "./use-app-selector";
 
 const TOAST_LIMIT = 1;
-const TOAST_DURATION = 3000;
+const TOAST_DURATION = 4000;
 
 type ToasterToast = Omit<ToastProps, "id"> & {
   id: number;
