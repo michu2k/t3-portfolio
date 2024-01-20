@@ -5,7 +5,11 @@ const reduxStore = () =>
   configureStore({
     reducer: {
       toast: toastReducer
-    }
+    },
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false
+      })
   });
 
 type AppStore = ReturnType<typeof reduxStore>;

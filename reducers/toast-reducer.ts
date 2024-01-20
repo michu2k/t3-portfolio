@@ -1,6 +1,6 @@
 import type {PayloadAction} from "@reduxjs/toolkit";
 import {createSlice} from "@reduxjs/toolkit";
-import type {ToasterToast} from "~/hooks/use-toast";
+import {TOAST_LIMIT, type ToasterToast} from "~/hooks/use-toast";
 
 type ToastState = {
   toasts: Array<ToasterToast>;
@@ -15,7 +15,7 @@ const toastSlice = createSlice({
   initialState,
   reducers: {
     addToast: (state: ToastState, action: PayloadAction<ToasterToast>) => {
-      state.toasts = [...state.toasts, action.payload];
+      state.toasts = [action.payload, ...state.toasts].slice(0, TOAST_LIMIT);
     },
     updateToast: (state: ToastState, action: PayloadAction<ToasterToast>) => {
       state.toasts = state.toasts.map((t) => (t.id === action.payload.id ? {...t, ...action.payload} : t));
