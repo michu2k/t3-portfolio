@@ -4,7 +4,7 @@ import {addToast, removeToast, updateToast} from "~/reducers/toast-reducer";
 import {useAppSelector} from "./use-app-selector";
 
 const TOAST_LIMIT = 1;
-const TOAST_REMOVE_DELAY = 3000;
+const TOAST_DURATION = 3000;
 
 type ToasterToast = Omit<ToastProps, "id"> & {
   id: number;
@@ -46,7 +46,7 @@ const useToast = () => {
 
       setTimeout(() => {
         dispatch(removeToast(toastId));
-      }, TOAST_REMOVE_DELAY);
+      }, TOAST_DURATION);
     };
 
     return {
@@ -64,4 +64,4 @@ const useToast = () => {
 
 export type {ToasterToast};
 
-export {TOAST_LIMIT, useToast};
+export {TOAST_LIMIT, TOAST_DURATION, useToast};
