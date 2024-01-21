@@ -11,7 +11,7 @@ const AboutMe = async () => {
   const snippetValues = getSnippetValues<keyof AboutMeSnippetsFormValues>(data);
   const {description = "", image: imageId} = snippetValues;
 
-  const imageObj = imageId ? await api.image.getImage.query({id: imageId}) : null;
+  const imageObj = imageId ? await api.image.getImage.query({key: imageId}) : null;
 
   return (
     <PageSection id="about" heading="Personal Details" subheading="01. About Me">
