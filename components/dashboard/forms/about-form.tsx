@@ -6,6 +6,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {api} from "~/trpc/react";
 import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import {useToast} from "~/hooks/use-toast";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Button} from "~/components/ui/button";
 import {Textarea} from "~/components/ui/textarea";
@@ -17,11 +18,12 @@ import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
 import {acceptedImageTypes} from "~/utils/file";
 
 const AboutForm = () => {
+  const {toast} = useToast();
   const {data = []} = api.snippet.getSnippets.useQuery({type: "ABOUT_ME", keys: ["description", "image"]});
   const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", data);
-  const {description = "", image: imageId} = getSnippetValues<keyof AboutMeSnippetsFormValues>(data);
+  const {description = "", image: imageKey} = getSnippetValues<keyof AboutMeSnippetsFormValues>(data);
 
-  const {data: imageObj} = api.image.getImage.useQuery({id: imageId}, {enabled: !!imageId});
+  const {data: imageObj} = api.image.getImage.useQuery({key: imageKey});
   const createImage = api.image.createImage.useMutation();
   const deleteImage = api.image.deleteImage.useMutation();
 
@@ -44,20 +46,26 @@ const AboutForm = () => {
 
     await updateSnippets({description});
 
-    if (image?.name === imageObj?.name) return;
+    if (image?.name !== imageObj?.name) {
+      // Delete old image
+      if (imageKey) {
+        await deleteImage.mutateAsync({key: imageKey});
+      }
 
-    // Delete old image
-    if (imageId) {
-      await deleteImage.mutateAsync({id: imageId});
+      // Create new image if it exists
+      if (image) {
+        const imageKey = await createImage.mutateAsync({image});
+        await updateSnippets({image: imageKey});
+      } else {
+        await updateSnippets({image: ""});
+      }
     }
 
-    // Create new image if it exists
-    if (image) {
-      const {id} = await createImage.mutateAsync({image});
-      await updateSnippets({image: id});
-    } else {
-      await updateSnippets({image: ""});
-    }
+    toast({
+      title: "Success",
+      description: "Your changes have been saved.",
+      variant: "success"
+    });
   }
 
   return (
