@@ -3,11 +3,12 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {useRouter} from "next/navigation";
+import {zodResolver} from "@hookform/resolvers/zod";
 import {api} from "~/trpc/react";
 import {Button} from "~/components/ui/button";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
-import {zodResolver} from "@hookform/resolvers/zod";
+import {useToast} from "~/hooks/use-toast";
 import {cn} from "~/utils/className";
 import {capitalize} from "~/utils/capitalize";
 import {socialMediaIconsDef} from "~/utils/get-social-media-icon";
@@ -20,6 +21,7 @@ type SocialMediaItemFormProps = {
 
 const SocialMediaItemForm = ({id}: SocialMediaItemFormProps) => {
   const router = useRouter();
+  const {toast} = useToast();
   const utils = api.useUtils();
 
   const {data} = api.socialMedia.getItem.useQuery({id});
@@ -45,6 +47,12 @@ const SocialMediaItemForm = ({id}: SocialMediaItemFormProps) => {
 
     await mutation.mutateAsync(mutationVariables, {
       async onSuccess() {
+        toast({
+          title: "Success",
+          description: data?.id ? "Your changes have been saved." : "A new item has been added.",
+          variant: "success"
+        });
+
         await utils.socialMedia.getItem.invalidate();
       }
     });
