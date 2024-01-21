@@ -4,6 +4,7 @@ import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {api} from "~/trpc/react";
+import {useToast} from "~/hooks/use-toast";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Button} from "~/components/ui/button";
 import {Textarea} from "~/components/ui/textarea";
@@ -13,6 +14,7 @@ import {contactSnippetsSchema} from "~/utils/validations/contact";
 import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
 
 const ContactForm = () => {
+  const {toast} = useToast();
   const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT", keys: ["description"]});
   const updateSnippets = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", data);
   const snippetValues = getSnippetValues<keyof ContactSnippetsFormValues>(data);
@@ -30,6 +32,12 @@ const ContactForm = () => {
   async function handleFormSubmit(snippets: ContactSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
     await updateSnippets(snippets);
+
+    toast({
+      title: "Success",
+      description: "Your changes have been saved.",
+      variant: "success"
+    });
   }
 
   return (

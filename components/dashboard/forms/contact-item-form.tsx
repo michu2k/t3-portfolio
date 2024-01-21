@@ -6,6 +6,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {ContactMethodType} from "@prisma/client";
 import {FormProvider, useForm} from "react-hook-form";
 import {api} from "~/trpc/react";
+import {useToast} from "~/hooks/use-toast";
 import {Button} from "~/components/ui/button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
@@ -20,6 +21,7 @@ type ContactItemFormProps = {
 
 const ContactItemForm = ({id}: ContactItemFormProps) => {
   const router = useRouter();
+  const {toast} = useToast();
   const utils = api.useUtils();
 
   const {data} = api.contact.getItem.useQuery({id});
@@ -49,6 +51,12 @@ const ContactItemForm = ({id}: ContactItemFormProps) => {
 
     await mutation.mutateAsync(mutationVariables, {
       async onSuccess() {
+        toast({
+          title: "Success",
+          description: data?.id ? "Your changes have been saved." : "A new item has been added.",
+          variant: "success"
+        });
+
         await utils.contact.getItem.invalidate();
       }
     });
