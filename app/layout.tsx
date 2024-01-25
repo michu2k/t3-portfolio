@@ -3,6 +3,7 @@ import {Inter, Poppins} from "next/font/google";
 import {cookies} from "next/headers";
 import {TRPCReactProvider} from "~/trpc/react";
 import {NextAuthProvider} from "./next-auth-provider";
+import {ReduxStoreProvider} from "./redux-store-provider";
 
 import "~/styles/globals.css";
 
@@ -32,7 +33,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body>
         <TRPCReactProvider cookies={cookies().toString()}>
-          <NextAuthProvider>{children}</NextAuthProvider>
+          <NextAuthProvider>
+            <ReduxStoreProvider>{children}</ReduxStoreProvider>
+          </NextAuthProvider>
         </TRPCReactProvider>
       </body>
     </html>

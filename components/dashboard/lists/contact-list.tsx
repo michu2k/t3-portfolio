@@ -5,6 +5,7 @@ import type {ContactMethod} from "@prisma/client";
 import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {api} from "~/trpc/react";
+import {useToast} from "~/hooks/use-toast";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {Button, buttonVariants} from "~/components/ui/button";
 import {EmptySection} from "~/components/ui/empty-section";
@@ -15,31 +16,45 @@ import {cn} from "~/utils/className";
 const ContactList = () => {
   const {data: contactMethods = [], isLoading} = api.contact.getItems.useQuery();
   const deleteItemMutation = api.contact.deleteItem.useMutation();
-  const [selectedContactMethod, setSelectedContactMethod] = useState<ContactMethod | null>(null);
+  const {toast} = useToast();
   const utils = api.useUtils();
 
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+  const selectedItem = contactMethods.find((item) => item.id === selectedItemId);
+
   async function handleDeleteItem() {
-    if (selectedContactMethod?.id) {
-      await deleteItemMutation.mutateAsync(
-        {id: selectedContactMethod.id},
-        {
-          async onSuccess() {
-            await utils.contact.getItems.invalidate();
-            setSelectedContactMethod(null);
-          }
+    if (!selectedItemId) return;
+
+    await deleteItemMutation.mutateAsync(
+      {id: selectedItemId},
+      {
+        async onSuccess() {
+          toast({
+            title: "Success",
+            description: "Contact method deleted successfully",
+            variant: "success"
+          });
+
+          await utils.contact.getItems.invalidate();
         }
-      );
+      }
+    );
+  }
+
+  function handleDialogOpenChange(open: boolean) {
+    if (!open) {
+      setSelectedItemId(null);
     }
   }
 
   function displayItems() {
     return contactMethods.map((item) => (
-      <ContactMethodCard key={item.id} onDelete={() => setSelectedContactMethod(item)} {...item} />
+      <ContactMethodCard key={item.id} onClickDeleteBtn={() => setSelectedItemId(item.id)} {...item} />
     ));
   }
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={handleDialogOpenChange}>
       <Heading as="h2" size="sm">
         Contact methods
       </Heading>
@@ -59,7 +74,7 @@ const ContactList = () => {
 
       <DeleteEntityDialog
         title="Delete contact method"
-        entityName={(selectedContactMethod?.type || "Method").toLowerCase()}
+        entityName={(selectedItem?.type || "Method").toLowerCase()}
         onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>
@@ -67,10 +82,10 @@ const ContactList = () => {
 };
 
 type ContactMethodCardProps = ContactMethod & {
-  onDelete: (e: React.MouseEvent) => void;
+  onClickDeleteBtn: (e: React.MouseEvent) => void;
 };
 
-const ContactMethodCard = ({id, name, description, onDelete}: ContactMethodCardProps) => {
+const ContactMethodCard = ({id, name, description, onClickDeleteBtn}: ContactMethodCardProps) => {
   return (
     <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-3 last-of-type:border-0">
       <div className="mr-4 flex-1">
@@ -84,7 +99,7 @@ const ContactMethodCard = ({id, name, description, onDelete}: ContactMethodCardP
       </Link>
 
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" onClick={onDelete}>
+        <Button variant="ghost" size="icon" onClick={onClickDeleteBtn}>
           <TrashIcon size={16} />
           <span className="sr-only">Delete</span>
         </Button>

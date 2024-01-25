@@ -7,48 +7,33 @@ import type {FileObj} from "~/utils/file";
 // prettier-ignore
 export const imageRouter = createTRPCRouter({
   getImage: publicProcedure
-    .input(z.object({id: z.string().optional()}))
-    .query(async ({ctx, input: {id}}) => {
-      const item = await ctx.prisma.image.findUnique({
-        where: {id}
-      });
-
-      if (item) {
-        return await getPresignedUrl(item.image);
+    .input(z.object({key: z.string().optional()}))
+    .query(async ({input: {key}}) => {
+      if (!key) {
+        return null;
       }
 
-      return null;
+      return await getPresignedUrl(key);
     }),
 
   createImage: protectedProcedure
     .input(z.object({image: z.custom<FileObj>()}))
-    .mutation(async ({ctx, input: {image}}) => {
+    .mutation(async ({input: {image}}) => {
       if (!image) {
         throw new Error("Image is required");
       }
 
-      return await ctx.prisma.$transaction(async (tx) => {
-        const {key: imageKey} = await uploadFileToS3(image);
-
-        return await tx.image.create({
-          data: {
-            image: imageKey
-          }
-        });
-      });
+      const {key: imageKey} = await uploadFileToS3(image);
+      return imageKey;
     }),
 
   deleteImage: protectedProcedure
-    .input(z.object({id: z.string()}))
-    .mutation(async ({ctx, input: {id}}) => {
-      return await ctx.prisma.$transaction(async (tx) => {
-        const item = await tx.image.delete({
-          where: {id}
-        });
+    .input(z.object({key: z.string().optional()}))
+    .mutation(async ({input: {key}}) => {
+      if (!key) {
+        throw new Error("Image key is required");
+      }
 
-        await deleteFileFromS3(item.image);
-
-        return item;
-      });
+      return await deleteFileFromS3(key);
     })
 });

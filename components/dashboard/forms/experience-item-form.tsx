@@ -7,6 +7,7 @@ import {format} from "date-fns";
 import {CalendarIcon, PlusIcon, Trash2Icon} from "lucide-react";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {api} from "~/trpc/react";
+import {useToast} from "~/hooks/use-toast";
 import {Button} from "~/components/ui/button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
@@ -21,6 +22,7 @@ type ExperienceItemFormProps = {
 
 const ExperienceItemForm = ({id}: ExperienceItemFormProps) => {
   const router = useRouter();
+  const {toast} = useToast();
   const utils = api.useUtils();
   const newResponsibilityItem = {id: undefined, name: ""};
 
@@ -72,6 +74,12 @@ const ExperienceItemForm = ({id}: ExperienceItemFormProps) => {
 
     await mutation.mutateAsync(mutationVariables, {
       async onSuccess() {
+        toast({
+          title: "Success",
+          description: data?.id ? "Your changes have been saved." : "A new item has been added.",
+          variant: "success"
+        });
+
         await utils.experience.getItem.invalidate();
       }
     });

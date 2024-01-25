@@ -4,6 +4,7 @@ import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {api} from "~/trpc/react";
+import {useToast} from "~/hooks/use-toast";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
 import {Button} from "~/components/ui/button";
@@ -14,6 +15,7 @@ import {headerSnippetsSchema} from "~/utils/validations/header";
 import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
 
 const HeaderForm = () => {
+  const {toast} = useToast();
   const {data = []} = api.snippet.getSnippets.useQuery({type: "HEADER", keys: ["heading", "description", "image"]});
   const updateSnippets = useSnippets<keyof HeaderSnippetsFormValues>("HEADER", data);
   const {heading = "", description = ""} = getSnippetValues<keyof HeaderSnippetsFormValues>(data);
@@ -34,7 +36,14 @@ const HeaderForm = () => {
 
   async function handleFormSubmit({heading, description}: HeaderSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
+
     await updateSnippets({heading, description});
+
+    toast({
+      title: "Success",
+      description: "Your changes have been saved.",
+      variant: "success"
+    });
   }
 
   return (
