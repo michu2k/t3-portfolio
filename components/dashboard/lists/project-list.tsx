@@ -6,6 +6,7 @@ import Image from "next/image";
 import {PlusIcon, PencilIcon, TrashIcon, EyeIcon} from "lucide-react";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {api} from "~/trpc/react";
+import {useToast} from "~/hooks/use-toast";
 import {Button, buttonVariants} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
 import {EmptySection} from "~/components/ui/empty-section";
@@ -16,29 +17,45 @@ import {cn} from "~/utils/className";
 const ProjectList = () => {
   const {data: projects = [], isLoading} = api.project.getItems.useQuery();
   const deleteItemMutation = api.project.deleteItem.useMutation();
-  const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+  const {toast} = useToast();
   const utils = api.useUtils();
 
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+  const selectedItem = projects.find((item) => item.id === selectedItemId);
+
   async function handleDeleteItem() {
-    if (selectedProject?.id) {
-      await deleteItemMutation.mutateAsync(
-        {id: selectedProject.id},
-        {
-          async onSuccess() {
-            await utils.project.getItems.invalidate();
-            setSelectedProject(null);
-          }
+    if (!selectedItemId) return;
+
+    await deleteItemMutation.mutateAsync(
+      {id: selectedItemId},
+      {
+        async onSuccess() {
+          toast({
+            title: "Success",
+            description: "Project item deleted successfully",
+            variant: "success"
+          });
+
+          await utils.project.getItems.invalidate();
         }
-      );
+      }
+    );
+  }
+
+  function handleDialogOpenChange(open: boolean) {
+    if (!open) {
+      setSelectedItemId(null);
     }
   }
 
   function displayItems() {
-    return projects.map((item) => <ProjectCard key={item.id} onDelete={() => setSelectedProject(item)} {...item} />);
+    return projects.map((item) => (
+      <ProjectCard key={item.id} onClickDeleteBtn={() => setSelectedItemId(item.id)} {...item} />
+    ));
   }
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={handleDialogOpenChange}>
       <Heading as="h2" size="sm">
         Project items
       </Heading>
@@ -54,7 +71,7 @@ const ProjectList = () => {
 
       <DeleteEntityDialog
         title="Delete project"
-        entityName={(selectedProject?.name || "Project").toLowerCase()}
+        entityName={(selectedItem?.name || "Project").toLowerCase()}
         onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>
@@ -62,10 +79,10 @@ const ProjectList = () => {
 };
 
 type ProjectCardProps = ProjectItem & {
-  onDelete: (e: React.MouseEvent) => void;
+  onClickDeleteBtn: (e: React.MouseEvent) => void;
 };
 
-const ProjectCard = ({id, name, shortDescription, description, coverImage, onDelete}: ProjectCardProps) => {
+const ProjectCard = ({id, name, shortDescription, description, coverImage, onClickDeleteBtn}: ProjectCardProps) => {
   const MAX_TEXT_LENGTH = 100;
   const descriptionLength = shortDescription?.length || description?.length;
   const itemDescription = (shortDescription || description).slice(0, MAX_TEXT_LENGTH);
@@ -95,7 +112,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onDel
       </Link>
 
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" onClick={onDelete}>
+        <Button variant="ghost" size="icon" onClick={onClickDeleteBtn}>
           <TrashIcon size={16} />
           <span className="sr-only">Delete</span>
         </Button>

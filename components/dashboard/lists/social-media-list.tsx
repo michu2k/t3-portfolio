@@ -5,6 +5,7 @@ import type {SocialMediaLink} from "@prisma/client";
 import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {api} from "~/trpc/react";
+import {useToast} from "~/hooks/use-toast";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {Button, buttonVariants} from "~/components/ui/button";
 import {EmptySection} from "~/components/ui/empty-section";
@@ -16,33 +17,45 @@ import {getSocialMediaIcon} from "~/utils/get-social-media-icon";
 const SocialMediaList = () => {
   const {data: socialMediaLinks = [], isLoading} = api.socialMedia.getItems.useQuery();
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
-  const [selectedSocialMediaLink, setSelectedSocialMediaLink] = useState<SocialMediaLink | null>(null);
+  const {toast} = useToast();
   const utils = api.useUtils();
 
-  const {icon} = selectedSocialMediaLink || {};
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+  const selectedItem = socialMediaLinks.find((item) => item.id === selectedItemId);
 
   async function handleDeleteItem() {
-    if (selectedSocialMediaLink?.id) {
-      await deleteItemMutation.mutateAsync(
-        {id: selectedSocialMediaLink.id},
-        {
-          async onSuccess() {
-            await utils.socialMedia.getItems.invalidate();
-            setSelectedSocialMediaLink(null);
-          }
+    if (!selectedItemId) return;
+
+    await deleteItemMutation.mutateAsync(
+      {id: selectedItemId},
+      {
+        async onSuccess() {
+          toast({
+            title: "Success",
+            description: "Social media link deleted successfully",
+            variant: "success"
+          });
+
+          await utils.socialMedia.getItems.invalidate();
         }
-      );
+      }
+    );
+  }
+
+  function handleDialogOpenChange(open: boolean) {
+    if (!open) {
+      setSelectedItemId(null);
     }
   }
 
   function displayItems() {
     return socialMediaLinks.map((item) => (
-      <SocialMediaCard key={item.id} onDelete={() => setSelectedSocialMediaLink(item)} {...item} />
+      <SocialMediaCard key={item.id} onClickDeleteBtn={() => setSelectedItemId(item.id)} {...item} />
     ));
   }
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={handleDialogOpenChange}>
       <Heading as="h2" size="sm">
         Links
       </Heading>
@@ -58,7 +71,7 @@ const SocialMediaList = () => {
 
       <DeleteEntityDialog
         title="Delete link"
-        entityName={`${icon || ""} url`}
+        entityName={`${selectedItem?.icon || ""} url`}
         onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>
@@ -66,10 +79,10 @@ const SocialMediaList = () => {
 };
 
 type SocialMediaCardProps = SocialMediaLink & {
-  onDelete: (e: React.MouseEvent) => void;
+  onClickDeleteBtn: (e: React.MouseEvent) => void;
 };
 
-const SocialMediaCard = ({id, icon, url, onDelete}: SocialMediaCardProps) => {
+const SocialMediaCard = ({id, icon, url, onClickDeleteBtn}: SocialMediaCardProps) => {
   const Icon = getSocialMediaIcon(icon);
 
   return (
@@ -86,7 +99,7 @@ const SocialMediaCard = ({id, icon, url, onDelete}: SocialMediaCardProps) => {
       </Link>
 
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" onClick={onDelete}>
+        <Button variant="ghost" size="icon" onClick={onClickDeleteBtn}>
           <TrashIcon size={16} />
           <span className="sr-only">Delete</span>
         </Button>
