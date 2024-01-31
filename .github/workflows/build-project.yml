@@ -46,5 +46,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Check ESLint errors
+        run: pnpm run lint:ts
+
       - name: Build
         run: pnpm run build
