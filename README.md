@@ -19,6 +19,7 @@ _Dashboard and landing page view_
 - [Zod](https://zod.dev/) - API and forms validation
 - [React Hook Form](https://www.react-hook-form.com/) - Managing forms
 - [Framer motion](https://www.framer.com/motion/) - Animations
+- [PlanetScale](https://planetscale.com) - MySQL Database
 
 ## Run the project
 
