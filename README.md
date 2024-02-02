@@ -8,7 +8,7 @@ An open-source portfolio template with a custom admin dashboard bootstrapped wit
 
 - [Next.js](https://nextjs.org) - Framework
 - [NextAuth.js](https://next-auth.js.org) - Authentication
-- [Prisma](https://prisma.io) - Type-safe communication with the database
+- [Prisma](https://prisma.io) - ORM
 - [Tailwind CSS](https://tailwindcss.com) - Styling
 - [shadcn/ui](https://ui.shadcn.com/) - UI components
 - [tRPC](https://trpc.io) - Typesafe API
