@@ -4,6 +4,9 @@ An open-source portfolio template with a custom admin dashboard bootstrapped wit
 
 #### :warning: This project is in early development stage and is not recommended for production use. Various aspects of the application are subject to change.
 
+![T3Portfolio](./public/images/preview.jpg)
+_Dashboard and landing page view_
+
 ## Tech Stack
 
 - [Next.js](https://nextjs.org) - Framework
