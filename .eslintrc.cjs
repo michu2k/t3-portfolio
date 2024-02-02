@@ -12,7 +12,6 @@ const config = {
   rules: {
     "@typescript-eslint/consistent-type-imports": "warn",
     "indent": "off",
-    // "@typescript-eslint/indent": ["error", 2],
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "semi": ["warn", "always"],
