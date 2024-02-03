@@ -1,3 +1,5 @@
+import {env} from "./env.js";
+
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
  * This is especially useful for Docker builds.
@@ -24,7 +26,7 @@ const config = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "t3-stack-portfolio-website.s3.eu-central-1.amazonaws.com",
+        hostname: `${env.AWS_S3_BUCKET}.s3.${env.AWS_S3_REGION}.amazonaws.com`,
         pathname: "/**"
       }
     ]
