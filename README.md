@@ -51,7 +51,7 @@ GOOGLE_CLIENT_ID =
 GOOGLE_CLIENT_SECRET =
 ```
 
-- AWS variables required to support uploading images to S3. [AWS S3 Documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html). More information on the AWS configuration will be available soon in an additional file.
+- AWS variables required to support uploading images to S3. [AWS S3 Documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html). More information on how to configure the AWS services are available [here](./AWS_SETUP.md).
 
 ```
 AWS_S3_BUCKET=
