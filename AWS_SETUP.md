@@ -1,6 +1,6 @@
 # T3 Portfolio - AWS setup
 
-Follow the steps described in this file to fully configure AWS for the project.
+Follow the steps described in this file to fully configure AWS services for the project.
 
 ## Create an S3 Bucket
 
