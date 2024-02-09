@@ -86,10 +86,10 @@ const SidebarNavigation = () => {
           </Avatar>
 
           <div className="min-w-0">
-            <p className="overflow-hidden text-ellipsis whitespace-nowrap font-poppins text-sm font-medium text-slate-700">
+            <p className="text-foreground overflow-hidden text-ellipsis whitespace-nowrap font-poppins text-sm font-medium">
               {name}
             </p>
-            <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs">{email}</p>
+            <p className="text-muted-foreground overflow-hidden text-ellipsis whitespace-nowrap text-xs">{email}</p>
           </div>
         </div>
 
@@ -98,13 +98,13 @@ const SidebarNavigation = () => {
 
           <Button
             variant="ghost"
-            className="mt-auto h-11 w-full justify-start hover:bg-transparent hover:text-slate-900"
+            className="hover:text-foreground mt-auto h-11 w-full justify-start hover:bg-transparent"
             onClick={() => signOut()}>
             <LogOutIcon size={16} className="mr-2" />
             Log Out
           </Button>
         </nav>
-        <span className="px-3 text-xs text-slate-400">Dashboard v{pkg.version}</span>
+        <span className="text-muted-foreground px-3 text-xs opacity-50">Dashboard v{pkg.version}</span>
       </SidebarContent>
     </Sidebar>
   );
@@ -129,7 +129,7 @@ const NavigationItem = ({text, href, icon: Icon}: NavigationItemDef) => {
         href={href}
         className={`
           flex items-center gap-3 rounded-lg px-3 py-2.5 font-poppins text-sm font-medium leading-5
-          ${isActive ? "text-primary" : "text-slate-700"}
+          ${isActive ? "text-primary" : "text-foreground"}
           transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2
         `}>
         <Icon size={16} />

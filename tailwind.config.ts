@@ -12,7 +12,18 @@ const config = {
         poppins: ["var(--font-poppins)", ...defaultTheme.fontFamily.sans]
       },
       colors: {
-        primary: "#3b82f6" // blue.500
+        primary: "#3b82f6", // blue.500
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))"
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))"
+        },
+        placeholder: "hsl(var(--placeholder))"
       }
     }
   },

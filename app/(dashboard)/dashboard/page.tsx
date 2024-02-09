@@ -49,7 +49,7 @@ export default function Page() {
           Introduction
         </Heading>
 
-        <p className="pb-8 text-sm leading-7">
+        <p className="text-muted-foreground pb-8 text-sm leading-7">
           Welcome to the portfolio management dashboard. This is an open-source simple dashboard for your website
           bootstraped with <span className="rounded bg-slate-100 px-1.5 py-0.5">create-t3-app</span>. Use the links in
           the sidebar to navigate to the section you want to manage.
@@ -59,7 +59,7 @@ export default function Page() {
           Quick Access
         </Heading>
 
-        <p className="pb-4 text-sm leading-7">
+        <p className="text-muted-foreground pb-4 text-sm leading-7">
           If you want to learn more about the project, check out the links below.
         </p>
 
@@ -85,10 +85,10 @@ const LinkCard = ({text, description, icon: Icon, href}: UsefulLinkDef) => {
         className={cn(buttonVariants({variant: "outline", size: "md"}), "h-20 flex-1 justify-start gap-4")}
         target="_blank"
         rel="noopener noreferrer">
-        <Icon size={24} className="text-slate-700 transition-colors group-hover:text-primary" />
+        <Icon size={24} className="text-foreground transition-colors group-hover:text-primary" />
         <span className="flex flex-col gap-1">
-          <span className="text-sm">{text}</span>
-          <span className="font-sans text-xs font-normal">{description}</span>
+          <span className="text-foreground text-sm">{text}</span>
+          <span className="text-muted-foreground font-sans text-xs font-normal">{description}</span>
         </span>
       </a>
     </li>

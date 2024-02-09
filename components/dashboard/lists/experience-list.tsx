@@ -91,8 +91,8 @@ const ExperienceCard = ({id, company, startDate, endDate, position, onClickDelet
     <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-3 last-of-type:border-0">
       <div className="mr-4 flex-1">
         <p className="font-poppins text-sm font-semibold leading-8">{position}</p>
-        <p className="text-xs leading-6">{company}</p>
-        <span className="text-xs leading-6">
+        <p className="text-muted-foreground text-xs leading-6">{company}</p>
+        <span className="text-muted-foreground text-xs leading-6">
           {format(startDate, "MMM yyyy")} {" - "}
           {endDate ? format(endDate, "MMM yyyy") : "Present"}
         </span>

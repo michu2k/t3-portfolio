@@ -5,8 +5,6 @@ import {TRPCReactProvider} from "~/trpc/react";
 import {NextAuthProvider} from "./next-auth-provider";
 import {ReduxStoreProvider} from "./redux-store-provider";
 
-import "~/styles/globals.css";
-
 const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",

@@ -76,13 +76,13 @@ const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, ac
       <UploadCloudIcon size={40} strokeWidth={1} />
 
       <div className="flex flex-1 flex-col gap-1">
-        <p className="text-xs leading-6">
+        <p className="text-muted-foreground text-xs leading-6">
           {isDragActive
             ? `Drop the ${multiple ? "files" : "file"} here...`
             : `Drag and drop ${multiple ? "files" : "file"} here or click to select ${multiple ? "files" : "file"}`}
         </p>
 
-        <p className="text-xs leading-6">
+        <p className="text-muted-foreground text-xs leading-6">
           Only {displayExtensions()} files with max size of <strong>{convertBytesToMB(maxSize)}</strong>
         </p>
       </div>

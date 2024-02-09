@@ -10,7 +10,7 @@ const PageHeader = ({heading, description}: PageHeaderProps) => {
   return (
     <>
       <div className="sticky top-0 z-30 flex h-14 items-center justify-center bg-white px-4 md:relative md:hidden">
-        <span className="text-md font-poppins font-semibold text-slate-900">{heading}</span>
+        <span className="text-md font-poppins font-semibold">{heading}</span>
       </div>
 
       <header className="px-4 pt-2 md:px-10 md:pt-10">
@@ -18,7 +18,7 @@ const PageHeader = ({heading, description}: PageHeaderProps) => {
           <Heading as="h1" size="lg">
             {heading}
           </Heading>
-          <p className="pb-6 text-sm leading-6">{description}</p>
+          <p className="text-muted-foreground pb-6 text-sm leading-6">{description}</p>
         </div>
       </header>
     </>

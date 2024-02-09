@@ -2,11 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --background: 0, 0%, 100%; /* white */
+    --foreground: 222, 47%, 11%; /* slate-900 */
+
+    --muted: 215, 20%, 65%; /* slate-400 - CHANGE TO 100?*/
+    --muted-foreground: 215, 19%, 35%; /* slate-600 */
+  }
+}
+
 html {
   height: 100%;
 }
 
 body {
-  @apply text-slate-600;
+  @apply text-foreground bg-background;
   height: 100%;
 }

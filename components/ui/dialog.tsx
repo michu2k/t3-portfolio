@@ -83,7 +83,7 @@ const DialogTitle = React.forwardRef<
   return (
     <DialogPrimitive.Title
       ref={ref}
-      className={cn("font-poppins text-lg font-semibold tracking-tight text-slate-900", className)}
+      className={cn("text-foreground font-poppins text-lg font-semibold tracking-tight", className)}
       {...props}
     />
   );
@@ -96,7 +96,11 @@ const DialogDescription = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(({className, ...props}, ref) => {
   return (
-    <DialogPrimitive.Description ref={ref} className={cn("text-center text-sm leading-6", className)} {...props} />
+    <DialogPrimitive.Description
+      ref={ref}
+      className={cn("text-muted-foreground text-center text-sm leading-6", className)}
+      {...props}
+    />
   );
 });
 
