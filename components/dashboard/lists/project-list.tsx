@@ -88,14 +88,14 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onCli
   const itemDescription = (shortDescription || description).slice(0, MAX_TEXT_LENGTH);
 
   return (
-    <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-3 last-of-type:border-0">
+    <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-muted py-3 last-of-type:border-0">
       <div className="relative mr-2 h-16 w-24 shrink-0 overflow-hidden rounded-md bg-slate-50">
         {coverImage.url ? <Image src={coverImage.url} fill style={{objectFit: "cover"}} alt="" /> : null}
       </div>
 
       <div className="flex flex-1 flex-col items-start">
         <p className="mr-2 font-poppins text-sm font-semibold leading-6">{name}</p>
-        <p className="text-muted-foreground hidden text-xs leading-6 sm:block">
+        <p className="hidden text-xs leading-6 text-muted-foreground sm:block">
           {itemDescription}
           {descriptionLength > MAX_TEXT_LENGTH && "..."}
         </p>

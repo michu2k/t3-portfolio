@@ -7,7 +7,7 @@
     --background: 0, 0%, 100%; /* white */
     --foreground: 222, 47%, 11%; /* slate-900 */
 
-    --muted: 215, 20%, 65%; /* slate-400 - CHANGE TO 100?*/
+    --muted: 214, 32%, 91%; /* slate-200 */
     --muted-foreground: 215, 19%, 35%; /* slate-600 */
 
     --accent: 210, 40%, 98%; /* slate-50 */
@@ -20,9 +20,10 @@
     --background: 0, 0%, 9%; /* neutral-900 */
     --foreground: 214, 32%, 91%; /* slate-200 */
 
-    /* --muted: 215, 20%, 65%; TODO: slate-400 */
+    --muted: 0, 0%, 25%; /* natural-700 */
     --muted-foreground: 213, 27%, 84%; /* slate-300 */
 
+    /* TODO: ! */
     /* --accent: 210, 40%, 98%) slate-50 */
     /* --accent-foreground: 210, 40%, 98%; slate-50 */
 
@@ -35,6 +36,6 @@ html {
 }
 
 body {
-  @apply text-foreground bg-background;
+  @apply bg-background text-foreground;
   height: 100%;
 }

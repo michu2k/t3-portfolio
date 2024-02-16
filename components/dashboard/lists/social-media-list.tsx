@@ -86,11 +86,11 @@ const SocialMediaCard = ({id, icon, url, onClickDeleteBtn}: SocialMediaCardProps
   const Icon = getSocialMediaIcon(icon);
 
   return (
-    <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-slate-200 py-3 last-of-type:border-0">
-      <Icon className="fill-foreground mr-2 h-4 w-4 flex-shrink-0" aria-hidden="true" />
+    <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-muted py-3 last-of-type:border-0">
+      <Icon className="mr-2 h-4 w-4 flex-shrink-0 fill-foreground" aria-hidden="true" />
 
       <div className="mr-4 flex-1">
-        <p className="text-muted-foreground text-sm leading-6">{url}</p>
+        <p className="text-sm leading-6 text-muted-foreground">{url}</p>
       </div>
 
       <Link href={`/dashboard/social-media/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="en" className={`dark ${inter.variable} ${poppins.variable}`}>
       <body>
         <TRPCReactProvider cookies={cookies().toString()}>
           <NextAuthProvider>

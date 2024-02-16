@@ -75,7 +75,7 @@ const SocialMediaItemForm = ({id}: SocialMediaItemFormProps) => {
                     <Button
                       size="icon"
                       variant="outline"
-                      className={cn({["border-slate-100 bg-slate-100"]: key === value})}
+                      className={cn({["border-muted bg-slate-100"]: key === value})}
                       onClick={() => onChange(key)}>
                       <Icon className="h-4 w-4 fill-slate-700" aria-hidden="true" />
                       <span className="sr-only">{capitalize(key)}</span>

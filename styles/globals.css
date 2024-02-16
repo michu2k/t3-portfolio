@@ -7,7 +7,7 @@
     --background: 0, 0%, 100%; /* white */
     --foreground: 222, 47%, 11%; /* slate-900 */
 
-    --muted: 215, 20%, 65%; /* slate-400 - CHANGE TO 100?*/
+    --muted: 214, 32%, 91%; /* slate-200 */
     --muted-foreground: 215, 19%, 35%; /* slate-600 */
   }
 }
@@ -17,6 +17,6 @@ html {
 }
 
 body {
-  @apply text-foreground bg-background;
+  @apply bg-background text-foreground;
   height: 100%;
 }

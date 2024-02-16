@@ -33,7 +33,7 @@ const SidebarOverlay = React.forwardRef<HTMLDivElement, SidebarOverlayProps>(({c
         key="sidebar-overlay"
         ref={ref}
         onClick={toggleSidebar}
-        className={cn("bg-background/80 fixed inset-0 z-40 backdrop-blur-sm", className)}
+        className={cn("fixed inset-0 z-40 bg-background/80 backdrop-blur-sm", className)}
         {...overlayAnimation}
       />
     </Portal.Root>
@@ -58,7 +58,7 @@ const SidebarContent = React.forwardRef<HTMLElement, SidebarContentProps>(({chil
   };
 
   const sidebarClassName = cn(
-    "flex flex-col h-full py-10 px-4 bg-white border-r-[1px] border-slate-200 w-full max-w-[18rem] md:w-72 md:h-screen z-50 top-0 fixed md:sticky",
+    "flex flex-col h-full py-10 px-4 bg-background border-r-[1px] border-muted w-full max-w-[18rem] md:w-72 md:h-screen z-50 top-0 fixed md:sticky",
     className
   );
 
