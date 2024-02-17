@@ -2,6 +2,7 @@ import React, {Fragment, useCallback} from "react";
 import {UploadCloudIcon} from "lucide-react";
 import type {Accept} from "react-dropzone";
 import {useDropzone} from "react-dropzone";
+import {buttonVariants} from "~/components/ui/button";
 import type {FileObj} from "~/utils/file";
 import {MAX_FILE_SIZE, convertBytesToMB, transformFileToFileObj} from "~/utils/file";
 import {cn} from "~/utils/className";
@@ -69,20 +70,21 @@ const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, ac
     <div
       {...getRootProps()}
       className={cn(
-        "flex min-h-[6rem] cursor-pointer items-center gap-6 rounded-md border-2 border-dashed px-3 py-4 transition-colors hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2",
+        buttonVariants({variant: "outline"}),
+        "flex min-h-[6rem] cursor-pointer gap-6 border-2 border-dashed px-3 py-4",
         {"cursor-not-allowed opacity-50": disabled}
       )}>
       <input {...props} {...getInputProps({name})} />
       <UploadCloudIcon size={40} strokeWidth={1} />
 
       <div className="flex flex-1 flex-col gap-1">
-        <p className="text-muted-foreground text-xs leading-6">
+        <p className="text-xs leading-6 text-muted-foreground">
           {isDragActive
             ? `Drop the ${multiple ? "files" : "file"} here...`
             : `Drag and drop ${multiple ? "files" : "file"} here or click to select ${multiple ? "files" : "file"}`}
         </p>
 
-        <p className="text-muted-foreground text-xs leading-6">
+        <p className="text-xs leading-6 text-muted-foreground">
           Only {displayExtensions()} files with max size of <strong>{convertBytesToMB(maxSize)}</strong>
         </p>
       </div>
