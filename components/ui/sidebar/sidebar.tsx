@@ -101,8 +101,8 @@ const SidebarTrigger = React.forwardRef<HTMLButtonElement, SidebarTriggerProps>(
   ({className, onClick = () => null}, ref) => {
     const {toggleSidebar} = useSidebarContext();
 
-    const innerLineStyles = "w-8 h-0.5 bg-slate-900 absolute top-0 left-0 bottom-0 m-auto";
-    const outerLineStyles = "w-6 h-0.5 bg-slate-900 flex";
+    const innerLineStyles = "w-8 h-0.5 bg-secondary absolute top-0 left-0 bottom-0 m-auto";
+    const outerLineStyles = "w-6 h-0.5 bg-secondary flex";
 
     function handleBtnClick(e: React.MouseEvent) {
       toggleSidebar();

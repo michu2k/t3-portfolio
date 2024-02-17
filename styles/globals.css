@@ -4,11 +4,17 @@
 
 @layer base {
   :root {
-    --background: 0, 0%, 100%; /* white */
-    --foreground: 222, 47%, 11%; /* slate-900 */
+    --primary: 217 91% 60%; /* blue-500 */
+    --secondary: 221 39% 11%; /* gray-900 */
 
-    --muted: 214, 32%, 91%; /* slate-200 */
-    --muted-foreground: 215, 19%, 35%; /* slate-600 */
+    --background: 0 0% 100%; /* white */
+    --foreground: 221 39% 11%; /* gray-900 */
+
+    --muted: 214 32% 91%; /* slate-200 */
+    --muted-foreground: 215 19% 35%; /* slate-600 */
+
+    --accent: 210 40% 98%; /* slate-50 */
+    --accent-foreground: 210 40% 98%; /* slate-50 */
   }
 }
 

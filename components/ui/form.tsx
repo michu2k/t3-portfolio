@@ -58,11 +58,11 @@ const FormLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive.Root>,
       <LabelPrimitive.Root
         ref={ref}
         htmlFor={formItemId}
-        className={cn("text-foreground block pb-3 font-poppins text-sm font-semibold leading-5", className)}
+        className={cn("block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground", className)}
         {...props}>
         {children}
         {isOptional && (
-          <span className="text-muted-foreground inline-block pl-2 text-xs font-normal italic leading-4 opacity-50">
+          <span className="inline-block pl-2 text-xs font-normal italic leading-4 text-muted-foreground/60">
             optional
           </span>
         )}
@@ -102,7 +102,7 @@ const FormDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttribu
       <p
         ref={ref}
         id={formDescriptionId}
-        className={cn("text-muted-foreground pt-3 text-xs leading-5", className)}
+        className={cn("pt-3 text-xs leading-5 text-muted-foreground", className)}
         {...props}
       />
     );

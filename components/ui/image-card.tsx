@@ -13,7 +13,7 @@ type ImageCardProps = {
 const ImageCard = React.forwardRef<HTMLDivElement, ImageCardProps>(({file, className, actions}, ref) => {
   return (
     <div ref={ref} className={cn("flex min-h-[5.5rem] gap-4", className)}>
-      <div className="relative h-24 w-36 shrink-0 overflow-hidden rounded-md bg-slate-50">
+      <div className="relative h-24 w-36 shrink-0 overflow-hidden rounded-md bg-accent">
         {file.url ? <Image src={file.url} fill style={{objectFit: "cover"}} alt="" /> : null}
       </div>
 
