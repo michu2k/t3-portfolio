@@ -16,12 +16,12 @@ const Header = async () => {
         <p className="mb-2 font-poppins text-xl font-semibold leading-8 text-primary">Hi there! I&apos;m</p>
 
         <div className="mb-8 flex w-full flex-col gap-8 md:flex-row md:items-center">
-          <h1 className="text-foreground font-poppins text-5xl font-bold leading-tight md:text-6xl lg:text-7xl">
+          <h1 className="font-poppins text-5xl font-bold leading-tight text-foreground md:text-6xl lg:text-7xl">
             {heading}
           </h1>
         </div>
 
-        <p className="text-muted-foreground mb-12 max-w-3xl text-lg leading-8">{description}</p>
+        <p className="mb-12 max-w-3xl text-lg leading-8 text-muted-foreground">{description}</p>
 
         <HeaderButton />
       </div>

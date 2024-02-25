@@ -19,7 +19,7 @@ const Contact = async () => {
 
   return (
     <PageSection id="contact" heading="Get In Touch" subheading="04. Contact">
-      <p className="text-md text-muted-foreground mb-10 max-w-2xl leading-7">{description}</p>
+      <p className="text-md mb-10 max-w-2xl leading-7 text-muted-foreground">{description}</p>
       <ul className="flex flex-col gap-8">{displayContactItems()}</ul>
     </PageSection>
   );
@@ -34,7 +34,7 @@ const ContactMethodListItem = ({name, description, type}: ContactMethod) => {
 
       <div className="flex-1">
         <p className="text-md font-poppins font-semibold leading-7 text-slate-700">{name}</p>
-        <p className="text-muted-foreground text-sm leading-7">{description}</p>
+        <p className="text-sm leading-7 text-muted-foreground">{description}</p>
       </div>
     </li>
   );

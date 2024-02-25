@@ -40,7 +40,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
             {name}
           </p>
 
-          <p className="text-muted-foreground text-md line-clamp-4 overflow-hidden text-ellipsis leading-7">
+          <p className="text-md line-clamp-4 overflow-hidden text-ellipsis leading-7 text-muted-foreground">
             {shortDescription || description}
           </p>
         </div>

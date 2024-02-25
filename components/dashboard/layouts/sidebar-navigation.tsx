@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
 import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
+import {ThemeSwitch} from "~/components/ui/theme-switch";
 import {Button} from "~/components/ui/button";
 import {getUserInitials} from "~/utils/get-user-initials";
 import pkg from "~/package.json";
@@ -78,7 +79,7 @@ const SidebarNavigation = () => {
     <Sidebar>
       <SidebarTrigger className="fixed left-4 top-4 z-40 md:hidden" />
 
-      <SidebarContent className="gap-10">
+      <SidebarContent className="gap-8">
         <div className="flex min-w-0 items-center gap-2 px-2">
           <Avatar>
             {image && <AvatarImage src={image} alt="" />}
@@ -86,25 +87,28 @@ const SidebarNavigation = () => {
           </Avatar>
 
           <div className="min-w-0">
-            <p className="text-foreground overflow-hidden text-ellipsis whitespace-nowrap font-poppins text-sm font-medium">
+            <p className="overflow-hidden text-ellipsis whitespace-nowrap font-poppins text-sm font-medium text-foreground">
               {name}
             </p>
-            <p className="text-muted-foreground overflow-hidden text-ellipsis whitespace-nowrap text-xs">{email}</p>
+            <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs text-muted-foreground">{email}</p>
           </div>
         </div>
+
+        <ThemeSwitch />
 
         <nav className="flex flex-grow flex-col">
           <ul className="flex flex-col gap-3">{displayNavigationItems()}</ul>
 
           <Button
             variant="ghost"
-            className="hover:text-foreground mt-auto h-11 w-full justify-start hover:bg-transparent"
+            className="mt-auto h-11 w-full justify-start hover:bg-transparent hover:text-foreground"
             onClick={() => signOut()}>
             <LogOutIcon size={16} className="mr-2" />
             Log Out
           </Button>
         </nav>
-        <span className="text-muted-foreground px-3 text-xs opacity-50">Dashboard v{pkg.version}</span>
+
+        <span className="px-3 text-xs text-muted-foreground opacity-50">Dashboard v{pkg.version}</span>
       </SidebarContent>
     </Sidebar>
   );

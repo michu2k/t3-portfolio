@@ -24,7 +24,7 @@ export default async function SignInLayout({children}: {children: React.ReactNod
         {children}
 
         <footer className="flex flex-col items-center">
-          <span className="text-muted-foreground text-xs opacity-50">Dashboard v{pkg.version}</span>
+          <span className="text-xs text-muted-foreground opacity-50">Dashboard v{pkg.version}</span>
         </footer>
       </div>
     </main>
