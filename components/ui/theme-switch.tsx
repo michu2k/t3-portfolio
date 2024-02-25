@@ -1,14 +1,19 @@
 "use client";
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {MoonIcon, SunIcon} from "lucide-react";
 import {useTheme} from "next-themes";
 import {capitalize} from "~/utils/capitalize";
 
 const ThemeSwitch = () => {
   const {theme = "", setTheme} = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   const isDarkMode = theme === "dark";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div className="flex items-center gap-3 px-2">
@@ -30,15 +35,17 @@ const ThemeSwitch = () => {
             onChange={() => setTheme(isDarkMode ? "light" : "dark")}
           />
 
-          <span
-            className={`absolute h-full w-full rounded-full p-1 before:absolute before:block before:h-5 before:w-5 before:rounded-full before:bg-secondary ${
-              isDarkMode ? "before:translate-x-7" : ""
-            } transition-colors before:transition-transform`}
-          />
+          {mounted ? (
+            <span
+              className={`absolute h-full w-full rounded-full p-1 animate-in fade-in before:absolute before:block before:h-5 before:w-5 before:rounded-full before:bg-muted ${
+                isDarkMode ? "before:translate-x-7" : ""
+              } transition-colors before:transition-transform`}
+            />
+          ) : null}
         </label>
       </div>
 
-      <p className="font-poppins text-xs font-medium">{capitalize(theme)}</p>
+      {mounted ? <p className="font-poppins text-xs font-medium">{capitalize(theme)}</p> : null}
     </div>
   );
 };
