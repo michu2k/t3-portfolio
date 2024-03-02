@@ -57,7 +57,7 @@ const Navigation = ({navItems, isItemActive = () => false, children}: Navigation
 
   return (
     <Sidebar>
-      <div className="sticky left-0 right-0 top-0 z-40 mx-auto h-16 w-full bg-white px-4 md:h-[4.5rem] md:px-6">
+      <div className="sticky left-0 right-0 top-0 z-40 mx-auto h-16 w-full bg-background px-4 md:h-[4.5rem] md:px-6">
         <nav className="section-container flex h-full items-center justify-between gap-4">
           <SidebarTrigger />
           <ul className="section-container hidden flex-1 items-center gap-8 md:flex">{displayNavigationItems()}</ul>

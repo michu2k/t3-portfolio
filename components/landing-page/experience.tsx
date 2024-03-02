@@ -30,7 +30,7 @@ const ExperienceListItem = ({
   return (
     <li className="group flex flex-col items-start gap-2 md:flex-row md:gap-8">
       <div className="flex flex-col justify-center md:min-h-[2rem]">
-        <span className="flex-inline min-w-[10rem] font-poppins text-sm font-semibold transition-colors group-hover:text-primary">
+        <span className="flex-inline min-w-[10rem] font-poppins text-sm font-semibold text-muted-foreground transition-colors group-hover:text-primary">
           {format(startDate, "MMM yyyy")} {" - "}
           {endDate ? format(endDate, "MMM yyyy") : "Present"}
         </span>
@@ -47,7 +47,7 @@ const ExperienceListItem = ({
             {responsibilities.map(({id, name}) => (
               <li key={id} className="flex items-start gap-3">
                 <span className="before:mt-3 before:block before:h-1 before:w-1 before:rounded-full before:bg-slate-500" />
-                <p className="text-md leading-7">{name}</p>
+                <p className="text-md leading-7 text-muted-foreground">{name}</p>
               </li>
             ))}
           </ul>

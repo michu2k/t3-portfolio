@@ -42,7 +42,7 @@ export default async function Page({params: {id}}: PageProps) {
       <header id="top" className="px-4 pb-14 pt-10 md:px-6">
         <div className="section-container flex min-h-[8rem] flex-col items-start justify-center gap-2 md:min-h-[10rem] lg:min-h-[12rem]">
           <p className="font-poppins text-xl font-semibold leading-8 text-primary">Project</p>
-          <h1 className="font-poppins text-3xl font-bold text-slate-900 md:text-4xl lg:text-5xl">{name}</h1>
+          <h1 className="font-poppins text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">{name}</h1>
         </div>
       </header>
 
@@ -71,7 +71,9 @@ export default async function Page({params: {id}}: PageProps) {
                   Description
                 </Heading>
 
-                <p className="whitespace-pre-wrap text-justify text-sm leading-7">{description}</p>
+                <p className="whitespace-pre-wrap text-justify text-sm leading-7 text-muted-foreground">
+                  {description}
+                </p>
               </div>
 
               <div className="mx-auto flex w-full gap-4">
@@ -81,7 +83,7 @@ export default async function Page({params: {id}}: PageProps) {
                     className={cn(buttonVariants({variant: "primary", size: "md"}), "max-w-[12rem] flex-1 gap-3 px-8")}
                     target="_blank"
                     rel="noopener noreferrer">
-                    <GlobeIcon className="h-4 w-4" aria-hidden="true" />
+                    <GlobeIcon className="h-4 w-4" />
                     Website
                   </a>
                 ) : null}
@@ -92,7 +94,7 @@ export default async function Page({params: {id}}: PageProps) {
                     className={cn(buttonVariants({variant: "outline", size: "md"}), "max-w-[12rem] flex-1 gap-3 px-8")}
                     target="_blank"
                     rel="noopener noreferrer">
-                    <CodeIcon className="h-4 w-4" aria-hidden="true" />
+                    <CodeIcon className="h-4 w-4" />
                     Repository
                   </a>
                 ) : null}

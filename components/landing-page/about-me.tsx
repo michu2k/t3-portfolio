@@ -25,7 +25,7 @@ const AboutMe = async () => {
         ) : null}
 
         <div className="max-w-lg flex-1">
-          <p className="text-md leading-7">{description}</p>
+          <p className="text-md leading-7 text-muted-foreground">{description}</p>
         </div>
       </div>
     </PageSection>

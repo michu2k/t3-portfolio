@@ -4,8 +4,7 @@ import {cookies} from "next/headers";
 import {TRPCReactProvider} from "~/trpc/react";
 import {NextAuthProvider} from "./next-auth-provider";
 import {ReduxStoreProvider} from "./redux-store-provider";
-
-import "~/styles/globals.css";
+import {AppThemeProvider} from "./app-theme-provider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,11 +29,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
       <body>
         <TRPCReactProvider cookies={cookies().toString()}>
           <NextAuthProvider>
-            <ReduxStoreProvider>{children}</ReduxStoreProvider>
+            <ReduxStoreProvider>
+              <AppThemeProvider>{children}</AppThemeProvider>
+            </ReduxStoreProvider>
           </NextAuthProvider>
         </TRPCReactProvider>
       </body>
