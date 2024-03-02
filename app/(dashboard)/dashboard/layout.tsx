@@ -5,7 +5,7 @@ import {getServerAuthSession} from "~/server/auth";
 import {SidebarNavigation} from "~/components/dashboard/layouts/sidebar-navigation";
 import {Toaster} from "~/components/ui/toast";
 
-import "~/styles/dashboard-globals.css";
+import "~/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Dashboard",

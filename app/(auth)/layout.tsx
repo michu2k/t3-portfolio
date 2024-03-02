@@ -4,7 +4,7 @@ import {redirect} from "next/navigation";
 import {getServerAuthSession} from "~/server/auth";
 import pkg from "~/package.json";
 
-import "~/styles/dashboard-globals.css";
+import "~/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Dashboard: Authentication",

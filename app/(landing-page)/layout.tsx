@@ -1,7 +1,7 @@
 import React from "react";
 import type {Metadata} from "next";
 
-import "~/styles/globals.css";
+import "~/styles/landing-page-globals.css";
 
 export const metadata: Metadata = {
   title: "T3 Portfolio",
