@@ -7,9 +7,8 @@ import {SubpageNavigation} from "~/components/landing-page/navigation";
 import {SocialMedia} from "~/components/landing-page/social-media";
 import {Footer} from "~/components/landing-page/footer";
 import {Heading} from "~/components/ui/heading";
-import {buttonVariants} from "~/components/ui/button";
+import {Button} from "~/components/ui/button";
 import {Separator} from "~/components/ui/separator";
-import {cn} from "~/utils/className";
 
 type MetadataProps = {
   params: {id: string};
@@ -78,25 +77,21 @@ export default async function Page({params: {id}}: PageProps) {
 
               <div className="mx-auto flex w-full gap-4">
                 {websiteUrl ? (
-                  <a
-                    href={websiteUrl}
-                    className={cn(buttonVariants({variant: "primary", size: "md"}), "max-w-[12rem] flex-1 gap-3 px-8")}
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <GlobeIcon className="h-4 w-4" />
-                    Website
-                  </a>
+                  <Button className="max-w-[12rem] flex-1 gap-3 px-8" asChild>
+                    <a href={websiteUrl} target="_blank" rel="noopener noreferrer">
+                      <GlobeIcon className="h-4 w-4" />
+                      Website
+                    </a>
+                  </Button>
                 ) : null}
 
                 {repositoryUrl ? (
-                  <a
-                    href={repositoryUrl}
-                    className={cn(buttonVariants({variant: "outline", size: "md"}), "max-w-[12rem] flex-1 gap-3 px-8")}
-                    target="_blank"
-                    rel="noopener noreferrer">
-                    <CodeIcon className="h-4 w-4" />
-                    Repository
-                  </a>
+                  <Button variant="outline" className="max-w-[12rem] flex-1 gap-3 px-8" asChild>
+                    <a href={repositoryUrl} target="_blank" rel="noopener noreferrer">
+                      <CodeIcon className="h-4 w-4" />
+                      Repository
+                    </a>
+                  </Button>
                 ) : null}
               </div>
             </div>

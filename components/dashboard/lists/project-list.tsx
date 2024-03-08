@@ -7,12 +7,11 @@ import {PlusIcon, PencilIcon, TrashIcon, EyeIcon} from "lucide-react";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {api} from "~/trpc/react";
 import {useToast} from "~/hooks/use-toast";
-import {Button, buttonVariants} from "~/components/ui/button";
+import {Button} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
 import {EmptySection} from "~/components/ui/empty-section";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
-import {cn} from "~/utils/className";
 
 const ProjectList = () => {
   const {data: projects = [], isLoading} = api.project.getItems.useQuery();
@@ -63,10 +62,12 @@ const ProjectList = () => {
       <div className="flex flex-col items-start">
         {isLoading ? null : projects.length ? displayItems() : <EmptySection heading="No project items found" />}
 
-        <Link href="/dashboard/projects/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
-          <PlusIcon size={16} className="mr-1" />
-          Add new item
-        </Link>
+        <Button className="mt-6" asChild>
+          <Link href="/dashboard/projects/new">
+            <PlusIcon size={16} className="mr-1" />
+            Add new item
+          </Link>
+        </Button>
       </div>
 
       <DeleteEntityDialog
@@ -101,15 +102,19 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onCli
         </p>
       </div>
 
-      <Link href={`/dashboard/projects/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>
-        <PencilIcon size={16} />
-        <span className="sr-only">Edit</span>
-      </Link>
+      <Button variant="ghost" size="icon" asChild>
+        <Link href={`/dashboard/projects/${id}`}>
+          <PencilIcon size={16} />
+          <span className="sr-only">Edit</span>
+        </Link>
+      </Button>
 
-      <Link href={`/projects/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})} target="_blank">
-        <EyeIcon size={16} />
-        <span className="sr-only">Show preview</span>
-      </Link>
+      <Button variant="ghost" size="icon" asChild>
+        <Link href={`/projects/${id}`} target="_blank">
+          <EyeIcon size={16} />
+          <span className="sr-only">Show preview</span>
+        </Link>
+      </Button>
 
       <DialogTrigger asChild>
         <Button variant="ghost" size="icon" onClick={onClickDeleteBtn}>

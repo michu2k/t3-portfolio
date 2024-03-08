@@ -3,9 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import {useSearchParams} from "next/navigation";
-import {buttonVariants} from "~/components/ui/button";
+import {Button} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
-import {cn} from "~/utils/className";
 
 // NextAuth errors
 const errors = {
@@ -31,9 +30,9 @@ export default function Page() {
       </header>
 
       <div className="flex w-full flex-col justify-center gap-4 pb-12 pt-8">
-        <Link href="/sign-in" className={cn(buttonVariants({variant: "secondary"}))}>
-          Go back to Sign In page
-        </Link>
+        <Button variant="secondary" asChild>
+          <Link href="/sign-in">Go back to Sign In page</Link>
+        </Button>
       </div>
     </>
   );
