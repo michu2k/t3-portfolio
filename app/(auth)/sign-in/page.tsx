@@ -1,10 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import {getProviders} from "next-auth/react";
-import {buttonVariants} from "~/components/ui/button";
+import {Button} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
 import {SignInProviders} from "~/components/auth/sign-in-providers";
-import {cn} from "~/utils/className";
 
 export default async function Page() {
   const providers = await getProviders();
@@ -30,9 +29,9 @@ export default async function Page() {
           </div>
         </div>
 
-        <Link href="/" className={cn(buttonVariants({variant: "secondary"}))}>
-          Go back to Home page
-        </Link>
+        <Button variant="secondary" asChild>
+          <Link href="/">Go back to Home page</Link>
+        </Button>
       </div>
     </>
   );
