@@ -19,7 +19,7 @@ _Dashboard and landing page view_
 - [Zod](https://zod.dev/) - API and forms validation
 - [React Hook Form](https://www.react-hook-form.com/) - Managing forms
 - [Framer motion](https://www.framer.com/motion/) - Animations
-- [PlanetScale](https://planetscale.com) - MySQL Database
+- [Supabase](https://supabase.com) - PostgreSQL Database
 
 ## Run the project
 
@@ -31,7 +31,7 @@ _Dashboard and landing page view_
 
 ## Environment variables
 
-- Planetscale MySQL database URL. [PlanetScale Documentation](https://planetscale.com/docs/concepts/connection-strings)
+- Supabase PostgreSQL database URL. [Supabase Documentation](https://supabase.com/partners/integrations/prisma)
 
 ```
 DATABASE_URL=
