@@ -7,11 +7,10 @@ import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {api} from "~/trpc/react";
 import {useToast} from "~/hooks/use-toast";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
-import {Button, buttonVariants} from "~/components/ui/button";
+import {Button} from "~/components/ui/button";
 import {EmptySection} from "~/components/ui/empty-section";
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
 import {Heading} from "~/components/ui/heading";
-import {cn} from "~/utils/className";
 
 const ContactList = () => {
   const {data: contactMethods = [], isLoading} = api.contact.getItems.useQuery();
@@ -66,10 +65,12 @@ const ContactList = () => {
           <EmptySection heading="No contact methods found" />
         )}
 
-        <Link href="/dashboard/contact/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
-          <PlusIcon size={16} className="mr-1" />
-          Add new item
-        </Link>
+        <Button className="mt-6" asChild>
+          <Link href="/dashboard/contact/new">
+            <PlusIcon size={16} className="mr-1" />
+            Add new item
+          </Link>
+        </Button>
       </div>
 
       <DeleteEntityDialog
@@ -93,10 +94,12 @@ const ContactMethodCard = ({id, name, description, onClickDeleteBtn}: ContactMet
         <p className="text-xs leading-6 text-muted-foreground">{description}</p>
       </div>
 
-      <Link href={`/dashboard/contact/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>
-        <PencilIcon size={16} />
-        <span className="sr-only">Edit</span>
-      </Link>
+      <Button variant="ghost" size="icon" asChild>
+        <Link href={`/dashboard/contact/${id}`}>
+          <PencilIcon size={16} />
+          <span className="sr-only">Edit</span>
+        </Link>
+      </Button>
 
       <DialogTrigger asChild>
         <Button variant="ghost" size="icon" onClick={onClickDeleteBtn}>

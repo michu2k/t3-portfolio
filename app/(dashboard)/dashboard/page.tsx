@@ -4,8 +4,7 @@ import type {LucideIcon} from "lucide-react";
 import {CodeIcon, BookTextIcon, RocketIcon} from "lucide-react";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
-import {buttonVariants} from "~/components/ui/button";
-import {cn} from "~/utils/className";
+import {Button} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
 
 const projectLinks: Array<UsefulLinkDef> = [
@@ -80,17 +79,15 @@ type UsefulLinkDef = {
 const LinkCard = ({text, description, icon: Icon, href}: UsefulLinkDef) => {
   return (
     <li className="group flex">
-      <a
-        href={href}
-        className={cn(buttonVariants({variant: "outline", size: "md"}), "h-20 flex-1 justify-start gap-4")}
-        target="_blank"
-        rel="noopener noreferrer">
-        <Icon size={24} className="text-foreground transition-colors group-hover:text-primary" />
-        <span className="flex flex-col gap-1">
-          <span className="text-sm text-foreground">{text}</span>
-          <span className="font-sans text-xs font-normal text-muted-foreground">{description}</span>
-        </span>
-      </a>
+      <Button variant="outline" className="h-20 flex-1 justify-start gap-4" asChild>
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          <Icon size={24} className="text-foreground transition-colors group-hover:text-primary" />
+          <span className="flex flex-col gap-1">
+            <span className="text-sm text-foreground">{text}</span>
+            <span className="font-sans text-xs font-normal text-muted-foreground">{description}</span>
+          </span>
+        </a>
+      </Button>
     </li>
   );
 };

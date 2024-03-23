@@ -8,11 +8,10 @@ import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {api} from "~/trpc/react";
 import {useToast} from "~/hooks/use-toast";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
-import {Button, buttonVariants} from "~/components/ui/button";
+import {Button} from "~/components/ui/button";
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
 import {EmptySection} from "~/components/ui/empty-section";
 import {Heading} from "~/components/ui/heading";
-import {cn} from "~/utils/className";
 import {sortExperienceByEndDate} from "~/utils/sort-experience-by-end-date";
 
 const ExperienceList = () => {
@@ -67,10 +66,12 @@ const ExperienceList = () => {
       <div className="flex flex-col items-start">
         {isLoading ? null : experience.length ? displayItems() : <EmptySection heading="No experience items found" />}
 
-        <Link href="/dashboard/experience/new" className={cn(buttonVariants({variant: "primary"}), "mt-6")}>
-          <PlusIcon size={16} className="mr-1" />
-          Add new item
-        </Link>
+        <Button className="mt-6" asChild>
+          <Link href="/dashboard/experience/new">
+            <PlusIcon size={16} className="mr-1" />
+            Add new item
+          </Link>
+        </Button>
       </div>
 
       <DeleteEntityDialog
@@ -98,10 +99,12 @@ const ExperienceCard = ({id, company, startDate, endDate, position, onClickDelet
         </span>
       </div>
 
-      <Link href={`/dashboard/experience/${id}`} className={buttonVariants({variant: "ghost", size: "icon"})}>
-        <PencilIcon size={16} />
-        <span className="sr-only">Edit</span>
-      </Link>
+      <Button variant="ghost" size="icon" asChild>
+        <Link href={`/dashboard/experience/${id}`}>
+          <PencilIcon size={16} />
+          <span className="sr-only">Edit</span>
+        </Link>
+      </Button>
 
       <DialogTrigger asChild>
         <Button variant="ghost" size="icon" onClick={onClickDeleteBtn}>
