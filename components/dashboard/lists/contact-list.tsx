@@ -3,6 +3,7 @@
 import React, {useState} from "react";
 import type {ContactMethod} from "@prisma/client";
 import Link from "next/link";
+import {usePathname} from "next/navigation";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {api} from "~/trpc/react";
 import {useToast} from "~/hooks/use-toast";
@@ -11,12 +12,16 @@ import {Button} from "~/components/ui/button";
 import {EmptySection} from "~/components/ui/empty-section";
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
 import {Heading} from "~/components/ui/heading";
+import {revalidatePath} from "~/utils/revalidate-path";
 
-const ContactList = () => {
-  const {data: contactMethods = [], isLoading} = api.contact.getItems.useQuery();
+type ContactListProps = {
+  contactMethods: Array<ContactMethod>;
+};
+
+const ContactList = ({contactMethods}: ContactListProps) => {
   const deleteItemMutation = api.contact.deleteItem.useMutation();
+  const pathname = usePathname();
   const {toast} = useToast();
-  const utils = api.useUtils();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const selectedItem = contactMethods.find((item) => item.id === selectedItemId);
@@ -33,17 +38,11 @@ const ContactList = () => {
             description: "Contact method deleted successfully",
             variant: "success"
           });
-
-          await utils.contact.getItems.invalidate();
         }
       }
     );
-  }
 
-  function handleDialogOpenChange(open: boolean) {
-    if (!open) {
-      setSelectedItemId(null);
-    }
+    revalidatePath(pathname);
   }
 
   function displayItems() {
@@ -53,17 +52,13 @@ const ContactList = () => {
   }
 
   return (
-    <Dialog onOpenChange={handleDialogOpenChange}>
+    <Dialog onOpenChange={(open) => (open ? undefined : setSelectedItemId(null))}>
       <Heading as="h2" size="sm">
         Contact methods
       </Heading>
 
       <div className="flex flex-col items-start">
-        {isLoading ? null : contactMethods.length ? (
-          displayItems()
-        ) : (
-          <EmptySection heading="No contact methods found" />
-        )}
+        {contactMethods.length ? displayItems() : <EmptySection heading="No contact methods found" />}
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/contact/new">

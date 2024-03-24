@@ -14,6 +14,7 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/c
 import {capitalize} from "~/utils/capitalize";
 import type {ContactMethodFormValues} from "~/utils/validations/contact";
 import {contactMethodSchema} from "~/utils/validations/contact";
+import {revalidatePath} from "~/utils/revalidate-path";
 
 type ContactItemFormProps = {
   id: string;
@@ -61,6 +62,7 @@ const ContactItemForm = ({id}: ContactItemFormProps) => {
       }
     });
 
+    revalidatePath("/dashboard/contact");
     router.push("/dashboard/contact");
   }
 
