@@ -15,6 +15,7 @@ import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {Calendar} from "~/components/ui/calendar";
 import type {ExperienceItemFormValues} from "~/utils/validations/experience";
 import {experienceItemSchema} from "~/utils/validations/experience";
+import {revalidatePath} from "~/utils/revalidate-path";
 
 type ExperienceItemFormProps = {
   id: string;
@@ -84,6 +85,7 @@ const ExperienceItemForm = ({id}: ExperienceItemFormProps) => {
       }
     });
 
+    revalidatePath("/dashboard/experience");
     router.push("/dashboard/experience");
   }
 
