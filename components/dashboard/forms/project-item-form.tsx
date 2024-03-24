@@ -16,6 +16,7 @@ import {ImageCard} from "~/components/ui/image-card";
 import type {ProjectItemFormValues} from "~/utils/validations/project";
 import {projectItemSchema} from "~/utils/validations/project";
 import {acceptedImageTypes} from "~/utils/file";
+import {revalidatePath} from "~/utils/revalidate-path";
 
 type ProjectItemFormProps = {
   id: string;
@@ -71,6 +72,7 @@ const ProjectItemForm = ({id}: ProjectItemFormProps) => {
       }
     });
 
+    revalidatePath("/dashboard/projects");
     router.push("/dashboard/projects");
   }
 

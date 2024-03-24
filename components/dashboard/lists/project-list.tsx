@@ -3,6 +3,7 @@
 import React, {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
+import {usePathname} from "next/navigation";
 import {PlusIcon, PencilIcon, TrashIcon, EyeIcon} from "lucide-react";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {api} from "~/trpc/react";
@@ -12,12 +13,16 @@ import {Heading} from "~/components/ui/heading";
 import {EmptySection} from "~/components/ui/empty-section";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
+import {revalidatePath} from "~/utils/revalidate-path";
 
-const ProjectList = () => {
-  const {data: projects = [], isLoading} = api.project.getItems.useQuery();
+type ProjectListProps = {
+  projects: Array<ProjectItem>;
+};
+
+const ProjectList = ({projects}: ProjectListProps) => {
   const deleteItemMutation = api.project.deleteItem.useMutation();
+  const pathname = usePathname();
   const {toast} = useToast();
-  const utils = api.useUtils();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const selectedItem = projects.find((item) => item.id === selectedItemId);
@@ -34,17 +39,11 @@ const ProjectList = () => {
             description: "Project item deleted successfully",
             variant: "success"
           });
-
-          await utils.project.getItems.invalidate();
         }
       }
     );
-  }
 
-  function handleDialogOpenChange(open: boolean) {
-    if (!open) {
-      setSelectedItemId(null);
-    }
+    revalidatePath(pathname);
   }
 
   function displayItems() {
@@ -54,13 +53,13 @@ const ProjectList = () => {
   }
 
   return (
-    <Dialog onOpenChange={handleDialogOpenChange}>
+    <Dialog onOpenChange={(open) => (open ? undefined : setSelectedItemId(null))}>
       <Heading as="h2" size="sm">
         Project items
       </Heading>
 
       <div className="flex flex-col items-start">
-        {isLoading ? null : projects.length ? displayItems() : <EmptySection heading="No project items found" />}
+        {projects.length ? displayItems() : <EmptySection heading="No project items found" />}
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/projects/new">

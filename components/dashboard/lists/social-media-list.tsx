@@ -2,6 +2,7 @@
 
 import React, {useState} from "react";
 import type {SocialMediaLink} from "@prisma/client";
+import {usePathname} from "next/navigation";
 import Link from "next/link";
 import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
 import {api} from "~/trpc/react";
@@ -20,6 +21,7 @@ type SocialMediaListProps = {
 
 const SocialMediaList = ({socialMediaLinks = []}: SocialMediaListProps) => {
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
+  const pathname = usePathname();
   const {toast} = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -41,13 +43,7 @@ const SocialMediaList = ({socialMediaLinks = []}: SocialMediaListProps) => {
       }
     );
 
-    revalidatePath("/dashboard/social-media");
-  }
-
-  function handleDialogOpenChange(open: boolean) {
-    if (!open) {
-      setSelectedItemId(null);
-    }
+    revalidatePath(pathname);
   }
 
   function displayItems() {
@@ -57,7 +53,7 @@ const SocialMediaList = ({socialMediaLinks = []}: SocialMediaListProps) => {
   }
 
   return (
-    <Dialog onOpenChange={handleDialogOpenChange}>
+    <Dialog onOpenChange={(open) => (open ? undefined : setSelectedItemId(null))}>
       <Heading as="h2" size="sm">
         Links
       </Heading>
