@@ -14,6 +14,7 @@ import {capitalize} from "~/utils/capitalize";
 import {socialMediaIconsDef} from "~/utils/get-social-media-icon";
 import type {SocialMediaLinkFormValues} from "~/utils/validations/social-media";
 import {socialMediaLinkSchema} from "~/utils/validations/social-media";
+import {revalidatePath} from "~/utils/revalidate-path";
 
 type SocialMediaItemFormProps = {
   id: string;
@@ -57,6 +58,7 @@ const SocialMediaItemForm = ({id}: SocialMediaItemFormProps) => {
       }
     });
 
+    revalidatePath("/dashboard/social-media");
     router.push("/dashboard/social-media");
   }
 

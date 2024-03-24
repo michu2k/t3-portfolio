@@ -12,12 +12,15 @@ import {EmptySection} from "~/components/ui/empty-section";
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
 import {Heading} from "~/components/ui/heading";
 import {getSocialMediaIcon} from "~/utils/get-social-media-icon";
+import {revalidatePath} from "~/utils/revalidate-path";
 
-const SocialMediaList = () => {
-  const {data: socialMediaLinks = [], isLoading} = api.socialMedia.getItems.useQuery();
+type SocialMediaListProps = {
+  socialMediaLinks?: Array<SocialMediaLink>;
+};
+
+const SocialMediaList = ({socialMediaLinks = []}: SocialMediaListProps) => {
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
   const {toast} = useToast();
-  const utils = api.useUtils();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const selectedItem = socialMediaLinks.find((item) => item.id === selectedItemId);
@@ -34,11 +37,11 @@ const SocialMediaList = () => {
             description: "Social media link deleted successfully",
             variant: "success"
           });
-
-          await utils.socialMedia.getItems.invalidate();
         }
       }
     );
+
+    revalidatePath("/dashboard/social-media");
   }
 
   function handleDialogOpenChange(open: boolean) {
@@ -60,7 +63,7 @@ const SocialMediaList = () => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {isLoading ? null : socialMediaLinks.length ? displayItems() : <EmptySection heading="No links found" />}
+        {socialMediaLinks.length ? displayItems() : <EmptySection heading="No links found" />}
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/social-media/new">
