@@ -4,6 +4,7 @@ import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {useRouter} from "next/navigation";
 import {zodResolver} from "@hookform/resolvers/zod";
+import type {SocialMediaLink} from "@prisma/client";
 import {api} from "~/trpc/react";
 import {Button} from "~/components/ui/button";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
@@ -17,24 +18,24 @@ import {socialMediaLinkSchema} from "~/utils/validations/social-media";
 import {revalidatePath} from "~/utils/revalidate-path";
 
 type SocialMediaItemFormProps = {
-  id: string;
+  socialMediaLink: SocialMediaLink | null;
 };
 
-const SocialMediaItemForm = ({id}: SocialMediaItemFormProps) => {
+const SocialMediaItemForm = ({socialMediaLink}: SocialMediaItemFormProps) => {
   const router = useRouter();
   const {toast} = useToast();
   const utils = api.useUtils();
 
-  const {data} = api.socialMedia.getItem.useQuery({id});
   const createItemMutation = api.socialMedia.createItem.useMutation();
   const updateItemMutation = api.socialMedia.updateItem.useMutation();
+  const itemId = socialMediaLink?.id;
 
   const formMethods = useForm<SocialMediaLinkFormValues>({
     defaultValues: {
       icon: undefined,
       url: ""
     },
-    values: data ?? undefined,
+    values: socialMediaLink ?? undefined,
     resolver: zodResolver(socialMediaLinkSchema)
   });
 
@@ -43,14 +44,14 @@ const SocialMediaItemForm = ({id}: SocialMediaItemFormProps) => {
   async function handleFormSubmit(formValues: SocialMediaLinkFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    const mutation = data?.id ? updateItemMutation : createItemMutation;
-    const mutationVariables = data?.id ? {id: data.id, ...formValues} : formValues;
+    const mutation = itemId ? updateItemMutation : createItemMutation;
+    const mutationVariables = itemId ? {id: itemId, ...formValues} : formValues;
 
     await mutation.mutateAsync(mutationVariables, {
       async onSuccess() {
         toast({
           title: "Success",
-          description: data?.id ? "Your changes have been saved." : "A new item has been added.",
+          description: itemId ? "Your changes have been saved." : "A new item has been added.",
           variant: "success"
         });
 
