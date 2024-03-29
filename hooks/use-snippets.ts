@@ -1,5 +1,7 @@
 import type {Snippet, SnippetType} from "@prisma/client";
+import {usePathname} from "next/navigation";
 import {api} from "~/trpc/react";
+import {revalidatePath} from "~/utils/revalidate-path";
 
 type SnippetValues<T extends string> = {
   [key in T]: string;
@@ -17,6 +19,7 @@ function getSnippetValues<T extends string>(data: Array<Snippet>): Partial<Snipp
 const useSnippets = <T extends string>(type: SnippetType, data: Array<Snippet>) => {
   const updateSnippet = api.snippet.updateSnippet.useMutation();
   const createSnippet = api.snippet.createSnippet.useMutation();
+  const pathname = usePathname();
   const utils = api.useUtils();
 
   /** Bulk update section snippets for the given type */
@@ -33,6 +36,7 @@ const useSnippets = <T extends string>(type: SnippetType, data: Array<Snippet>) 
 
     await Promise.all(promises).then(async () => {
       await utils.snippet.getSnippets.invalidate();
+      revalidatePath(pathname);
     });
   }
 

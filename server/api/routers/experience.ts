@@ -16,7 +16,8 @@ export const experienceRouter = createTRPCRouter({
     }).optional())
     .query(async ({ctx, input: {include} = {}}) => {
       return await ctx.prisma.experienceItem.findMany({
-        include
+        include,
+        orderBy: {endDate: "desc"}
       });
     }),
 

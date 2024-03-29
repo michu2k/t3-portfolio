@@ -3,6 +3,7 @@
 import React from "react";
 import {useRouter} from "next/navigation";
 import {zodResolver} from "@hookform/resolvers/zod";
+import type {ContactMethod} from "@prisma/client";
 import {ContactMethodType} from "@prisma/client";
 import {FormProvider, useForm} from "react-hook-form";
 import {api} from "~/trpc/react";
@@ -14,19 +15,20 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/c
 import {capitalize} from "~/utils/capitalize";
 import type {ContactMethodFormValues} from "~/utils/validations/contact";
 import {contactMethodSchema} from "~/utils/validations/contact";
+import {revalidatePath} from "~/utils/revalidate-path";
 
 type ContactItemFormProps = {
-  id: string;
+  contact: ContactMethod | null;
 };
 
-const ContactItemForm = ({id}: ContactItemFormProps) => {
+const ContactItemForm = ({contact}: ContactItemFormProps) => {
   const router = useRouter();
   const {toast} = useToast();
   const utils = api.useUtils();
 
-  const {data} = api.contact.getItem.useQuery({id});
   const createItemMutation = api.contact.createItem.useMutation();
   const updateItemMutation = api.contact.updateItem.useMutation();
+  const itemId = contact?.id;
 
   const formMethods = useForm<ContactMethodFormValues>({
     defaultValues: {
@@ -34,7 +36,7 @@ const ContactItemForm = ({id}: ContactItemFormProps) => {
       description: "",
       type: undefined
     },
-    values: data ?? undefined,
+    values: contact ?? undefined,
     resolver: zodResolver(contactMethodSchema)
   });
 
@@ -46,14 +48,14 @@ const ContactItemForm = ({id}: ContactItemFormProps) => {
   async function handleFormSubmit(formValues: ContactMethodFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    const mutation = data?.id ? updateItemMutation : createItemMutation;
-    const mutationVariables = data?.id ? {id: data.id, ...formValues} : formValues;
+    const mutation = itemId ? updateItemMutation : createItemMutation;
+    const mutationVariables = itemId ? {id: itemId, ...formValues} : formValues;
 
     await mutation.mutateAsync(mutationVariables, {
       async onSuccess() {
         toast({
           title: "Success",
-          description: data?.id ? "Your changes have been saved." : "A new item has been added.",
+          description: itemId ? "Your changes have been saved." : "A new item has been added.",
           variant: "success"
         });
 
@@ -61,6 +63,7 @@ const ContactItemForm = ({id}: ContactItemFormProps) => {
       }
     });
 
+    revalidatePath("/dashboard/contact");
     router.push("/dashboard/contact");
   }
 

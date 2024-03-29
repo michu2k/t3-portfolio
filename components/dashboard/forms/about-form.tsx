@@ -4,6 +4,7 @@ import React from "react";
 import {FileX2Icon} from "lucide-react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
+import type {Snippet} from "@prisma/client";
 import {api} from "~/trpc/react";
 import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
@@ -17,11 +18,14 @@ import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
 import {acceptedImageTypes} from "~/utils/file";
 
-const AboutForm = () => {
+type AboutFormProps = {
+  snippets: Array<Snippet>;
+};
+
+const AboutForm = ({snippets}: AboutFormProps) => {
   const {toast} = useToast();
-  const {data = []} = api.snippet.getSnippets.useQuery({type: "ABOUT_ME", keys: ["description", "image"]});
-  const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", data);
-  const {description = "", image: imageKey} = getSnippetValues<keyof AboutMeSnippetsFormValues>(data);
+  const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", snippets);
+  const {description = "", image: imageKey} = getSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
 
   const {data: imageObj} = api.image.getImage.useQuery({key: imageKey});
   const createImage = api.image.createImage.useMutation();
