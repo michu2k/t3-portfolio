@@ -2,7 +2,8 @@
 
 An open-source portfolio template with a custom admin dashboard bootstrapped with [`create-t3-app`](https://create.t3.gg/).
 
-#### :warning: This project is in early development stage and is not recommended for production use. Various aspects of the application are subject to change.
+> [!WARNING]
+> This project is in early development stage and is not recommended for production use. Various aspects of the application are subject to change.
 
 ![T3Portfolio](./public/images/preview.jpg)
 _Dashboard and landing page view_
@@ -69,13 +70,6 @@ ALLOWED_EMAIL_ADDRESSES=
 ## How do I deploy this?
 
 Follow the deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
-
-## Roadmap
-
-- [ ] Re-implementation of dark mode
-- [ ] Add custom loadings / skeletons
-- [ ] More advanced text editor
-- & more...
 
 ## License
 
