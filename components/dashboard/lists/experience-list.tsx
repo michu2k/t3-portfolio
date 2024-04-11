@@ -64,7 +64,7 @@ const ExperienceList = ({experience}: ExperienceListProps) => {
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/experience/new">
-            <PlusIcon size={16} className="mr-1" />
+            <PlusIcon size={16} />
             Add new item
           </Link>
         </Button>

@@ -63,7 +63,7 @@ const SocialMediaList = ({socialMediaLinks = []}: SocialMediaListProps) => {
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/social-media/new">
-            <PlusIcon size={16} className="mr-1" />
+            <PlusIcon size={16} />
             Add new link
           </Link>
         </Button>
