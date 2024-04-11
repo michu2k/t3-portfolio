@@ -79,7 +79,7 @@ const SidebarNavigation = () => {
     <Sidebar>
       <SidebarTrigger className="fixed left-4 top-4 z-40 md:hidden" />
 
-      <SidebarContent className="gap-8">
+      <SidebarContent className="gap-6 md:gap-8">
         <div className="flex min-w-0 items-center gap-2 px-2">
           <Avatar>
             {image && <AvatarImage src={image} alt="" />}
@@ -97,11 +97,11 @@ const SidebarNavigation = () => {
         <ThemeSwitch />
 
         <nav className="flex flex-grow flex-col">
-          <ul className="flex flex-col gap-3">{displayNavigationItems()}</ul>
+          <ul className="flex flex-col gap-2 md:gap-3">{displayNavigationItems()}</ul>
 
           <Button
             variant="ghost"
-            className="mt-auto h-11 w-full justify-start hover:bg-transparent hover:text-foreground"
+            className="mt-auto h-11 w-full justify-start px-3 hover:bg-transparent hover:text-foreground"
             onClick={() => signOut()}>
             <LogOutIcon size={16} className="mr-2" />
             Log Out
