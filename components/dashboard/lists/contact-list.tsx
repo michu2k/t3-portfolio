@@ -62,7 +62,7 @@ const ContactList = ({contactMethods}: ContactListProps) => {
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/contact/new">
-            <PlusIcon size={16} className="mr-1" />
+            <PlusIcon size={16} />
             Add new item
           </Link>
         </Button>
