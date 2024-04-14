@@ -8,6 +8,7 @@ import {CalendarIcon, PlusIcon, Trash2Icon} from "lucide-react";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {api} from "~/trpc/react";
 import {useToast} from "~/hooks/use-toast";
+import type {ExperienceItemWithResponsibilities} from "~/server/api/routers/experience";
 import {Button} from "~/components/ui/button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
@@ -15,21 +16,22 @@ import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
 import {Calendar} from "~/components/ui/calendar";
 import type {ExperienceItemFormValues} from "~/utils/validations/experience";
 import {experienceItemSchema} from "~/utils/validations/experience";
+import {revalidatePath} from "~/utils/revalidate-path";
 
 type ExperienceItemFormProps = {
-  id: string;
+  experienceItem: ExperienceItemWithResponsibilities | null;
 };
 
-const ExperienceItemForm = ({id}: ExperienceItemFormProps) => {
+const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
   const router = useRouter();
   const {toast} = useToast();
   const utils = api.useUtils();
   const newResponsibilityItem = {id: undefined, name: ""};
 
-  const {data} = api.experience.getItem.useQuery({id});
   const createItemMutation = api.experience.createItem.useMutation();
   const updateItemMutation = api.experience.updateItem.useMutation();
-  const {responsibilities = []} = data || {};
+  const {responsibilities = []} = experienceItem || {};
+  const itemId = experienceItem?.id;
 
   const formMethods = useForm<ExperienceItemFormValues>({
     defaultValues: {
@@ -39,7 +41,7 @@ const ExperienceItemForm = ({id}: ExperienceItemFormProps) => {
       endDate: undefined,
       responsibilities: [newResponsibilityItem]
     },
-    values: data ? {...data, responsibilities: [newResponsibilityItem]} : undefined,
+    values: experienceItem ? experienceItem : undefined,
     resolver: zodResolver(experienceItemSchema)
   });
 
@@ -67,16 +69,16 @@ const ExperienceItemForm = ({id}: ExperienceItemFormProps) => {
     // Filter out empty responsibilities
     const responsibilities = formResponsibilities.filter(({name}) => !!name);
 
-    const mutation = data?.id ? updateItemMutation : createItemMutation;
-    const mutationVariables = data?.id
-      ? {id: data.id, ...formValues, responsibilities}
+    const mutation = itemId ? updateItemMutation : createItemMutation;
+    const mutationVariables = itemId
+      ? {id: itemId, ...formValues, responsibilities}
       : {...formValues, responsibilities};
 
     await mutation.mutateAsync(mutationVariables, {
       async onSuccess() {
         toast({
           title: "Success",
-          description: data?.id ? "Your changes have been saved." : "A new item has been added.",
+          description: itemId ? "Your changes have been saved." : "A new item has been added.",
           variant: "success"
         });
 
@@ -84,6 +86,7 @@ const ExperienceItemForm = ({id}: ExperienceItemFormProps) => {
       }
     });
 
+    revalidatePath("/dashboard/experience");
     router.push("/dashboard/experience");
   }
 

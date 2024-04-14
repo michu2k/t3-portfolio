@@ -3,7 +3,7 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {api} from "~/trpc/react";
+import type {Snippet} from "@prisma/client";
 import {useToast} from "~/hooks/use-toast";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Button} from "~/components/ui/button";
@@ -13,11 +13,14 @@ import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {contactSnippetsSchema} from "~/utils/validations/contact";
 import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
 
-const ContactForm = () => {
+type ContactFormProps = {
+  snippets: Array<Snippet>;
+};
+
+const ContactForm = ({snippets}: ContactFormProps) => {
   const {toast} = useToast();
-  const {data = []} = api.snippet.getSnippets.useQuery({type: "CONTACT", keys: ["description"]});
-  const updateSnippets = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", data);
-  const snippetValues = getSnippetValues<keyof ContactSnippetsFormValues>(data);
+  const updateSnippets = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", snippets);
+  const snippetValues = getSnippetValues<keyof ContactSnippetsFormValues>(snippets);
 
   const formMethods = useForm<ContactSnippetsFormValues>({
     defaultValues: {

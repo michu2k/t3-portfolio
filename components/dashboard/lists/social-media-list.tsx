@@ -2,22 +2,28 @@
 
 import React, {useState} from "react";
 import type {SocialMediaLink} from "@prisma/client";
+import {usePathname} from "next/navigation";
 import Link from "next/link";
-import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
+import {PlusIcon, PencilIcon, TrashIcon, EllipsisIcon} from "lucide-react";
 import {api} from "~/trpc/react";
 import {useToast} from "~/hooks/use-toast";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {Button} from "~/components/ui/button";
 import {EmptySection} from "~/components/ui/empty-section";
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
 import {Heading} from "~/components/ui/heading";
 import {getSocialMediaIcon} from "~/utils/get-social-media-icon";
+import {revalidatePath} from "~/utils/revalidate-path";
 
-const SocialMediaList = () => {
-  const {data: socialMediaLinks = [], isLoading} = api.socialMedia.getItems.useQuery();
+type SocialMediaListProps = {
+  socialMediaLinks?: Array<SocialMediaLink>;
+};
+
+const SocialMediaList = ({socialMediaLinks = []}: SocialMediaListProps) => {
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
+  const pathname = usePathname();
   const {toast} = useToast();
-  const utils = api.useUtils();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const selectedItem = socialMediaLinks.find((item) => item.id === selectedItemId);
@@ -34,17 +40,11 @@ const SocialMediaList = () => {
             description: "Social media link deleted successfully",
             variant: "success"
           });
-
-          await utils.socialMedia.getItems.invalidate();
         }
       }
     );
-  }
 
-  function handleDialogOpenChange(open: boolean) {
-    if (!open) {
-      setSelectedItemId(null);
-    }
+    revalidatePath(pathname);
   }
 
   function displayItems() {
@@ -54,17 +54,17 @@ const SocialMediaList = () => {
   }
 
   return (
-    <Dialog onOpenChange={handleDialogOpenChange}>
+    <Dialog onOpenChange={(open) => (open ? undefined : setSelectedItemId(null))}>
       <Heading as="h2" size="sm">
         Links
       </Heading>
 
       <div className="flex flex-col items-start">
-        {isLoading ? null : socialMediaLinks.length ? displayItems() : <EmptySection heading="No links found" />}
+        {socialMediaLinks.length ? displayItems() : <EmptySection heading="No links found" />}
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/social-media/new">
-            <PlusIcon size={16} className="mr-1" />
+            <PlusIcon size={16} />
             Add new link
           </Link>
         </Button>
@@ -94,19 +94,30 @@ const SocialMediaCard = ({id, icon, url, onClickDeleteBtn}: SocialMediaCardProps
         <p className="text-sm leading-6 text-muted-foreground">{url}</p>
       </div>
 
-      <Button variant="ghost" size="icon" asChild>
-        <Link href={`/dashboard/social-media/${id}`}>
-          <PencilIcon size={16} />
-          <span className="sr-only">Edit</span>
-        </Link>
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon">
+            <EllipsisIcon size={16} />
+            <span className="sr-only">Options</span>
+          </Button>
+        </DropdownMenuTrigger>
 
-      <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" onClick={onClickDeleteBtn}>
-          <TrashIcon size={16} />
-          <span className="sr-only">Delete</span>
-        </Button>
-      </DialogTrigger>
+        <DropdownMenuContent>
+          <Link href={`/dashboard/social-media/${id}`}>
+            <DropdownMenuItem>
+              <PencilIcon size={16} />
+              Edit
+            </DropdownMenuItem>
+          </Link>
+
+          <DialogTrigger asChild>
+            <DropdownMenuItem onClick={onClickDeleteBtn}>
+              <TrashIcon size={16} />
+              Delete
+            </DropdownMenuItem>
+          </DialogTrigger>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </article>
   );
 };

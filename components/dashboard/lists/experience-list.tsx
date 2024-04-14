@@ -1,24 +1,29 @@
 "use client";
 
 import React, {useState} from "react";
-import type {ExperienceItem} from "@prisma/client";
 import {format} from "date-fns";
 import Link from "next/link";
-import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
+import {usePathname} from "next/navigation";
+import {PlusIcon, PencilIcon, TrashIcon, EllipsisIcon} from "lucide-react";
+import type {ExperienceItem} from "@prisma/client";
 import {api} from "~/trpc/react";
 import {useToast} from "~/hooks/use-toast";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {Button} from "~/components/ui/button";
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
 import {EmptySection} from "~/components/ui/empty-section";
 import {Heading} from "~/components/ui/heading";
-import {sortExperienceByEndDate} from "~/utils/sort-experience-by-end-date";
+import {revalidatePath} from "~/utils/revalidate-path";
 
-const ExperienceList = () => {
-  const {data: experience = [], isLoading} = api.experience.getItems.useQuery();
+type ExperienceListProps = {
+  experience: Array<ExperienceItem>;
+};
+
+const ExperienceList = ({experience}: ExperienceListProps) => {
   const deleteItemMutation = api.experience.deleteItem.useMutation();
+  const pathname = usePathname();
   const {toast} = useToast();
-  const utils = api.useUtils();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const selectedItem = experience.find((item) => item.id === selectedItemId);
@@ -36,39 +41,31 @@ const ExperienceList = () => {
             description: "Experience item deleted successfully",
             variant: "success"
           });
-
-          await utils.experience.getItems.invalidate();
         }
       }
     );
-  }
 
-  function handleDialogOpenChange(open: boolean) {
-    if (!open) {
-      setSelectedItemId(null);
-    }
+    revalidatePath(pathname);
   }
 
   function displayItems() {
-    const sortedItems = sortExperienceByEndDate(experience);
-
-    return sortedItems.map((item) => (
+    return experience.map((item) => (
       <ExperienceCard key={item.id} onClickDeleteBtn={() => setSelectedItemId(item.id)} {...item} />
     ));
   }
 
   return (
-    <Dialog onOpenChange={handleDialogOpenChange}>
+    <Dialog onOpenChange={(open) => (open ? undefined : setSelectedItemId(null))}>
       <Heading as="h2" size="sm">
         Experience items
       </Heading>
 
       <div className="flex flex-col items-start">
-        {isLoading ? null : experience.length ? displayItems() : <EmptySection heading="No experience items found" />}
+        {experience.length ? displayItems() : <EmptySection heading="No experience items found" />}
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/experience/new">
-            <PlusIcon size={16} className="mr-1" />
+            <PlusIcon size={16} />
             Add new item
           </Link>
         </Button>
@@ -99,19 +96,30 @@ const ExperienceCard = ({id, company, startDate, endDate, position, onClickDelet
         </span>
       </div>
 
-      <Button variant="ghost" size="icon" asChild>
-        <Link href={`/dashboard/experience/${id}`}>
-          <PencilIcon size={16} />
-          <span className="sr-only">Edit</span>
-        </Link>
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon">
+            <EllipsisIcon size={16} />
+            <span className="sr-only">Options</span>
+          </Button>
+        </DropdownMenuTrigger>
 
-      <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" onClick={onClickDeleteBtn}>
-          <TrashIcon size={16} />
-          <span className="sr-only">Delete</span>
-        </Button>
-      </DialogTrigger>
+        <DropdownMenuContent>
+          <Link href={`/dashboard/experience/${id}`}>
+            <DropdownMenuItem>
+              <PencilIcon size={16} />
+              Edit
+            </DropdownMenuItem>
+          </Link>
+
+          <DialogTrigger asChild>
+            <DropdownMenuItem onClick={onClickDeleteBtn}>
+              <TrashIcon size={16} />
+              Delete
+            </DropdownMenuItem>
+          </DialogTrigger>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </article>
   );
 };

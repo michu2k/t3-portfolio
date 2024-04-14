@@ -3,17 +3,20 @@ import type {Metadata} from "next";
 import {AboutForm} from "~/components/dashboard/forms/about-form";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
+import {api} from "~/trpc/server";
 
 export const metadata: Metadata = {
   title: "Dashboard: About Me"
 };
 
-export default function Page() {
+export default async function Page() {
+  const snippetsData = await api.snippet.getSnippets.query({type: "ABOUT_ME", keys: ["description", "image"]});
+
   return (
     <>
       <PageHeader heading="About" description="About section settings" />
       <PageContent>
-        <AboutForm />
+        <AboutForm snippets={snippetsData} />
       </PageContent>
     </>
   );

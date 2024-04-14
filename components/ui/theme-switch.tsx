@@ -20,12 +20,12 @@ const ThemeSwitch = () => {
       <div className="relative">
         <label className="flex h-7 w-fit cursor-pointer items-center rounded-full border border-muted">
           <div className="flex w-7 items-center justify-center gap-1">
-            <SunIcon className="h-4 w-4" />
+            <SunIcon size={16} />
             <p className="sr-only">Light</p>
           </div>
 
           <div className="flex w-7 items-center justify-center gap-1">
-            <MoonIcon className="h-4 w-4" />
+            <MoonIcon size={16} />
             <p className="sr-only">Dark</p>
           </div>
 
@@ -45,7 +45,7 @@ const ThemeSwitch = () => {
         </label>
       </div>
 
-      {mounted ? <p className="font-poppins text-xs font-medium">{capitalize(theme)}</p> : null}
+      {mounted ? <p className="font-poppins text-xs font-medium text-muted-foreground">{capitalize(theme)}</p> : null}
     </div>
   );
 };

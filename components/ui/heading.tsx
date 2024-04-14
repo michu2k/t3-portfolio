@@ -6,10 +6,11 @@ import {cn} from "~/utils/className";
 const headingVariants = cva("font-poppins", {
   variants: {
     size: {
-      sm: ["font-semibold", "text-sm", "pb-2"],
-      md: ["font-semibold", "text-md", "pb-2"],
-      lg: ["font-semibold", "text-2xl", "pb-2"],
-      xl: ["font-bold", "text-2xl", "md:text-3xl"]
+      "sm": ["font-medium", "text-sm", "pb-2"],
+      "md": ["font-medium", "text-md", "pb-2"],
+      "lg": ["font-semibold", "text-lg", "pb-2"],
+      "xl": ["font-semibold", "text-xl"],
+      "2xl": ["font-bold", "text-2xl", "md:text-3xl"]
     }
   }
 });

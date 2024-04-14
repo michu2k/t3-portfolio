@@ -16,7 +16,7 @@ const PageSection = ({id, heading, subheading, className, children}: PageSection
       <div className="section-container">
         <div className="flex flex-col gap-2 pb-14">
           <p className="text-md font-poppins font-semibold text-primary">{subheading}</p>
-          <Heading as="h2" size="xl">
+          <Heading as="h2" size="2xl">
             {heading}
           </Heading>
         </div>

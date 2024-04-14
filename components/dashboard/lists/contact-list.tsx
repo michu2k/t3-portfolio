@@ -3,20 +3,26 @@
 import React, {useState} from "react";
 import type {ContactMethod} from "@prisma/client";
 import Link from "next/link";
-import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
+import {usePathname} from "next/navigation";
+import {PlusIcon, PencilIcon, TrashIcon, EllipsisIcon} from "lucide-react";
 import {api} from "~/trpc/react";
 import {useToast} from "~/hooks/use-toast";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {Button} from "~/components/ui/button";
 import {EmptySection} from "~/components/ui/empty-section";
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
 import {Heading} from "~/components/ui/heading";
+import {revalidatePath} from "~/utils/revalidate-path";
 
-const ContactList = () => {
-  const {data: contactMethods = [], isLoading} = api.contact.getItems.useQuery();
+type ContactListProps = {
+  contactMethods: Array<ContactMethod>;
+};
+
+const ContactList = ({contactMethods}: ContactListProps) => {
   const deleteItemMutation = api.contact.deleteItem.useMutation();
+  const pathname = usePathname();
   const {toast} = useToast();
-  const utils = api.useUtils();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const selectedItem = contactMethods.find((item) => item.id === selectedItemId);
@@ -33,17 +39,11 @@ const ContactList = () => {
             description: "Contact method deleted successfully",
             variant: "success"
           });
-
-          await utils.contact.getItems.invalidate();
         }
       }
     );
-  }
 
-  function handleDialogOpenChange(open: boolean) {
-    if (!open) {
-      setSelectedItemId(null);
-    }
+    revalidatePath(pathname);
   }
 
   function displayItems() {
@@ -53,21 +53,17 @@ const ContactList = () => {
   }
 
   return (
-    <Dialog onOpenChange={handleDialogOpenChange}>
+    <Dialog onOpenChange={(open) => (open ? undefined : setSelectedItemId(null))}>
       <Heading as="h2" size="sm">
         Contact methods
       </Heading>
 
       <div className="flex flex-col items-start">
-        {isLoading ? null : contactMethods.length ? (
-          displayItems()
-        ) : (
-          <EmptySection heading="No contact methods found" />
-        )}
+        {contactMethods.length ? displayItems() : <EmptySection heading="No contact methods found" />}
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/contact/new">
-            <PlusIcon size={16} className="mr-1" />
+            <PlusIcon size={16} />
             Add new item
           </Link>
         </Button>
@@ -94,19 +90,30 @@ const ContactMethodCard = ({id, name, description, onClickDeleteBtn}: ContactMet
         <p className="text-xs leading-6 text-muted-foreground">{description}</p>
       </div>
 
-      <Button variant="ghost" size="icon" asChild>
-        <Link href={`/dashboard/contact/${id}`}>
-          <PencilIcon size={16} />
-          <span className="sr-only">Edit</span>
-        </Link>
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon">
+            <EllipsisIcon size={16} />
+            <span className="sr-only">Options</span>
+          </Button>
+        </DropdownMenuTrigger>
 
-      <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" onClick={onClickDeleteBtn}>
-          <TrashIcon size={16} />
-          <span className="sr-only">Delete</span>
-        </Button>
-      </DialogTrigger>
+        <DropdownMenuContent>
+          <Link href={`/dashboard/contact/${id}`}>
+            <DropdownMenuItem>
+              <PencilIcon size={16} />
+              Edit
+            </DropdownMenuItem>
+          </Link>
+
+          <DialogTrigger asChild>
+            <DropdownMenuItem onClick={onClickDeleteBtn}>
+              <TrashIcon size={16} />
+              Delete
+            </DropdownMenuItem>
+          </DialogTrigger>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </article>
   );
 };

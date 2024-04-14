@@ -6,7 +6,7 @@ import {Button} from "~/components/ui/button";
 import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
 
 const HeaderButton = () => {
-  const scrollToTarget = useSmoothScroll("#recent-work");
+  const scrollToTarget = useSmoothScroll("#projects");
 
   return (
     <Button variant="secondary" onClick={scrollToTarget} className="h-12 gap-6 px-8">

@@ -31,6 +31,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
             fill
             style={{objectFit: "cover"}}
             className="rounded-lg transition-transform group-hover:scale-110"
+            sizes="(min-width: 768px) 50vw, 100vw"
             alt={`${name} preview`}
           />
         </div>

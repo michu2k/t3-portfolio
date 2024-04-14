@@ -13,12 +13,14 @@ import {
   ImageIcon,
   BriefcaseIcon,
   MailIcon,
-  LogOutIcon
+  LogOutIcon,
+  ExternalLinkIcon
 } from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
 import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
 import {ThemeSwitch} from "~/components/ui/theme-switch";
 import {Button} from "~/components/ui/button";
+import {Separator} from "~/components/ui/separator";
 import {getUserInitials} from "~/utils/get-user-initials";
 import pkg from "~/package.json";
 
@@ -79,7 +81,7 @@ const SidebarNavigation = () => {
     <Sidebar>
       <SidebarTrigger className="fixed left-4 top-4 z-40 md:hidden" />
 
-      <SidebarContent className="gap-8">
+      <SidebarContent className="gap-6 md:gap-8">
         <div className="flex min-w-0 items-center gap-2 px-2">
           <Avatar>
             {image && <AvatarImage src={image} alt="" />}
@@ -94,16 +96,27 @@ const SidebarNavigation = () => {
           </div>
         </div>
 
-        <ThemeSwitch />
+        <div className="flex items-center gap-2">
+          <ThemeSwitch />
+
+          <Separator orientation="vertical" />
+
+          <Button variant="ghost" size="sm" asChild className="hover:bg-transparent hover:text-foreground">
+            <Link href="/" target="_blank">
+              <ExternalLinkIcon size={16} />
+              Home page
+            </Link>
+          </Button>
+        </div>
 
         <nav className="flex flex-grow flex-col">
-          <ul className="flex flex-col gap-3">{displayNavigationItems()}</ul>
+          <ul className="flex flex-col gap-2 md:gap-3">{displayNavigationItems()}</ul>
 
           <Button
             variant="ghost"
-            className="mt-auto h-11 w-full justify-start hover:bg-transparent hover:text-foreground"
+            className="mt-auto h-11 w-full justify-start px-3 hover:bg-transparent hover:text-foreground"
             onClick={() => signOut()}>
-            <LogOutIcon size={16} className="mr-2" />
+            <LogOutIcon size={16} className="mr-1" />
             Log Out
           </Button>
         </nav>

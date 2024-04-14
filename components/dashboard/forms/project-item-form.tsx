@@ -6,6 +6,7 @@ import {FileX2Icon} from "lucide-react";
 import {useRouter} from "next/navigation";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {api} from "~/trpc/react";
+import type {ProjectItem} from "~/server/api/routers/project";
 import {useToast} from "~/hooks/use-toast";
 import {Button} from "~/components/ui/button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
@@ -16,19 +17,20 @@ import {ImageCard} from "~/components/ui/image-card";
 import type {ProjectItemFormValues} from "~/utils/validations/project";
 import {projectItemSchema} from "~/utils/validations/project";
 import {acceptedImageTypes} from "~/utils/file";
+import {revalidatePath} from "~/utils/revalidate-path";
 
 type ProjectItemFormProps = {
-  id: string;
+  project: ProjectItem | null;
 };
 
-const ProjectItemForm = ({id}: ProjectItemFormProps) => {
+const ProjectItemForm = ({project}: ProjectItemFormProps) => {
   const router = useRouter();
   const {toast} = useToast();
   const utils = api.useUtils();
 
-  const {data} = api.project.getItem.useQuery({id});
   const createItemMutation = api.project.createItem.useMutation();
   const updateItemMutation = api.project.updateItem.useMutation();
+  const itemId = project?.id;
 
   const formMethods = useForm<ProjectItemFormValues>({
     defaultValues: {
@@ -40,12 +42,12 @@ const ProjectItemForm = ({id}: ProjectItemFormProps) => {
       image: undefined,
       coverImage: undefined
     },
-    values: data
+    values: project
       ? {
-          ...data,
-          shortDescription: data.shortDescription ?? "",
-          websiteUrl: data.websiteUrl ?? "",
-          repositoryUrl: data.repositoryUrl ?? ""
+          ...project,
+          shortDescription: project.shortDescription ?? "",
+          websiteUrl: project.websiteUrl ?? "",
+          repositoryUrl: project.repositoryUrl ?? ""
         }
       : undefined,
     resolver: zodResolver(projectItemSchema)
@@ -56,14 +58,14 @@ const ProjectItemForm = ({id}: ProjectItemFormProps) => {
   async function handleFormSubmit(formValues: ProjectItemFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    const mutation = data?.id ? updateItemMutation : createItemMutation;
-    const mutationVariables = data?.id ? {id: data.id, ...formValues} : formValues;
+    const mutation = itemId ? updateItemMutation : createItemMutation;
+    const mutationVariables = itemId ? {id: itemId, ...formValues} : formValues;
 
     await mutation.mutateAsync(mutationVariables, {
       async onSuccess() {
         toast({
           title: "Success",
-          description: data?.id ? "Your changes have been saved." : "A new item has been added.",
+          description: itemId ? "Your changes have been saved." : "A new item has been added.",
           variant: "success"
         });
 
@@ -71,6 +73,7 @@ const ProjectItemForm = ({id}: ProjectItemFormProps) => {
       }
     });
 
+    revalidatePath("/dashboard/projects");
     router.push("/dashboard/projects");
   }
 

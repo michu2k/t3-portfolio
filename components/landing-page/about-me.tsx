@@ -19,7 +19,13 @@ const AboutMe = async () => {
         {imageObj ? (
           <div className="relative my-auto h-64 w-56 flex-shrink-0 rounded-lg md:h-80 md:w-72">
             <div className="relative h-full w-full overflow-hidden rounded-lg">
-              <Image src={imageObj.url} fill alt="" style={{objectFit: "cover"}} />
+              <Image
+                src={imageObj.url}
+                fill
+                style={{objectFit: "cover"}}
+                sizes="(min-width: 768px) 50vw, 75vw"
+                alt=""
+              />
             </div>
           </div>
         ) : null}

@@ -3,7 +3,6 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {api} from "~/trpc/react";
 import {useToast} from "~/hooks/use-toast";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
@@ -13,12 +12,16 @@ import {Heading} from "~/components/ui/heading";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {headerSnippetsSchema} from "~/utils/validations/header";
 import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import type {Snippet} from "@prisma/client";
 
-const HeaderForm = () => {
+type HeaderFormProps = {
+  snippets: Array<Snippet>;
+};
+
+const HeaderForm = ({snippets}: HeaderFormProps) => {
   const {toast} = useToast();
-  const {data = []} = api.snippet.getSnippets.useQuery({type: "HEADER", keys: ["heading", "description", "image"]});
-  const updateSnippets = useSnippets<keyof HeaderSnippetsFormValues>("HEADER", data);
-  const {heading = "", description = ""} = getSnippetValues<keyof HeaderSnippetsFormValues>(data);
+  const updateSnippets = useSnippets<keyof HeaderSnippetsFormValues>("HEADER", snippets);
+  const {heading = "", description = ""} = getSnippetValues<keyof HeaderSnippetsFormValues>(snippets);
 
   const formMethods = useForm<HeaderSnippetsFormValues>({
     defaultValues: {

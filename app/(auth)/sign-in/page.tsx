@@ -11,7 +11,7 @@ export default async function Page() {
   return (
     <>
       <header className="flex w-full flex-col items-center gap-4">
-        <Heading as="h1" size="xl">
+        <Heading as="h1" size="2xl">
           Sign In
         </Heading>
         <p className="text-center text-sm">Sign In to the dashboard</p>
