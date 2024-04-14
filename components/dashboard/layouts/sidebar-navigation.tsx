@@ -101,7 +101,7 @@ const SidebarNavigation = () => {
 
           <Separator orientation="vertical" />
 
-          <Button variant="ghost" size="sm" asChild className="text-foreground">
+          <Button variant="ghost" size="sm" asChild className="hover:bg-transparent hover:text-foreground">
             <Link href="/" target="_blank">
               <ExternalLinkIcon size={16} />
               Home page

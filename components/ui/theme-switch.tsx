@@ -45,7 +45,7 @@ const ThemeSwitch = () => {
         </label>
       </div>
 
-      {mounted ? <p className="font-poppins text-xs font-medium">{capitalize(theme)}</p> : null}
+      {mounted ? <p className="font-poppins text-xs font-medium text-muted-foreground">{capitalize(theme)}</p> : null}
     </div>
   );
 };
