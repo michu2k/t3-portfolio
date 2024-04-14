@@ -4,13 +4,14 @@ import React, {useState} from "react";
 import type {ContactMethod} from "@prisma/client";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
+import {PlusIcon, PencilIcon, TrashIcon, EllipsisIcon} from "lucide-react";
 import {api} from "~/trpc/react";
 import {useToast} from "~/hooks/use-toast";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {Button} from "~/components/ui/button";
 import {EmptySection} from "~/components/ui/empty-section";
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
 import {Heading} from "~/components/ui/heading";
 import {revalidatePath} from "~/utils/revalidate-path";
 
@@ -89,19 +90,30 @@ const ContactMethodCard = ({id, name, description, onClickDeleteBtn}: ContactMet
         <p className="text-xs leading-6 text-muted-foreground">{description}</p>
       </div>
 
-      <Button variant="ghost" size="icon" asChild>
-        <Link href={`/dashboard/contact/${id}`}>
-          <PencilIcon size={16} />
-          <span className="sr-only">Edit</span>
-        </Link>
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon">
+            <EllipsisIcon size={16} />
+            <span className="sr-only">Options</span>
+          </Button>
+        </DropdownMenuTrigger>
 
-      <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" onClick={onClickDeleteBtn}>
-          <TrashIcon size={16} />
-          <span className="sr-only">Delete</span>
-        </Button>
-      </DialogTrigger>
+        <DropdownMenuContent>
+          <Link href={`/dashboard/contact/${id}`}>
+            <DropdownMenuItem>
+              <PencilIcon size={16} />
+              Edit
+            </DropdownMenuItem>
+          </Link>
+
+          <DialogTrigger asChild>
+            <DropdownMenuItem onClick={onClickDeleteBtn}>
+              <TrashIcon size={16} />
+              Delete
+            </DropdownMenuItem>
+          </DialogTrigger>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </article>
   );
 };
