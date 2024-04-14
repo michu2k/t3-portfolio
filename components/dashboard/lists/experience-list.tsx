@@ -4,13 +4,14 @@ import React, {useState} from "react";
 import {format} from "date-fns";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {PlusIcon, PencilIcon, TrashIcon} from "lucide-react";
+import {PlusIcon, PencilIcon, TrashIcon, EllipsisIcon} from "lucide-react";
 import type {ExperienceItem} from "@prisma/client";
 import {api} from "~/trpc/react";
 import {useToast} from "~/hooks/use-toast";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {Button} from "~/components/ui/button";
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
 import {EmptySection} from "~/components/ui/empty-section";
 import {Heading} from "~/components/ui/heading";
 import {revalidatePath} from "~/utils/revalidate-path";
@@ -95,19 +96,30 @@ const ExperienceCard = ({id, company, startDate, endDate, position, onClickDelet
         </span>
       </div>
 
-      <Button variant="ghost" size="icon" asChild>
-        <Link href={`/dashboard/experience/${id}`}>
-          <PencilIcon size={16} />
-          <span className="sr-only">Edit</span>
-        </Link>
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon">
+            <EllipsisIcon size={16} />
+            <span className="sr-only">Options</span>
+          </Button>
+        </DropdownMenuTrigger>
 
-      <DialogTrigger asChild>
-        <Button variant="ghost" size="icon" onClick={onClickDeleteBtn}>
-          <TrashIcon size={16} />
-          <span className="sr-only">Delete</span>
-        </Button>
-      </DialogTrigger>
+        <DropdownMenuContent>
+          <Link href={`/dashboard/experience/${id}`}>
+            <DropdownMenuItem>
+              <PencilIcon size={16} />
+              Edit
+            </DropdownMenuItem>
+          </Link>
+
+          <DialogTrigger asChild>
+            <DropdownMenuItem onClick={onClickDeleteBtn}>
+              <TrashIcon size={16} />
+              Delete
+            </DropdownMenuItem>
+          </DialogTrigger>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </article>
   );
 };
