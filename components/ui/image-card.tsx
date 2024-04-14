@@ -14,12 +14,14 @@ const ImageCard = React.forwardRef<HTMLDivElement, ImageCardProps>(({file, class
   return (
     <div ref={ref} className={cn("flex min-h-[5.5rem] gap-4", className)}>
       <div className="relative h-24 w-36 shrink-0 overflow-hidden rounded-md bg-accent">
-        {file.url ? <Image src={file.url} fill style={{objectFit: "cover"}} alt="" /> : null}
+        {file.url ? (
+          <Image src={file.url} fill style={{objectFit: "cover"}} sizes="(min-width: 768px) 25vw, 50vw" alt="" />
+        ) : null}
       </div>
 
       <div className="flex flex-1 flex-col items-start">
         <p className="font-poppins text-xs font-semibold">{file.name}</p>
-        <p className="mb-auto text-xs leading-6">{convertBytesToMB(file.size)}</p>
+        <p className="mb-auto text-xs leading-6 text-muted-foreground">{convertBytesToMB(file.size)}</p>
 
         {actions}
       </div>
