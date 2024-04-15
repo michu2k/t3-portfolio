@@ -51,7 +51,7 @@ jobs:
         run: pnpm run lint:check
 
       - name: Check Prettier errors
-        run: pnpm run prettier:check
+        run: pnpm run format:check
 
       - name: Build
         run: pnpm run build

@@ -9,10 +9,10 @@
     "start:prod": "next start -p 3001",
     "lint:check": "next lint",
     "lint:fix": "next lint --fix",
+    "format:check": "prettier \"**/*.{ts,tsx}\" --check --cache",
+    "format:fix": "prettier \"**/*.{ts,tsx}\" --write --cache",
     "postinstall": "prisma generate",
     "prisma:gen": "prisma generate",
-    "prettier:check": "prettier \"**/*.{ts,tsx}\" --check --cache",
-    "prettier:fix": "prettier \"**/*.{ts,tsx}\" --write --cache",
     "prisma:push": "npx prisma db push",
     "prisma:studio": "npx prisma studio"
   },
