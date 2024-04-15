@@ -38,7 +38,6 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
       shortDescription: "",
       description: "",
       websiteUrl: "",
-      repositoryUrl: "",
       image: undefined,
       coverImage: undefined
     },
@@ -46,8 +45,7 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
       ? {
           ...project,
           shortDescription: project.shortDescription ?? "",
-          websiteUrl: project.websiteUrl ?? "",
-          repositoryUrl: project.repositoryUrl ?? ""
+          websiteUrl: project.websiteUrl ?? ""
         }
       : undefined,
     resolver: zodResolver(projectItemSchema)
@@ -179,20 +177,6 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
               <FormLabel isOptional>Website URL</FormLabel>
               <FormControl>
                 <Input {...field} placeholder="Enter url to the website" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={control}
-          name="repositoryUrl"
-          render={({field}) => (
-            <FormItem>
-              <FormLabel isOptional>Repository URL</FormLabel>
-              <FormControl>
-                <Input {...field} placeholder="Enter url to the repository" />
               </FormControl>
               <FormMessage />
             </FormItem>

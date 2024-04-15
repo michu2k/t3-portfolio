@@ -36,6 +36,7 @@ _Dashboard and landing page view_
 
 ```
 DATABASE_URL=
+DATABASE_DIRECT_URL=
 ```
 
 - NextAuth.js authentication variables. [NextAuth Documentation](https://next-auth.js.org/configuration/options#environment-variables)
