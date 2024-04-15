@@ -8,6 +8,7 @@ generator client {
 datasource db {
     provider = "postgresql"
     url = env("DATABASE_URL")
+    directUrl = env("DATABASE_DIRECT_URL")
     relationMode = "prisma"
 }
 
@@ -129,5 +130,4 @@ model ProjectItem {
     createdAt        DateTime @default(now())
     updatedAt        DateTime @updatedAt
     websiteUrl       String?
-    repositoryUrl    String?
 }
