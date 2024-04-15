@@ -6,7 +6,6 @@ import {Projects} from "~/components/landing-page/projects";
 import {Experience} from "~/components/landing-page/experience";
 import {Contact} from "~/components/landing-page/contact";
 import {Footer} from "~/components/landing-page/footer";
-import {Separator} from "~/components/ui/separator";
 import {SocialMedia} from "~/components/landing-page/social-media";
 
 export default function Page() {
@@ -16,13 +15,9 @@ export default function Page() {
         <SocialMedia />
       </HomeNavigation>
       <Header />
-      <Separator />
       <AboutMe />
-      <Separator />
       <Projects />
-      <Separator />
       <Experience />
-      <Separator />
       <Contact />
       <Footer />
     </>

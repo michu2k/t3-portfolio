@@ -11,7 +11,7 @@ const Separator = ({orientation = "horizontal", className}: SeparatorProps) => {
     <hr
       className={cn(
         "shrink-0 border-0 bg-muted",
-        orientation === "horizontal" ? "mx-auto h-0.5 w-full " : "h-full w-px ",
+        orientation === "horizontal" ? "mx-auto h-0.5 w-full " : "h-full w-px",
         className
       )}
     />

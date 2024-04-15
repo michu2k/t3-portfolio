@@ -38,7 +38,7 @@ const config = {
           marginLeft: theme("margin.auto"),
           marginRight: theme("margin.auto"),
           [`@media (min-width: ${theme("screens.md")})`]: {
-            maxWidth: theme("maxWidth.6xl")
+            maxWidth: theme("maxWidth.5xl")
           }
         }
       });
