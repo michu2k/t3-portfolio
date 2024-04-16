@@ -9,6 +9,7 @@ jobs:
 
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_DIRECT_URL: ${{ secrets.DATABASE_DIRECT_URL }}
 
       NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
       NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
@@ -50,7 +51,7 @@ jobs:
         run: pnpm run lint:check
 
       - name: Check Prettier errors
-        run: pnpm run prettier:check
+        run: pnpm run format:check
 
       - name: Build
         run: pnpm run build

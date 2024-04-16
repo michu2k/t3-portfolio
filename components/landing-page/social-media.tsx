@@ -32,11 +32,11 @@ const SocialMediaItem = ({icon, url}: SocialMediaLink) => {
     <li>
       <a
         href={url}
-        className="group flex h-6 w-6 items-center justify-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+        className="group flex h-6 w-6 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
         rel="noopener noreferrer"
         target="_blank">
         <Icon
-          className="h-4 w-4 fill-slate-700 transition-colors group-hover:fill-primary group-focus:fill-primary"
+          className="h-4 w-4 fill-foreground transition-colors group-hover:fill-accent-foreground group-focus:fill-accent-foreground"
           aria-hidden="true"
         />
         <span className="sr-only">{capitalize(icon)}</span>

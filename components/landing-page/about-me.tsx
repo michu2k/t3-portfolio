@@ -14,15 +14,16 @@ const AboutMe = async () => {
   const imageObj = imageId ? await api.image.getImage.query({key: imageId}) : null;
 
   return (
-    <PageSection id="about" heading="Personal Details" subheading="01. About Me">
+    <PageSection id="about" heading="Personal Details" subheading="About Me">
       <div className="flex flex-col gap-14 sm:flex-row sm:items-center">
         {imageObj ? (
-          <div className="relative my-auto h-64 w-56 flex-shrink-0 rounded-lg md:h-80 md:w-72">
-            <div className="relative h-full w-full overflow-hidden rounded-lg">
+          <div className="relative my-auto h-80 w-full flex-shrink-0 sm:w-64 md:h-96 md:w-80">
+            <div className="relative h-full w-full overflow-hidden">
               <Image
                 src={imageObj.url}
                 fill
                 style={{objectFit: "cover"}}
+                className="bg-accent"
                 sizes="(min-width: 768px) 50vw, 75vw"
                 alt=""
               />
@@ -30,9 +31,7 @@ const AboutMe = async () => {
           </div>
         ) : null}
 
-        <div className="max-w-lg flex-1">
-          <p className="text-md leading-7 text-muted-foreground">{description}</p>
-        </div>
+        <p className="text-lg leading-8 text-muted-foreground">{description}</p>
       </div>
     </PageSection>
   );
