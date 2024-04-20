@@ -1,15 +1,22 @@
 import {useEffect, useState} from "react";
-import {useWindowSize} from "./use-window-size";
 import theme from "tailwindcss/defaultTheme";
 
 const useIsMobile = () => {
-  const windowSize = useWindowSize();
   const [isMobile, setIsMobile] = useState(false);
-  const maxMobileWidth = parseInt(theme.screens.md);
 
   useEffect(() => {
-    setIsMobile(windowSize.width < maxMobileWidth);
-  }, [windowSize.width, maxMobileWidth]);
+    const maxMobileWidth = parseInt(theme.screens.md);
+    const mediaQuery = window.matchMedia(`(min-width: ${maxMobileWidth}px)`);
+
+    setIsMobile(!mediaQuery.matches);
+
+    function handleMediaQueryChange(e: MediaQueryListEvent) {
+      setIsMobile(!e.matches);
+    }
+
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
+    return () => mediaQuery.removeEventListener("change", handleMediaQueryChange);
+  }, []);
 
   return isMobile;
 };
