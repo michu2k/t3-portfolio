@@ -1,8 +1,15 @@
 import {DeleteObjectCommand, GetObjectCommand, PutObjectCommand, S3Client} from "@aws-sdk/client-s3";
 import {getSignedUrl} from "@aws-sdk/s3-request-presigner";
+import sharp from "sharp";
 import {v4 as uuidv4} from "uuid";
 import {env} from "~/env";
 import {getFileExtension, type FileObj} from "~/utils/file";
+
+type UploadFileOptions = {
+  directory?: string;
+  width?: number;
+  height?: number;
+};
 
 export const s3 = new S3Client({
   region: env.AWS_S3_REGION,
@@ -12,17 +19,19 @@ export const s3 = new S3Client({
   }
 });
 
-/** Upload a new file to S3 and return its key */
-export async function uploadFileToS3(file: FileObj, directory?: string) {
+/** Upload a new image file to S3 and return its key */
+export async function uploadFileToS3(file: FileObj, {directory, width, height}: UploadFileOptions = {}) {
   try {
     const ext = getFileExtension(file.type);
     const key = directory ? `${directory}/${uuidv4()}.${ext}` : `${uuidv4()}.${ext}`;
+
     const base64Data = Buffer.from(file.url.replace(/^data:image\/\w+;base64,/, ""), "base64");
+    const resizedImage = await sharp(base64Data).resize(width, height, {fit: "outside"}).toBuffer();
 
     const command = new PutObjectCommand({
       Bucket: env.AWS_S3_BUCKET,
       Key: key,
-      Body: base64Data,
+      Body: resizedImage,
       ContentEncoding: "base64",
       ContentType: file.type
     });
