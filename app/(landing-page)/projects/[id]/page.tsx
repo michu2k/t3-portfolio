@@ -1,6 +1,7 @@
 import React from "react";
 import type {Metadata} from "next";
 import Image from "next/image";
+import {notFound} from "next/navigation";
 import {GlobeIcon} from "lucide-react";
 import {api} from "~/trpc/server";
 import {SubpageNavigation} from "~/components/landing-page/navigation";
@@ -16,8 +17,14 @@ type MetadataProps = {
 export async function generateMetadata({params: {id}}: MetadataProps): Promise<Metadata> {
   const data = await api.project.getItem.query({id});
 
+  if (data) {
+    return {
+      title: `T3 Portfolio: ${data.name}`
+    };
+  }
+
   return {
-    title: `T3 Portfolio: ${data?.name}`
+    title: "T3 Portfolio: Page not found"
   };
 }
 
@@ -29,6 +36,11 @@ type PageProps = {
 
 export default async function Page({params: {id}}: PageProps) {
   const data = await api.project.getItem.query({id});
+
+  if (!data) {
+    notFound();
+  }
+
   const {name, image, description, websiteUrl} = data || {};
 
   return (
