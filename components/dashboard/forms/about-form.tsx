@@ -18,6 +18,9 @@ import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
 import {acceptedImageTypes} from "~/utils/file";
 
+const IMAGE_WIDTH = 400;
+const IMAGE_HEIGHT = 400;
+
 type AboutFormProps = {
   snippets: Array<Snippet>;
 };
@@ -58,7 +61,7 @@ const AboutForm = ({snippets}: AboutFormProps) => {
 
       // Create new image if it exists
       if (image) {
-        const imageKey = await createImage.mutateAsync({image});
+        const imageKey = await createImage.mutateAsync({image, width: IMAGE_WIDTH, height: IMAGE_HEIGHT});
         await updateSnippets({image: imageKey});
       } else {
         await updateSnippets({image: ""});
