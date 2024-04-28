@@ -12,12 +12,14 @@ type ProjectItem = Omit<PrismaProjectItem, "coverImage" | "image"> & {
 };
 
 const S3_DIRECTORY_NAME = "projects";
+const THUMBNAIL_WIDTH = 512;
+const THUMBNAIL_HEIGHT = 512;
 
 // prettier-ignore
 export const projectRouter = createTRPCRouter({
   getItems: publicProcedure
     .query(async ({ctx}) => {
-      const items = await ctx.prisma.projectItem.findMany();
+      const items = await ctx.prisma.projectItem.findMany({orderBy: {createdAt: "desc"}});
 
       const itemsWithImageObjects = await Promise.all(items.map(async (item) => {
         const coverImage = await getPresignedUrl(item.coverImage);
@@ -54,8 +56,8 @@ export const projectRouter = createTRPCRouter({
       }
 
       return await ctx.prisma.$transaction(async (tx) => {
-        const {key: coverImageKey} = await uploadFileToS3(coverImage, S3_DIRECTORY_NAME);
-        const {key: imageKey} = await uploadFileToS3(image, S3_DIRECTORY_NAME);
+        const {key: coverImageKey} = await uploadFileToS3(coverImage, {directory: S3_DIRECTORY_NAME, width: THUMBNAIL_WIDTH, height: THUMBNAIL_HEIGHT});
+        const {key: imageKey} = await uploadFileToS3(image, {directory: S3_DIRECTORY_NAME});
 
         return await tx.projectItem.create({
           data: {
@@ -89,14 +91,14 @@ export const projectRouter = createTRPCRouter({
         // If the coverImage has changed, delete the current image and upload the new one
         if (coverImage.name !== item.coverImage) {
           await deleteFileFromS3(item.coverImage);
-          const {key} = await uploadFileToS3(coverImage, S3_DIRECTORY_NAME);
+          const {key} = await uploadFileToS3(coverImage, {directory: S3_DIRECTORY_NAME, width: THUMBNAIL_WIDTH, height: THUMBNAIL_HEIGHT});
           coverImageKey = key;
         }
 
         // If the image has changed, delete the current image and upload the new one
         if (image.name !== item.image) {
           await deleteFileFromS3(item.image);
-          const {key} = await uploadFileToS3(image, S3_DIRECTORY_NAME);
+          const {key} = await uploadFileToS3(image, {directory: S3_DIRECTORY_NAME});
           imageKey = key;
         }
 

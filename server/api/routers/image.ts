@@ -17,13 +17,17 @@ export const imageRouter = createTRPCRouter({
     }),
 
   createImage: protectedProcedure
-    .input(z.object({image: z.custom<FileObj>()}))
-    .mutation(async ({input: {image}}) => {
+    .input(z.object({
+      image: z.custom<FileObj>(),
+      width: z.number().optional(),
+      height: z.number().optional()
+    }))
+    .mutation(async ({input: {image, width, height}}) => {
       if (!image) {
         throw new Error("Image is required");
       }
 
-      const {key: imageKey} = await uploadFileToS3(image);
+      const {key: imageKey} = await uploadFileToS3(image, {width, height});
       return imageKey;
     }),
 
