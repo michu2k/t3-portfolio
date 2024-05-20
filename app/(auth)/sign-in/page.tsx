@@ -1,11 +1,19 @@
 import React from "react";
 import Link from "next/link";
+import {redirect} from "next/navigation";
 import {getProviders} from "next-auth/react";
+import {getServerAuthSession} from "~/server/auth";
 import {Button} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
 import {SignInProviders} from "~/components/auth/sign-in-providers";
 
 export default async function Page() {
+  const session = await getServerAuthSession();
+
+  if (session?.user) {
+    redirect("/dashboard");
+  }
+
   const providers = await getProviders();
 
   return (
