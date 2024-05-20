@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const experience = await api.experience.getItems.query();
+  const experience = await api.experience.getItems();
 
   return (
     <>

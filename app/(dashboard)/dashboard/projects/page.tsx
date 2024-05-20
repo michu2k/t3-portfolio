@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const projects = await api.project.getItems.query();
+  const projects = await api.project.getItems();
 
   return (
     <>

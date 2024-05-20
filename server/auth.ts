@@ -1,6 +1,7 @@
 import {getServerSession, type NextAuthOptions, type DefaultSession} from "next-auth";
+import {PrismaAdapter} from "@auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
-import {PrismaAdapter} from "@next-auth/prisma-adapter";
+import type {Adapter} from "next-auth/adapters";
 import {env} from "~/env";
 import {prisma} from "~/server/db";
 
@@ -42,7 +43,7 @@ export const authOptions: NextAuthOptions = {
       }
     })
   },
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,

@@ -6,7 +6,7 @@ import {api} from "~/trpc/server";
 import {PageSection} from "./page-section";
 
 const Projects = async () => {
-  const projectItems = await api.project.getItems.query();
+  const projectItems = await api.project.getItems();
 
   function displayProjectsItems() {
     return projectItems.map((item) => <ProjectCard key={item.id} {...item} />);

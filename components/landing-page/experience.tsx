@@ -6,7 +6,7 @@ import {PageSection} from "./page-section";
 import {Separator} from "../ui/separator";
 
 const Experience = async () => {
-  const experienceItems = (await api.experience.getItems.query({
+  const experienceItems = (await api.experience.getItems({
     include: {responsibilities: true}
   })) as Array<ExperienceItemWithResponsibilities>;
 

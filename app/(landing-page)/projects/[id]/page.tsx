@@ -15,7 +15,7 @@ type MetadataProps = {
 };
 
 export async function generateMetadata({params: {id}}: MetadataProps): Promise<Metadata> {
-  const data = await api.project.getItem.query({id});
+  const data = await api.project.getItem({id});
 
   if (data) {
     return {
@@ -35,7 +35,7 @@ type PageProps = {
 };
 
 export default async function Page({params: {id}}: PageProps) {
-  const data = await api.project.getItem.query({id});
+  const data = await api.project.getItem({id});
 
   if (!data) {
     notFound();

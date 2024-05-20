@@ -6,12 +6,12 @@ import {PageSection} from "./page-section";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 
 const AboutMe = async () => {
-  const data = await api.snippet.getSnippets.query({type: "ABOUT_ME", keys: ["description", "image"]});
+  const data = await api.snippet.getSnippets({type: "ABOUT_ME", keys: ["description", "image"]});
 
   const snippetValues = getSnippetValues<keyof AboutMeSnippetsFormValues>(data);
   const {description = "", image: imageId} = snippetValues;
 
-  const imageObj = imageId ? await api.image.getImage.query({key: imageId}) : null;
+  const imageObj = imageId ? await api.image.getImage({key: imageId}) : null;
 
   return (
     <PageSection id="about" heading="Personal Details" subheading="About Me">

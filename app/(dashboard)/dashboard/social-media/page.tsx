@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const socialMediaLinks = await api.socialMedia.getItems.query();
+  const socialMediaLinks = await api.socialMedia.getItems();
 
   return (
     <>

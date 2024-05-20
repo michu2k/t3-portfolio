@@ -20,7 +20,7 @@ export default async function Page({params: {id}}: PageProps) {
   const heading = isNew ? "Create" : "Edit";
   const description = isNew ? "Create a new social media link." : "Edit an existing link.";
 
-  const socialMediaLink = await api.socialMedia.getItem.query({id});
+  const socialMediaLink = await api.socialMedia.getItem({id});
 
   return (
     <>

@@ -10,7 +10,7 @@ type SocialMediaProps = {
 };
 
 const SocialMedia = memo(async ({className}: SocialMediaProps) => {
-  const socialMediaItems = await api.socialMedia.getItems.query();
+  const socialMediaItems = await api.socialMedia.getItems();
 
   function displaySocialMediaIcons() {
     return socialMediaItems.map((item) => <SocialMediaItem key={item.id} {...item} />);

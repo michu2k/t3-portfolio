@@ -5,7 +5,7 @@ import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {HeaderButtons} from "./header-buttons";
 
 const Header = async () => {
-  const data = await api.snippet.getSnippets.query({type: "HEADER", keys: ["heading", "description"]});
+  const data = await api.snippet.getSnippets({type: "HEADER", keys: ["heading", "description"]});
 
   const snippetValues = getSnippetValues<keyof HeaderSnippetsFormValues>(data);
   const {heading = "", description = ""} = snippetValues;

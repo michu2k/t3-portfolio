@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const snippetsData = await api.snippet.getSnippets.query({type: "CONTACT", keys: ["description"]});
-  const contactMethods = await api.contact.getItems.query();
+  const snippetsData = await api.snippet.getSnippets({type: "CONTACT", keys: ["description"]});
+  const contactMethods = await api.contact.getItems();
 
   return (
     <>

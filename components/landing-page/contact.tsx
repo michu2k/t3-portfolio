@@ -7,8 +7,8 @@ import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {getContactIcon} from "~/utils/get-contact-icon";
 
 const Contact = async () => {
-  const data = await api.snippet.getSnippets.query({type: "CONTACT", keys: ["description"]});
-  const contactMethods = await api.contact.getItems.query();
+  const data = await api.snippet.getSnippets({type: "CONTACT", keys: ["description"]});
+  const contactMethods = await api.contact.getItems();
 
   const snippetValues = getSnippetValues<keyof ContactSnippetsFormValues>(data);
   const {description = ""} = snippetValues;
