@@ -1,10 +1,10 @@
-name: Build Next.js project
+name: Check Next.js project
 
 on: pull_request
 
 jobs:
-  build:
-    name: Build project
+  check:
+    name: Check project
     runs-on: ubuntu-latest
 
     env:
