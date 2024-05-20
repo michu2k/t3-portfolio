@@ -20,7 +20,7 @@ export default async function Page({params: {id}}: PageProps) {
   const heading = isNew ? "Create" : "Edit";
   const description = isNew ? "Create a new project item." : "Edit an existing project item.";
 
-  const project = await api.project.getItem.query({id});
+  const project = await api.project.getItem({id});
 
   return (
     <>

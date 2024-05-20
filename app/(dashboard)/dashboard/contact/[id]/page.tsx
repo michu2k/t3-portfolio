@@ -20,7 +20,7 @@ export default async function Page({params: {id}}: PageProps) {
   const heading = isNew ? "Create" : "Edit";
   const description = isNew ? "Create a new contact method." : "Edit an existing contact method.";
 
-  const contact = await api.contact.getItem.query({id});
+  const contact = await api.contact.getItem({id});
 
   return (
     <>

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const snippetsData = await api.snippet.getSnippets.query({type: "HEADER", keys: ["heading", "description", "image"]});
+  const snippetsData = await api.snippet.getSnippets({type: "HEADER", keys: ["heading", "description", "image"]});
 
   return (
     <>

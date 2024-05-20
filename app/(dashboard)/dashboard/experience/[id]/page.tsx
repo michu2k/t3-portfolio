@@ -20,7 +20,7 @@ export default async function Page({params: {id}}: PageProps) {
   const heading = isNew ? "Create" : "Edit";
   const description = isNew ? "Create a new experience item." : "Edit an existing experience item.";
 
-  const experienceItem = await api.experience.getItem.query({id});
+  const experienceItem = await api.experience.getItem({id});
 
   return (
     <>
