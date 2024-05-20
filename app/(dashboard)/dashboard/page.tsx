@@ -2,6 +2,7 @@ import React from "react";
 import type {Metadata} from "next";
 import type {LucideIcon} from "lucide-react";
 import {CodeIcon, BookTextIcon, RocketIcon} from "lucide-react";
+import {ensureAuthenticated} from "~/server/auth";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {Button} from "~/components/ui/button";
@@ -35,7 +36,9 @@ export const metadata: Metadata = {
   title: "Dashboard: General"
 };
 
-export default function Page() {
+export default async function Page() {
+  await ensureAuthenticated();
+
   function displayLinks() {
     return projectLinks.map((item) => <LinkCard key={item.id} {...item} />);
   }

@@ -1,6 +1,7 @@
 import React from "react";
 import type {Metadata} from "next";
 import {api} from "~/trpc/server";
+import {ensureAuthenticated} from "~/server/auth";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {ContactForm} from "~/components/dashboard/forms/contact-form";
@@ -12,6 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
+  await ensureAuthenticated();
+
   const snippetsData = await api.snippet.getSnippets({type: "CONTACT", keys: ["description"]});
   const contactMethods = await api.contact.getItems();
 

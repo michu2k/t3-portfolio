@@ -12,7 +12,13 @@ const errors = {
   default: "Unable to sign in. Try again later."
 };
 
-export default function Page({searchParams}: {searchParams: {error?: string}}) {
+type PageProps = {
+  searchParams: {
+    error?: string;
+  };
+};
+
+export default function Page({searchParams}: PageProps) {
   const error = searchParams.error;
   const heading = error && Object.keys(errors).includes(error) ? error : "Error";
   const description = (error && errors[error as keyof typeof errors]) ?? errors.default;
