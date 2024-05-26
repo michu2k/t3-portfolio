@@ -74,4 +74,4 @@ Follow the deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 
 ## License
 
-This project is under the MIT license
+This project is under the MIT license.
