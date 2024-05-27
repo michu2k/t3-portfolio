@@ -1,8 +1,11 @@
+import type {Snippet} from "@prisma/client";
 import {SnippetType} from "@prisma/client";
 import {z} from "zod";
 
 import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
 import {snippetSchema} from "~/utils/validations/snippet";
+
+export type Snippets = Array<Pick<Snippet, "id" | "name" | "value">>;
 
 // prettier-ignore
 export const snippetRouter = createTRPCRouter({
@@ -13,7 +16,12 @@ export const snippetRouter = createTRPCRouter({
     }))
     .query(async ({ctx, input: {type, keys}}) => {
       return await ctx.prisma.snippet.findMany({
-        where: {AND: {type, name: {in: keys}}}
+        where: {AND: {type, name: {in: keys}}},
+        select: {
+          id: true,
+          name: true,
+          value: true
+        }
       });
     }),
 
