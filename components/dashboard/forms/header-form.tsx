@@ -11,7 +11,7 @@ import {Textarea} from "~/components/ui/textarea";
 import {Heading} from "~/components/ui/heading";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {headerSnippetsSchema} from "~/utils/validations/header";
-import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import {extractSnippetValues, useSnippets} from "~/hooks/use-snippets";
 import type {Snippets} from "~/server/api/routers/snippet";
 
 type HeaderFormProps = {
@@ -21,7 +21,7 @@ type HeaderFormProps = {
 const HeaderForm = ({snippets}: HeaderFormProps) => {
   const {toast} = useToast();
   const updateSnippets = useSnippets<keyof HeaderSnippetsFormValues>("HEADER", snippets);
-  const {heading = "", description = ""} = getSnippetValues<keyof HeaderSnippetsFormValues>(snippets);
+  const {heading = "", description = ""} = extractSnippetValues<keyof HeaderSnippetsFormValues>(snippets);
 
   const formMethods = useForm<HeaderSnippetsFormValues>({
     defaultValues: {

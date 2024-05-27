@@ -5,7 +5,7 @@ import {FileX2Icon} from "lucide-react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {api} from "~/trpc/react";
-import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import {extractSnippetValues, useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Button} from "~/components/ui/button";
@@ -28,7 +28,7 @@ type AboutFormProps = {
 const AboutForm = ({snippets}: AboutFormProps) => {
   const {toast} = useToast();
   const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", snippets);
-  const {description = "", image: imageKey} = getSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
+  const {description = "", image: imageKey} = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
 
   const {data: imageObj} = api.image.getImage.useQuery({key: imageKey});
   const createImage = api.image.createImage.useMutation();

@@ -10,7 +10,7 @@ import {Textarea} from "~/components/ui/textarea";
 import {Heading} from "~/components/ui/heading";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {contactSnippetsSchema} from "~/utils/validations/contact";
-import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import {extractSnippetValues, useSnippets} from "~/hooks/use-snippets";
 import type {Snippets} from "~/server/api/routers/snippet";
 
 type ContactFormProps = {
@@ -20,7 +20,7 @@ type ContactFormProps = {
 const ContactForm = ({snippets}: ContactFormProps) => {
   const {toast} = useToast();
   const updateSnippets = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", snippets);
-  const snippetValues = getSnippetValues<keyof ContactSnippetsFormValues>(snippets);
+  const snippetValues = extractSnippetValues<keyof ContactSnippetsFormValues>(snippets);
 
   const formMethods = useForm<ContactSnippetsFormValues>({
     defaultValues: {

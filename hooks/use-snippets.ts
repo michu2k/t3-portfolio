@@ -8,8 +8,8 @@ type SnippetValues<T extends string> = {
   [key in T]: string;
 };
 
-/** Get the snippet values */
-function getSnippetValues<T extends string>(data: Snippets): Partial<SnippetValues<T>> {
+/** Get the snippet values from the array */
+function extractSnippetValues<T extends string>(data: Snippets): Partial<SnippetValues<T>> {
   if (data.length) {
     return data.reduce((acc, {name, value}) => ({...acc, [name]: value}), {});
   }
@@ -44,4 +44,4 @@ const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
   return updateSnippets;
 };
 
-export {useSnippets, getSnippetValues};
+export {useSnippets, extractSnippetValues};
