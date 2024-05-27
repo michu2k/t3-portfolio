@@ -1,11 +1,12 @@
 import React from "react";
-import type {Metadata} from "next";
-import {ensureAuthenticated} from "~/server/auth";
-import {PageHeader} from "~/components/dashboard/layouts/page-header";
-import {PageContent} from "~/components/dashboard/layouts/page-content";
-import {HeaderForm} from "~/components/dashboard/forms/header-form";
-import {getSnippetData} from "~/server/getSnippetData";
 import {SnippetType} from "@prisma/client";
+import type {Metadata} from "next";
+
+import {HeaderForm} from "~/components/dashboard/forms/header-form";
+import {PageContent} from "~/components/dashboard/layouts/page-content";
+import {PageHeader} from "~/components/dashboard/layouts/page-header";
+import {ensureAuthenticated} from "~/server/auth";
+import {getSnippetData} from "~/server/getSnippetData";
 
 export const metadata: Metadata = {
   title: "Dashboard: Header"

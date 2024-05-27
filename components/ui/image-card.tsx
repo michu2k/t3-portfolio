@@ -1,5 +1,6 @@
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+
 import {cn} from "~/utils/className";
 import type {FileObj} from "~/utils/file";
 import {convertBytesToMB} from "~/utils/file";

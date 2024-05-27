@@ -41,6 +41,7 @@ const config = {
       "error",
       {
         groups: [
+          ["server-only"],
           // Node.js builtins prefixed with `node:`.
           ["^node:"],
           // Packages.

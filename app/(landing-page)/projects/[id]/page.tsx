@@ -1,14 +1,15 @@
 import React from "react";
+import {GlobeIcon} from "lucide-react";
 import type {Metadata} from "next";
 import Image from "next/image";
 import {notFound} from "next/navigation";
-import {GlobeIcon} from "lucide-react";
-import {api} from "~/trpc/server";
+
+import {Footer} from "~/components/landing-page/footer";
 import {SubpageNavigation} from "~/components/landing-page/navigation";
 import {SocialMedia} from "~/components/landing-page/social-media";
-import {Footer} from "~/components/landing-page/footer";
-import {Heading} from "~/components/ui/heading";
 import {Button} from "~/components/ui/button";
+import {Heading} from "~/components/ui/heading";
+import {api} from "~/trpc/server";
 
 type MetadataProps = {
   params: {id: string};

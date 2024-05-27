@@ -1,22 +1,23 @@
 "use client";
 
 import React from "react";
-import {FileX2Icon} from "lucide-react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {api} from "~/trpc/react";
-import {extractSnippetValues, useSnippets} from "~/hooks/use-snippets";
-import {useToast} from "~/hooks/use-toast";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
+import {FileX2Icon} from "lucide-react";
+
 import {Button} from "~/components/ui/button";
-import {Textarea} from "~/components/ui/textarea";
+import {Dropzone} from "~/components/ui/dropzone";
+import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
 import {ImageCard} from "~/components/ui/image-card";
-import {Dropzone} from "~/components/ui/dropzone";
+import {Textarea} from "~/components/ui/textarea";
+import {extractSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import {useToast} from "~/hooks/use-toast";
+import type {Snippets} from "~/server/api/routers/snippet";
+import {api} from "~/trpc/react";
+import {acceptedImageTypes} from "~/utils/file";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
-import {acceptedImageTypes} from "~/utils/file";
-import type {Snippets} from "~/server/api/routers/snippet";
 
 const IMAGE_WIDTH = 400;
 const IMAGE_HEIGHT = 400;

@@ -1,9 +1,11 @@
 import React from "react";
 import {SnippetType} from "@prisma/client";
+
 import {extractSnippetValues} from "~/hooks/use-snippets";
-import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
-import {HeaderButtons} from "./header-buttons";
 import {getSnippetData} from "~/server/getSnippetData";
+import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
+
+import {HeaderButtons} from "./header-buttons";
 
 const Header = async () => {
   const data = await getSnippetData(SnippetType.HEADER);

@@ -1,4 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
+
 import {toastReducer} from "~/reducers/toast-reducer";
 
 const reduxStore = () =>

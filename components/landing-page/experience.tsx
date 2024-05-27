@@ -1,9 +1,11 @@
 import React from "react";
 import {format} from "date-fns";
-import {api} from "~/trpc/server";
+
 import type {ExperienceItemWithResponsibilities} from "~/server/api/routers/experience";
-import {PageSection} from "./page-section";
+import {api} from "~/trpc/server";
+
 import {Separator} from "../ui/separator";
+import {PageSection} from "./page-section";
 
 const Experience = async () => {
   const experienceItems = (await api.experience.getItems({

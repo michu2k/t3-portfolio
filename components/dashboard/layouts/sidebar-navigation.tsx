@@ -1,28 +1,29 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import {signOut, useSession} from "next-auth/react";
-import {useParams, usePathname} from "next/navigation";
 import type {LucideIcon} from "lucide-react";
 import {
-  LayoutDashboardIcon,
-  HeartIcon,
-  WallpaperIcon,
-  User2Icon,
-  ImageIcon,
   BriefcaseIcon,
-  MailIcon,
+  ExternalLinkIcon,
+  HeartIcon,
+  ImageIcon,
+  LayoutDashboardIcon,
   LogOutIcon,
-  ExternalLinkIcon
+  MailIcon,
+  User2Icon,
+  WallpaperIcon
 } from "lucide-react";
+import Link from "next/link";
+import {useParams, usePathname} from "next/navigation";
+import {signOut, useSession} from "next-auth/react";
+
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
-import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
-import {ThemeSwitch} from "~/components/ui/theme-switch";
 import {Button} from "~/components/ui/button";
 import {Separator} from "~/components/ui/separator";
-import {getUserInitials} from "~/utils/get-user-initials";
+import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
+import {ThemeSwitch} from "~/components/ui/theme-switch";
 import pkg from "~/package.json";
+import {getUserInitials} from "~/utils/get-user-initials";
 
 const navigationItems: Array<NavigationItemDef> = [
   {
