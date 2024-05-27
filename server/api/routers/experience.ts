@@ -4,7 +4,7 @@ import {z} from "zod";
 import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
 import {experienceItemSchema} from "~/utils/validations/experience";
 
-type ExperienceItemWithResponsibilities = ExperienceItem & {
+export type ExperienceItemWithResponsibilities = ExperienceItem & {
   responsibilities: Array<ExperienceItemResponsibility>;
 };
 
@@ -84,5 +84,3 @@ export const experienceRouter = createTRPCRouter({
       });
     })
 });
-
-export type {ExperienceItemWithResponsibilities};

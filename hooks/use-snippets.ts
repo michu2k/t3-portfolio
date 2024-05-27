@@ -1,5 +1,6 @@
-import type {Snippet, SnippetType} from "@prisma/client";
+import type {SnippetType} from "@prisma/client";
 import {usePathname} from "next/navigation";
+import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/react";
 import {revalidatePath} from "~/utils/revalidate-path";
 
@@ -8,7 +9,7 @@ type SnippetValues<T extends string> = {
 };
 
 /** Get the snippet values */
-function getSnippetValues<T extends string>(data: Array<Snippet>): Partial<SnippetValues<T>> {
+function getSnippetValues<T extends string>(data: Snippets): Partial<SnippetValues<T>> {
   if (data.length) {
     return data.reduce((acc, {name, value}) => ({...acc, [name]: value}), {});
   }
@@ -16,7 +17,7 @@ function getSnippetValues<T extends string>(data: Array<Snippet>): Partial<Snipp
   return {};
 }
 
-const useSnippets = <T extends string>(type: SnippetType, data: Array<Snippet>) => {
+const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
   const updateSnippet = api.snippet.updateSnippet.useMutation();
   const createSnippet = api.snippet.createSnippet.useMutation();
   const pathname = usePathname();

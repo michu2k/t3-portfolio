@@ -12,10 +12,10 @@ import {Heading} from "~/components/ui/heading";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {headerSnippetsSchema} from "~/utils/validations/header";
 import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
-import type {Snippet} from "@prisma/client";
+import type {Snippets} from "~/server/api/routers/snippet";
 
 type HeaderFormProps = {
-  snippets: Array<Snippet>;
+  snippets: Snippets;
 };
 
 const HeaderForm = ({snippets}: HeaderFormProps) => {

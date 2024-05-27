@@ -4,7 +4,6 @@ import React from "react";
 import {FileX2Icon} from "lucide-react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import type {Snippet} from "@prisma/client";
 import {api} from "~/trpc/react";
 import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
@@ -17,12 +16,13 @@ import {Dropzone} from "~/components/ui/dropzone";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
 import {acceptedImageTypes} from "~/utils/file";
+import type {Snippets} from "~/server/api/routers/snippet";
 
 const IMAGE_WIDTH = 400;
 const IMAGE_HEIGHT = 400;
 
 type AboutFormProps = {
-  snippets: Array<Snippet>;
+  snippets: Snippets;
 };
 
 const AboutForm = ({snippets}: AboutFormProps) => {

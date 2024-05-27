@@ -3,7 +3,6 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import type {Snippet} from "@prisma/client";
 import {useToast} from "~/hooks/use-toast";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Button} from "~/components/ui/button";
@@ -12,9 +11,10 @@ import {Heading} from "~/components/ui/heading";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {contactSnippetsSchema} from "~/utils/validations/contact";
 import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import type {Snippets} from "~/server/api/routers/snippet";
 
 type ContactFormProps = {
-  snippets: Array<Snippet>;
+  snippets: Snippets;
 };
 
 const ContactForm = ({snippets}: ContactFormProps) => {

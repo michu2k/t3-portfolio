@@ -7,6 +7,8 @@ import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {ContactForm} from "~/components/dashboard/forms/contact-form";
 import {ContactList} from "~/components/dashboard/lists/contact-list";
 import {Separator} from "~/components/ui/separator";
+import {getSnippetData} from "~/server/getSnippetData";
+import {SnippetType} from "@prisma/client";
 
 export const metadata: Metadata = {
   title: "Dashboard: Contact"
@@ -15,14 +17,14 @@ export const metadata: Metadata = {
 export default async function Page() {
   await ensureAuthenticated();
 
-  const snippetsData = await api.snippet.getSnippets({type: "CONTACT", keys: ["description"]});
+  const snippets = await getSnippetData(SnippetType.CONTACT);
   const contactMethods = await api.contact.getItems();
 
   return (
     <>
       <PageHeader heading="Contact" description="Contact section settings" />
       <PageContent>
-        <ContactForm snippets={snippetsData} />
+        <ContactForm snippets={snippets} />
         <Separator className="my-8" />
         <ContactList contactMethods={contactMethods} />
       </PageContent>
