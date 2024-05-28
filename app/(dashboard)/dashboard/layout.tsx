@@ -15,7 +15,7 @@ export default async function DashboardLayout({children}: {children: React.React
   return (
     <main className="min-h-full md:flex">
       <SidebarNavigation />
-      <div className="flex-1">{children}</div>
+      <div className="min-w-0 flex-1">{children}</div>
       <Toaster />
     </main>
   );
