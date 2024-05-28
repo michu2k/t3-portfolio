@@ -2,8 +2,9 @@ import {DeleteObjectCommand, GetObjectCommand, PutObjectCommand, S3Client} from 
 import {getSignedUrl} from "@aws-sdk/s3-request-presigner";
 import sharp from "sharp";
 import {v4 as uuidv4} from "uuid";
+
 import {env} from "~/env";
-import {getFileExtension, type FileObj} from "~/utils/file";
+import {type FileObj, getFileExtension} from "~/utils/file";
 
 type UploadFileOptions = {
   directory?: string;

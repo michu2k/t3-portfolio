@@ -1,5 +1,7 @@
 import {SnippetType} from "@prisma/client";
+
 import {api} from "~/trpc/server";
+
 import type {Snippets} from "./api/routers/snippet";
 
 const snippetKeys: {[key in SnippetType]: Array<string>} = {

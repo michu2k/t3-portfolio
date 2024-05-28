@@ -2,22 +2,23 @@
 
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 import {FileX2Icon} from "lucide-react";
 import {useRouter} from "next/navigation";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {api} from "~/trpc/react";
-import type {ProjectItem} from "~/server/api/routers/project";
-import {useToast} from "~/hooks/use-toast";
+
 import {Button} from "~/components/ui/button";
+import {Dropzone} from "~/components/ui/dropzone";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
+import {ImageCard} from "~/components/ui/image-card";
 import {Input} from "~/components/ui/input";
 import {Textarea} from "~/components/ui/textarea";
-import {Dropzone} from "~/components/ui/dropzone";
-import {ImageCard} from "~/components/ui/image-card";
-import type {ProjectItemFormValues} from "~/utils/validations/project";
-import {projectItemSchema} from "~/utils/validations/project";
+import {useToast} from "~/hooks/use-toast";
+import type {ProjectItem} from "~/server/api/routers/project";
+import {api} from "~/trpc/react";
 import {acceptedImageTypes} from "~/utils/file";
 import {revalidatePath} from "~/utils/revalidate-path";
+import type {ProjectItemFormValues} from "~/utils/validations/project";
+import {projectItemSchema} from "~/utils/validations/project";
 
 type ProjectItemFormProps = {
   project: ProjectItem | null;

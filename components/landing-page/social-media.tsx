@@ -1,8 +1,9 @@
 import React, {memo} from "react";
 import type {SocialMediaLink} from "@prisma/client";
+
 import {api} from "~/trpc/server";
-import {cn} from "~/utils/className";
 import {capitalize} from "~/utils/capitalize";
+import {cn} from "~/utils/className";
 import {getSocialMediaIcon} from "~/utils/get-social-media-icon";
 
 type SocialMediaProps = {

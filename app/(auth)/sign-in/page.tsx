@@ -1,9 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import {getProviders} from "next-auth/react";
-import {ensureUnAuthenticated} from "~/server/auth";
+
 import {Button} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
+import {ensureUnAuthenticated} from "~/server/auth";
+
 import {SignInProviders} from "./sign-in-providers";
 
 export default async function Page() {

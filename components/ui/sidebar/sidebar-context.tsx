@@ -1,5 +1,5 @@
-import {usePathname} from "next/navigation";
 import React, {useContext, useEffect, useState} from "react";
+import {usePathname} from "next/navigation";
 
 type SidebarContextProps = {
   isExpanded: boolean;

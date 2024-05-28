@@ -1,11 +1,13 @@
 import React from "react";
-import Image from "next/image";
 import {SnippetType} from "@prisma/client";
+import Image from "next/image";
+
 import {extractSnippetValues} from "~/hooks/use-snippets";
-import {api} from "~/trpc/server";
-import {PageSection} from "./page-section";
-import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {getSnippetData} from "~/server/getSnippetData";
+import {api} from "~/trpc/server";
+import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
+
+import {PageSection} from "./page-section";
 
 const AboutMe = async () => {
   const data = await getSnippetData(SnippetType.ABOUT_ME);

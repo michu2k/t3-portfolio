@@ -1,10 +1,11 @@
 import React from "react";
 import type {Metadata} from "next";
-import {api} from "~/trpc/server";
-import {ensureAuthenticated} from "~/server/auth";
-import {PageHeader} from "~/components/dashboard/layouts/page-header";
-import {PageContent} from "~/components/dashboard/layouts/page-content";
+
 import {ContactItemForm} from "~/components/dashboard/forms/contact-item-form";
+import {PageContent} from "~/components/dashboard/layouts/page-content";
+import {PageHeader} from "~/components/dashboard/layouts/page-header";
+import {ensureAuthenticated} from "~/server/auth";
+import {api} from "~/trpc/server";
 
 export const metadata: Metadata = {
   title: "Dashboard: Contact"

@@ -1,5 +1,7 @@
 import React from "react";
 import {TrashIcon} from "lucide-react";
+
+import {Button} from "~/components/ui/button";
 import {
   DialogClose,
   DialogContent,
@@ -8,7 +10,6 @@ import {
   DialogHeader,
   DialogTitle
 } from "~/components/ui/dialog";
-import {Button} from "~/components/ui/button";
 
 type DeleteEntityDialogProps = {
   title: string;

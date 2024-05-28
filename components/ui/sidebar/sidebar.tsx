@@ -1,12 +1,14 @@
 import type {PropsWithChildren} from "react";
 import React from "react";
-import {XIcon} from "lucide-react";
+import * as Portal from "@radix-ui/react-portal";
 import type {AnimationProps} from "framer-motion";
 import {AnimatePresence, motion} from "framer-motion";
-import * as Portal from "@radix-ui/react-portal";
+import {XIcon} from "lucide-react";
+
 import {Button} from "~/components/ui/button";
 import {useIsMobile} from "~/hooks/use-is-mobile";
 import {cn} from "~/utils/className";
+
 import {SidebarContextProvider, useSidebarContext} from "./sidebar-context";
 
 const Sidebar = ({children}: {children: React.ReactNode}) => {

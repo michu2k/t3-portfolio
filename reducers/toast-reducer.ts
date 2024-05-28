@@ -1,5 +1,6 @@
 import type {PayloadAction} from "@reduxjs/toolkit";
 import {createSlice} from "@reduxjs/toolkit";
+
 import {TOAST_LIMIT, type ToasterToast} from "~/hooks/use-toast";
 
 type ToastState = {

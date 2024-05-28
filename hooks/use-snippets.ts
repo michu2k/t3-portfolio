@@ -1,5 +1,6 @@
 import type {SnippetType} from "@prisma/client";
 import {usePathname} from "next/navigation";
+
 import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/react";
 import {revalidatePath} from "~/utils/revalidate-path";

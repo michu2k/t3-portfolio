@@ -2,8 +2,9 @@
 
 import type {PropsWithChildren} from "react";
 import React, {useState} from "react";
-import Link from "next/link";
 import {useMotionValueEvent, useScroll} from "framer-motion";
+import Link from "next/link";
+
 import {Sidebar, SidebarContent, SidebarTrigger, useSidebarContext} from "~/components/ui/sidebar";
 import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
 

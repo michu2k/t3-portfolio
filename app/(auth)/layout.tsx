@@ -1,5 +1,6 @@
 import React from "react";
 import type {Metadata} from "next";
+
 import pkg from "~/package.json";
 
 import "~/styles/globals.css";
