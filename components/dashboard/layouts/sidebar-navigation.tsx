@@ -22,6 +22,7 @@ import {Button} from "~/components/ui/button";
 import {Separator} from "~/components/ui/separator";
 import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
 import {ThemeSwitch} from "~/components/ui/theme-switch";
+import {useIsMobile} from "~/hooks/use-is-mobile";
 import pkg from "~/package.json";
 import {getUserInitials} from "~/utils/get-user-initials";
 
@@ -72,6 +73,7 @@ const navigationItems: Array<NavigationItemDef> = [
 
 const SidebarNavigation = () => {
   const {data: sessionData} = useSession();
+  const isMobile = useIsMobile();
   const {name, image, email} = sessionData?.user || {};
 
   function displayNavigationItems() {
@@ -82,7 +84,7 @@ const SidebarNavigation = () => {
     <Sidebar>
       <SidebarTrigger className="fixed left-4 top-4 z-40 md:hidden" />
 
-      <SidebarContent className="gap-6 md:gap-8">
+      <SidebarContent className="gap-6 md:gap-8" isExpandable={isMobile}>
         <div className="flex min-w-0 items-center gap-2 px-2">
           <Avatar>
             {image && <AvatarImage src={image} alt="" />}

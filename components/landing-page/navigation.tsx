@@ -66,7 +66,7 @@ const Navigation = ({navItems, isItemActive = () => false, children}: Navigation
         </nav>
       </div>
 
-      <SidebarContent className="md:hidden">
+      <SidebarContent>
         <ul className="section-container flex flex-1 flex-col gap-3">{displayNavigationItems()}</ul>
         <div className="pb-4">{children}</div>
       </SidebarContent>
