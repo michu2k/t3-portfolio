@@ -2,8 +2,9 @@
 
 import type {PropsWithChildren} from "react";
 import React, {useState} from "react";
-import Link from "next/link";
 import {useMotionValueEvent, useScroll} from "framer-motion";
+import Link from "next/link";
+
 import {Sidebar, SidebarContent, SidebarTrigger, useSidebarContext} from "~/components/ui/sidebar";
 import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
 
@@ -59,13 +60,13 @@ const Navigation = ({navItems, isItemActive = () => false, children}: Navigation
     <Sidebar>
       <div className="sticky left-0 right-0 top-0 z-40 mx-auto h-16 w-full bg-background px-4 md:h-[4.5rem] md:px-6">
         <nav className="section-container flex h-full items-center justify-between gap-4">
-          <SidebarTrigger />
+          <SidebarTrigger className="md:hidden" />
           <ul className="section-container hidden flex-1 items-center gap-8 md:flex">{displayNavigationItems()}</ul>
           {children}
         </nav>
       </div>
 
-      <SidebarContent className="md:hidden">
+      <SidebarContent>
         <ul className="section-container flex flex-1 flex-col gap-3">{displayNavigationItems()}</ul>
         <div className="pb-4">{children}</div>
       </SidebarContent>

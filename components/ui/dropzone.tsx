@@ -1,11 +1,12 @@
 import React, {Fragment, useCallback} from "react";
-import {UploadCloudIcon} from "lucide-react";
 import type {Accept} from "react-dropzone";
 import {useDropzone} from "react-dropzone";
+import {UploadCloudIcon} from "lucide-react";
+
 import {Button} from "~/components/ui/button";
-import type {FileObj} from "~/utils/file";
-import {MAX_FILE_SIZE, convertBytesToMB, transformFileToFileObj} from "~/utils/file";
 import {cn} from "~/utils/className";
+import type {FileObj} from "~/utils/file";
+import {convertBytesToMB, MAX_FILE_SIZE, transformFileToFileObj} from "~/utils/file";
 
 type DropzoneProps = {
   name: string;

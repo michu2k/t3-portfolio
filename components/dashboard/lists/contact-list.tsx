@@ -2,17 +2,18 @@
 
 import React, {useState} from "react";
 import type {ContactMethod} from "@prisma/client";
+import {EllipsisIcon, PencilIcon, PlusIcon, TrashIcon} from "lucide-react";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {PlusIcon, PencilIcon, TrashIcon, EllipsisIcon} from "lucide-react";
-import {api} from "~/trpc/react";
-import {useToast} from "~/hooks/use-toast";
-import {Dialog, DialogTrigger} from "~/components/ui/dialog";
-import {Button} from "~/components/ui/button";
-import {EmptySection} from "~/components/ui/empty-section";
+
 import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
+import {Button} from "~/components/ui/button";
+import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
+import {EmptySection} from "~/components/ui/empty-section";
 import {Heading} from "~/components/ui/heading";
+import {useToast} from "~/hooks/use-toast";
+import {api} from "~/trpc/react";
 import {revalidatePath} from "~/utils/revalidate-path";
 
 type ContactListProps = {

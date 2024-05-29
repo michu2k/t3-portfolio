@@ -1,16 +1,21 @@
 import type {PropsWithChildren} from "react";
 import React from "react";
-import {XIcon} from "lucide-react";
+import * as Portal from "@radix-ui/react-portal";
 import type {AnimationProps} from "framer-motion";
 import {AnimatePresence, motion} from "framer-motion";
-import * as Portal from "@radix-ui/react-portal";
+import {XIcon} from "lucide-react";
+
 import {Button} from "~/components/ui/button";
-import {useIsMobile} from "~/hooks/use-is-mobile";
 import {cn} from "~/utils/className";
+
 import {SidebarContextProvider, useSidebarContext} from "./sidebar-context";
 
-const Sidebar = ({children}: {children: React.ReactNode}) => {
-  return <SidebarContextProvider>{children}</SidebarContextProvider>;
+type SidebarProps = PropsWithChildren<{
+  isExpandable?: boolean;
+}>;
+
+const Sidebar = ({children, isExpandable}: SidebarProps) => {
+  return <SidebarContextProvider isExpandable={isExpandable}>{children}</SidebarContextProvider>;
 };
 
 type SidebarOverlayProps = {
@@ -47,8 +52,7 @@ type SidebarContentProps = PropsWithChildren<{
 }>;
 
 const SidebarContent = React.forwardRef<HTMLElement, SidebarContentProps>(({children, className}, ref) => {
-  const {isExpanded, toggleSidebar} = useSidebarContext();
-  const isMobile = useIsMobile();
+  const {isExpanded, isExpandable, toggleSidebar} = useSidebarContext();
 
   const contentAnimation: AnimationProps = {
     transition: {duration: 0.25, ease: "easeInOut"},
@@ -58,11 +62,11 @@ const SidebarContent = React.forwardRef<HTMLElement, SidebarContentProps>(({chil
   };
 
   const sidebarClassName = cn(
-    "flex flex-col h-full py-10 px-4 bg-background border-r-[1px] border-muted w-full max-w-[18rem] md:w-72 md:h-screen z-50 top-0 fixed md:sticky",
+    "flex shrink-0 gap-6 md:gap-8 flex-col h-full py-10 px-4 bg-background border-r-[1px] border-muted w-full max-w-[18rem] md:w-72 md:h-screen z-50 top-0 fixed",
     className
   );
 
-  if (isMobile) {
+  if (isExpandable) {
     return (
       <AnimatePresence>
         {isExpanded && (
@@ -83,8 +87,9 @@ const SidebarContent = React.forwardRef<HTMLElement, SidebarContentProps>(({chil
     );
   }
 
+  // If a sidebar is not expandable (i.e. it's defined as static), it will be visible only on the desktop
   return (
-    <aside ref={ref} className={sidebarClassName}>
+    <aside ref={ref} className={cn(sidebarClassName, "hidden md:sticky md:flex")}>
       {children}
     </aside>
   );
@@ -113,7 +118,7 @@ const SidebarTrigger = React.forwardRef<HTMLButtonElement, SidebarTriggerProps>(
       <button
         ref={ref}
         onClick={handleBtnClick}
-        className={cn("relative flex h-8 w-8 shrink-0 flex-col justify-center md:hidden", className)}>
+        className={cn("relative z-40 flex h-8 w-8 shrink-0 flex-col justify-center", className)}>
         <span className={cn(outerLineStyles, "mb-2")} />
         <span className={innerLineStyles} />
         <span className={cn(outerLineStyles, "mt-2")} />

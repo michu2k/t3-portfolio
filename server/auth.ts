@@ -1,8 +1,9 @@
-import {getServerSession, type NextAuthOptions, type DefaultSession} from "next-auth";
 import {PrismaAdapter} from "@auth/prisma-adapter";
 import {redirect} from "next/navigation";
-import GoogleProvider from "next-auth/providers/google";
+import {type DefaultSession, getServerSession, type NextAuthOptions} from "next-auth";
 import type {Adapter} from "next-auth/adapters";
+import GoogleProvider from "next-auth/providers/google";
+
 import {env} from "~/env";
 import {prisma} from "~/server/db";
 

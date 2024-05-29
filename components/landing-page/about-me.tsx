@@ -1,14 +1,18 @@
 import React from "react";
+import {SnippetType} from "@prisma/client";
 import Image from "next/image";
-import {getSnippetValues} from "~/hooks/use-snippets";
+
+import {extractSnippetValues} from "~/hooks/use-snippets";
+import {getSnippetData} from "~/server/getSnippetData";
 import {api} from "~/trpc/server";
-import {PageSection} from "./page-section";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 
-const AboutMe = async () => {
-  const data = await api.snippet.getSnippets({type: "ABOUT_ME", keys: ["description", "image"]});
+import {PageSection} from "./page-section";
 
-  const snippetValues = getSnippetValues<keyof AboutMeSnippetsFormValues>(data);
+const AboutMe = async () => {
+  const data = await getSnippetData(SnippetType.ABOUT_ME);
+
+  const snippetValues = extractSnippetValues<keyof AboutMeSnippetsFormValues>(data);
   const {description = "", image: imageId} = snippetValues;
 
   const imageObj = imageId ? await api.image.getImage({key: imageId}) : null;

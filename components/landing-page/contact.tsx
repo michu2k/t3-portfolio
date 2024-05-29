@@ -1,16 +1,19 @@
 import React from "react";
-import type {ContactMethod} from "@prisma/client";
-import {getSnippetValues} from "~/hooks/use-snippets";
+import {type ContactMethod, SnippetType} from "@prisma/client";
+
+import {extractSnippetValues} from "~/hooks/use-snippets";
+import {getSnippetData} from "~/server/getSnippetData";
 import {api} from "~/trpc/server";
-import {PageSection} from "./page-section";
-import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {getContactIcon} from "~/utils/get-contact-icon";
+import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
+
+import {PageSection} from "./page-section";
 
 const Contact = async () => {
-  const data = await api.snippet.getSnippets({type: "CONTACT", keys: ["description"]});
+  const data = await getSnippetData(SnippetType.CONTACT);
   const contactMethods = await api.contact.getItems();
 
-  const snippetValues = getSnippetValues<keyof ContactSnippetsFormValues>(data);
+  const snippetValues = extractSnippetValues<keyof ContactSnippetsFormValues>(data);
   const {description = ""} = snippetValues;
 
   function displayContactItems() {

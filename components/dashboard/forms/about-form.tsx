@@ -1,34 +1,35 @@
 "use client";
 
 import React from "react";
-import {FileX2Icon} from "lucide-react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import type {Snippet} from "@prisma/client";
-import {api} from "~/trpc/react";
-import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
-import {useToast} from "~/hooks/use-toast";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
+import {FileX2Icon} from "lucide-react";
+
 import {Button} from "~/components/ui/button";
-import {Textarea} from "~/components/ui/textarea";
+import {Dropzone} from "~/components/ui/dropzone";
+import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
 import {ImageCard} from "~/components/ui/image-card";
-import {Dropzone} from "~/components/ui/dropzone";
+import {Textarea} from "~/components/ui/textarea";
+import {extractSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import {useToast} from "~/hooks/use-toast";
+import type {Snippets} from "~/server/api/routers/snippet";
+import {api} from "~/trpc/react";
+import {acceptedImageTypes} from "~/utils/file";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
-import {acceptedImageTypes} from "~/utils/file";
 
 const IMAGE_WIDTH = 400;
 const IMAGE_HEIGHT = 400;
 
 type AboutFormProps = {
-  snippets: Array<Snippet>;
+  snippets: Snippets;
 };
 
 const AboutForm = ({snippets}: AboutFormProps) => {
   const {toast} = useToast();
   const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", snippets);
-  const {description = "", image: imageKey} = getSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
+  const {description = "", image: imageKey} = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
 
   const {data: imageObj} = api.image.getImage.useQuery({key: imageKey});
   const createImage = api.image.createImage.useMutation();
@@ -92,8 +93,8 @@ const AboutForm = ({snippets}: AboutFormProps) => {
                 <ImageCard
                   file={value}
                   actions={
-                    <Button variant="secondary" onClick={() => onChange(undefined)}>
-                      <FileX2Icon size={16} className="mr-2" />
+                    <Button variant="secondary" size="sm" onClick={() => onChange(undefined)}>
+                      <FileX2Icon size={16} />
                       Delete image
                     </Button>
                   }

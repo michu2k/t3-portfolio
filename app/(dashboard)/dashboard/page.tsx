@@ -1,12 +1,13 @@
 import React from "react";
-import type {Metadata} from "next";
 import type {LucideIcon} from "lucide-react";
-import {CodeIcon, BookTextIcon, RocketIcon} from "lucide-react";
-import {ensureAuthenticated} from "~/server/auth";
-import {PageHeader} from "~/components/dashboard/layouts/page-header";
+import {BookTextIcon, CodeIcon, RocketIcon} from "lucide-react";
+import type {Metadata} from "next";
+
 import {PageContent} from "~/components/dashboard/layouts/page-content";
+import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {Button} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
+import {ensureAuthenticated} from "~/server/auth";
 
 const projectLinks: Array<UsefulLinkDef> = [
   {

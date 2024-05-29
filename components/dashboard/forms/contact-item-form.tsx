@@ -1,21 +1,22 @@
 "use client";
 
 import React from "react";
-import {useRouter} from "next/navigation";
+import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import type {ContactMethod} from "@prisma/client";
 import {ContactMethodType} from "@prisma/client";
-import {FormProvider, useForm} from "react-hook-form";
-import {api} from "~/trpc/react";
-import {useToast} from "~/hooks/use-toast";
+import {useRouter} from "next/navigation";
+
 import {Button} from "~/components/ui/button";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
+import {useToast} from "~/hooks/use-toast";
+import {api} from "~/trpc/react";
 import {capitalize} from "~/utils/capitalize";
+import {revalidatePath} from "~/utils/revalidate-path";
 import type {ContactMethodFormValues} from "~/utils/validations/contact";
 import {contactMethodSchema} from "~/utils/validations/contact";
-import {revalidatePath} from "~/utils/revalidate-path";
 
 type ContactItemFormProps = {
   contact: ContactMethod | null;
