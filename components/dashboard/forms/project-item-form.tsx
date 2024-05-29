@@ -89,8 +89,8 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
                 <ImageCard
                   file={value}
                   actions={
-                    <Button variant="secondary" onClick={() => onChange(undefined)}>
-                      <FileX2Icon size={16} className="mr-2" />
+                    <Button variant="secondary" size="sm" onClick={() => onChange(undefined)}>
+                      <FileX2Icon size={16} />
                       Delete image
                     </Button>
                   }
@@ -142,8 +142,8 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
                 <ImageCard
                   file={value}
                   actions={
-                    <Button variant="secondary" onClick={() => onChange(undefined)}>
-                      <FileX2Icon size={16} className="mr-2" />
+                    <Button variant="secondary" size="sm" onClick={() => onChange(undefined)}>
+                      <FileX2Icon size={16} />
                       Delete image
                     </Button>
                   }
