@@ -11,10 +11,11 @@ import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/compon
 import {Heading} from "~/components/ui/heading";
 import {ImageCard} from "~/components/ui/image-card";
 import {Textarea} from "~/components/ui/textarea";
-import {extractSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
 import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/react";
+import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import {acceptedImageTypes} from "~/utils/file";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";

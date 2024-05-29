@@ -3,20 +3,8 @@ import {usePathname} from "next/navigation";
 
 import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/react";
+import type {SnippetValues} from "~/utils/extractSnippetValues";
 import {revalidatePath} from "~/utils/revalidate-path";
-
-type SnippetValues<T extends string> = {
-  [key in T]: string;
-};
-
-/** Get the snippet values from the array */
-function extractSnippetValues<T extends string>(data: Snippets): Partial<SnippetValues<T>> {
-  if (data.length) {
-    return data.reduce((acc, {name, value}) => ({...acc, [name]: value}), {});
-  }
-
-  return {};
-}
 
 const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
   const updateSnippet = api.snippet.updateSnippet.useMutation();
@@ -45,4 +33,4 @@ const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
   return updateSnippets;
 };
 
-export {useSnippets, extractSnippetValues};
+export {useSnippets};

@@ -1,9 +1,9 @@
 import React from "react";
 import {type ContactMethod, SnippetType} from "@prisma/client";
 
-import {extractSnippetValues} from "~/hooks/use-snippets";
 import {getSnippetData} from "~/server/getSnippetData";
 import {api} from "~/trpc/server";
+import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import {getContactIcon} from "~/utils/get-contact-icon";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 

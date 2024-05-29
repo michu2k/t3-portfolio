@@ -9,9 +9,10 @@ import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/compon
 import {Heading} from "~/components/ui/heading";
 import {Input} from "~/components/ui/input";
 import {Textarea} from "~/components/ui/textarea";
-import {extractSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
 import type {Snippets} from "~/server/api/routers/snippet";
+import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {headerSnippetsSchema} from "~/utils/validations/header";
 
