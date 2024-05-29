@@ -1,15 +1,21 @@
+import type {PropsWithChildren} from "react";
 import React, {useContext, useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
 
 type SidebarContextProps = {
   isExpanded: boolean;
+  isExpandable: boolean;
   toggleSidebar: () => void;
   hideSidebar: () => void;
 };
 
 const SidebarContext = React.createContext({} as SidebarContextProps);
 
-const SidebarContextProvider = ({children}: {children: React.ReactNode}) => {
+type SidebarContextProviderProps = PropsWithChildren<{
+  isExpandable?: boolean;
+}>;
+
+const SidebarContextProvider = ({children, isExpandable = true}: SidebarContextProviderProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const pathname = usePathname();
 
@@ -21,7 +27,7 @@ const SidebarContextProvider = ({children}: {children: React.ReactNode}) => {
     setIsExpanded(false);
   }
 
-  const value = {isExpanded, toggleSidebar, hideSidebar};
+  const value = {isExpanded, isExpandable, toggleSidebar, hideSidebar};
 
   useEffect(() => {
     hideSidebar();

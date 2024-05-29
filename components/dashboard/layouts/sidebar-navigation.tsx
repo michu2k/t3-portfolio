@@ -81,10 +81,10 @@ const SidebarNavigation = () => {
   }
 
   return (
-    <Sidebar>
-      <SidebarTrigger className="fixed left-4 top-4 z-40 md:hidden" />
+    <Sidebar isExpandable={isMobile}>
+      <SidebarTrigger className="fixed left-4 top-4 md:hidden" />
 
-      <SidebarContent className="gap-6 md:gap-8" isExpandable={isMobile}>
+      <SidebarContent>
         <div className="flex min-w-0 items-center gap-2 px-2">
           <Avatar>
             {image && <AvatarImage src={image} alt="" />}
@@ -92,10 +92,8 @@ const SidebarNavigation = () => {
           </Avatar>
 
           <div className="min-w-0">
-            <p className="overflow-hidden text-ellipsis whitespace-nowrap font-poppins text-sm font-medium text-foreground">
-              {name}
-            </p>
-            <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs text-muted-foreground">{email}</p>
+            <p className="truncate font-poppins text-sm font-medium text-foreground">{name}</p>
+            <p className="truncate text-xs text-muted-foreground">{email}</p>
           </div>
         </div>
 
