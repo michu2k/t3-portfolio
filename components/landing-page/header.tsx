@@ -1,8 +1,8 @@
 import React from "react";
 import {SnippetType} from "@prisma/client";
 
-import {extractSnippetValues} from "~/hooks/use-snippets";
 import {getSnippetData} from "~/server/getSnippetData";
+import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 
 import {HeaderButtons} from "./header-buttons";

@@ -2,9 +2,9 @@ import React from "react";
 import {SnippetType} from "@prisma/client";
 import Image from "next/image";
 
-import {extractSnippetValues} from "~/hooks/use-snippets";
 import {getSnippetData} from "~/server/getSnippetData";
 import {api} from "~/trpc/server";
+import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 
 import {PageSection} from "./page-section";

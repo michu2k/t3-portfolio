@@ -8,9 +8,10 @@ import {Button} from "~/components/ui/button";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
 import {Textarea} from "~/components/ui/textarea";
-import {extractSnippetValues, useSnippets} from "~/hooks/use-snippets";
+import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
 import type {Snippets} from "~/server/api/routers/snippet";
+import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {contactSnippetsSchema} from "~/utils/validations/contact";
 
