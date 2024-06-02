@@ -135,10 +135,7 @@ const NavigationItem = ({href, text, isActive}: NavigationItemProps) => {
       <Link
         href={href}
         onClick={handleNavigationItemClick}
-        className={`block py-1.5 font-poppins text-sm font-medium leading-8
-          ${isActive ? "text-accent-foreground" : "text-muted-foreground"}
-          transition-colors hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400
-          focus-visible:ring-offset-2`}>
+        className={`block py-1.5 font-poppins text-sm font-medium leading-8 ${isActive ? "text-accent-foreground" : "text-muted-foreground"} transition-colors hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2`}>
         {text}
       </Link>
     </li>
