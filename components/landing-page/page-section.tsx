@@ -2,6 +2,7 @@ import type {PropsWithChildren} from "react";
 import React from "react";
 
 import {Heading} from "~/components/ui/heading";
+import {MotionInViewWrapper} from "~/components/ui/motion-in-view-wrapper";
 import {cn} from "~/utils/className";
 
 type PageSectionProps = PropsWithChildren<{
@@ -17,9 +18,12 @@ const PageSection = ({id, heading, subheading, className, children}: PageSection
       <div className="section-container">
         <div className="flex flex-col gap-2 pb-14">
           <p className="font-poppins text-xl font-normal text-primary">/ {subheading}</p>
-          <Heading as="h2" size="2xl">
-            {heading}
-          </Heading>
+
+          <MotionInViewWrapper initial={{opacity: 0, x: 20}} whileInView={{opacity: 1, x: 0}}>
+            <Heading as="h2" size="2xl">
+              {heading}
+            </Heading>
+          </MotionInViewWrapper>
         </div>
 
         {children}

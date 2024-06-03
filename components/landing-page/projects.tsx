@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import {MotionInViewWrapper} from "~/components/ui/motion-in-view-wrapper";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {api} from "~/trpc/server";
 
@@ -27,7 +28,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
   return (
     <article className="group w-auto shrink-0 sm:even:mt-20">
       <Link href={projectUrl} className="flex flex-col gap-6">
-        <div className="relative h-48 w-full shrink-0 overflow-hidden lg:h-80">
+        <MotionInViewWrapper className="relative h-48 w-full shrink-0 overflow-hidden lg:h-80">
           <Image
             src={coverImage.url}
             fill
@@ -36,7 +37,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
             sizes="(min-width: 640px) 50vw, 100vw"
             alt={`${name} preview`}
           />
-        </div>
+        </MotionInViewWrapper>
 
         <div className="flex h-full w-full flex-1 flex-col gap-2">
           <p className="font-poppins text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
