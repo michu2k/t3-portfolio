@@ -9,7 +9,30 @@ export type Snippets = Array<Pick<Snippet, "id" | "name" | "value">>;
 
 // prettier-ignore
 export const snippetRouter = createTRPCRouter({
-  getSnippets: publicProcedure
+  getAllSnippets: publicProcedure
+    .query(async ({ctx}) => {
+      const snippets = await ctx.prisma.snippet.findMany({
+        select: {
+          id: true,
+          name: true,
+          value: true,
+          type: true
+        }
+      });
+
+      // Group snippets by type
+      const groupedSnippets = snippets.reduce<{[key in SnippetType]: Snippets}>((acc, {type, ...snippet}) => (
+        {...acc, [type]: [...acc[type] || [], snippet]}
+      ), {
+        [SnippetType.HEADER]: [],
+        [SnippetType.ABOUT_ME]: [],
+        [SnippetType.CONTACT]: []
+      });
+
+      return groupedSnippets;
+    }),
+
+  getSnippetsByType: publicProcedure
     .input(z.object({
       type: z.nativeEnum(SnippetType),
       keys: z.array(z.string())
