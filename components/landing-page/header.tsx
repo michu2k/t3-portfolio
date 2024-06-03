@@ -1,17 +1,18 @@
 import React from "react";
-import {SnippetType} from "@prisma/client";
 
 import {MotionInViewWrapper} from "~/components/ui/motion-in-view-wrapper";
-import {getSnippetData} from "~/server/getSnippetData";
+import type {Snippets} from "~/server/api/routers/snippet";
 import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 
 import {HeaderButtons} from "./header-buttons";
 
-const Header = async () => {
-  const data = await getSnippetData(SnippetType.HEADER);
+type HeaderProps = {
+  snippets: Snippets;
+};
 
-  const snippetValues = extractSnippetValues<keyof HeaderSnippetsFormValues>(data);
+const Header = async ({snippets}: HeaderProps) => {
+  const snippetValues = extractSnippetValues<keyof HeaderSnippetsFormValues>(snippets);
   const {heading = "", description = ""} = snippetValues;
 
   return (
