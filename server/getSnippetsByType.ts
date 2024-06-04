@@ -10,8 +10,8 @@ const snippetKeys: {[key in SnippetType]: Array<string>} = {
   [SnippetType.CONTACT]: ["description"]
 };
 
-async function getSnippetData(type: SnippetType): Promise<Snippets> {
+async function getSnippetsByType(type: SnippetType): Promise<Snippets> {
   return await api.snippet.getSnippetsByType({type, keys: snippetKeys[type]});
 }
 
-export {getSnippetData};
+export {getSnippetsByType};
