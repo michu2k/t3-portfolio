@@ -1,10 +1,10 @@
-name: Build Next.js project
+name: Check Next.js project
 
 on: pull_request
 
 jobs:
-  build:
-    name: Build project
+  check:
+    name: Check project
     runs-on: ubuntu-latest
 
     env:
@@ -26,15 +26,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Use pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 8
 
       - name: Cache dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ github.workspace }}/.next/cache
           # Generate a new cache whenever packages or source files change.
@@ -47,11 +47,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Check Typescript errors
+        run: pnpm run ts:check
+
       - name: Check ESLint errors
         run: pnpm run lint:check
 
       - name: Check Prettier errors
         run: pnpm run format:check
-
-      - name: Build
-        run: pnpm run build

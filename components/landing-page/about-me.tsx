@@ -1,23 +1,29 @@
 import React from "react";
 import Image from "next/image";
-import {getSnippetValues} from "~/hooks/use-snippets";
+
+import {MotionInViewWrapper} from "~/components/ui/motion-in-view-wrapper";
+import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/server";
-import {PageSection} from "./page-section";
+import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 
-const AboutMe = async () => {
-  const data = await api.snippet.getSnippets.query({type: "ABOUT_ME", keys: ["description", "image"]});
+import {PageSection} from "./page-section";
 
-  const snippetValues = getSnippetValues<keyof AboutMeSnippetsFormValues>(data);
+type AboutMeProps = {
+  snippets: Snippets;
+};
+
+const AboutMe = async ({snippets}: AboutMeProps) => {
+  const snippetValues = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
   const {description = "", image: imageId} = snippetValues;
 
-  const imageObj = imageId ? await api.image.getImage.query({key: imageId}) : null;
+  const imageObj = imageId ? await api.image.getImage({key: imageId}) : null;
 
   return (
     <PageSection id="about" heading="Personal Details" subheading="About Me">
       <div className="flex flex-col gap-14 sm:flex-row sm:items-center">
         {imageObj ? (
-          <div className="relative my-auto h-80 w-full flex-shrink-0 sm:w-64 md:h-96 md:w-80">
+          <MotionInViewWrapper className="relative my-auto h-80 w-full flex-shrink-0 sm:w-64 md:h-96 md:w-80">
             <div className="relative h-full w-full overflow-hidden">
               <Image
                 src={imageObj.url}
@@ -28,7 +34,7 @@ const AboutMe = async () => {
                 alt=""
               />
             </div>
-          </div>
+          </MotionInViewWrapper>
         ) : null}
 
         <p className="text-lg leading-8 text-muted-foreground">{description}</p>

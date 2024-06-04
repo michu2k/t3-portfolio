@@ -1,6 +1,7 @@
 import * as React from "react";
-import {ChevronLeftIcon, ChevronRightIcon} from "lucide-react";
 import {DayPicker} from "react-day-picker";
+import {ChevronLeftIcon, ChevronRightIcon} from "lucide-react";
+
 import {cn} from "~/utils/className";
 
 const Calendar = ({classNames, ...props}: React.ComponentProps<typeof DayPicker>) => {

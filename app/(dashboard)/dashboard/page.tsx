@@ -1,11 +1,13 @@
 import React from "react";
-import type {Metadata} from "next";
 import type {LucideIcon} from "lucide-react";
-import {CodeIcon, BookTextIcon, RocketIcon} from "lucide-react";
-import {PageHeader} from "~/components/dashboard/layouts/page-header";
+import {BookTextIcon, CodeIcon, RocketIcon} from "lucide-react";
+import type {Metadata} from "next";
+
 import {PageContent} from "~/components/dashboard/layouts/page-content";
+import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {Button} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
+import {ensureAuthenticated} from "~/server/auth";
 
 const projectLinks: Array<UsefulLinkDef> = [
   {
@@ -35,7 +37,9 @@ export const metadata: Metadata = {
   title: "Dashboard: General"
 };
 
-export default function Page() {
+export default async function Page() {
+  await ensureAuthenticated();
+
   function displayLinks() {
     return projectLinks.map((item) => <LinkCard key={item.id} {...item} />);
   }

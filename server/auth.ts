@@ -1,6 +1,9 @@
-import {getServerSession, type NextAuthOptions, type DefaultSession} from "next-auth";
+import {PrismaAdapter} from "@auth/prisma-adapter";
+import {redirect} from "next/navigation";
+import {type DefaultSession, getServerSession, type NextAuthOptions} from "next-auth";
+import type {Adapter} from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
-import {PrismaAdapter} from "@next-auth/prisma-adapter";
+
 import {env} from "~/env";
 import {prisma} from "~/server/db";
 
@@ -42,7 +45,7 @@ export const authOptions: NextAuthOptions = {
       }
     })
   },
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
@@ -62,3 +65,25 @@ export const authOptions: NextAuthOptions = {
  * @see https://next-auth.js.org/configuration/nextjs
  */
 export const getServerAuthSession = () => getServerSession(authOptions);
+
+/**
+ * Make sure the user is authenticated to visit the page.
+ */
+export async function ensureAuthenticated() {
+  const session = await getServerAuthSession();
+
+  if (!session?.user) {
+    redirect("/sign-in");
+  }
+}
+
+/**
+ * Make sure the user is non authenticated to visit the page.
+ */
+export async function ensureUnAuthenticated() {
+  const session = await getServerAuthSession();
+
+  if (session?.user) {
+    redirect("/dashboard");
+  }
+}

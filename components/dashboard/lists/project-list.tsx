@@ -1,19 +1,20 @@
 "use client";
 
 import React, {useState} from "react";
-import Link from "next/link";
+import {EllipsisIcon, ExternalLinkIcon, PencilIcon, PlusIcon, TrashIcon} from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import {usePathname} from "next/navigation";
-import {PlusIcon, PencilIcon, TrashIcon, EllipsisIcon, ExternalLinkIcon} from "lucide-react";
+
+import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
+import {Button} from "~/components/ui/button";
+import {Dialog, DialogTrigger} from "~/components/ui/dialog";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
+import {EmptySection} from "~/components/ui/empty-section";
+import {Heading} from "~/components/ui/heading";
+import {useToast} from "~/hooks/use-toast";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {api} from "~/trpc/react";
-import {useToast} from "~/hooks/use-toast";
-import {Button} from "~/components/ui/button";
-import {Heading} from "~/components/ui/heading";
-import {EmptySection} from "~/components/ui/empty-section";
-import {Dialog, DialogTrigger} from "~/components/ui/dialog";
-import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
 import {revalidatePath} from "~/utils/revalidate-path";
 
 type ProjectListProps = {

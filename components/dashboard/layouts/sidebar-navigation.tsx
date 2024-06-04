@@ -1,28 +1,30 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
-import {signOut, useSession} from "next-auth/react";
-import {useParams, usePathname} from "next/navigation";
 import type {LucideIcon} from "lucide-react";
 import {
-  LayoutDashboardIcon,
-  HeartIcon,
-  WallpaperIcon,
-  User2Icon,
-  ImageIcon,
   BriefcaseIcon,
-  MailIcon,
+  ExternalLinkIcon,
+  HeartIcon,
+  ImageIcon,
+  LayoutDashboardIcon,
   LogOutIcon,
-  ExternalLinkIcon
+  MailIcon,
+  User2Icon,
+  WallpaperIcon
 } from "lucide-react";
+import Link from "next/link";
+import {useParams, usePathname} from "next/navigation";
+import {signOut, useSession} from "next-auth/react";
+
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
-import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
-import {ThemeSwitch} from "~/components/ui/theme-switch";
 import {Button} from "~/components/ui/button";
 import {Separator} from "~/components/ui/separator";
-import {getUserInitials} from "~/utils/get-user-initials";
+import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
+import {ThemeSwitch} from "~/components/ui/theme-switch";
+import {useIsMobile} from "~/hooks/use-is-mobile";
 import pkg from "~/package.json";
+import {getUserInitials} from "~/utils/get-user-initials";
 
 const navigationItems: Array<NavigationItemDef> = [
   {
@@ -71,6 +73,7 @@ const navigationItems: Array<NavigationItemDef> = [
 
 const SidebarNavigation = () => {
   const {data: sessionData} = useSession();
+  const isMobile = useIsMobile();
   const {name, image, email} = sessionData?.user || {};
 
   function displayNavigationItems() {
@@ -78,10 +81,10 @@ const SidebarNavigation = () => {
   }
 
   return (
-    <Sidebar>
-      <SidebarTrigger className="fixed left-4 top-4 z-40 md:hidden" />
+    <Sidebar isExpandable={isMobile}>
+      <SidebarTrigger className="fixed left-4 top-4 md:hidden" />
 
-      <SidebarContent className="gap-6 md:gap-8">
+      <SidebarContent>
         <div className="flex min-w-0 items-center gap-2 px-2">
           <Avatar>
             {image && <AvatarImage src={image} alt="" />}
@@ -89,10 +92,8 @@ const SidebarNavigation = () => {
           </Avatar>
 
           <div className="min-w-0">
-            <p className="overflow-hidden text-ellipsis whitespace-nowrap font-poppins text-sm font-medium text-foreground">
-              {name}
-            </p>
-            <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xs text-muted-foreground">{email}</p>
+            <p className="truncate font-poppins text-sm font-medium text-foreground">{name}</p>
+            <p className="truncate text-xs text-muted-foreground">{email}</p>
           </div>
         </div>
 
@@ -144,11 +145,7 @@ const NavigationItem = ({text, href, icon: Icon}: NavigationItemDef) => {
     <li>
       <Link
         href={href}
-        className={`
-          flex items-center gap-3 rounded-lg px-3 py-2.5 font-poppins text-sm font-medium leading-5
-          ${isActive ? "text-primary" : "text-foreground"}
-          transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2
-        `}>
+        className={`flex items-center gap-3 rounded-lg px-3 py-2.5 font-poppins text-sm font-medium leading-5 ${isActive ? "text-primary" : "text-foreground"} transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2`}>
         <Icon size={16} />
         {text}
       </Link>

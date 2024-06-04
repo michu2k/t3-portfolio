@@ -1,16 +1,23 @@
 import React from "react";
-import type {ContactMethod} from "@prisma/client";
-import {getSnippetValues} from "~/hooks/use-snippets";
+import {type ContactMethod} from "@prisma/client";
+
+import {MotionInViewWrapper} from "~/components/ui/motion-in-view-wrapper";
+import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/server";
-import {PageSection} from "./page-section";
-import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
+import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import {getContactIcon} from "~/utils/get-contact-icon";
+import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 
-const Contact = async () => {
-  const data = await api.snippet.getSnippets.query({type: "CONTACT", keys: ["description"]});
-  const contactMethods = await api.contact.getItems.query();
+import {PageSection} from "./page-section";
 
-  const snippetValues = getSnippetValues<keyof ContactSnippetsFormValues>(data);
+type ContactProps = {
+  snippets: Snippets;
+};
+
+const Contact = async ({snippets}: ContactProps) => {
+  const contactMethods = await api.contact.getItems();
+
+  const snippetValues = extractSnippetValues<keyof ContactSnippetsFormValues>(snippets);
   const {description = ""} = snippetValues;
 
   function displayContactItems() {
@@ -29,13 +36,15 @@ const ContactMethodListItem = ({name, description, type}: ContactMethod) => {
   const Icon = getContactIcon(type);
 
   return (
-    <li className="group flex items-center gap-6">
-      <Icon className="h-5 w-5 fill-accent-foreground transition-colors group-hover:fill-primary" />
+    <li className="group flex items-center">
+      <MotionInViewWrapper className="flex items-center gap-6">
+        <Icon className="h-5 w-5 fill-accent-foreground transition-colors group-hover:fill-primary" />
 
-      <div className="flex-1">
-        <p className="font-poppins text-base font-semibold leading-7 text-foreground">{name}</p>
-        <p className="text-sm leading-7 text-muted-foreground">{description}</p>
-      </div>
+        <div className="flex-1">
+          <p className="font-poppins text-base font-semibold leading-7 text-foreground">{name}</p>
+          <p className="text-sm leading-7 text-muted-foreground">{description}</p>
+        </div>
+      </MotionInViewWrapper>
     </li>
   );
 };

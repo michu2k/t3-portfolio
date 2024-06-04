@@ -1,8 +1,9 @@
 import React, {memo} from "react";
 import type {SocialMediaLink} from "@prisma/client";
+
 import {api} from "~/trpc/server";
-import {cn} from "~/utils/className";
 import {capitalize} from "~/utils/capitalize";
+import {cn} from "~/utils/className";
 import {getSocialMediaIcon} from "~/utils/get-social-media-icon";
 
 type SocialMediaProps = {
@@ -10,7 +11,7 @@ type SocialMediaProps = {
 };
 
 const SocialMedia = memo(async ({className}: SocialMediaProps) => {
-  const socialMediaItems = await api.socialMedia.getItems.query();
+  const socialMediaItems = await api.socialMedia.getItems();
 
   function displaySocialMediaIcons() {
     return socialMediaItems.map((item) => <SocialMediaItem key={item.id} {...item} />);

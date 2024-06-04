@@ -1,22 +1,27 @@
 import React from "react";
+import {SnippetType} from "@prisma/client";
 import type {Metadata} from "next";
+
 import {AboutForm} from "~/components/dashboard/forms/about-form";
-import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
-import {api} from "~/trpc/server";
+import {PageHeader} from "~/components/dashboard/layouts/page-header";
+import {ensureAuthenticated} from "~/server/auth";
+import {getSnippetsByType} from "~/server/getSnippetsByType";
 
 export const metadata: Metadata = {
   title: "Dashboard: About Me"
 };
 
 export default async function Page() {
-  const snippetsData = await api.snippet.getSnippets.query({type: "ABOUT_ME", keys: ["description", "image"]});
+  await ensureAuthenticated();
+
+  const snippets = await getSnippetsByType(SnippetType.ABOUT_ME);
 
   return (
     <>
       <PageHeader heading="About" description="About section settings" />
       <PageContent>
-        <AboutForm snippets={snippetsData} />
+        <AboutForm snippets={snippets} />
       </PageContent>
     </>
   );

@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import {useSearchParams} from "next/navigation";
+
 import {Button} from "~/components/ui/button";
 import {Heading} from "~/components/ui/heading";
 
@@ -13,10 +13,14 @@ const errors = {
   default: "Unable to sign in. Try again later."
 };
 
-export default function Page() {
-  const searchParams = useSearchParams();
+type PageProps = {
+  searchParams: {
+    error?: string;
+  };
+};
 
-  const error = searchParams.get("error");
+export default function Page({searchParams}: PageProps) {
+  const error = searchParams.error;
   const heading = error && Object.keys(errors).includes(error) ? error : "Error";
   const description = (error && errors[error as keyof typeof errors]) ?? errors.default;
 

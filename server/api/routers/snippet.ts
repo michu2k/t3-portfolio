@@ -1,19 +1,50 @@
+import type {Snippet} from "@prisma/client";
 import {SnippetType} from "@prisma/client";
 import {z} from "zod";
 
 import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
 import {snippetSchema} from "~/utils/validations/snippet";
 
+export type Snippets = Array<Pick<Snippet, "id" | "name" | "value">>;
+
 // prettier-ignore
 export const snippetRouter = createTRPCRouter({
-  getSnippets: publicProcedure
+  getAllSnippets: publicProcedure
+    .query(async ({ctx}) => {
+      const snippets = await ctx.prisma.snippet.findMany({
+        select: {
+          id: true,
+          name: true,
+          value: true,
+          type: true
+        }
+      });
+
+      // Group snippets by type
+      const groupedSnippets = snippets.reduce<{[key in SnippetType]: Snippets}>((acc, {type, ...snippet}) => (
+        {...acc, [type]: [...acc[type] || [], snippet]}
+      ), {
+        [SnippetType.HEADER]: [],
+        [SnippetType.ABOUT_ME]: [],
+        [SnippetType.CONTACT]: []
+      });
+
+      return groupedSnippets;
+    }),
+
+  getSnippetsByType: publicProcedure
     .input(z.object({
       type: z.nativeEnum(SnippetType),
       keys: z.array(z.string())
     }))
     .query(async ({ctx, input: {type, keys}}) => {
       return await ctx.prisma.snippet.findMany({
-        where: {AND: {type, name: {in: keys}}}
+        where: {AND: {type, name: {in: keys}}},
+        select: {
+          id: true,
+          name: true,
+          value: true
+        }
       });
     }),
 

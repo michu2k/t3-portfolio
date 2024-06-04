@@ -49,8 +49,8 @@ NEXTAUTH_URL=
 - Google provider keys required to login to the dashboard via Google account. [Google 0Auth Documentation](https://developers.google.com/identity/protocols/oauth2)
 
 ```
-GOOGLE_CLIENT_ID =
-GOOGLE_CLIENT_SECRET =
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 ```
 
 - AWS variables required to support uploading images to S3. [AWS S3 Documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html). More information on how to configure the AWS services are available [here](./AWS-SETUP.md).
@@ -74,4 +74,4 @@ Follow the deployment guides for [Vercel](https://create.t3.gg/en/deployment/ver
 
 ## License
 
-This project is under the MIT license
+This project is under the MIT license.

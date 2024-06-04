@@ -3,25 +3,27 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useToast} from "~/hooks/use-toast";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
-import {Input} from "~/components/ui/input";
+
 import {Button} from "~/components/ui/button";
-import {Textarea} from "~/components/ui/textarea";
+import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
+import {Input} from "~/components/ui/input";
+import {Textarea} from "~/components/ui/textarea";
+import {useSnippets} from "~/hooks/use-snippets";
+import {useToast} from "~/hooks/use-toast";
+import type {Snippets} from "~/server/api/routers/snippet";
+import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {headerSnippetsSchema} from "~/utils/validations/header";
-import {getSnippetValues, useSnippets} from "~/hooks/use-snippets";
-import type {Snippet} from "@prisma/client";
 
 type HeaderFormProps = {
-  snippets: Array<Snippet>;
+  snippets: Snippets;
 };
 
 const HeaderForm = ({snippets}: HeaderFormProps) => {
   const {toast} = useToast();
   const updateSnippets = useSnippets<keyof HeaderSnippetsFormValues>("HEADER", snippets);
-  const {heading = "", description = ""} = getSnippetValues<keyof HeaderSnippetsFormValues>(snippets);
+  const {heading = "", description = ""} = extractSnippetValues<keyof HeaderSnippetsFormValues>(snippets);
 
   const formMethods = useForm<HeaderSnippetsFormValues>({
     defaultValues: {
