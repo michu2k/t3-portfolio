@@ -25,7 +25,7 @@ const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
     });
 
     await Promise.all(promises).then(async () => {
-      await utils.snippet.getSnippets.invalidate();
+      await utils.snippet.getSnippetsByType.invalidate();
       revalidatePath(pathname);
     });
   }

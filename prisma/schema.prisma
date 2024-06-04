@@ -87,8 +87,6 @@ model Snippet {
 enum SnippetType {
     HEADER
     ABOUT_ME
-    PROJECTS
-    EXPERIENCE
     CONTACT
 }
 

@@ -8,7 +8,7 @@ import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {ContactList} from "~/components/dashboard/lists/contact-list";
 import {Separator} from "~/components/ui/separator";
 import {ensureAuthenticated} from "~/server/auth";
-import {getSnippetData} from "~/server/getSnippetData";
+import {getSnippetsByType} from "~/server/getSnippetsByType";
 import {api} from "~/trpc/server";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   await ensureAuthenticated();
 
-  const snippets = await getSnippetData(SnippetType.CONTACT);
+  const snippets = await getSnippetsByType(SnippetType.CONTACT);
   const contactMethods = await api.contact.getItems();
 
   return (

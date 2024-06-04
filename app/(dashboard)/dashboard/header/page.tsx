@@ -6,7 +6,7 @@ import {HeaderForm} from "~/components/dashboard/forms/header-form";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {ensureAuthenticated} from "~/server/auth";
-import {getSnippetData} from "~/server/getSnippetData";
+import {getSnippetsByType} from "~/server/getSnippetsByType";
 
 export const metadata: Metadata = {
   title: "Dashboard: Header"
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default async function Page() {
   await ensureAuthenticated();
 
-  const snippets = await getSnippetData(SnippetType.HEADER);
+  const snippets = await getSnippetsByType(SnippetType.HEADER);
 
   return (
     <>

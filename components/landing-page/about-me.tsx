@@ -1,19 +1,20 @@
 import React from "react";
-import {SnippetType} from "@prisma/client";
 import Image from "next/image";
 
 import {MotionInViewWrapper} from "~/components/ui/motion-in-view-wrapper";
-import {getSnippetData} from "~/server/getSnippetData";
+import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/server";
 import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 
 import {PageSection} from "./page-section";
 
-const AboutMe = async () => {
-  const data = await getSnippetData(SnippetType.ABOUT_ME);
+type AboutMeProps = {
+  snippets: Snippets;
+};
 
-  const snippetValues = extractSnippetValues<keyof AboutMeSnippetsFormValues>(data);
+const AboutMe = async ({snippets}: AboutMeProps) => {
+  const snippetValues = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
   const {description = "", image: imageId} = snippetValues;
 
   const imageObj = imageId ? await api.image.getImage({key: imageId}) : null;
