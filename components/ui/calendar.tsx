@@ -9,7 +9,7 @@ const Calendar = ({classNames, ...props}: React.ComponentProps<typeof DayPicker>
     <DayPicker
       showOutsideDays
       fixedWeeks
-      className="p-3 font-poppins"
+      className="p-3"
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",

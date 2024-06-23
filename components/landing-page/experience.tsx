@@ -45,7 +45,7 @@ const ExperienceListItem = ({
       <div className="relative flex flex-col gap-6">
         <MotionInViewWrapper transition={{delay: 0.5}} className="flex flex-col justify-center gap-2 md:min-h-[4rem]">
           <p className="font-poppins text-xl font-semibold leading-7 text-foreground">{position}</p>
-          <p className="font-regular font-poppins text-sm leading-7 text-primary">{company}</p>
+          <p className="text-sm leading-7 text-primary">{company}</p>
         </MotionInViewWrapper>
 
         {responsibilities?.length ? (

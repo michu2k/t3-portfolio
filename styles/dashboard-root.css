@@ -1,9 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
-  .light {
+  :root {
     --primary: 217 91% 60%; /* blue-500 */
     --secondary: 221 39% 11%; /* gray-900 */
 
@@ -33,14 +29,5 @@
     --accent-foreground: 221 39% 11%; /* gray-900 */
 
     --placeholder: 215 19% 35%; /* slate-600 */
-  }
-
-  html {
-    height: 100%;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    height: 100%;
   }
 }
