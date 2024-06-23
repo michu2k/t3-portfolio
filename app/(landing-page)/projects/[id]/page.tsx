@@ -61,7 +61,9 @@ export default async function Page({params: {id}}: PageProps) {
         <div className="section-container">
           <div className="flex flex-col gap-14 md:flex-row md:gap-12">
             {image && (
-              <MotionInViewWrapper transition={{delay: 0.5}} className="h-fit w-full shrink-0 md:w-1/2">
+              <MotionInViewWrapper
+                transition={{delay: 0.5}}
+                className="h-fit w-full shrink-0 overflow-hidden rounded-md md:w-1/2">
                 <Image
                   src={image.url}
                   width={0}
