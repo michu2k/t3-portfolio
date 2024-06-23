@@ -57,7 +57,7 @@ export default async function Page({params: {id}}: PageProps) {
         </MotionInViewWrapper>
       </header>
 
-      <section className="px-4 py-20 md:px-6 md:py-24">
+      <section className="px-4 py-20 md:px-6">
         <div className="section-container">
           <div className="flex flex-col gap-14 md:flex-row md:gap-12">
             {image && (
