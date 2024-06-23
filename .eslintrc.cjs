@@ -7,8 +7,8 @@ const config = {
     project: "./tsconfig.json",
     tsconfigRootDir: __dirname
   },
-  plugins: ["@typescript-eslint", "unused-imports", "simple-import-sort"],
-  extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  plugins: ["@typescript-eslint", "unused-imports", "simple-import-sort", "jsx-a11y"],
+  extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended", "plugin:jsx-a11y/recommended"],
   rules: {
     "@typescript-eslint/consistent-type-imports": "warn",
     "indent": "off",
