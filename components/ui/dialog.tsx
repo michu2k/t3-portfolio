@@ -50,7 +50,7 @@ const DialogContent = React.forwardRef<
             "relative flex min-h-[18rem] flex-col rounded-lg border border-muted bg-background p-8",
             className
           )}>
-          <DialogClose className="absolute right-4 top-4 flex h-6 w-6 items-center justify-center rounded-sm ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:pointer-events-none">
+          <DialogClose className="absolute right-4 top-4 flex size-6 items-center justify-center rounded-sm ring-offset-white transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:pointer-events-none">
             <XIcon size={22} />
             <span className="sr-only">Close</span>
           </DialogClose>
