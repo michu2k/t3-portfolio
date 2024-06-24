@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  .light {
+  :root {
     --primary: 217 91% 60%; /* blue-500 */
     --secondary: 221 39% 11%; /* gray-900 */
 
