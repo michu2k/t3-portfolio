@@ -17,6 +17,7 @@
     --accent-foreground: 210 40% 98%; /* slate-50 */
 
     --placeholder: 213 27% 84%; /* slate-300 */
+    --ring: 218 11% 65%; /* slate-400 */
   }
 
   .dark {
@@ -33,6 +34,7 @@
     --accent-foreground: 221 39% 11%; /* gray-900 */
 
     --placeholder: 215 19% 35%; /* slate-600 */
+    --ring: 218 11% 65%; /* slate-400 */
   }
 
   html {
