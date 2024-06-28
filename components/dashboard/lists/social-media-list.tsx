@@ -89,7 +89,7 @@ const SocialMediaCard = ({id, icon, url, onClickDeleteBtn}: SocialMediaCardProps
 
   return (
     <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-muted py-3 last-of-type:border-0">
-      <Icon className="mr-2 h-4 w-4 flex-shrink-0 fill-foreground" aria-hidden="true" />
+      <Icon className="mr-2 size-4 flex-shrink-0 fill-foreground" aria-hidden="true" />
 
       <div className="mr-4 flex-1">
         <p className="text-sm leading-6 text-muted-foreground">{url}</p>

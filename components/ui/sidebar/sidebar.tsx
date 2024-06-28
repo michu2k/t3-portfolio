@@ -72,7 +72,7 @@ const SidebarContent = React.forwardRef<HTMLElement, SidebarContentProps>(({chil
         {isExpanded && (
           <>
             <motion.aside key="sidebar-content" ref={ref} className={sidebarClassName} {...contentAnimation}>
-              <Button variant="ghost" className="absolute right-4 top-4 h-8 w-8 p-0" onClick={toggleSidebar}>
+              <Button variant="ghost" className="absolute right-4 top-4 size-8 p-0" onClick={toggleSidebar}>
                 <XIcon size={22} />
                 <span className="sr-only">Close</span>
               </Button>
@@ -118,7 +118,7 @@ const SidebarTrigger = React.forwardRef<HTMLButtonElement, SidebarTriggerProps>(
       <button
         ref={ref}
         onClick={handleBtnClick}
-        className={cn("relative z-40 flex h-8 w-8 shrink-0 flex-col justify-center", className)}>
+        className={cn("relative z-40 flex size-8 shrink-0 flex-col justify-center", className)}>
         <span className={cn(outerLineStyles, "mb-2")} />
         <span className={innerLineStyles} />
         <span className={cn(outerLineStyles, "mt-2")} />

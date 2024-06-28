@@ -9,7 +9,7 @@ const Calendar = ({classNames, ...props}: React.ComponentProps<typeof DayPicker>
     <DayPicker
       showOutsideDays
       fixedWeeks
-      className="p-3 font-poppins"
+      className="p-3"
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
@@ -17,7 +17,7 @@ const Calendar = ({classNames, ...props}: React.ComponentProps<typeof DayPicker>
         caption_label: "text-sm font-medium",
         nav: "space-x-1 flex items-center",
         nav_button:
-          "border bg-background hover:bg-muted/50 flex items-center justify-center rounded-md h-8 w-8 bg-transparent p-0 opacity-50 hover:opacity-100",
+          "border bg-background hover:bg-muted/50 flex items-center justify-center rounded-md size-8 bg-transparent p-0 opacity-50 hover:opacity-100",
         nav_button_previous: "absolute left-1",
         nav_button_next: "absolute right-1",
         table: "w-full border-collapse space-y-1",
@@ -30,7 +30,7 @@ const Calendar = ({classNames, ...props}: React.ComponentProps<typeof DayPicker>
             ? "[&:has(>.day-range-end)]:rounded-r-md [&:has(>.day-range-start)]:rounded-l-md first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md"
             : "[&:has([aria-selected])]:rounded-md"
         ),
-        day: "rounded-md h-9 w-9 p-0 font-normal aria-selected:opacity-100 hover:bg-muted/50",
+        day: "rounded-md size-9 p-0 font-normal aria-selected:opacity-100 hover:bg-muted/50",
         day_selected: "bg-secondary text-accent-foreground pointer-events-none",
         day_today: "bg-muted",
         day_outside: "text-muted-foreground opacity-25",
@@ -40,8 +40,8 @@ const Calendar = ({classNames, ...props}: React.ComponentProps<typeof DayPicker>
         ...classNames
       }}
       components={{
-        IconLeft: () => <ChevronLeftIcon className="h-4 w-4" />,
-        IconRight: () => <ChevronRightIcon className="h-4 w-4" />
+        IconLeft: () => <ChevronLeftIcon className="size-4" />,
+        IconRight: () => <ChevronRightIcon className="size-4" />
       }}
       {...props}
     />

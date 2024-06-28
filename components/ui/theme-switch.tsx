@@ -32,13 +32,13 @@ const ThemeSwitch = () => {
 
           <input
             type="checkbox"
-            className="absolute h-0 w-0 opacity-0"
+            className="absolute size-0 opacity-0"
             onChange={() => setTheme(isDarkMode ? "light" : "dark")}
           />
 
           {mounted ? (
             <span
-              className={`absolute h-full w-full rounded-full p-1 animate-in fade-in before:absolute before:block before:h-5 before:w-5 before:rounded-full before:bg-muted ${
+              className={`absolute size-full rounded-full p-1 animate-in fade-in before:absolute before:block before:size-5 before:rounded-full before:bg-muted ${
                 isDarkMode ? "before:translate-x-7" : ""
               } transition-colors before:transition-transform`}
             />

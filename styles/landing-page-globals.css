@@ -14,14 +14,16 @@
 
     --accent: 210 40% 98%; /* slate-50 */
     --accent-foreground: 215 20% 65%; /* slate-400 */
+
+    --ring: 218 11% 65%; /* slate-400 */
   }
-}
 
-html {
-  height: 100%;
-}
+  html {
+    height: 100%;
+  }
 
-body {
-  @apply bg-background text-foreground;
-  height: 100%;
+  body {
+    @apply bg-background text-foreground;
+    height: 100%;
+  }
 }

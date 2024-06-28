@@ -10,7 +10,7 @@ import {ReduxStoreProvider} from "./redux-store-provider";
 const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
   display: "swap"
 });
 

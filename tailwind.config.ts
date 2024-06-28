@@ -24,13 +24,14 @@ const config = {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))"
         },
-        placeholder: "hsl(var(--placeholder))"
+        placeholder: "hsl(var(--placeholder))",
+        ring: "hsl(var(--ring))"
       }
     }
   },
   plugins: [
     require("tailwindcss-animate"),
-    plugin(function ({addComponents, theme}) {
+    plugin(function ({addComponents, addUtilities, theme}) {
       addComponents({
         ".section-container": {
           width: theme("width.full"),
@@ -40,6 +41,14 @@ const config = {
           [`@media (min-width: ${theme("screens.md")})`]: {
             maxWidth: theme("maxWidth.5xl")
           }
+        }
+      });
+      addUtilities({
+        ".ring-appearance": {
+          "--tw-ring-opacity": "1",
+          "--tw-ring-color": "hsl(var(--ring) / var(--tw-ring-opacity))",
+          "--tw-ring-offset-width": "2px",
+          "--tw-ring-offset-color": "hsl(var(--background))"
         }
       });
     })

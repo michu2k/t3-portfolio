@@ -24,7 +24,7 @@ const AboutMe = async ({snippets}: AboutMeProps) => {
       <div className="flex flex-col gap-14 sm:flex-row sm:items-center">
         {imageObj ? (
           <MotionInViewWrapper className="relative my-auto h-80 w-full flex-shrink-0 sm:w-64 md:h-96 md:w-80">
-            <div className="relative h-full w-full overflow-hidden">
+            <div className="relative h-full w-full overflow-hidden rounded-md">
               <Image
                 src={imageObj.url}
                 fill
