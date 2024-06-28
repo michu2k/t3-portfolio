@@ -92,9 +92,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onCli
   return (
     <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-muted py-3 last-of-type:border-0">
       <div className="relative mr-2 h-16 w-20 shrink-0 overflow-hidden rounded-md bg-accent md:w-24">
-        {coverImage.url ? (
-          <Image src={coverImage.url} fill style={{objectFit: "cover"}} sizes="(min-width: 768px) 25vw, 50vw" alt="" />
-        ) : null}
+        {coverImage.url ? <Image src={coverImage.url} fill style={{objectFit: "cover"}} sizes="192px" alt="" /> : null}
       </div>
 
       <div className="flex flex-1 flex-col items-start">
