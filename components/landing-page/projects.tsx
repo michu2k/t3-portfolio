@@ -27,7 +27,9 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
 
   return (
     <article className="group w-auto shrink-0 sm:even:mt-20">
-      <Link href={projectUrl} className="flex flex-col gap-6">
+      <Link
+        href={projectUrl}
+        className="flex flex-col gap-6 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-appearance">
         <MotionInViewWrapper className="relative h-48 w-full shrink-0 overflow-hidden rounded-md lg:h-80">
           <Image
             src={coverImage.url}

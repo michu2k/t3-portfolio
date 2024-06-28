@@ -6,8 +6,8 @@ import {cn} from "~/utils/className";
 
 const buttonVariants = cva(
   `font-poppins font-medium shrink-0
-  inline-flex justify-center items-center rounded-md ring-offset-white
-  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2
+  inline-flex justify-center items-center rounded-md
+  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-appearance
   disabled:pointer-events-none disabled:opacity-50 gap-2
   transition-colors`,
   {

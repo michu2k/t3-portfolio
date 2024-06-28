@@ -33,7 +33,7 @@ const SocialMediaItem = ({icon, url}: SocialMediaLink) => {
     <li>
       <a
         href={url}
-        className="group flex size-6 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+        className="group flex size-6 items-center justify-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-appearance"
         rel="noopener noreferrer"
         target="_blank">
         <Icon
