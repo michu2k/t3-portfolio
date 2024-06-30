@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {memo} from "react";
 import type {LucideIcon} from "lucide-react";
 import {
   BriefcaseIcon,
@@ -135,7 +135,7 @@ type NavigationItemDef = {
   icon: LucideIcon;
 };
 
-const NavigationItem = ({text, href, icon: Icon}: NavigationItemDef) => {
+const NavigationItem = memo(({text, href, icon: Icon}: NavigationItemDef) => {
   const pathname = usePathname();
   const params = useParams<{id: string}>();
 
@@ -151,6 +151,8 @@ const NavigationItem = ({text, href, icon: Icon}: NavigationItemDef) => {
       </Link>
     </li>
   );
-};
+});
+
+NavigationItem.displayName = "NavigationItem";
 
 export {SidebarNavigation};

@@ -16,6 +16,7 @@ import {useToast} from "~/hooks/use-toast";
 import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/react";
 import {extractSnippetValues} from "~/utils/extractSnippetValues";
+import type {FileObj} from "~/utils/file";
 import {acceptedImageTypes} from "~/utils/file";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
@@ -25,14 +26,14 @@ const IMAGE_HEIGHT = 400;
 
 type AboutFormProps = {
   snippets: Snippets;
+  currentImage: FileObj | null;
 };
 
-const AboutForm = ({snippets}: AboutFormProps) => {
+const AboutForm = ({snippets, currentImage}: AboutFormProps) => {
   const {toast} = useToast();
   const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", snippets);
   const {description = "", image: imageKey} = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
 
-  const {data: imageObj} = api.image.getImage.useQuery({key: imageKey});
   const createImage = api.image.createImage.useMutation();
   const deleteImage = api.image.deleteImage.useMutation();
 
@@ -43,7 +44,7 @@ const AboutForm = ({snippets}: AboutFormProps) => {
     },
     values: {
       description,
-      image: imageObj ?? undefined
+      image: currentImage ?? undefined
     },
     resolver: zodResolver(aboutMeSnippetsSchema)
   });
@@ -55,7 +56,7 @@ const AboutForm = ({snippets}: AboutFormProps) => {
 
     await updateSnippets({description});
 
-    if (image?.name !== imageObj?.name) {
+    if (image?.name !== currentImage?.name) {
       // Delete old image
       if (imageKey) {
         await deleteImage.mutateAsync({key: imageKey});
