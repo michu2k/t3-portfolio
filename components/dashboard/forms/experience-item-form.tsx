@@ -133,7 +133,7 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
-                      <Button variant="outline" className="w-full font-normal">
+                      <Button variant="outline" className="w-full">
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         <span className="flex-1">{value ? format(value, "LLL dd, y") : "Pick start date"}</span>
                       </Button>
@@ -166,7 +166,7 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
-                      <Button variant="outline" className="w-full font-normal">
+                      <Button variant="outline" className="w-full">
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         <span className="flex-1">{value ? format(value, "LLL dd, y") : "Pick end date"}</span>
                       </Button>

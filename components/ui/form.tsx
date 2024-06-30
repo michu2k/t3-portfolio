@@ -63,7 +63,7 @@ const FormLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive.Root>,
         {...props}>
         {children}
         {isOptional && (
-          <span className="inline-block pl-2 text-xs font-normal italic leading-4 text-muted-foreground/60">
+          <span className="inline-block pl-2 text-xs font-medium italic leading-4 text-muted-foreground/60">
             optional
           </span>
         )}

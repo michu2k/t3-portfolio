@@ -81,7 +81,7 @@ const SocialMediaItemForm = ({socialMediaLink}: SocialMediaItemFormProps) => {
                       variant="outline"
                       className={cn({"bg-muted": key === value})}
                       onClick={() => onChange(key)}>
-                      <Icon className="h-4 w-4 fill-foreground" aria-hidden="true" />
+                      <Icon className="size-4 fill-foreground" aria-hidden="true" />
                       <span className="sr-only">{capitalize(key)}</span>
                     </Button>
                   </li>

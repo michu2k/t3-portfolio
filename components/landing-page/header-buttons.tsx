@@ -13,12 +13,12 @@ const HeaderButtons = () => {
 
   return (
     <MotionInViewWrapper transition={{delay: 0.4}} className="flex gap-4">
-      <Button variant="secondary" onClick={scrollToProjects} className="group h-12 gap-4 rounded-none px-6">
+      <Button variant="secondary" onClick={scrollToProjects} className="group h-12 gap-4 px-6">
         See my work
         <MoveRightIcon size={20} className="transition-transform group-hover:translate-x-2" />
       </Button>
 
-      <Button variant="ghost" onClick={scrollToContact} className="h-12 gap-4 rounded-none px-6 text-foreground">
+      <Button variant="ghost" onClick={scrollToContact} className="h-12 gap-4 px-6 text-foreground">
         Contact
         <SendIcon size={20} />
       </Button>

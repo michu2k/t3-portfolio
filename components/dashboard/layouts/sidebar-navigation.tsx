@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {memo} from "react";
 import type {LucideIcon} from "lucide-react";
 import {
   BriefcaseIcon,
@@ -135,7 +135,7 @@ type NavigationItemDef = {
   icon: LucideIcon;
 };
 
-const NavigationItem = ({text, href, icon: Icon}: NavigationItemDef) => {
+const NavigationItem = memo(({text, href, icon: Icon}: NavigationItemDef) => {
   const pathname = usePathname();
   const params = useParams<{id: string}>();
 
@@ -145,12 +145,14 @@ const NavigationItem = ({text, href, icon: Icon}: NavigationItemDef) => {
     <li>
       <Link
         href={href}
-        className={`flex items-center gap-3 rounded-lg px-3 py-2.5 font-poppins text-sm font-medium leading-5 ${isActive ? "text-primary" : "text-foreground"} transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2`}>
+        className={`flex items-center gap-3 rounded-md px-3 py-2.5 font-poppins text-sm font-medium leading-5 ${isActive ? "text-primary" : "text-foreground"} transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-appearance`}>
         <Icon size={16} />
         {text}
       </Link>
     </li>
   );
-};
+});
+
+NavigationItem.displayName = "NavigationItem";
 
 export {SidebarNavigation};

@@ -57,11 +57,13 @@ export default async function Page({params: {id}}: PageProps) {
         </MotionInViewWrapper>
       </header>
 
-      <section className="px-4 py-20 md:px-6 md:py-24">
+      <section className="px-4 py-20 md:px-6">
         <div className="section-container">
           <div className="flex flex-col gap-14 md:flex-row md:gap-12">
             {image && (
-              <MotionInViewWrapper transition={{delay: 0.5}} className="h-fit w-full shrink-0 md:w-1/2">
+              <MotionInViewWrapper
+                transition={{delay: 0.5}}
+                className="h-fit w-full shrink-0 overflow-hidden rounded-md md:w-1/2">
                 <Image
                   src={image.url}
                   width={0}
@@ -87,7 +89,7 @@ export default async function Page({params: {id}}: PageProps) {
                 {websiteUrl ? (
                   <Button variant="secondary" className="max-w-[14rem] flex-1 gap-3 px-8" asChild>
                     <a href={websiteUrl} target="_blank" rel="noopener noreferrer">
-                      <GlobeIcon className="h-4 w-4" />
+                      <GlobeIcon className="size-4" />
                       Project website
                     </a>
                   </Button>

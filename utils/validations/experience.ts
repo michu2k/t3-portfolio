@@ -5,7 +5,7 @@ type ExperienceItemFormValues = z.infer<typeof experienceItemSchema>;
 
 const experienceItemResponsibilitySchema = z.object({
   id: z.string().optional(),
-  name: z.string().max(128, "Name is too long")
+  name: z.string().max(256, "Name is too long")
 });
 
 const experienceItemSchema = z

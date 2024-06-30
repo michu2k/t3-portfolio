@@ -38,7 +38,7 @@ const ContactMethodListItem = ({name, description, type}: ContactMethod) => {
   return (
     <li className="group flex items-center">
       <MotionInViewWrapper className="flex items-center gap-6">
-        <Icon className="h-5 w-5 fill-accent-foreground transition-colors group-hover:fill-primary" />
+        <Icon className="size-5 fill-accent-foreground transition-colors group-hover:fill-primary" />
 
         <div className="flex-1">
           <p className="font-poppins text-base font-semibold leading-7 text-foreground">{name}</p>

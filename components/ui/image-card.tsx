@@ -16,7 +16,8 @@ const ImageCard = React.forwardRef<HTMLDivElement, ImageCardProps>(({file, class
     <div ref={ref} className={cn("flex min-h-[5.5rem] gap-4", className)}>
       <div className="relative h-24 w-36 shrink-0 overflow-hidden rounded-md bg-accent">
         {file.url ? (
-          <Image src={file.url} fill style={{objectFit: "cover"}} sizes="(min-width: 768px) 25vw, 50vw" alt="" />
+          // Priority is set to true by default as the component will always be above the fold
+          <Image src={file.url} fill style={{objectFit: "cover"}} sizes="192px" alt="" priority />
         ) : null}
       </div>
 
