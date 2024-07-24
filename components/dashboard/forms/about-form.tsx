@@ -7,9 +7,9 @@ import {FileX2Icon} from "lucide-react";
 
 import {Button} from "~/components/ui/button";
 import {Dropzone} from "~/components/ui/dropzone";
+import {FileThumbnailCard} from "~/components/ui/file-thumbnail";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
-import {ImageCard} from "~/components/ui/image-card";
 import {Textarea} from "~/components/ui/textarea";
 import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
@@ -92,7 +92,7 @@ const AboutForm = ({snippets, currentImage}: AboutFormProps) => {
             <FormItem>
               <FormLabel isOptional>Image</FormLabel>
               {value ? (
-                <ImageCard
+                <FileThumbnailCard
                   file={value}
                   actions={
                     <Button variant="secondary" size="sm" onClick={() => onChange(undefined)}>
