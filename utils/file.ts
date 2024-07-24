@@ -9,8 +9,13 @@ type FileObj = {
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
+// Only accept files with the specific extension or MIME type
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept#limiting_accepted_file_types
 const acceptedImageTypes: Accept = {
-  "image/*": [".jpg", ".jpeg", ".png", ".gif"]
+  "image/jpeg": [".jpg", ".jpeg"],
+  "image/png": [".png"],
+  "image/gif": [".gif"],
+  "image/webp": [".webp"]
 };
 
 function convertBytesToMB(bytes: number) {
