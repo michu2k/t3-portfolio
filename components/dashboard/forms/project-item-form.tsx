@@ -8,8 +8,8 @@ import {useRouter} from "next/navigation";
 
 import {Button} from "~/components/ui/button";
 import {Dropzone} from "~/components/ui/dropzone";
+import {FileThumbnailCard} from "~/components/ui/file-thumbnail";
 import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
-import {ImageCard} from "~/components/ui/image-card";
 import {Input} from "~/components/ui/input";
 import {Textarea} from "~/components/ui/textarea";
 import {useToast} from "~/hooks/use-toast";
@@ -86,7 +86,7 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
             <FormItem>
               <FormLabel>Cover image</FormLabel>
               {value ? (
-                <ImageCard
+                <FileThumbnailCard
                   file={value}
                   actions={
                     <Button variant="secondary" size="sm" onClick={() => onChange(undefined)}>
@@ -139,7 +139,7 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
             <FormItem>
               <FormLabel>Image</FormLabel>
               {value ? (
-                <ImageCard
+                <FileThumbnailCard
                   file={value}
                   actions={
                     <Button variant="secondary" size="sm" onClick={() => onChange(undefined)}>
