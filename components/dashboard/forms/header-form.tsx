@@ -13,6 +13,7 @@ import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
 import type {Snippets} from "~/server/api/routers/snippet";
 import {extractSnippetValues} from "~/utils/extractSnippetValues";
+import {revalidatePath} from "~/utils/revalidate-path";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {headerSnippetsSchema} from "~/utils/validations/header";
 
@@ -43,6 +44,8 @@ const HeaderForm = ({snippets}: HeaderFormProps) => {
     e?.preventDefault();
 
     await updateSnippets({heading, description});
+
+    revalidatePath("/dashboard/header");
 
     toast({
       title: "Success",

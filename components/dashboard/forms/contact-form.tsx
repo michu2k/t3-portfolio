@@ -12,6 +12,7 @@ import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
 import type {Snippets} from "~/server/api/routers/snippet";
 import {extractSnippetValues} from "~/utils/extractSnippetValues";
+import {revalidatePath} from "~/utils/revalidate-path";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 import {contactSnippetsSchema} from "~/utils/validations/contact";
 
@@ -36,7 +37,10 @@ const ContactForm = ({snippets}: ContactFormProps) => {
 
   async function handleFormSubmit(snippets: ContactSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
+
     await updateSnippets(snippets);
+
+    revalidatePath("/dashboard/contact");
 
     toast({
       title: "Success",

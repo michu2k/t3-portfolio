@@ -19,7 +19,6 @@ async function resizeImage({base64String, width, height}: ResizeImageOptions) {
   const fileBuffer = Buffer.from(base64, BUFFER_ENCODING);
   const resizedImgBuffer = await sharp(fileBuffer).resize(width, height, {fit: "outside"}).toBuffer();
 
-  console.log({rest: `${dataUrl}base64,${resizedImgBuffer.toString(BUFFER_ENCODING)}`});
   // Apply the previously deleted dataUrl to the new base64
   return `${dataUrl}base64,${resizedImgBuffer.toString(BUFFER_ENCODING)}`;
 }

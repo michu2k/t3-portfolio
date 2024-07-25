@@ -18,6 +18,7 @@ import {api} from "~/trpc/react";
 import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import type {FileObj} from "~/utils/file";
 import {acceptedImageTypes} from "~/utils/file";
+import {revalidatePath} from "~/utils/revalidate-path";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
 
@@ -32,7 +33,7 @@ type AboutFormProps = {
 const AboutForm = ({snippets, currentImage}: AboutFormProps) => {
   const {toast} = useToast();
   const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", snippets);
-  const {description = "", image: imageKey} = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
+  const {description = "", image: currentImageKey} = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
 
   const createImage = api.image.createImage.useMutation();
   const deleteImage = api.image.deleteImage.useMutation();
@@ -54,22 +55,24 @@ const AboutForm = ({snippets, currentImage}: AboutFormProps) => {
   async function handleFormSubmit({description, image}: AboutMeSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    await updateSnippets({description});
+    let imageKey = currentImageKey;
 
     if (image?.name !== currentImage?.name) {
       // Delete old image
-      if (imageKey) {
-        await deleteImage.mutateAsync({key: imageKey});
+      if (currentImageKey) {
+        await deleteImage.mutateAsync({key: currentImageKey});
+        imageKey = "";
       }
 
-      // Create new image if it exists
+      // Create new image
       if (image) {
-        const imageKey = await createImage.mutateAsync({image, width: IMAGE_WIDTH, height: IMAGE_HEIGHT});
-        await updateSnippets({image: imageKey});
-      } else {
-        await updateSnippets({image: ""});
+        imageKey = await createImage.mutateAsync({image, width: IMAGE_WIDTH, height: IMAGE_HEIGHT});
       }
     }
+
+    await updateSnippets({description, image: imageKey});
+
+    revalidatePath("/dashboard/about");
 
     toast({
       title: "Success",
