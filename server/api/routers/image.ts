@@ -17,7 +17,7 @@ export const imageRouter = createTRPCRouter({
       return await getPresignedUrl(key);
     }),
 
-  createImage: protectedProcedure
+  uploadImage: protectedProcedure
     .input(z.object({
       image: z.custom<FileObj>(),
       width: z.number().optional(),
