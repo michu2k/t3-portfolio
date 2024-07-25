@@ -71,6 +71,7 @@ export async function deleteFileFromS3(key: string) {
     });
 
     await s3.send(command);
+    return {key};
   } catch (error) {
     console.error(error);
     throw new Error(`An error occured while deleting "${key}" from S3`);
