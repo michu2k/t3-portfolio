@@ -14,8 +14,8 @@ const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 const acceptedImageTypes: Accept = {
   "image/jpeg": [".jpg", ".jpeg"],
   "image/png": [".png"],
-  "image/gif": [".gif"],
-  "image/webp": [".webp"]
+  "image/webp": [".webp"],
+  "image/avif": [".avif"]
 };
 
 function convertBytesToMB(bytes: number) {
