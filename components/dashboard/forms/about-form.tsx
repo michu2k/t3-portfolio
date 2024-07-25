@@ -35,7 +35,7 @@ const AboutForm = ({snippets, currentImage}: AboutFormProps) => {
   const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", snippets);
   const {description = "", image: currentImageKey} = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
 
-  const createImage = api.image.createImage.useMutation();
+  const uploadImage = api.image.uploadImage.useMutation();
   const deleteImage = api.image.deleteImage.useMutation();
 
   const formMethods = useForm<AboutMeSnippetsFormValues>({
@@ -64,9 +64,9 @@ const AboutForm = ({snippets, currentImage}: AboutFormProps) => {
         imageKey = "";
       }
 
-      // Create new image
+      // Upload new image
       if (image) {
-        imageKey = await createImage.mutateAsync({image, width: IMAGE_WIDTH, height: IMAGE_HEIGHT});
+        imageKey = await uploadImage.mutateAsync({image, width: IMAGE_WIDTH, height: IMAGE_HEIGHT});
       }
     }
 
