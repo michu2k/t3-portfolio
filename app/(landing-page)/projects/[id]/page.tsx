@@ -89,7 +89,7 @@ export default async function Page({params: {id}}: PageProps) {
                 {websiteUrl ? (
                   <Button variant="secondary" className="max-w-[14rem] flex-1 gap-3 px-8" asChild>
                     <a href={websiteUrl} target="_blank" rel="noopener noreferrer">
-                      <GlobeIcon className="size-4" />
+                      <GlobeIcon size={16} />
                       Project website
                     </a>
                   </Button>

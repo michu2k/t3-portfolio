@@ -37,7 +37,7 @@ const FileThumbnail = ({file, size, className}: FileThumbnailProps) => {
         // Priority is set to true by default as the component will always be above the fold
         <Image src={url} fill style={{objectFit: "cover"}} sizes="192px" alt="" priority />
       ) : (
-        <FileIcon className="size-12 stroke-1 text-muted-foreground" />
+        <FileIcon size={40} className="stroke-1 text-muted-foreground" />
       )}
     </div>
   );
