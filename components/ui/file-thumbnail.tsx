@@ -59,7 +59,7 @@ const FileThumbnailCard = React.forwardRef<HTMLDivElement, FileThumbnailCardProp
           <p className="w-full truncate font-poppins text-xs font-semibold">{file.name}</p>
           <p className="mb-auto text-xs leading-6 text-muted-foreground">{convertBytesToMB(file.size)}</p>
 
-          {actions}
+          {actions ? <div className="flex items-center gap-2">{actions}</div> : null}
         </div>
       </div>
     );
