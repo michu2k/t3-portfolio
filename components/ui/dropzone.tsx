@@ -1,30 +1,51 @@
-import React, {Fragment, useCallback} from "react";
+import type {PropsWithChildren} from "react";
+import React, {Fragment, useCallback, useContext} from "react";
 import type {Accept} from "react-dropzone";
 import {useDropzone} from "react-dropzone";
 import {UploadCloudIcon} from "lucide-react";
 
 import {Button} from "~/components/ui/button";
-import {cn} from "~/utils/className";
 import type {FileObj} from "~/utils/file";
 import {convertBytesToMB, MAX_FILE_SIZE, transformFileToFileObj} from "~/utils/file";
 
-type DropzoneProps = {
-  name: string;
+type DropzoneContextProps = {
   accept: Accept;
-  maxSize?: number;
-  disabled?: boolean;
-} & (
-  | {
-      multiple: true;
-      onDrop: (files: Array<FileObj>) => void;
-    }
-  | {
-      multiple?: false;
-      onDrop: (file: FileObj) => void;
-    }
-);
+  maxSize: number;
+  isDragActive: boolean;
+  multiple?: boolean;
+};
 
-const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, accept, ...props}: DropzoneProps) => {
+const DropzoneContext = React.createContext({} as DropzoneContextProps);
+
+type DropzoneProps = PropsWithChildren<
+  {
+    name: string;
+    accept: Accept;
+    maxSize?: number;
+    disabled?: boolean;
+    className?: string;
+  } & (
+    | {
+        multiple: true;
+        onDrop: (files: Array<FileObj>) => void;
+      }
+    | {
+        multiple?: false;
+        onDrop: (file: FileObj) => void;
+      }
+  )
+>;
+
+const Dropzone = ({
+  name,
+  accept,
+  maxSize = MAX_FILE_SIZE,
+  disabled,
+  multiple,
+  onDrop,
+  className,
+  children
+}: DropzoneProps) => {
   const onFileDrop = useCallback(
     async (acceptedFiles: Array<File>) => {
       const result = await Promise.all<FileObj>(
@@ -50,7 +71,26 @@ const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, ac
     accept
   });
 
-  function getAcceptedFileTypes(accept: Accept) {
+  return (
+    <Button
+      variant="outline"
+      disabled={disabled}
+      className={className ?? "flex h-auto cursor-pointer border-2 border-dashed px-3 py-3.5"}
+      asChild>
+      <div {...getRootProps()}>
+        <DropzoneContext.Provider value={{accept, isDragActive, multiple, maxSize}}>
+          <input {...getInputProps({name})} />
+          {children}
+        </DropzoneContext.Provider>
+      </div>
+    </Button>
+  );
+};
+
+const DropzoneContent = () => {
+  const {isDragActive, accept, multiple, maxSize} = useContext(DropzoneContext);
+
+  function getAcceptedFileTypes() {
     return Object.entries(accept).reduce<Array<string>>(
       (acc, [mimeType, extensions]) =>
         extensions.length > 0 ? [...acc, ...extensions] : [...acc, mimeType.split("/")[1] as string],
@@ -59,7 +99,7 @@ const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, ac
   }
 
   function displayFileTypes() {
-    return getAcceptedFileTypes(accept).map((ext, idx, arr) => {
+    return getAcceptedFileTypes().map((ext, idx, arr) => {
       const isLastElement = idx === arr.length - 1;
 
       return (
@@ -73,30 +113,22 @@ const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, ac
   }
 
   return (
-    <Button
-      variant="outline"
-      className={cn("flex min-h-[6rem] cursor-pointer gap-6 border-2 border-dashed px-3 py-4", {
-        "cursor-not-allowed opacity-50": disabled
-      })}
-      asChild>
-      <div {...getRootProps()}>
-        <input {...props} {...getInputProps({name})} />
-        <UploadCloudIcon size={40} strokeWidth={1} />
+    <div className="flex min-h-16 flex-grow items-center gap-6">
+      <UploadCloudIcon size={40} strokeWidth={1} />
 
-        <div className="flex flex-1 flex-col gap-1">
-          <p className="text-xs leading-6 text-muted-foreground">
-            {isDragActive
-              ? `Drop the ${multiple ? "files" : "file"} here...`
-              : `Drag and drop ${multiple ? "files" : "file"} here or click to select ${multiple ? "files" : "file"}`}
-          </p>
+      <div className="flex flex-1 flex-col gap-1">
+        <p className="text-xs leading-6 text-muted-foreground">
+          {isDragActive
+            ? `Drop the ${multiple ? "files" : "file"} here...`
+            : `Drag and drop ${multiple ? "files" : "file"} here or click to select ${multiple ? "files" : "file"}`}
+        </p>
 
-          <p className="text-xs leading-6 text-muted-foreground">
-            Only {displayFileTypes()} with max size of <strong>{convertBytesToMB(maxSize)}</strong>
-          </p>
-        </div>
+        <p className="text-xs leading-6 text-muted-foreground">
+          Only {displayFileTypes()} with max size of <strong>{convertBytesToMB(maxSize)}</strong>
+        </p>
       </div>
-    </Button>
+    </div>
   );
 };
 
-export {Dropzone};
+export {Dropzone, DropzoneContent, DropzoneContext};
