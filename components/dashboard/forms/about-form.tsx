@@ -3,10 +3,10 @@
 import React from "react";
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {FileX2Icon} from "lucide-react";
+import {PencilIcon, TrashIcon} from "lucide-react";
 
 import {Button} from "~/components/ui/button";
-import {Dropzone} from "~/components/ui/dropzone";
+import {Dropzone, DropzoneContent} from "~/components/ui/dropzone";
 import {FileThumbnailCard} from "~/components/ui/file-thumbnail";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
@@ -98,15 +98,29 @@ const AboutForm = ({snippets, currentImage}: AboutFormProps) => {
                 <FileThumbnailCard
                   file={value}
                   actions={
-                    <Button variant="secondary" size="sm" onClick={() => onChange(undefined)}>
-                      <FileX2Icon size={16} />
-                      Delete image
-                    </Button>
+                    <>
+                      <Dropzone
+                        name={name}
+                        onDrop={onChange}
+                        accept={acceptedImageTypes}
+                        className="size-10 cursor-pointer p-0">
+                        <PencilIcon size={16} />
+                        <span className="sr-only">Change image</span>
+                      </Dropzone>
+
+                      <Button variant="outline" size="icon" onClick={() => onChange(undefined)}>
+                        <TrashIcon size={16} />
+                        <span className="sr-only">Delete image</span>
+                      </Button>
+                    </>
                   }
                 />
               ) : (
-                <Dropzone name={name} onDrop={onChange} accept={acceptedImageTypes} />
+                <Dropzone name={name} onDrop={onChange} accept={acceptedImageTypes}>
+                  <DropzoneContent />
+                </Dropzone>
               )}
+
               <FormMessage />
             </FormItem>
           )}
