@@ -1,11 +1,11 @@
 "use client";
 
 import type {PropsWithChildren} from "react";
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {useMotionValueEvent, useScroll} from "framer-motion";
 import Link from "next/link";
 
-import {Sidebar, SidebarContent, SidebarTrigger, useSidebarContext} from "~/components/ui/sidebar";
+import {Sidebar, SidebarContent, SidebarContext, SidebarTrigger} from "~/components/ui/sidebar";
 import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
 
 const homeNavigationItems: Array<NavigationItemDef> = [
@@ -124,7 +124,7 @@ type NavigationItemProps = NavigationItemDef & {
 };
 
 const NavigationItem = ({href, text, isActive}: NavigationItemProps) => {
-  const {hideSidebar} = useSidebarContext();
+  const {hideSidebar} = useContext(SidebarContext);
   const scrollToTarget = useSmoothScroll(href.replace("/", ""));
 
   function handleNavigationItemClick(e: React.MouseEvent) {
