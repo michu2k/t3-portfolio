@@ -40,8 +40,8 @@ const Calendar = ({classNames, ...props}: React.ComponentProps<typeof DayPicker>
         ...classNames
       }}
       components={{
-        IconLeft: () => <ChevronLeftIcon className="size-4" />,
-        IconRight: () => <ChevronRightIcon className="size-4" />
+        IconLeft: () => <ChevronLeftIcon size={16} />,
+        IconRight: () => <ChevronRightIcon size={16} />
       }}
       {...props}
     />
