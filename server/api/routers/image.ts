@@ -1,6 +1,7 @@
 import {z} from "zod";
 
 import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
+import {resizeImage} from "~/server/image";
 import {deleteFileFromS3, getPresignedUrl, uploadFileToS3} from "~/server/s3";
 import type {FileObj} from "~/utils/file";
 
@@ -16,7 +17,7 @@ export const imageRouter = createTRPCRouter({
       return await getPresignedUrl(key);
     }),
 
-  createImage: protectedProcedure
+  uploadImage: protectedProcedure
     .input(z.object({
       image: z.custom<FileObj>(),
       width: z.number().optional(),
@@ -27,7 +28,8 @@ export const imageRouter = createTRPCRouter({
         throw new Error("Image is required");
       }
 
-      const {key: imageKey} = await uploadFileToS3(image, {width, height});
+      const newImageUrl = await resizeImage({base64String: image.url, width, height});
+      const {key: imageKey} = await uploadFileToS3({...image, url: newImageUrl});
       return imageKey;
     }),
 

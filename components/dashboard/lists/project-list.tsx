@@ -2,7 +2,6 @@
 
 import React, {useState} from "react";
 import {EllipsisIcon, ExternalLinkIcon, PencilIcon, PlusIcon, TrashIcon} from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 
@@ -11,6 +10,7 @@ import {Button} from "~/components/ui/button";
 import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
 import {EmptySection} from "~/components/ui/empty-section";
+import {FileThumbnail} from "~/components/ui/file-thumbnail";
 import {Heading} from "~/components/ui/heading";
 import {useToast} from "~/hooks/use-toast";
 import type {ProjectItem} from "~/server/api/routers/project";
@@ -91,12 +91,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onCli
 
   return (
     <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-muted py-3 last-of-type:border-0">
-      <div className="relative mr-2 h-16 w-20 shrink-0 overflow-hidden rounded-md bg-accent md:w-24">
-        {coverImage.url ? (
-          // Priority is set to true by default as the component will always be above the fold
-          <Image src={coverImage.url} fill style={{objectFit: "cover"}} sizes="192px" alt="" priority />
-        ) : null}
-      </div>
+      <FileThumbnail file={coverImage} size="sm" className="mr-2" />
 
       <div className="flex flex-1 flex-col items-start">
         <p className="mr-2 font-poppins text-sm font-semibold leading-6">{name}</p>

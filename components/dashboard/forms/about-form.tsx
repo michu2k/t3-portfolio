@@ -7,9 +7,9 @@ import {FileX2Icon} from "lucide-react";
 
 import {Button} from "~/components/ui/button";
 import {Dropzone} from "~/components/ui/dropzone";
+import {FileThumbnailCard} from "~/components/ui/file-thumbnail";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
-import {ImageCard} from "~/components/ui/image-card";
 import {Textarea} from "~/components/ui/textarea";
 import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
@@ -18,6 +18,7 @@ import {api} from "~/trpc/react";
 import {extractSnippetValues} from "~/utils/extractSnippetValues";
 import type {FileObj} from "~/utils/file";
 import {acceptedImageTypes} from "~/utils/file";
+import {revalidatePath} from "~/utils/revalidate-path";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 import {aboutMeSnippetsSchema} from "~/utils/validations/about-me";
 
@@ -32,9 +33,9 @@ type AboutFormProps = {
 const AboutForm = ({snippets, currentImage}: AboutFormProps) => {
   const {toast} = useToast();
   const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", snippets);
-  const {description = "", image: imageKey} = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
+  const {description = "", image: currentImageKey} = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
 
-  const createImage = api.image.createImage.useMutation();
+  const uploadImage = api.image.uploadImage.useMutation();
   const deleteImage = api.image.deleteImage.useMutation();
 
   const formMethods = useForm<AboutMeSnippetsFormValues>({
@@ -54,22 +55,24 @@ const AboutForm = ({snippets, currentImage}: AboutFormProps) => {
   async function handleFormSubmit({description, image}: AboutMeSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    await updateSnippets({description});
+    let imageKey = currentImageKey;
 
     if (image?.name !== currentImage?.name) {
       // Delete old image
-      if (imageKey) {
-        await deleteImage.mutateAsync({key: imageKey});
+      if (currentImageKey) {
+        await deleteImage.mutateAsync({key: currentImageKey});
+        imageKey = "";
       }
 
-      // Create new image if it exists
+      // Upload new image
       if (image) {
-        const imageKey = await createImage.mutateAsync({image, width: IMAGE_WIDTH, height: IMAGE_HEIGHT});
-        await updateSnippets({image: imageKey});
-      } else {
-        await updateSnippets({image: ""});
+        imageKey = await uploadImage.mutateAsync({image, width: IMAGE_WIDTH, height: IMAGE_HEIGHT});
       }
     }
+
+    await updateSnippets({description, image: imageKey});
+
+    revalidatePath("/dashboard/about");
 
     toast({
       title: "Success",
@@ -92,7 +95,7 @@ const AboutForm = ({snippets, currentImage}: AboutFormProps) => {
             <FormItem>
               <FormLabel isOptional>Image</FormLabel>
               {value ? (
-                <ImageCard
+                <FileThumbnailCard
                   file={value}
                   actions={
                     <Button variant="secondary" size="sm" onClick={() => onChange(undefined)}>

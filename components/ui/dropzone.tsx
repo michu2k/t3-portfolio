@@ -50,21 +50,26 @@ const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, ac
     accept
   });
 
-  function displayExtensions() {
-    return Object.values(accept)
-      .flat()
-      .map((ext, idx, arr) => {
-        const isLastElement = idx === arr.length - 1;
-        const isLastTwoElements = idx >= arr.length - 2;
+  function getAcceptedFileTypes(accept: Accept) {
+    return Object.entries(accept).reduce<Array<string>>(
+      (acc, [mimeType, extensions]) =>
+        extensions.length > 0 ? [...acc, ...extensions] : [...acc, mimeType.split("/")[1] as string],
+      []
+    );
+  }
 
-        return (
-          <Fragment key={ext}>
-            {isLastElement && " and "}
-            <strong>{ext.replace(".", "").toUpperCase()}</strong>
-            {!isLastTwoElements && ", "}
-          </Fragment>
-        );
-      });
+  function displayFileTypes() {
+    return getAcceptedFileTypes(accept).map((ext, idx, arr) => {
+      const isLastElement = idx === arr.length - 1;
+
+      return (
+        <Fragment key={ext}>
+          {isLastElement && " and "}
+          <strong>{ext.replace(".", "").toUpperCase()}</strong>
+          {!isLastElement && ", "}
+        </Fragment>
+      );
+    });
   }
 
   return (
@@ -86,7 +91,7 @@ const Dropzone = ({name, onDrop, maxSize = MAX_FILE_SIZE, multiple, disabled, ac
           </p>
 
           <p className="text-xs leading-6 text-muted-foreground">
-            Only {displayExtensions()} files with max size of <strong>{convertBytesToMB(maxSize)}</strong>
+            Only {displayFileTypes()} with max size of <strong>{convertBytesToMB(maxSize)}</strong>
           </p>
         </div>
       </div>

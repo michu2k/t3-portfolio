@@ -1,15 +1,12 @@
 import type {SnippetType} from "@prisma/client";
-import {usePathname} from "next/navigation";
 
 import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/react";
 import type {SnippetValues} from "~/utils/extractSnippetValues";
-import {revalidatePath} from "~/utils/revalidate-path";
 
 const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
   const updateSnippet = api.snippet.updateSnippet.useMutation();
   const createSnippet = api.snippet.createSnippet.useMutation();
-  const pathname = usePathname();
   const utils = api.useUtils();
 
   /** Bulk update section snippets for the given type */
@@ -25,8 +22,7 @@ const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
     });
 
     await Promise.all(promises).then(async () => {
-      await utils.snippet.getSnippetsByType.invalidate();
-      revalidatePath(pathname);
+      await utils.snippet.getSnippetsByType.invalidate({type});
     });
   }
 
