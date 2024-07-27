@@ -21,16 +21,16 @@ const AboutMe = async ({snippets}: AboutMeProps) => {
 
   return (
     <PageSection id="about" heading="Personal Details" subheading="About Me">
-      <div className="flex flex-col gap-14 sm:flex-row sm:items-center">
+      <div className="flex flex-col gap-12 sm:flex-row sm:items-center md:gap-14">
         {imageObj ? (
-          <MotionInViewWrapper className="relative my-auto h-80 w-full flex-shrink-0 sm:w-64 md:h-96 md:w-80">
+          <MotionInViewWrapper className="relative my-auto h-52 w-40 flex-shrink-0 sm:h-72 sm:w-56 md:h-96 md:w-80">
             <div className="relative h-full w-full overflow-hidden rounded-md">
               <Image
                 src={imageObj.url}
                 fill
                 style={{objectFit: "cover"}}
                 className="bg-accent"
-                sizes="(min-width: 768px) 50vw, 75vw"
+                sizes="(min-width: 768px) 50vw, 160px"
                 alt=""
               />
             </div>
