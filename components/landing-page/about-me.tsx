@@ -37,7 +37,7 @@ const AboutMe = async ({snippets}: AboutMeProps) => {
           </MotionInViewWrapper>
         ) : null}
 
-        <p className="text-lg leading-8 text-muted-foreground">{description}</p>
+        <p className="text-base leading-8 text-muted-foreground">{description}</p>
       </div>
     </PageSection>
   );
