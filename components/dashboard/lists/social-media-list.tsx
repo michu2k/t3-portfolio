@@ -12,6 +12,7 @@ import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
 import {EmptySection} from "~/components/ui/empty-section";
 import {Heading} from "~/components/ui/heading";
+import {Skeleton} from "~/components/ui/skeleton";
 import {useToast} from "~/hooks/use-toast";
 import {api} from "~/trpc/react";
 import {getSocialMediaIcon} from "~/utils/get-social-media-icon";
@@ -88,11 +89,11 @@ const SocialMediaCard = ({id, icon, url, onClickDeleteBtn}: SocialMediaCardProps
   const Icon = getSocialMediaIcon(icon);
 
   return (
-    <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-muted py-3 last-of-type:border-0">
-      <Icon className="mr-2 size-4 flex-shrink-0 fill-foreground" aria-hidden="true" />
+    <article className="flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+      <Icon className="size-4 flex-shrink-0 fill-foreground" aria-hidden="true" />
 
-      <div className="mr-4 flex-1">
-        <p className="text-sm leading-6 text-muted-foreground">{url}</p>
+      <div className="flex-1">
+        <p className="text-sm leading-5 text-muted-foreground">{url}</p>
       </div>
 
       <DropdownMenu>
@@ -123,4 +124,32 @@ const SocialMediaCard = ({id, icon, url, onClickDeleteBtn}: SocialMediaCardProps
   );
 };
 
-export {SocialMediaList};
+const SocialMediaListSkeleton = () => {
+  return (
+    <>
+      <Heading as="h2" size="sm">
+        Links
+      </Heading>
+
+      <div className="flex flex-col items-start">
+        <SocialMediaCardSkeleton />
+        <SocialMediaCardSkeleton />
+        <SocialMediaCardSkeleton />
+      </div>
+    </>
+  );
+};
+
+const SocialMediaCardSkeleton = () => {
+  return (
+    <article className="flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+      <Skeleton className="size-4" />
+
+      <div className="flex-1">
+        <Skeleton className="h-4 w-2/3" />
+      </div>
+    </article>
+  );
+};
+
+export {SocialMediaList, SocialMediaListSkeleton};
