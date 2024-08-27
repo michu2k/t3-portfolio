@@ -55,9 +55,9 @@ const FileThumbnailCard = React.forwardRef<HTMLDivElement, FileThumbnailCardProp
       <div ref={ref} className={cn("flex min-h-[5.5rem] gap-4", className)}>
         <FileThumbnail file={file} />
 
-        <div className="flex min-w-0 flex-1 flex-col items-start">
+        <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
           <p className="w-full truncate font-poppins text-xs font-semibold">{file.name}</p>
-          <p className="mb-auto text-xs leading-6 text-muted-foreground">{convertBytesToMB(file.size)}</p>
+          <p className="mb-auto text-xs text-muted-foreground">{convertBytesToMB(file.size)}</p>
 
           {actions ? <div className="flex items-center gap-2">{actions}</div> : null}
         </div>
