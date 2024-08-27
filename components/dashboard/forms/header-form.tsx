@@ -8,6 +8,7 @@ import {Button} from "~/components/ui/button";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
 import {Input} from "~/components/ui/input";
+import {Skeleton} from "~/components/ui/skeleton";
 import {Textarea} from "~/components/ui/textarea";
 import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
@@ -97,4 +98,31 @@ const HeaderForm = ({snippets}: HeaderFormProps) => {
   );
 };
 
-export {HeaderForm};
+const HeaderFormSkeleton = () => {
+  return (
+    <>
+      <Heading as="h2" size="sm">
+        General settings
+      </Heading>
+
+      <div className="py-4">
+        <span className="block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground">Heading</span>
+
+        <Skeleton className="h-10 w-full" />
+      </div>
+
+      <div className="py-4">
+        <span className="block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground">
+          Description
+          <span className="inline-block pl-2 text-xs font-medium italic leading-4 text-muted-foreground/60">
+            optional
+          </span>
+        </span>
+
+        <Skeleton className="h-28 w-full" />
+      </div>
+    </>
+  );
+};
+
+export {HeaderForm, HeaderFormSkeleton};
