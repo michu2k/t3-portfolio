@@ -10,6 +10,7 @@ import {Dropzone, DropzoneContent} from "~/components/ui/dropzone";
 import {FileThumbnailCard} from "~/components/ui/file-thumbnail";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
+import {Skeleton} from "~/components/ui/skeleton";
 import {Textarea} from "~/components/ui/textarea";
 import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
@@ -148,4 +149,38 @@ const AboutForm = ({snippets, currentImage}: AboutFormProps) => {
   );
 };
 
-export {AboutForm};
+const AboutFormSkeleton = () => {
+  return (
+    <>
+      <Heading as="h2" size="sm">
+        General settings
+      </Heading>
+
+      <div className="py-4">
+        <span className="block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground">
+          Image
+          <span className="inline-block pl-2 text-xs font-medium italic leading-4 text-muted-foreground/60">
+            optional
+          </span>
+        </span>
+
+        <div className="flex min-h-[5.5rem] gap-4">
+          <Skeleton className="h-24 w-36" />
+
+          <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
+            <Skeleton className="h-4 w-40" />
+            <Skeleton className="h-4 w-10" />
+          </div>
+        </div>
+      </div>
+
+      <div className="py-4">
+        <span className="block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground">Description</span>
+
+        <Skeleton className="h-28 w-full" />
+      </div>
+    </>
+  );
+};
+
+export {AboutForm, AboutFormSkeleton};
