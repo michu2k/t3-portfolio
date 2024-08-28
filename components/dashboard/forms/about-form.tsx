@@ -168,7 +168,7 @@ const AboutFormSkeleton = () => {
           <Skeleton className="h-24 w-36" />
 
           <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
-            <Skeleton className="h-4 w-40" />
+            <Skeleton className="h-4 w-36" />
             <Skeleton className="h-4 w-10" />
           </div>
         </div>
