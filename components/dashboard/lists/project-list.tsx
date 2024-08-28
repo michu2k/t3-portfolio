@@ -12,6 +12,7 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 import {EmptySection} from "~/components/ui/empty-section";
 import {FileThumbnail} from "~/components/ui/file-thumbnail";
 import {Heading} from "~/components/ui/heading";
+import {Skeleton} from "~/components/ui/skeleton";
 import {useToast} from "~/hooks/use-toast";
 import type {ProjectItem} from "~/server/api/routers/project";
 import {api} from "~/trpc/react";
@@ -90,8 +91,8 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onCli
   const itemDescription = (shortDescription || description).slice(0, MAX_TEXT_LENGTH);
 
   return (
-    <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-muted py-3 last-of-type:border-0">
-      <FileThumbnail file={coverImage} size="sm" className="mr-2" />
+    <article className="flex min-h-[5.25rem] w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+      <FileThumbnail file={coverImage} size="sm" />
 
       <div className="flex flex-1 flex-col items-start">
         <p className="mr-2 font-poppins text-sm font-semibold leading-6">{name}</p>
@@ -136,4 +137,33 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage, onCli
   );
 };
 
-export {ProjectList};
+const ProjectListSkeleton = () => {
+  return (
+    <>
+      <Heading as="h2" size="sm">
+        Project items
+      </Heading>
+
+      <div className="flex flex-col items-start">
+        <ProjectCardSkeleton />
+        <ProjectCardSkeleton />
+        <ProjectCardSkeleton />
+      </div>
+    </>
+  );
+};
+
+const ProjectCardSkeleton = () => {
+  return (
+    <div className="flex min-h-[5.25rem] w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+      <Skeleton className="h-16 w-20 md:w-24" />
+
+      <div className="flex flex-1 flex-col items-start">
+        <Skeleton className="my-1 h-4 w-36" />
+        <Skeleton className="my-1 h-4 w-1/2" />
+      </div>
+    </div>
+  );
+};
+
+export {ProjectList, ProjectListSkeleton};
