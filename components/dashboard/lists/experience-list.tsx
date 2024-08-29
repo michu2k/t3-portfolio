@@ -13,6 +13,7 @@ import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
 import {EmptySection} from "~/components/ui/empty-section";
 import {Heading} from "~/components/ui/heading";
+import {Skeleton} from "~/components/ui/skeleton";
 import {useToast} from "~/hooks/use-toast";
 import {api} from "~/trpc/react";
 import {revalidatePath} from "~/utils/revalidate-path";
@@ -87,11 +88,11 @@ type ExperienceCardProps = ExperienceItem & {
 
 const ExperienceCard = ({id, company, startDate, endDate, position, onClickDeleteBtn}: ExperienceCardProps) => {
   return (
-    <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-muted py-3 last-of-type:border-0">
-      <div className="mr-4 flex-1">
+    <article className="flex min-h-28 w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+      <div className="flex-1">
         <p className="font-poppins text-sm font-semibold leading-8">{position}</p>
         <p className="text-xs leading-6 text-muted-foreground">{company}</p>
-        <span className="text-xs leading-6 text-muted-foreground">
+        <span className="block text-xs leading-6 text-muted-foreground">
           {format(startDate, "MMM yyyy")} {" - "}
           {endDate ? format(endDate, "MMM yyyy") : "Present"}
         </span>
@@ -125,4 +126,40 @@ const ExperienceCard = ({id, company, startDate, endDate, position, onClickDelet
   );
 };
 
-export {ExperienceList};
+const ExperienceListSkeleton = () => {
+  return (
+    <>
+      <Heading as="h2" size="sm">
+        Experience items
+      </Heading>
+
+      <div className="flex flex-col items-start">
+        <ExperienceCardSkeleton />
+        <ExperienceCardSkeleton />
+        <ExperienceCardSkeleton />
+      </div>
+    </>
+  );
+};
+
+const ExperienceCardSkeleton = () => {
+  return (
+    <div className="flex min-h-28 w-full items-center gap-1 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+      <div className="flex-1">
+        <div className="flex h-8 items-center">
+          <Skeleton className="h-4 w-20" />
+        </div>
+
+        <div className="flex h-6 items-center">
+          <Skeleton className="h-4 w-40" />
+        </div>
+
+        <div className="flex h-6 items-center">
+          <Skeleton className="h-4 w-28" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export {ExperienceList, ExperienceListSkeleton};
