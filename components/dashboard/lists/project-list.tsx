@@ -159,8 +159,13 @@ const ProjectCardSkeleton = () => {
       <Skeleton className="h-16 w-20 md:w-24" />
 
       <div className="flex flex-1 flex-col items-start">
-        <Skeleton className="my-1 h-4 w-36" />
-        <Skeleton className="my-1 h-4 w-1/2" />
+        <div className="flex h-6 items-center">
+          <Skeleton className="h-4 w-36" />
+        </div>
+
+        <div className="flex h-6 w-full items-center">
+          <Skeleton className="h-4 w-1/3" />
+        </div>
       </div>
     </div>
   );

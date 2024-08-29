@@ -93,7 +93,7 @@ const SocialMediaCard = ({id, icon, url, onClickDeleteBtn}: SocialMediaCardProps
       <Icon className="size-4 flex-shrink-0 fill-foreground" aria-hidden="true" />
 
       <div className="flex-1">
-        <p className="text-sm leading-5 text-muted-foreground">{url}</p>
+        <p className="text-sm leading-6 text-muted-foreground">{url}</p>
       </div>
 
       <DropdownMenu>
