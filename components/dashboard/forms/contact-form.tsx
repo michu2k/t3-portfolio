@@ -7,6 +7,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Button} from "~/components/ui/button";
 import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
+import {Skeleton} from "~/components/ui/skeleton";
 import {Textarea} from "~/components/ui/textarea";
 import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
@@ -78,4 +79,20 @@ const ContactForm = ({snippets}: ContactFormProps) => {
   );
 };
 
-export {ContactForm};
+const ContactFormSkeleton = () => {
+  return (
+    <>
+      <Heading as="h2" size="sm">
+        General settings
+      </Heading>
+
+      <div className="pb-20 pt-4">
+        <span className="block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground">Description</span>
+
+        <Skeleton className="h-28 w-full" />
+      </div>
+    </>
+  );
+};
+
+export {ContactForm, ContactFormSkeleton};
