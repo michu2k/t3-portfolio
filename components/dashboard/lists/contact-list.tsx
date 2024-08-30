@@ -12,6 +12,7 @@ import {Dialog, DialogTrigger} from "~/components/ui/dialog";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
 import {EmptySection} from "~/components/ui/empty-section";
 import {Heading} from "~/components/ui/heading";
+import {Skeleton} from "~/components/ui/skeleton";
 import {useToast} from "~/hooks/use-toast";
 import {api} from "~/trpc/react";
 import {revalidatePath} from "~/utils/revalidate-path";
@@ -85,8 +86,8 @@ type ContactMethodCardProps = ContactMethod & {
 
 const ContactMethodCard = ({id, name, description, onClickDeleteBtn}: ContactMethodCardProps) => {
   return (
-    <article className="flex w-full items-center gap-1 border-b-[1px] border-solid border-muted py-3 last-of-type:border-0">
-      <div className="mr-4 flex-1">
+    <article className="flex min-h-20 w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+      <div className="flex-1">
         <p className="font-poppins text-sm font-semibold leading-8">{name}</p>
         <p className="text-xs leading-6 text-muted-foreground">{description}</p>
       </div>
@@ -119,4 +120,36 @@ const ContactMethodCard = ({id, name, description, onClickDeleteBtn}: ContactMet
   );
 };
 
-export {ContactList};
+const ContactListSkeleton = () => {
+  return (
+    <>
+      <Heading as="h2" size="sm">
+        Contact methods
+      </Heading>
+
+      <div className="flex flex-col items-start">
+        <ContactMethodCardSkeleton />
+        <ContactMethodCardSkeleton />
+        <ContactMethodCardSkeleton />
+      </div>
+    </>
+  );
+};
+
+const ContactMethodCardSkeleton = () => {
+  return (
+    <div className="flex min-h-20 w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+      <div className="flex-1">
+        <div className="flex h-8 items-center">
+          <Skeleton className="h-4 w-36" />
+        </div>
+
+        <div className="flex h-6 items-center">
+          <Skeleton className="h-4 w-1/3" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export {ContactList, ContactListSkeleton};
