@@ -8,15 +8,46 @@ import {ContactMethodType} from "@prisma/client";
 import {useRouter} from "next/navigation";
 
 import {Button} from "~/components/ui/button";
-import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormLabelSkeleton,
+  FormMessage
+} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
+import {Skeleton} from "~/components/ui/skeleton";
 import {useToast} from "~/hooks/use-toast";
 import {api} from "~/trpc/react";
 import {capitalize} from "~/utils/capitalize";
 import {revalidatePath} from "~/utils/revalidate-path";
 import type {ContactMethodFormValues} from "~/utils/validations/contact";
 import {contactMethodSchema} from "~/utils/validations/contact";
+
+type FieldPlaceholders = {
+  [key in ContactMethodType]: {
+    name: string;
+    description: string;
+  };
+};
+
+const fieldPlaceholdersDef: FieldPlaceholders = {
+  ADDRESS: {
+    name: "Country, city",
+    description: "Street address"
+  },
+  EMAIL: {
+    name: "Email address",
+    description: "Short email description"
+  },
+  PHONE: {
+    name: "Phone number",
+    description: "Availability, possible contact hours"
+  }
+};
 
 type ContactItemFormProps = {
   contact: ContactMethod | null;
@@ -134,26 +165,25 @@ const ContactItemForm = ({contact}: ContactItemFormProps) => {
   );
 };
 
-type FieldPlaceholders = {
-  [key in ContactMethodType]: {
-    name: string;
-    description: string;
-  };
+const ContactItemFormSkeleton = () => {
+  return (
+    <>
+      <div className="pb-12 pt-4">
+        <FormLabelSkeleton>Type</FormLabelSkeleton>
+        <Skeleton className="h-10 w-[14rem]" />
+      </div>
+
+      <div className="py-4">
+        <FormLabelSkeleton>Name</FormLabelSkeleton>
+        <Skeleton className="h-10 w-full" />
+      </div>
+
+      <div className="py-4">
+        <FormLabelSkeleton>Description</FormLabelSkeleton>
+        <Skeleton className="h-10 w-full" />
+      </div>
+    </>
+  );
 };
 
-const fieldPlaceholdersDef: FieldPlaceholders = {
-  ADDRESS: {
-    name: "Country, city",
-    description: "Street address"
-  },
-  EMAIL: {
-    name: "Email address",
-    description: "Short email description"
-  },
-  PHONE: {
-    name: "Phone number",
-    description: "Availability, possible contact hours"
-  }
-};
-
-export {ContactItemForm};
+export {ContactItemForm, ContactItemFormSkeleton};

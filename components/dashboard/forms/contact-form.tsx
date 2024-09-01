@@ -5,7 +5,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 
 import {Button} from "~/components/ui/button";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
+import {FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
 import {Skeleton} from "~/components/ui/skeleton";
 import {Textarea} from "~/components/ui/textarea";
@@ -87,8 +87,7 @@ const ContactFormSkeleton = () => {
       </Heading>
 
       <div className="pb-20 pt-4">
-        <span className="block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground">Description</span>
-
+        <FormLabelSkeleton>Description</FormLabelSkeleton>
         <Skeleton className="h-28 w-full" />
       </div>
     </>
