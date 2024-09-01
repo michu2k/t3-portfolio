@@ -7,8 +7,9 @@ import type {SocialMediaLink} from "@prisma/client";
 import {useRouter} from "next/navigation";
 
 import {Button} from "~/components/ui/button";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
+import {FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
+import {Skeleton} from "~/components/ui/skeleton";
 import {useToast} from "~/hooks/use-toast";
 import {api} from "~/trpc/react";
 import {capitalize} from "~/utils/capitalize";
@@ -114,4 +115,27 @@ const SocialMediaItemForm = ({socialMediaLink}: SocialMediaItemFormProps) => {
   );
 };
 
-export {socialMediaIconsDef, SocialMediaItemForm};
+const SocialMediaItemFormSkeleton = () => {
+  return (
+    <>
+      <div className="py-4">
+        <FormLabelSkeleton>Icon</FormLabelSkeleton>
+
+        <div className="flex flex-wrap gap-2">
+          <Skeleton className="size-10" />
+          <Skeleton className="size-10" />
+          <Skeleton className="size-10" />
+          <Skeleton className="size-10" />
+        </div>
+      </div>
+
+      <div className="py-4">
+        <FormLabelSkeleton>Url</FormLabelSkeleton>
+
+        <Skeleton className="h-10 w-full" />
+      </div>
+    </>
+  );
+};
+
+export {socialMediaIconsDef, SocialMediaItemForm, SocialMediaItemFormSkeleton};
