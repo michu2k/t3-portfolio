@@ -9,9 +9,18 @@ import {useRouter} from "next/navigation";
 
 import {Button} from "~/components/ui/button";
 import {Calendar} from "~/components/ui/calendar";
-import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormLabelSkeleton,
+  FormMessage
+} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
 import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
+import {Skeleton} from "~/components/ui/skeleton";
 import {useToast} from "~/hooks/use-toast";
 import type {ExperienceItemWithResponsibilities} from "~/server/api/routers/experience";
 import {api} from "~/trpc/react";
@@ -235,4 +244,40 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
   );
 };
 
-export {ExperienceItemForm};
+const ExperienceItemFormSkeleton = () => {
+  return (
+    <>
+      <div className="py-4">
+        <FormLabelSkeleton>Position name</FormLabelSkeleton>
+        <Skeleton className="h-10 w-full" />
+      </div>
+
+      <div className="py-4">
+        <FormLabelSkeleton>Company name</FormLabelSkeleton>
+        <Skeleton className="h-10 w-full" />
+      </div>
+
+      <div className="sm:flex sm:gap-4">
+        <div className="max-w-[14rem] flex-1 py-4">
+          <FormLabelSkeleton>From</FormLabelSkeleton>
+          <Skeleton className="h-10 w-full" />
+        </div>
+
+        <div className="max-w-[14rem] flex-1 py-4">
+          <FormLabelSkeleton isOptional>To</FormLabelSkeleton>
+          <Skeleton className="h-10 w-full" />
+        </div>
+      </div>
+
+      <div className="py-4">
+        <FormLabelSkeleton isOptional>Responsibilities</FormLabelSkeleton>
+        <div className="flex items-center pt-10">
+          <Skeleton className="mr-2 h-10 w-full" />
+          <Skeleton className="size-10" />
+        </div>
+      </div>
+    </>
+  );
+};
+
+export {ExperienceItemForm, ExperienceItemFormSkeleton};
