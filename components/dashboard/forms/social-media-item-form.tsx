@@ -120,7 +120,6 @@ const SocialMediaItemFormSkeleton = () => {
     <>
       <div className="py-4">
         <FormLabelSkeleton>Icon</FormLabelSkeleton>
-
         <div className="flex flex-wrap gap-2">
           <Skeleton className="size-10" />
           <Skeleton className="size-10" />
@@ -131,7 +130,6 @@ const SocialMediaItemFormSkeleton = () => {
 
       <div className="py-4">
         <FormLabelSkeleton>Url</FormLabelSkeleton>
-
         <Skeleton className="h-10 w-full" />
       </div>
     </>
