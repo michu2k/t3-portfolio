@@ -74,6 +74,19 @@ const FormLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive.Root>,
 
 FormLabel.displayName = "Label";
 
+const FormLabelSkeleton = ({className, isOptional, children}: FormLabelProps) => {
+  return (
+    <span className={cn("block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground", className)}>
+      {children}
+      {isOptional && (
+        <span className="inline-block pl-2 text-xs font-medium italic leading-4 text-muted-foreground/60">
+          optional
+        </span>
+      )}
+    </span>
+  );
+};
+
 const FormControl = React.forwardRef<
   React.ElementRef<typeof Slot>,
   React.ComponentPropsWithoutRef<typeof Slot> & {withDescription?: boolean}
@@ -135,4 +148,14 @@ const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<
 
 FormMessage.displayName = "FormMessage";
 
-export {FormField, FormItem, FormLabel, FormControl, FormDescription, FormFieldContext, FormItemContext, FormMessage};
+export {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormLabelSkeleton,
+  FormControl,
+  FormDescription,
+  FormFieldContext,
+  FormItemContext,
+  FormMessage
+};
