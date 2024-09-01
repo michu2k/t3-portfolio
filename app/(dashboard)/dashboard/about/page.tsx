@@ -1,8 +1,8 @@
-import React from "react";
+import React, {Suspense} from "react";
 import {SnippetType} from "@prisma/client";
 import type {Metadata} from "next";
 
-import {AboutForm} from "~/components/dashboard/forms/about-form";
+import {AboutForm, AboutFormSkeleton} from "~/components/dashboard/forms/about-form";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {ensureAuthenticated} from "~/server/auth";
@@ -18,17 +18,23 @@ export const metadata: Metadata = {
 export default async function Page() {
   await ensureAuthenticated();
 
+  return (
+    <>
+      <PageHeader heading="About" description="About section settings" />
+      <PageContent>
+        <Suspense fallback={<AboutFormSkeleton />}>
+          <AboutFormWrapper />
+        </Suspense>
+      </PageContent>
+    </>
+  );
+}
+
+const AboutFormWrapper = async () => {
   const snippets = await getSnippetsByType(SnippetType.ABOUT_ME);
 
   const {image} = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
   const currentImage = await api.image.getImage({key: image});
 
-  return (
-    <>
-      <PageHeader heading="About" description="About section settings" />
-      <PageContent>
-        <AboutForm snippets={snippets} currentImage={currentImage} />
-      </PageContent>
-    </>
-  );
-}
+  return <AboutForm snippets={snippets} currentImage={currentImage} />;
+};
