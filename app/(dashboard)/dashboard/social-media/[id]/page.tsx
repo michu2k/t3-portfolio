@@ -1,7 +1,7 @@
-import React from "react";
+import React, {Suspense} from "react";
 import type {Metadata} from "next";
 
-import {SocialMediaItemForm} from "~/components/dashboard/forms/social-media-item-form";
+import {SocialMediaItemForm, SocialMediaItemFormSkeleton} from "~/components/dashboard/forms/social-media-item-form";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {ensureAuthenticated} from "~/server/auth";
@@ -24,14 +24,21 @@ export default async function Page({params: {id}}: PageProps) {
   const heading = isNew ? "Create" : "Edit";
   const description = isNew ? "Create a new social media link." : "Edit an existing link.";
 
-  const socialMediaLink = await api.socialMedia.getItem({id});
-
   return (
     <>
       <PageHeader heading={heading} description={description} />
       <PageContent>
-        <SocialMediaItemForm socialMediaLink={socialMediaLink} />
+        <Suspense fallback={<SocialMediaItemFormSkeleton />}>
+          <SocialMediaItemFormWrapper id={id} />
+        </Suspense>
       </PageContent>
     </>
   );
 }
+
+const SocialMediaItemFormWrapper = async ({id}: {id: string}) => {
+  const isNew = id === "new";
+  const socialMediaLink = isNew ? null : await api.socialMedia.getItem({id});
+
+  return <SocialMediaItemForm socialMediaLink={socialMediaLink} />;
+};
