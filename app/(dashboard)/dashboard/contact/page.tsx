@@ -1,11 +1,11 @@
-import React from "react";
+import React, {Suspense} from "react";
 import {SnippetType} from "@prisma/client";
 import type {Metadata} from "next";
 
-import {ContactForm} from "~/components/dashboard/forms/contact-form";
+import {ContactForm, ContactFormSkeleton} from "~/components/dashboard/forms/contact-form";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
-import {ContactList} from "~/components/dashboard/lists/contact-list";
+import {ContactList, ContactListSkeleton} from "~/components/dashboard/lists/contact-list";
 import {Separator} from "~/components/ui/separator";
 import {ensureAuthenticated} from "~/server/auth";
 import {getSnippetsByType} from "~/server/getSnippetsByType";
@@ -18,17 +18,32 @@ export const metadata: Metadata = {
 export default async function Page() {
   await ensureAuthenticated();
 
-  const snippets = await getSnippetsByType(SnippetType.CONTACT);
-  const contactMethods = await api.contact.getItems();
-
   return (
     <>
       <PageHeader heading="Contact" description="Contact section settings" />
       <PageContent>
-        <ContactForm snippets={snippets} />
+        <Suspense fallback={<ContactFormSkeleton />}>
+          <ContactFormWrapper />
+        </Suspense>
+
         <Separator className="my-8" />
-        <ContactList contactMethods={contactMethods} />
+
+        <Suspense fallback={<ContactListSkeleton />}>
+          <ContactListWrapper />
+        </Suspense>
       </PageContent>
     </>
   );
 }
+
+const ContactFormWrapper = async () => {
+  const snippets = await getSnippetsByType(SnippetType.CONTACT);
+
+  return <ContactForm snippets={snippets} />;
+};
+
+const ContactListWrapper = async () => {
+  const contactMethods = await api.contact.getItems();
+
+  return <ContactList contactMethods={contactMethods} />;
+};
