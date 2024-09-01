@@ -5,7 +5,7 @@ import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 
 import {Button} from "~/components/ui/button";
-import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
+import {FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage} from "~/components/ui/form";
 import {Heading} from "~/components/ui/heading";
 import {Input} from "~/components/ui/input";
 import {Skeleton} from "~/components/ui/skeleton";
@@ -106,19 +106,12 @@ const HeaderFormSkeleton = () => {
       </Heading>
 
       <div className="py-4">
-        <span className="block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground">Heading</span>
-
+        <FormLabelSkeleton>Heading</FormLabelSkeleton>
         <Skeleton className="h-10 w-full" />
       </div>
 
       <div className="py-4">
-        <span className="block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground">
-          Description
-          <span className="inline-block pl-2 text-xs font-medium italic leading-4 text-muted-foreground/60">
-            optional
-          </span>
-        </span>
-
+        <FormLabelSkeleton isOptional>Description</FormLabelSkeleton>
         <Skeleton className="h-28 w-full" />
       </div>
     </>
