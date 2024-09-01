@@ -1,7 +1,7 @@
-import React from "react";
+import React, {Suspense} from "react";
 import type {Metadata} from "next";
 
-import {ProjectItemForm} from "~/components/dashboard/forms/project-item-form";
+import {ProjectItemForm, ProjectItemFormSkeleton} from "~/components/dashboard/forms/project-item-form";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {ensureAuthenticated} from "~/server/auth";
@@ -24,14 +24,21 @@ export default async function Page({params: {id}}: PageProps) {
   const heading = isNew ? "Create" : "Edit";
   const description = isNew ? "Create a new project item." : "Edit an existing project item.";
 
-  const project = await api.project.getItem({id});
-
   return (
     <>
       <PageHeader heading={heading} description={description} />
       <PageContent>
-        <ProjectItemForm project={project} />
+        <Suspense fallback={<ProjectItemFormSkeleton />}>
+          <ProjectItemFormWrapper id={id} />
+        </Suspense>
       </PageContent>
     </>
   );
 }
+
+const ProjectItemFormWrapper = async ({id}: {id: string}) => {
+  const isNew = id === "new";
+  const project = isNew ? null : await api.project.getItem({id});
+
+  return <ProjectItemForm project={project} />;
+};
