@@ -1,7 +1,7 @@
-import React from "react";
+import React, {Suspense} from "react";
 import type {Metadata} from "next";
 
-import {ContactItemForm} from "~/components/dashboard/forms/contact-item-form";
+import {ContactItemForm, ContactItemFormSkeleton} from "~/components/dashboard/forms/contact-item-form";
 import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {ensureAuthenticated} from "~/server/auth";
@@ -24,14 +24,21 @@ export default async function Page({params: {id}}: PageProps) {
   const heading = isNew ? "Create" : "Edit";
   const description = isNew ? "Create a new contact method." : "Edit an existing contact method.";
 
-  const contact = await api.contact.getItem({id});
-
   return (
     <>
       <PageHeader heading={heading} description={description} />
       <PageContent>
-        <ContactItemForm contact={contact} />
+        <Suspense fallback={<ContactItemFormSkeleton />}>
+          <ContactItemFormWrapper id={id} />
+        </Suspense>
       </PageContent>
     </>
   );
 }
+
+const ContactItemFormWrapper = async ({id}: {id: string}) => {
+  const isNew = id === "new";
+  const contact = isNew ? null : await api.contact.getItem({id});
+
+  return <ContactItemForm contact={contact} />;
+};
