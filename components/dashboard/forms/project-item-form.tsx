@@ -9,8 +9,17 @@ import {useRouter} from "next/navigation";
 import {Button} from "~/components/ui/button";
 import {Dropzone, DropzoneContent} from "~/components/ui/dropzone";
 import {FileThumbnailCard} from "~/components/ui/file-thumbnail";
-import {FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage} from "~/components/ui/form";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormLabelSkeleton,
+  FormMessage
+} from "~/components/ui/form";
 import {Input} from "~/components/ui/input";
+import {Skeleton} from "~/components/ui/skeleton";
 import {Textarea} from "~/components/ui/textarea";
 import {useToast} from "~/hooks/use-toast";
 import type {ProjectItem} from "~/server/api/routers/project";
@@ -204,4 +213,52 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
   );
 };
 
-export {ProjectItemForm};
+const ProjectItemFormSkeleton = () => {
+  return (
+    <>
+      <div className="py-4">
+        <FormLabelSkeleton>Cover image</FormLabelSkeleton>
+        <div className="flex min-h-[5.5rem] gap-4">
+          <Skeleton className="h-24 w-36" />
+          <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
+            <Skeleton className="h-4 w-36" />
+            <Skeleton className="h-4 w-10" />
+          </div>
+        </div>
+      </div>
+
+      <div className="py-4">
+        <FormLabelSkeleton>Name</FormLabelSkeleton>
+        <Skeleton className="h-10 w-full" />
+      </div>
+
+      <div className="pb-12 pt-4">
+        <FormLabelSkeleton isOptional>Short description</FormLabelSkeleton>
+        <Skeleton className="h-28 w-full" />
+      </div>
+
+      <div className="py-4">
+        <FormLabelSkeleton>Image</FormLabelSkeleton>
+        <div className="flex min-h-[5.5rem] gap-4">
+          <Skeleton className="h-24 w-36" />
+          <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
+            <Skeleton className="h-4 w-36" />
+            <Skeleton className="h-4 w-10" />
+          </div>
+        </div>
+      </div>
+
+      <div className="py-4">
+        <FormLabelSkeleton>Description</FormLabelSkeleton>
+        <Skeleton className="h-28 w-full" />
+      </div>
+
+      <div className="py-4">
+        <FormLabelSkeleton isOptional>Website URL</FormLabelSkeleton>
+        <Skeleton className="h-10 w-full" />
+      </div>
+    </>
+  );
+};
+
+export {ProjectItemForm, ProjectItemFormSkeleton};
