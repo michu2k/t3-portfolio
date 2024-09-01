@@ -113,8 +113,8 @@ const DropzoneContent = () => {
   }
 
   return (
-    <div className="flex min-h-16 flex-grow items-center gap-6">
-      <UploadCloudIcon size={40} strokeWidth={1} />
+    <div className="flex min-h-16 flex-grow items-center gap-4 md:gap-6">
+      <UploadCloudIcon className="size-8 md:size-10" strokeWidth={1} />
 
       <div className="flex flex-1 flex-col gap-1">
         <p className="text-xs leading-6 text-muted-foreground">
