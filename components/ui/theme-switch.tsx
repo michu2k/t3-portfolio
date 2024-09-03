@@ -17,7 +17,7 @@ const ThemeSwitch = () => {
   }, []);
 
   return (
-    <div className="flex items-center gap-3 px-2">
+    <div className="flex min-w-28 items-center gap-2 px-2">
       <div className="relative">
         <label className="flex h-7 w-fit cursor-pointer items-center rounded-full border border-muted">
           <div className="flex w-7 items-center justify-center gap-1">
