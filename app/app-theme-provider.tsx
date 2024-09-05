@@ -5,7 +5,7 @@ import {ThemeProvider} from "next-themes";
 
 function AppThemeProvider({children}: {children: React.ReactNode}) {
   return (
-    <ThemeProvider attribute="class" disableTransitionOnChange>
+    <ThemeProvider attribute="class" enableSystem={false} disableTransitionOnChange>
       {children}
     </ThemeProvider>
   );
