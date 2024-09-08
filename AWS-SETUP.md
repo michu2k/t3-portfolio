@@ -29,6 +29,6 @@ After creating the user, open his profile and in the **Security credentials** ta
 
 ## Summary
 
-Once the S3 bucket is fully configured, and all the environment variables are updated, then you should be able to upload files to your S3 bucket.
+Once your S3 bucket is fully configured and all environment variables are updated, you will be able to upload files to your S3 bucket.
 
 It is worth noting that all actions, such as the generation of pre-signed URLs, are handled server-side, so there is no need to configure CORS.
