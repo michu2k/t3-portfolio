@@ -57,7 +57,7 @@ const HeaderForm = ({snippets}: HeaderFormProps) => {
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={(e) => handleSubmit(handleFormSubmit)(e)} encType="multipart/form-data">
+      <form onSubmit={(e) => handleSubmit(handleFormSubmit)(e)}>
         <Heading as="h2" size="sm">
           General settings
         </Heading>

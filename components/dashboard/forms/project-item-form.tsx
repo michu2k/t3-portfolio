@@ -87,7 +87,7 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
 
   return (
     <FormProvider {...formMethods}>
-      <form onSubmit={(e) => handleSubmit(handleFormSubmit)(e)} encType="multipart/form-data">
+      <form onSubmit={(e) => handleSubmit(handleFormSubmit)(e)}>
         <FormField
           control={control}
           name="coverImage"
