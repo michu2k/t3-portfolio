@@ -6,7 +6,7 @@ import {HeaderForm, HeaderFormSkeleton} from "~/components/dashboard/forms/heade
 import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {ensureAuthenticated} from "~/server/auth";
-import {getSnippetsByType} from "~/server/getSnippetsByType";
+import {api} from "~/trpc/server";
 
 export const metadata: Metadata = {
   title: "Dashboard: Header"
@@ -28,7 +28,7 @@ export default async function Page() {
 }
 
 const HeaderFormWrapper = async () => {
-  const snippets = await getSnippetsByType(SnippetType.HEADER);
+  const snippets = await api.snippet.getSnippetsByType({type: SnippetType.HEADER});
 
   return <HeaderForm snippets={snippets} />;
 };

@@ -7,6 +7,12 @@ import {snippetSchema} from "~/utils/validations/snippet";
 
 export type Snippets = Array<Pick<Snippet, "id" | "name" | "value">>;
 
+const snippetKeys: {[key in SnippetType]: Array<string>} = {
+  [SnippetType.HEADER]: ["heading", "description"],
+  [SnippetType.ABOUT_ME]: ["description", "image"],
+  [SnippetType.CONTACT]: ["description"]
+};
+
 // prettier-ignore
 export const snippetRouter = createTRPCRouter({
   getAllSnippets: publicProcedure
@@ -34,12 +40,11 @@ export const snippetRouter = createTRPCRouter({
 
   getSnippetsByType: publicProcedure
     .input(z.object({
-      type: z.nativeEnum(SnippetType),
-      keys: z.array(z.string())
+      type: z.nativeEnum(SnippetType)
     }))
-    .query(async ({ctx, input: {type, keys}}) => {
+    .query(async ({ctx, input: {type}}) => {
       return await ctx.prisma.snippet.findMany({
-        where: {AND: {type, name: {in: keys}}},
+        where: {AND: {type, name: {in: snippetKeys[type]}}},
         select: {
           id: true,
           name: true,
