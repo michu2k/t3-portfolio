@@ -21,6 +21,7 @@ import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
 import {Button} from "~/components/ui/button";
 import {Separator} from "~/components/ui/separator";
 import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
+import {Skeleton} from "~/components/ui/skeleton";
 import {ThemeSwitch} from "~/components/ui/theme-switch";
 import {useIsMobile} from "~/hooks/use-is-mobile";
 import pkg from "~/package.json";
@@ -72,9 +73,7 @@ const navigationItems: Array<NavigationItemDef> = [
 ];
 
 const SidebarNavigation = () => {
-  const {data: sessionData} = useSession();
   const isMobile = useIsMobile();
-  const {name, image, email} = sessionData?.user || {};
 
   function displayNavigationItems() {
     return navigationItems.map((item) => <NavigationItem key={item.id} {...item} />);
@@ -86,15 +85,7 @@ const SidebarNavigation = () => {
 
       <SidebarContent>
         <div className="flex min-w-0 items-center gap-2 px-2">
-          <Avatar>
-            {image && <AvatarImage src={image} alt="" />}
-            <AvatarFallback>{getUserInitials(name)}</AvatarFallback>
-          </Avatar>
-
-          <div className="min-w-0">
-            <p className="truncate font-poppins text-sm font-medium text-foreground">{name}</p>
-            <p className="truncate text-xs text-muted-foreground">{email}</p>
-          </div>
+          <UserPanel />
         </div>
 
         <div className="flex items-center gap-2">
@@ -154,5 +145,37 @@ const NavigationItem = memo(({text, href, icon: Icon}: NavigationItemDef) => {
 });
 
 NavigationItem.displayName = "NavigationItem";
+
+const UserPanel = () => {
+  const {data: sessionData} = useSession();
+  const {name, image, email} = sessionData?.user || {};
+
+  if (sessionData?.user) {
+    return (
+      <>
+        <Avatar>
+          {image && <AvatarImage src={image} alt="" />}
+          <AvatarFallback>{getUserInitials(name)}</AvatarFallback>
+        </Avatar>
+
+        <div className="min-w-0 space-y-0.5">
+          <p className="truncate font-poppins text-sm font-medium text-foreground">{name}</p>
+          <p className="truncate text-xs text-muted-foreground">{email}</p>
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <Skeleton className="size-10 rounded-full" />
+
+      <div className="min-w-0 space-y-1">
+        <Skeleton className="h-4 w-28" />
+        <Skeleton className="h-4 w-36" />
+      </div>
+    </>
+  );
+};
 
 export {SidebarNavigation};
