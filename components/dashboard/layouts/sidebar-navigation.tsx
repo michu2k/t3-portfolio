@@ -170,9 +170,9 @@ const UserPanel = () => {
     <>
       <Skeleton className="size-10 rounded-full" />
 
-      <div className="min-w-0 space-y-1">
-        <Skeleton className="h-4 w-28" />
-        <Skeleton className="h-4 w-36" />
+      <div className="min-w-0 space-y-2.5">
+        <Skeleton className="h-3 w-28" />
+        <Skeleton className="h-3 w-36" />
       </div>
     </>
   );
