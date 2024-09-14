@@ -46,7 +46,7 @@ const ProjectCard = ({id, name, shortDescription, description, coverImage}: Proj
             {name}
           </p>
 
-          <p className="line-clamp-4 overflow-hidden text-ellipsis text-sm leading-7 text-muted-foreground">
+          <p className="line-clamp-3 overflow-hidden text-ellipsis text-sm leading-7 text-muted-foreground">
             {shortDescription || description}
           </p>
         </div>
