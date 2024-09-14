@@ -1,7 +1,8 @@
 {
   "name": "t3-portfolio",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "license": "MIT",
+  "author": "Michał Strumpf",
   "private": true,
   "type": "module",
   "scripts": {
