@@ -16,7 +16,7 @@ import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
 import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/react";
-import {extractSnippetValues} from "~/utils/extractSnippetValues";
+import {extractSnippetValues} from "~/utils/extract-snippet-values";
 import type {FileObj} from "~/utils/file";
 import {acceptedImageTypes} from "~/utils/file";
 import {revalidatePath} from "~/utils/revalidate-path";

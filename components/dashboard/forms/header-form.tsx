@@ -13,7 +13,7 @@ import {Textarea} from "~/components/ui/textarea";
 import {useSnippets} from "~/hooks/use-snippets";
 import {useToast} from "~/hooks/use-toast";
 import type {Snippets} from "~/server/api/routers/snippet";
-import {extractSnippetValues} from "~/utils/extractSnippetValues";
+import {extractSnippetValues} from "~/utils/extract-snippet-values";
 import {revalidatePath} from "~/utils/revalidate-path";
 import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
 import {headerSnippetsSchema} from "~/utils/validations/header";
