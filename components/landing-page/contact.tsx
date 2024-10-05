@@ -4,7 +4,7 @@ import {type ContactMethod} from "@prisma/client";
 import {MotionInViewWrapper} from "~/components/ui/motion-in-view-wrapper";
 import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/server";
-import {extractSnippetValues} from "~/utils/extractSnippetValues";
+import {extractSnippetValues} from "~/utils/extract-snippet-values";
 import {getContactIcon} from "~/utils/get-contact-icon";
 import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
 
