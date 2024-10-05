@@ -7,7 +7,7 @@ import {PageContent} from "~/components/dashboard/layouts/page-content";
 import {PageHeader} from "~/components/dashboard/layouts/page-header";
 import {ensureAuthenticated} from "~/server/auth";
 import {api} from "~/trpc/server";
-import {extractSnippetValues} from "~/utils/extractSnippetValues";
+import {extractSnippetValues} from "~/utils/extract-snippet-values";
 import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
 
 export const metadata: Metadata = {

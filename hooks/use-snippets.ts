@@ -2,7 +2,7 @@ import type {SnippetType} from "@prisma/client";
 
 import type {Snippets} from "~/server/api/routers/snippet";
 import {api} from "~/trpc/react";
-import type {SnippetValues} from "~/utils/extractSnippetValues";
+import type {SnippetValues} from "~/utils/extract-snippet-values";
 
 const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
   const updateSnippet = api.snippet.updateSnippet.useMutation();
