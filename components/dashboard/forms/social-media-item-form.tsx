@@ -13,7 +13,7 @@ import {Skeleton} from "~/components/ui/skeleton";
 import {useToast} from "~/hooks/use-toast";
 import {api} from "~/trpc/react";
 import {capitalize} from "~/utils/capitalize";
-import {cn} from "~/utils/className";
+import {cn} from "~/utils/cn";
 import {socialMediaIconsDef} from "~/utils/get-social-media-icon";
 import {revalidatePath} from "~/utils/revalidate-path";
 import type {SocialMediaLinkFormValues} from "~/utils/validations/social-media";

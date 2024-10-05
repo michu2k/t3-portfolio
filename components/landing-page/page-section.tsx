@@ -3,7 +3,7 @@ import React from "react";
 
 import {Heading} from "~/components/ui/heading";
 import {MotionInViewWrapper} from "~/components/ui/motion-in-view-wrapper";
-import {cn} from "~/utils/className";
+import {cn} from "~/utils/cn";
 
 type PageSectionProps = PropsWithChildren<{
   id: string;

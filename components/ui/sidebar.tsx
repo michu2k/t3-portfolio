@@ -7,7 +7,7 @@ import {XIcon} from "lucide-react";
 import {usePathname} from "next/navigation";
 
 import {Button} from "~/components/ui/button";
-import {cn} from "~/utils/className";
+import {cn} from "~/utils/cn";
 
 type SidebarContextProps = {
   isExpanded: boolean;
