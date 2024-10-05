@@ -5,7 +5,7 @@ import * as ToastPrimitives from "@radix-ui/react-toast";
 import {cva, type VariantProps} from "class-variance-authority";
 import {AlertTriangleIcon, CheckIcon, InfoIcon, X} from "lucide-react";
 
-import {cn} from "~/utils/className";
+import {cn} from "~/utils/cn";
 
 const ToastProvider = ToastPrimitives.Provider;
 

@@ -4,7 +4,7 @@ import {cva} from "class-variance-authority";
 import {FileIcon} from "lucide-react";
 import Image from "next/image";
 
-import {cn} from "~/utils/className";
+import {cn} from "~/utils/cn";
 import {convertBytesToMB, type FileObj} from "~/utils/file";
 
 const fileThumbnailVariants = cva(

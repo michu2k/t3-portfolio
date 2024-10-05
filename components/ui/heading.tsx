@@ -2,7 +2,7 @@ import type {PropsWithChildren} from "react";
 import React from "react";
 import {cva, type VariantProps} from "class-variance-authority";
 
-import {cn} from "~/utils/className";
+import {cn} from "~/utils/cn";
 
 const headingVariants = cva("font-poppins", {
   variants: {

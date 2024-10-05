@@ -5,7 +5,7 @@ import * as LabelPrimitive from "@radix-ui/react-label";
 import {Slot} from "@radix-ui/react-slot";
 
 import {useFormField} from "~/hooks/use-form-field";
-import {cn} from "~/utils/className";
+import {cn} from "~/utils/cn";
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
