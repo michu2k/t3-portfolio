@@ -47,11 +47,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Check Typescript errors
+      - name: Run Typescript check
         run: pnpm run ts:check
 
-      - name: Check ESLint errors
+      - name: Run ESLint check
         run: pnpm run lint:check
 
-      - name: Check Prettier errors
+      - name: Run Prettier check
         run: pnpm run format:check
