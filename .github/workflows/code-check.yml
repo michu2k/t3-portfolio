@@ -1,4 +1,4 @@
-name: Check Next.js project
+name: Code check
 
 on: pull_request
 
