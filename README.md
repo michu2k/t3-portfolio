@@ -8,7 +8,7 @@ An open-source portfolio template with a custom admin dashboard bootstrapped wit
 ![T3Portfolio](./public/images/preview.jpg)
 _Dashboard and landing page view_
 
-## Tech Stack
+## Tech stack
 
 - [Next.js](https://nextjs.org) - Framework
 - [NextAuth.js](https://next-auth.js.org) - Authentication
@@ -22,7 +22,7 @@ _Dashboard and landing page view_
 - [Framer motion](https://www.framer.com/motion/) - Animations
 - [Supabase](https://supabase.com) - PostgreSQL Database
 
-## Run the project
+## Getting started
 
 1. Clone the repository and install all dependencies using pnpm
 2. Copy the `.env.example` to the `.env` file and update the variables
