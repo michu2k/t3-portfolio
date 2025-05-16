@@ -1,7 +1,7 @@
 /**
  * @type {import("prettier").Config & import("prettier-plugin-tailwindcss").PluginOptions}
  */
-const config = {
+export default {
   plugins: ["prettier-plugin-tailwindcss"],
   printWidth: 120,
   bracketSameLine: true,
@@ -9,5 +9,3 @@ const config = {
   trailingComma: "none",
   quoteProps: "consistent"
 };
-
-export default config;
