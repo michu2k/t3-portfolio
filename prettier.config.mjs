@@ -5,7 +5,7 @@ export default {
   plugins: ["prettier-plugin-tailwindcss"],
   printWidth: 120,
   bracketSameLine: true,
-  bracketSpacing: false,
+  bracketSpacing: true,
   trailingComma: "none",
   quoteProps: "consistent"
 };
