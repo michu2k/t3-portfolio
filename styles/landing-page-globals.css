@@ -1,21 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-poppins: var(--font-poppins);
+
+  --color-primary: var(--primary);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-ring: var(--ring);
+}
 
 @layer base {
   :root {
-    --primary: 221 39% 11%; /* gray-900 */
+    --primary: hsl(221 39% 11%); /* gray-900 */
 
-    --background: 0 0% 100%; /* white */
-    --foreground: 221 39% 11%; /* gray-900 */
+    --background: hsl(0 0% 100%); /* white */
+    --foreground: hsl(221 39% 11%); /* gray-900 */
 
-    --muted: 214 32% 91%; /* slate-200 */
-    --muted-foreground: 215 19% 35%; /* slate-600 */
+    --muted: hsl(214 32% 91%); /* slate-200 */
+    --muted-foreground: hsl(215 19% 35%); /* slate-600 */
 
-    --accent: 210 40% 98%; /* slate-50 */
-    --accent-foreground: 215 20% 65%; /* slate-400 */
+    --accent: hsl(210 40% 98%); /* slate-50 */
+    --accent-foreground: hsl(215 20% 65%); /* slate-400 */
 
-    --ring: 218 11% 65%; /* slate-400 */
+    --ring: hsl(218 11% 65%); /* slate-400 */
   }
 
   html {
@@ -25,5 +41,11 @@
   body {
     @apply bg-background text-foreground;
     height: 100%;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply mx-auto w-full max-w-xl md:max-w-4xl;
   }
 }
