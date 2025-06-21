@@ -1,23 +1,15 @@
-import {env} from "./env.js";
+import type { NextConfig } from "next";
+
+import { env } from "./env.js";
 
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
  * This is especially useful for Docker builds.
  */
-await import("./env.js");
+import "./env.js";
 
-/**
- * @type {import("next").NextConfig}
- */
-const config = {
+const config: NextConfig = {
   reactStrictMode: true,
-
-  /**
-   * If you have the "experimental: { appDir: true }" setting enabled, then you
-   * must comment the below `i18n` config out.
-   *
-   * @see https://github.com/vercel/next.js/issues/41980
-   */
   i18n: {
     locales: ["en"],
     defaultLocale: "en"
@@ -36,7 +28,7 @@ const config = {
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
-    const fileLoaderRule = config.module.rules.find((/** @type {{ test: { test: (arg0: string) => any; }; }} */ rule) =>
+    const fileLoaderRule = config.module.rules.find((rule: { test: { test: (arg0: string) => unknown } }) =>
       rule.test?.test?.(".svg")
     );
 
@@ -51,7 +43,7 @@ const config = {
       {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
-        resourceQuery: {not: [...fileLoaderRule.resourceQuery.not, /url/]}, // exclude if *.svg?url
+        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
         loader: "@svgr/webpack",
         options: {
           svgoConfig: {
