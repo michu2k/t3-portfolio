@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z } from "zod";
 
 type HeaderSnippetsFormValues = z.infer<typeof headerSnippetsSchema>;
 
@@ -7,6 +7,6 @@ const headerSnippetsSchema = z.object({
   description: z.string().max(640, "Description is too long").optional()
 });
 
-export type {HeaderSnippetsFormValues};
+export type { HeaderSnippetsFormValues };
 
-export {headerSnippetsSchema};
+export { headerSnippetsSchema };

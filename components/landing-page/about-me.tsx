@@ -1,23 +1,23 @@
 import React from "react";
 import Image from "next/image";
 
-import {MotionInViewWrapper} from "~/components/ui/motion-in-view-wrapper";
-import type {Snippets} from "~/server/api/routers/snippet";
-import {api} from "~/trpc/server";
-import {extractSnippetValues} from "~/utils/extract-snippet-values";
-import type {AboutMeSnippetsFormValues} from "~/utils/validations/about-me";
+import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";
+import type { Snippets } from "~/server/api/routers/snippet";
+import { api } from "~/trpc/server";
+import { extractSnippetValues } from "~/utils/extract-snippet-values";
+import type { AboutMeSnippetsFormValues } from "~/utils/validations/about-me";
 
-import {PageSection} from "./page-section";
+import { PageSection } from "./page-section";
 
 type AboutMeProps = {
   snippets: Snippets;
 };
 
-const AboutMe = async ({snippets}: AboutMeProps) => {
+const AboutMe = async ({ snippets }: AboutMeProps) => {
   const snippetValues = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
-  const {description = "", image: imageId} = snippetValues;
+  const { description = "", image: imageId } = snippetValues;
 
-  const imageObj = imageId ? await api.image.getImage({key: imageId}) : null;
+  const imageObj = imageId ? await api.image.getImage({ key: imageId }) : null;
 
   return (
     <PageSection id="about" heading="Personal Details" subheading="About Me">
@@ -28,7 +28,7 @@ const AboutMe = async ({snippets}: AboutMeProps) => {
               <Image
                 src={imageObj.url}
                 fill
-                style={{objectFit: "cover"}}
+                style={{ objectFit: "cover" }}
                 className="bg-accent"
                 sizes="(min-width: 768px) 50vw, 160px"
                 alt=""
@@ -37,10 +37,10 @@ const AboutMe = async ({snippets}: AboutMeProps) => {
           </MotionInViewWrapper>
         ) : null}
 
-        <p className="text-base leading-8 text-muted-foreground">{description}</p>
+        <p className="text-muted-foreground text-base leading-8">{description}</p>
       </div>
     </PageSection>
   );
 };
 
-export {AboutMe};
+export { AboutMe };

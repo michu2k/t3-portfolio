@@ -1,41 +1,46 @@
 "use client";
 
-import React, {useState} from "react";
-import type {ExperienceItem} from "@prisma/client";
-import {format} from "date-fns";
-import {EllipsisIcon, PencilIcon, PlusIcon, TrashIcon} from "lucide-react";
+import React, { useState } from "react";
+import type { ExperienceItem } from "@prisma/client";
+import { format } from "date-fns";
+import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 
-import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
-import {Button} from "~/components/ui/button";
-import {Dialog, DialogTrigger} from "~/components/ui/dialog";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
-import {EmptySection} from "~/components/ui/empty-section";
-import {Heading} from "~/components/ui/heading";
-import {Skeleton} from "~/components/ui/skeleton";
-import {useToast} from "~/hooks/use-toast";
-import {api} from "~/trpc/react";
-import {revalidatePath} from "~/utils/revalidate-path";
+import { DeleteEntityDialog } from "~/components/dashboard/dialogs/delete-entity-dialog";
+import { Button } from "~/components/ui/button";
+import { Dialog, DialogTrigger } from "~/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "~/components/ui/dropdown-menu";
+import { EmptySection } from "~/components/ui/empty-section";
+import { Heading } from "~/components/ui/heading";
+import { Skeleton } from "~/components/ui/skeleton";
+import { useToast } from "~/hooks/use-toast";
+import { api } from "~/trpc/react";
+import { revalidatePath } from "~/utils/revalidate-path";
 
 type ExperienceListProps = {
   experience: Array<ExperienceItem>;
 };
 
-const ExperienceList = ({experience}: ExperienceListProps) => {
+const ExperienceList = ({ experience }: ExperienceListProps) => {
   const deleteItemMutation = api.experience.deleteItem.useMutation();
   const pathname = usePathname();
-  const {toast} = useToast();
+  const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const selectedItem = experience.find((item) => item.id === selectedItemId);
-  const {position, company} = selectedItem || {};
+  const { position, company } = selectedItem || {};
 
   async function handleDeleteItem() {
     if (!selectedItemId) return;
 
     await deleteItemMutation.mutateAsync(
-      {id: selectedItemId},
+      { id: selectedItemId },
       {
         async onSuccess() {
           toast({
@@ -86,13 +91,13 @@ type ExperienceCardProps = ExperienceItem & {
   onClickDeleteBtn: (e: React.MouseEvent) => void;
 };
 
-const ExperienceCard = ({id, company, startDate, endDate, position, onClickDeleteBtn}: ExperienceCardProps) => {
+const ExperienceCard = ({ id, company, startDate, endDate, position, onClickDeleteBtn }: ExperienceCardProps) => {
   return (
-    <article className="flex min-h-28 w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+    <article className="border-muted flex min-h-28 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
       <div className="flex-1">
-        <p className="font-poppins text-sm font-semibold leading-8">{position}</p>
-        <p className="text-xs leading-6 text-muted-foreground">{company}</p>
-        <span className="block text-xs leading-6 text-muted-foreground">
+        <p className="font-poppins text-sm leading-8 font-semibold">{position}</p>
+        <p className="text-muted-foreground text-xs leading-6">{company}</p>
+        <span className="text-muted-foreground block text-xs leading-6">
           {format(startDate, "MMM yyyy")} {" - "}
           {endDate ? format(endDate, "MMM yyyy") : "Present"}
         </span>
@@ -144,7 +149,7 @@ const ExperienceListSkeleton = () => {
 
 const ExperienceCardSkeleton = () => {
   return (
-    <div className="flex min-h-28 w-full items-center gap-1 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+    <div className="border-muted flex min-h-28 w-full items-center gap-1 border-b-[1px] border-solid py-2 last-of-type:border-0">
       <div className="flex-1">
         <div className="flex h-8 items-center">
           <Skeleton className="h-4 w-20" />
@@ -162,4 +167,4 @@ const ExperienceCardSkeleton = () => {
   );
 };
 
-export {ExperienceList, ExperienceListSkeleton};
+export { ExperienceList, ExperienceListSkeleton };

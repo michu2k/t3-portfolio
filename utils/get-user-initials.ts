@@ -3,4 +3,4 @@ function getUserInitials(fullname?: string | null) {
   return `${letters[0] ?? ""}${letters[1] ?? ""}`;
 }
 
-export {getUserInitials};
+export { getUserInitials };

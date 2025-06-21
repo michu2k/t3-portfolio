@@ -1,6 +1,6 @@
-import {configureStore} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
-import {toastReducer} from "~/reducers/toast-reducer";
+import { toastReducer } from "~/reducers/toast-reducer";
 
 const reduxStore = () =>
   configureStore({
@@ -17,6 +17,6 @@ type AppStore = ReturnType<typeof reduxStore>;
 type RootState = ReturnType<AppStore["getState"]>;
 type AppDispatch = AppStore["dispatch"];
 
-export type {AppStore, RootState, AppDispatch};
+export type { AppStore, RootState, AppDispatch };
 
-export {reduxStore};
+export { reduxStore };

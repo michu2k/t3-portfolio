@@ -1,16 +1,16 @@
-import React, {memo} from "react";
-import type {SocialMediaLink} from "@prisma/client";
+import React, { memo } from "react";
+import type { SocialMediaLink } from "@prisma/client";
 
-import {api} from "~/trpc/server";
-import {capitalize} from "~/utils/capitalize";
-import {cn} from "~/utils/cn";
-import {getSocialMediaIcon} from "~/utils/get-social-media-icon";
+import { api } from "~/trpc/server";
+import { capitalize } from "~/utils/capitalize";
+import { cn } from "~/utils/cn";
+import { getSocialMediaIcon } from "~/utils/get-social-media-icon";
 
 type SocialMediaProps = {
   className?: string;
 };
 
-const SocialMedia = memo(async ({className}: SocialMediaProps) => {
+const SocialMedia = memo(async ({ className }: SocialMediaProps) => {
   const socialMediaItems = await api.socialMedia.getItems();
 
   function displaySocialMediaIcons() {
@@ -26,18 +26,18 @@ const SocialMedia = memo(async ({className}: SocialMediaProps) => {
 
 SocialMedia.displayName = "SocialMedia";
 
-const SocialMediaItem = ({icon, url}: SocialMediaLink) => {
+const SocialMediaItem = ({ icon, url }: SocialMediaLink) => {
   const Icon = getSocialMediaIcon(icon);
 
   return (
     <li>
       <a
         href={url}
-        className="group flex size-6 items-center justify-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-appearance"
+        className="group focus-visible:ring-appearance flex size-6 items-center justify-center rounded-sm focus-visible:ring-2 focus-visible:outline-none"
         rel="noopener noreferrer"
         target="_blank">
         <Icon
-          className="size-4 fill-foreground transition-colors group-hover:fill-accent-foreground group-focus:fill-accent-foreground"
+          className="fill-foreground group-hover:fill-accent-foreground group-focus:fill-accent-foreground size-4 transition-colors"
           aria-hidden="true"
         />
         <span className="sr-only">{capitalize(icon)}</span>
@@ -46,4 +46,4 @@ const SocialMediaItem = ({icon, url}: SocialMediaLink) => {
   );
 };
 
-export {SocialMedia};
+export { SocialMedia };

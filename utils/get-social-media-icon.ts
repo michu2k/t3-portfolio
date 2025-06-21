@@ -16,4 +16,4 @@ function getSocialMediaIcon(key: string) {
   return socialMediaIconsDef[key as SocialMediaIconsKeys];
 }
 
-export {getSocialMediaIcon, socialMediaIconsDef};
+export { getSocialMediaIcon, socialMediaIconsDef };

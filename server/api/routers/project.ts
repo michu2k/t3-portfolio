@@ -1,11 +1,11 @@
-import type {ProjectItem as PrismaProjectItem} from "@prisma/client";
-import {z} from "zod";
+import type { ProjectItem as PrismaProjectItem } from "@prisma/client";
+import { z } from "zod";
 
-import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
-import {resizeImage} from "~/server/image";
-import {deleteFileFromS3, getPresignedUrl, uploadFileToS3} from "~/server/s3";
-import type {FileObj} from "~/utils/file";
-import {projectItemSchema} from "~/utils/validations/project";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
+import { resizeImage } from "~/server/image";
+import { deleteFileFromS3, getPresignedUrl, uploadFileToS3 } from "~/server/s3";
+import type { FileObj } from "~/utils/file";
+import { projectItemSchema } from "~/utils/validations/project";
 
 type ProjectItem = Omit<PrismaProjectItem, "coverImage" | "image"> & {
   coverImage: FileObj;
@@ -133,4 +133,4 @@ export const projectRouter = createTRPCRouter({
     })
 });
 
-export type {ProjectItem};
+export type { ProjectItem };

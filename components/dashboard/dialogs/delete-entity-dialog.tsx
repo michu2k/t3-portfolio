@@ -1,7 +1,7 @@
 import React from "react";
-import {TrashIcon} from "lucide-react";
+import { TrashIcon } from "lucide-react";
 
-import {Button} from "~/components/ui/button";
+import { Button } from "~/components/ui/button";
 import {
   DialogClose,
   DialogContent,
@@ -17,7 +17,7 @@ type DeleteEntityDialogProps = {
   onClickDeleteBtn: (e: React.MouseEvent) => void;
 };
 
-const DeleteEntityDialog = ({title, entityName, onClickDeleteBtn}: DeleteEntityDialogProps) => {
+const DeleteEntityDialog = ({ title, entityName, onClickDeleteBtn }: DeleteEntityDialogProps) => {
   return (
     <DialogContent>
       <DialogHeader>
@@ -49,4 +49,4 @@ const DeleteEntityDialog = ({title, entityName, onClickDeleteBtn}: DeleteEntityD
   );
 };
 
-export {DeleteEntityDialog};
+export { DeleteEntityDialog };

@@ -1,15 +1,15 @@
 "use client";
 
-import type {PropsWithChildren} from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
-import type {HTMLMotionProps} from "framer-motion";
-import {domAnimation, LazyMotion, m} from "framer-motion";
+import type { HTMLMotionProps } from "framer-motion";
+import { domAnimation, LazyMotion, m } from "framer-motion";
 
-import {inViewAnimationProps} from "~/utils/animations";
+import { inViewAnimationProps } from "~/utils/animations";
 
 type MotionInViewWrapperProps = PropsWithChildren<HTMLMotionProps<"div">>;
 
-const MotionInViewWrapper = ({children, transition, ...props}: MotionInViewWrapperProps) => {
+const MotionInViewWrapper = ({ children, transition, ...props }: MotionInViewWrapperProps) => {
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -25,4 +25,4 @@ const MotionInViewWrapper = ({children, transition, ...props}: MotionInViewWrapp
   );
 };
 
-export {MotionInViewWrapper};
+export { MotionInViewWrapper };

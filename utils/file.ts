@@ -1,4 +1,4 @@
-import type {Accept} from "react-dropzone";
+import type { Accept } from "react-dropzone";
 
 type FileObj = {
   name: string;
@@ -46,6 +46,6 @@ async function transformFileToFileObj(file: File): Promise<FileObj> {
   };
 }
 
-export type {FileObj};
+export type { FileObj };
 
-export {MAX_FILE_SIZE, acceptedImageTypes, getFileExtension, transformFileToFileObj, convertBytesToMB};
+export { MAX_FILE_SIZE, acceptedImageTypes, getFileExtension, transformFileToFileObj, convertBytesToMB };

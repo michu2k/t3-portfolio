@@ -1,4 +1,4 @@
-import {FlatCompat} from "@eslint/eslintrc";
+import { FlatCompat } from "@eslint/eslintrc";
 import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
 import unusedImportsPlugin from "eslint-plugin-unused-imports";
 import eslintTs from "typescript-eslint";
@@ -38,7 +38,7 @@ export default eslintTs.config(
       ],
       "import/newline-after-import": "error",
       "import/no-mutable-exports": "error",
-      "import/no-anonymous-default-export": ["error", {allowObject: true}],
+      "import/no-anonymous-default-export": ["error", { allowObject: true }],
       "simple-import-sort/imports": [
         "error",
         {

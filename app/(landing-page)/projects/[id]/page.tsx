@@ -1,23 +1,23 @@
 import React from "react";
-import {GlobeIcon} from "lucide-react";
-import type {Metadata} from "next";
+import { GlobeIcon } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
-import {notFound} from "next/navigation";
+import { notFound } from "next/navigation";
 
-import {Footer} from "~/components/landing-page/footer";
-import {SubpageNavigation} from "~/components/landing-page/navigation";
-import {SocialMedia} from "~/components/landing-page/social-media";
-import {Button} from "~/components/ui/button";
-import {Heading} from "~/components/ui/heading";
-import {MotionInViewWrapper} from "~/components/ui/motion-in-view-wrapper";
-import {api} from "~/trpc/server";
+import { Footer } from "~/components/landing-page/footer";
+import { SubpageNavigation } from "~/components/landing-page/navigation";
+import { SocialMedia } from "~/components/landing-page/social-media";
+import { Button } from "~/components/ui/button";
+import { Heading } from "~/components/ui/heading";
+import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";
+import { api, HydrateClient } from "~/trpc/server";
 
 type MetadataProps = {
-  params: {id: string};
+  params: { id: string };
 };
 
-export async function generateMetadata({params: {id}}: MetadataProps): Promise<Metadata> {
-  const data = await api.project.getItem({id});
+export async function generateMetadata({ params: { id } }: MetadataProps): Promise<Metadata> {
+  const data = await api.project.getItem({ id });
 
   if (data) {
     return {
@@ -36,24 +36,24 @@ type PageProps = {
   };
 };
 
-export default async function Page({params: {id}}: PageProps) {
-  const data = await api.project.getItem({id});
+export default async function Page({ params: { id } }: PageProps) {
+  const data = await api.project.getItem({ id });
 
   if (!data) {
     notFound();
   }
 
-  const {name, image, description, websiteUrl} = data || {};
+  const { name, image, description, websiteUrl } = data || {};
 
   return (
-    <>
+    <HydrateClient>
       <SubpageNavigation>
         <SocialMedia />
       </SubpageNavigation>
 
       <header id="top" className="px-4 py-10 md:px-6 md:py-14">
         <MotionInViewWrapper className="section-container flex min-h-[8rem] flex-col items-start justify-center gap-2 md:min-h-[10rem] lg:min-h-[12rem]">
-          <h1 className="font-poppins text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">{name}</h1>
+          <h1 className="font-poppins text-foreground text-3xl font-bold md:text-4xl lg:text-5xl">{name}</h1>
         </MotionInViewWrapper>
       </header>
 
@@ -62,7 +62,7 @@ export default async function Page({params: {id}}: PageProps) {
           <div className="flex flex-col gap-14 md:flex-row md:gap-12">
             {image && (
               <MotionInViewWrapper
-                transition={{delay: 0.5}}
+                transition={{ delay: 0.5 }}
                 className="h-fit w-full shrink-0 overflow-hidden rounded-md md:w-1/2">
                 <Image
                   src={image.url}
@@ -70,7 +70,7 @@ export default async function Page({params: {id}}: PageProps) {
                   height={0}
                   sizes="100vw"
                   className="bg-accent"
-                  style={{width: "100%", height: "auto"}}
+                  style={{ width: "100%", height: "auto" }}
                   alt=""
                 />
               </MotionInViewWrapper>
@@ -81,7 +81,7 @@ export default async function Page({params: {id}}: PageProps) {
                 Description
               </Heading>
 
-              <p className="whitespace-pre-wrap pb-14 text-justify text-sm leading-7 text-muted-foreground">
+              <p className="text-muted-foreground pb-14 text-justify text-sm leading-7 whitespace-pre-wrap">
                 {description}
               </p>
 
@@ -101,6 +101,6 @@ export default async function Page({params: {id}}: PageProps) {
       </section>
 
       <Footer />
-    </>
+    </HydrateClient>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import React, {memo} from "react";
-import type {LucideIcon} from "lucide-react";
+import React, { memo } from "react";
+import type { LucideIcon } from "lucide-react";
 import {
   BriefcaseIcon,
   ExternalLinkIcon,
@@ -14,18 +14,18 @@ import {
   WallpaperIcon
 } from "lucide-react";
 import Link from "next/link";
-import {useParams, usePathname} from "next/navigation";
-import {signOut, useSession} from "next-auth/react";
+import { useParams, usePathname } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 
-import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
-import {Button} from "~/components/ui/button";
-import {Separator} from "~/components/ui/separator";
-import {Sidebar, SidebarContent, SidebarTrigger} from "~/components/ui/sidebar";
-import {Skeleton} from "~/components/ui/skeleton";
-import {ThemeSwitch} from "~/components/ui/theme-switch";
-import {useIsMobile} from "~/hooks/use-is-mobile";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { Button } from "~/components/ui/button";
+import { Separator } from "~/components/ui/separator";
+import { Sidebar, SidebarContent, SidebarTrigger } from "~/components/ui/sidebar";
+import { Skeleton } from "~/components/ui/skeleton";
+import { ThemeSwitch } from "~/components/ui/theme-switch";
+import { useIsMobile } from "~/hooks/use-is-mobile";
 import pkg from "~/package.json";
-import {getUserInitials} from "~/utils/get-user-initials";
+import { getUserInitials } from "~/utils/get-user-initials";
 
 const navigationItems: Array<NavigationItemDef> = [
   {
@@ -81,7 +81,7 @@ const SidebarNavigation = () => {
 
   return (
     <Sidebar isExpandable={isMobile}>
-      <SidebarTrigger className="fixed left-4 top-4 md:hidden" />
+      <SidebarTrigger className="fixed top-4 left-4 md:hidden" />
 
       <SidebarContent>
         <div className="flex min-w-0 items-center gap-2 px-2">
@@ -93,7 +93,7 @@ const SidebarNavigation = () => {
 
           <Separator orientation="vertical" />
 
-          <Button variant="ghost" size="sm" asChild className="hover:bg-transparent hover:text-foreground">
+          <Button variant="ghost" size="sm" asChild className="hover:text-foreground hover:bg-transparent">
             <Link href="/" target="_blank">
               <ExternalLinkIcon size={16} />
               Home page
@@ -106,14 +106,14 @@ const SidebarNavigation = () => {
 
           <Button
             variant="ghost"
-            className="mt-auto h-11 w-full justify-start px-3 hover:bg-transparent hover:text-foreground"
+            className="hover:text-foreground mt-auto h-11 w-full justify-start px-3 hover:bg-transparent"
             onClick={() => signOut()}>
             <LogOutIcon size={16} className="mr-1" />
             Log Out
           </Button>
         </nav>
 
-        <span className="px-3 text-xs text-muted-foreground opacity-50">Dashboard v{pkg.version}</span>
+        <span className="text-muted-foreground px-3 text-xs opacity-50">Dashboard v{pkg.version}</span>
       </SidebarContent>
     </Sidebar>
   );
@@ -126,9 +126,9 @@ type NavigationItemDef = {
   icon: LucideIcon;
 };
 
-const NavigationItem = memo(({text, href, icon: Icon}: NavigationItemDef) => {
+const NavigationItem = memo(({ text, href, icon: Icon }: NavigationItemDef) => {
   const pathname = usePathname();
-  const params = useParams<{id: string}>();
+  const params = useParams<{ id: string }>();
 
   const isActive = params?.id ? pathname === `${href}/${params.id}` : pathname === href;
 
@@ -136,7 +136,7 @@ const NavigationItem = memo(({text, href, icon: Icon}: NavigationItemDef) => {
     <li>
       <Link
         href={href}
-        className={`flex items-center gap-3 rounded-md px-3 py-2.5 font-poppins text-sm font-medium leading-5 ${isActive ? "text-primary" : "text-foreground"} transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-appearance`}>
+        className={`font-poppins flex items-center gap-3 rounded-md px-3 py-2.5 text-sm leading-5 font-medium ${isActive ? "text-primary" : "text-foreground"} hover:text-primary focus-visible:ring-appearance transition-colors focus-visible:ring-2 focus-visible:outline-none`}>
         <Icon size={16} />
         {text}
       </Link>
@@ -147,8 +147,8 @@ const NavigationItem = memo(({text, href, icon: Icon}: NavigationItemDef) => {
 NavigationItem.displayName = "NavigationItem";
 
 const UserPanel = () => {
-  const {data: sessionData} = useSession();
-  const {name, image, email} = sessionData?.user || {};
+  const { data: sessionData } = useSession();
+  const { name, image, email } = sessionData?.user || {};
 
   if (sessionData?.user) {
     return (
@@ -159,8 +159,8 @@ const UserPanel = () => {
         </Avatar>
 
         <div className="min-w-0 space-y-0.5">
-          <p className="truncate font-poppins text-sm font-medium text-foreground">{name}</p>
-          <p className="truncate text-xs text-muted-foreground">{email}</p>
+          <p className="font-poppins text-foreground truncate text-sm font-medium">{name}</p>
+          <p className="text-muted-foreground truncate text-xs">{email}</p>
         </div>
       </>
     );
@@ -178,4 +178,4 @@ const UserPanel = () => {
   );
 };
 
-export {SidebarNavigation};
+export { SidebarNavigation };
