@@ -1,5 +1,5 @@
-import {ContactMethodType} from "@prisma/client";
-import {z} from "zod";
+import { ContactMethodType } from "@prisma/client";
+import { z } from "zod";
 
 type ContactMethodFormValues = z.infer<typeof contactMethodSchema>;
 
@@ -18,6 +18,6 @@ const contactSnippetsSchema = z.object({
   description: z.string().max(640, "Description is too long").optional()
 });
 
-export type {ContactMethodFormValues, ContactSnippetsFormValues};
+export type { ContactMethodFormValues, ContactSnippetsFormValues };
 
-export {contactMethodSchema, contactSnippetsSchema};
+export { contactMethodSchema, contactSnippetsSchema };

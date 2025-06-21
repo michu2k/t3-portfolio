@@ -1,13 +1,13 @@
-import type {Snippet} from "@prisma/client";
-import {SnippetType} from "@prisma/client";
-import {z} from "zod";
+import type { Snippet } from "@prisma/client";
+import { SnippetType } from "@prisma/client";
+import { z } from "zod";
 
-import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
-import {snippetSchema} from "~/utils/validations/snippet";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
+import { snippetSchema } from "~/utils/validations/snippet";
 
 export type Snippets = Array<Pick<Snippet, "id" | "name" | "value">>;
 
-const snippetKeys: {[key in SnippetType]: Array<string>} = {
+const snippetKeys: { [key in SnippetType]: Array<string> } = {
   [SnippetType.HEADER]: ["heading", "description"],
   [SnippetType.ABOUT_ME]: ["description", "image"],
   [SnippetType.CONTACT]: ["description"]

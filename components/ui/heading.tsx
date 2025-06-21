@@ -1,8 +1,8 @@
-import type {PropsWithChildren} from "react";
+import type { PropsWithChildren } from "react";
 import React from "react";
-import {cva, type VariantProps} from "class-variance-authority";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import {cn} from "~/utils/cn";
+import { cn } from "~/utils/cn";
 
 const headingVariants = cva("font-poppins", {
   variants: {
@@ -24,9 +24,9 @@ type HeadingProps = PropsWithChildren<
 >;
 
 const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
-  ({as: Component, size, className, children}, ref) => {
+  ({ as: Component, size, className, children }, ref) => {
     return (
-      <Component ref={ref} className={cn(headingVariants({size}), className)}>
+      <Component ref={ref} className={cn(headingVariants({ size }), className)}>
         {children}
       </Component>
     );
@@ -35,4 +35,4 @@ const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
 
 Heading.displayName = "Heading";
 
-export {Heading};
+export { Heading };

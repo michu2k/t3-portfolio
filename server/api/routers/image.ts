@@ -1,9 +1,9 @@
-import {z} from "zod";
+import { z } from "zod";
 
-import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
-import {resizeImage} from "~/server/image";
-import {deleteFileFromS3, getPresignedUrl, uploadFileToS3} from "~/server/s3";
-import type {FileObj} from "~/utils/file";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
+import { resizeImage } from "~/server/image";
+import { deleteFileFromS3, getPresignedUrl, uploadFileToS3 } from "~/server/s3";
+import type { FileObj } from "~/utils/file";
 
 // prettier-ignore
 export const imageRouter = createTRPCRouter({

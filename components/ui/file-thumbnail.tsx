@@ -1,11 +1,11 @@
 import React from "react";
-import type {VariantProps} from "class-variance-authority";
-import {cva} from "class-variance-authority";
-import {FileIcon} from "lucide-react";
+import type { VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
+import { FileIcon } from "lucide-react";
 import Image from "next/image";
 
-import {cn} from "~/utils/cn";
-import {convertBytesToMB, type FileObj} from "~/utils/file";
+import { cn } from "~/utils/cn";
+import { convertBytesToMB, type FileObj } from "~/utils/file";
 
 const fileThumbnailVariants = cva(
   "relative flex items-center justify-center overflow-hidden rounded-md bg-accent shrink-0",
@@ -27,17 +27,17 @@ type FileThumbnailProps = VariantProps<typeof fileThumbnailVariants> & {
   className?: string;
 };
 
-const FileThumbnail = ({file, size, className}: FileThumbnailProps) => {
-  const {url, type} = file;
+const FileThumbnail = ({ file, size, className }: FileThumbnailProps) => {
+  const { url, type } = file;
   const isImage = type.includes("image");
 
   return (
-    <div className={cn(fileThumbnailVariants({size}), className)}>
+    <div className={cn(fileThumbnailVariants({ size }), className)}>
       {url && isImage ? (
         // Priority is set to true by default as the component will always be above the fold
-        <Image src={url} fill style={{objectFit: "cover"}} sizes="192px" alt="" priority />
+        <Image src={url} fill style={{ objectFit: "cover" }} sizes="192px" alt="" priority />
       ) : (
-        <FileIcon size={40} className="stroke-1 text-muted-foreground" />
+        <FileIcon size={40} className="text-muted-foreground stroke-1" />
       )}
     </div>
   );
@@ -50,14 +50,14 @@ type FileThumbnailCardProps = {
 };
 
 const FileThumbnailCard = React.forwardRef<HTMLDivElement, FileThumbnailCardProps>(
-  ({file, className, actions}, ref) => {
+  ({ file, className, actions }, ref) => {
     return (
       <div ref={ref} className={cn("flex min-h-[5.5rem] gap-4", className)}>
         <FileThumbnail file={file} />
 
         <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
-          <p className="w-full truncate font-poppins text-xs font-semibold">{file.name}</p>
-          <p className="mb-auto text-xs text-muted-foreground">{convertBytesToMB(file.size)}</p>
+          <p className="font-poppins w-full truncate text-xs font-semibold">{file.name}</p>
+          <p className="text-muted-foreground mb-auto text-xs">{convertBytesToMB(file.size)}</p>
 
           {actions ? <div className="flex items-center gap-2">{actions}</div> : null}
         </div>
@@ -68,4 +68,4 @@ const FileThumbnailCard = React.forwardRef<HTMLDivElement, FileThumbnailCardProp
 
 FileThumbnailCard.displayName = "FileThumbnailCard";
 
-export {FileThumbnail, FileThumbnailCard};
+export { FileThumbnail, FileThumbnailCard };

@@ -1,11 +1,11 @@
-import {DeleteObjectCommand, GetObjectCommand, PutObjectCommand, S3Client} from "@aws-sdk/client-s3";
-import {getSignedUrl} from "@aws-sdk/s3-request-presigner";
-import {v4 as uuidv4} from "uuid";
+import { DeleteObjectCommand, GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { v4 as uuidv4 } from "uuid";
 
-import {env} from "~/env";
-import {type FileObj, getFileExtension} from "~/utils/file";
+import { env } from "~/env";
+import { type FileObj, getFileExtension } from "~/utils/file";
 
-import {BUFFER_ENCODING} from "./image";
+import { BUFFER_ENCODING } from "./image";
 
 export const s3 = new S3Client({
   region: env.AWS_S3_REGION,
@@ -32,7 +32,7 @@ export async function uploadFileToS3(file: FileObj, directory?: string) {
     });
 
     await s3.send(command);
-    return {key};
+    return { key };
   } catch (error) {
     console.error(error);
     throw new Error("An error occured while uploading file to S3");
@@ -47,8 +47,8 @@ export async function getPresignedUrl(key: string): Promise<FileObj> {
       Key: key
     });
 
-    const {ContentLength = 0, ContentType = "unknown"} = await s3.send(command);
-    const presignedUrl = await getSignedUrl(s3, command, {expiresIn: 3600}); // 1 hour
+    const { ContentLength = 0, ContentType = "unknown" } = await s3.send(command);
+    const presignedUrl = await getSignedUrl(s3, command, { expiresIn: 3600 }); // 1 hour
 
     return {
       name: key,
@@ -71,7 +71,7 @@ export async function deleteFileFromS3(key: string) {
     });
 
     await s3.send(command);
-    return {key};
+    return { key };
   } catch (error) {
     console.error(error);
     throw new Error(`An error occured while deleting "${key}" from S3`);

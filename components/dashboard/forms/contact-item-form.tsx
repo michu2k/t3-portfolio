@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import {FormProvider, useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import type {ContactMethod} from "@prisma/client";
-import {ContactMethodType} from "@prisma/client";
-import {useRouter} from "next/navigation";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { ContactMethod } from "@prisma/client";
+import { ContactMethodType } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
-import {Button} from "~/components/ui/button";
+import { Button } from "~/components/ui/button";
 import {
   FormControl,
   FormDescription,
@@ -17,15 +17,15 @@ import {
   FormLabelSkeleton,
   FormMessage
 } from "~/components/ui/form";
-import {Input} from "~/components/ui/input";
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "~/components/ui/select";
-import {Skeleton} from "~/components/ui/skeleton";
-import {useToast} from "~/hooks/use-toast";
-import {api} from "~/trpc/react";
-import {capitalize} from "~/utils/capitalize";
-import {revalidatePath} from "~/utils/revalidate-path";
-import type {ContactMethodFormValues} from "~/utils/validations/contact";
-import {contactMethodSchema} from "~/utils/validations/contact";
+import { Input } from "~/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
+import { Skeleton } from "~/components/ui/skeleton";
+import { useToast } from "~/hooks/use-toast";
+import { api } from "~/trpc/react";
+import { capitalize } from "~/utils/capitalize";
+import { revalidatePath } from "~/utils/revalidate-path";
+import type { ContactMethodFormValues } from "~/utils/validations/contact";
+import { contactMethodSchema } from "~/utils/validations/contact";
 
 type FieldPlaceholders = {
   [key in ContactMethodType]: {
@@ -53,9 +53,9 @@ type ContactItemFormProps = {
   contact: ContactMethod | null;
 };
 
-const ContactItemForm = ({contact}: ContactItemFormProps) => {
+const ContactItemForm = ({ contact }: ContactItemFormProps) => {
   const router = useRouter();
-  const {toast} = useToast();
+  const { toast } = useToast();
   const utils = api.useUtils();
 
   const createItemMutation = api.contact.createItem.useMutation();
@@ -72,7 +72,7 @@ const ContactItemForm = ({contact}: ContactItemFormProps) => {
     resolver: zodResolver(contactMethodSchema)
   });
 
-  const {control, handleSubmit, watch} = formMethods;
+  const { control, handleSubmit, watch } = formMethods;
   const type = watch("type");
 
   const fieldPlaceholder = type ? fieldPlaceholdersDef[type] : null;
@@ -81,7 +81,7 @@ const ContactItemForm = ({contact}: ContactItemFormProps) => {
     e?.preventDefault();
 
     const mutation = itemId ? updateItemMutation : createItemMutation;
-    const mutationVariables = itemId ? {id: itemId, ...formValues} : formValues;
+    const mutationVariables = itemId ? { id: itemId, ...formValues } : formValues;
 
     await mutation.mutateAsync(mutationVariables, {
       async onSuccess() {
@@ -105,7 +105,7 @@ const ContactItemForm = ({contact}: ContactItemFormProps) => {
         <FormField
           control={control}
           name="type"
-          render={({field: {name, value, onChange}}) => (
+          render={({ field: { name, value, onChange } }) => (
             <FormItem>
               <FormLabel>Type</FormLabel>
               <Select name={name} value={value} onValueChange={(newVal) => (newVal ? onChange(newVal) : undefined)}>
@@ -132,7 +132,7 @@ const ContactItemForm = ({contact}: ContactItemFormProps) => {
         <FormField
           control={control}
           name="name"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
@@ -146,7 +146,7 @@ const ContactItemForm = ({contact}: ContactItemFormProps) => {
         <FormField
           control={control}
           name="description"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
@@ -168,7 +168,7 @@ const ContactItemForm = ({contact}: ContactItemFormProps) => {
 const ContactItemFormSkeleton = () => {
   return (
     <>
-      <div className="pb-12 pt-4">
+      <div className="pt-4 pb-12">
         <FormLabelSkeleton>Type</FormLabelSkeleton>
         <Skeleton className="h-10 w-[14rem]" />
       </div>
@@ -186,4 +186,4 @@ const ContactItemFormSkeleton = () => {
   );
 };
 
-export {ContactItemForm, ContactItemFormSkeleton};
+export { ContactItemForm, ContactItemFormSkeleton };

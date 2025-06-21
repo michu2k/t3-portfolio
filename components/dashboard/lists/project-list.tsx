@@ -1,31 +1,36 @@
 "use client";
 
-import React, {useState} from "react";
-import {EllipsisIcon, ExternalLinkIcon, PencilIcon, PlusIcon, TrashIcon} from "lucide-react";
+import React, { useState } from "react";
+import { EllipsisIcon, ExternalLinkIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 
-import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
-import {Button} from "~/components/ui/button";
-import {Dialog, DialogTrigger} from "~/components/ui/dialog";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
-import {EmptySection} from "~/components/ui/empty-section";
-import {FileThumbnail} from "~/components/ui/file-thumbnail";
-import {Heading} from "~/components/ui/heading";
-import {Skeleton} from "~/components/ui/skeleton";
-import {useToast} from "~/hooks/use-toast";
-import type {ProjectItem} from "~/server/api/routers/project";
-import {api} from "~/trpc/react";
-import {revalidatePath} from "~/utils/revalidate-path";
+import { DeleteEntityDialog } from "~/components/dashboard/dialogs/delete-entity-dialog";
+import { Button } from "~/components/ui/button";
+import { Dialog, DialogTrigger } from "~/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "~/components/ui/dropdown-menu";
+import { EmptySection } from "~/components/ui/empty-section";
+import { FileThumbnail } from "~/components/ui/file-thumbnail";
+import { Heading } from "~/components/ui/heading";
+import { Skeleton } from "~/components/ui/skeleton";
+import { useToast } from "~/hooks/use-toast";
+import type { ProjectItem } from "~/server/api/routers/project";
+import { api } from "~/trpc/react";
+import { revalidatePath } from "~/utils/revalidate-path";
 
 type ProjectListProps = {
   projects: Array<ProjectItem>;
 };
 
-const ProjectList = ({projects}: ProjectListProps) => {
+const ProjectList = ({ projects }: ProjectListProps) => {
   const deleteItemMutation = api.project.deleteItem.useMutation();
   const pathname = usePathname();
-  const {toast} = useToast();
+  const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const selectedItem = projects.find((item) => item.id === selectedItemId);
@@ -34,7 +39,7 @@ const ProjectList = ({projects}: ProjectListProps) => {
     if (!selectedItemId) return;
 
     await deleteItemMutation.mutateAsync(
-      {id: selectedItemId},
+      { id: selectedItemId },
       {
         async onSuccess() {
           toast({
@@ -85,18 +90,18 @@ type ProjectCardProps = ProjectItem & {
   onClickDeleteBtn: (e: React.MouseEvent) => void;
 };
 
-const ProjectCard = ({id, name, shortDescription, description, coverImage, onClickDeleteBtn}: ProjectCardProps) => {
+const ProjectCard = ({ id, name, shortDescription, description, coverImage, onClickDeleteBtn }: ProjectCardProps) => {
   const MAX_TEXT_LENGTH = 100;
   const descriptionLength = shortDescription?.length || description?.length;
   const itemDescription = (shortDescription || description).slice(0, MAX_TEXT_LENGTH);
 
   return (
-    <article className="flex min-h-[5.25rem] w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+    <article className="border-muted flex min-h-[5.25rem] w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
       <FileThumbnail file={coverImage} size="sm" />
 
       <div className="flex flex-1 flex-col items-start">
-        <p className="mr-2 font-poppins text-sm font-semibold leading-6">{name}</p>
-        <p className="text-xs leading-6 text-muted-foreground">
+        <p className="font-poppins mr-2 text-sm leading-6 font-semibold">{name}</p>
+        <p className="text-muted-foreground text-xs leading-6">
           {itemDescription}
           {descriptionLength > MAX_TEXT_LENGTH && "..."}
         </p>
@@ -155,7 +160,7 @@ const ProjectListSkeleton = () => {
 
 const ProjectCardSkeleton = () => {
   return (
-    <div className="flex min-h-[5.25rem] w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+    <div className="border-muted flex min-h-[5.25rem] w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
       <Skeleton className="h-16 w-20 md:w-24" />
 
       <div className="flex flex-1 flex-col items-start">
@@ -171,4 +176,4 @@ const ProjectCardSkeleton = () => {
   );
 };
 
-export {ProjectList, ProjectListSkeleton};
+export { ProjectList, ProjectListSkeleton };

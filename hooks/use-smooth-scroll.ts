@@ -1,4 +1,4 @@
-import {useIsMobile} from "./use-is-mobile";
+import { useIsMobile } from "./use-is-mobile";
 
 // For better UX, offset the scroll position by a few pixels
 const OFFSET_TOP_MOBILE = 24;
@@ -25,4 +25,4 @@ const useSmoothScroll = (hash: string) => {
   return scrollToTarget;
 };
 
-export {useSmoothScroll};
+export { useSmoothScroll };

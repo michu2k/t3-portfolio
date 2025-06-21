@@ -7,4 +7,4 @@ function debounce<T extends (...args: Parameters<T>) => ReturnType<T>>(func: T, 
   };
 }
 
-export {debounce};
+export { debounce };

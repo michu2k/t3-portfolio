@@ -1,31 +1,31 @@
 "use client";
 
 import React from "react";
-import {FormProvider, useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import type {SocialMediaLink} from "@prisma/client";
-import {useRouter} from "next/navigation";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import type { SocialMediaLink } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
-import {Button} from "~/components/ui/button";
-import {FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage} from "~/components/ui/form";
-import {Input} from "~/components/ui/input";
-import {Skeleton} from "~/components/ui/skeleton";
-import {useToast} from "~/hooks/use-toast";
-import {api} from "~/trpc/react";
-import {capitalize} from "~/utils/capitalize";
-import {cn} from "~/utils/cn";
-import {socialMediaIconsDef} from "~/utils/get-social-media-icon";
-import {revalidatePath} from "~/utils/revalidate-path";
-import type {SocialMediaLinkFormValues} from "~/utils/validations/social-media";
-import {socialMediaLinkSchema} from "~/utils/validations/social-media";
+import { Button } from "~/components/ui/button";
+import { FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage } from "~/components/ui/form";
+import { Input } from "~/components/ui/input";
+import { Skeleton } from "~/components/ui/skeleton";
+import { useToast } from "~/hooks/use-toast";
+import { api } from "~/trpc/react";
+import { capitalize } from "~/utils/capitalize";
+import { cn } from "~/utils/cn";
+import { socialMediaIconsDef } from "~/utils/get-social-media-icon";
+import { revalidatePath } from "~/utils/revalidate-path";
+import type { SocialMediaLinkFormValues } from "~/utils/validations/social-media";
+import { socialMediaLinkSchema } from "~/utils/validations/social-media";
 
 type SocialMediaItemFormProps = {
   socialMediaLink: SocialMediaLink | null;
 };
 
-const SocialMediaItemForm = ({socialMediaLink}: SocialMediaItemFormProps) => {
+const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
   const router = useRouter();
-  const {toast} = useToast();
+  const { toast } = useToast();
   const utils = api.useUtils();
 
   const createItemMutation = api.socialMedia.createItem.useMutation();
@@ -41,13 +41,13 @@ const SocialMediaItemForm = ({socialMediaLink}: SocialMediaItemFormProps) => {
     resolver: zodResolver(socialMediaLinkSchema)
   });
 
-  const {control, handleSubmit} = formMethods;
+  const { control, handleSubmit } = formMethods;
 
   async function handleFormSubmit(formValues: SocialMediaLinkFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
     const mutation = itemId ? updateItemMutation : createItemMutation;
-    const mutationVariables = itemId ? {id: itemId, ...formValues} : formValues;
+    const mutationVariables = itemId ? { id: itemId, ...formValues } : formValues;
 
     await mutation.mutateAsync(mutationVariables, {
       async onSuccess() {
@@ -71,7 +71,7 @@ const SocialMediaItemForm = ({socialMediaLink}: SocialMediaItemFormProps) => {
         <FormField
           control={control}
           name="icon"
-          render={({field: {value, onChange}}) => (
+          render={({ field: { value, onChange } }) => (
             <FormItem>
               <FormLabel>Icon</FormLabel>
               <ul className="flex flex-wrap gap-2">
@@ -80,9 +80,9 @@ const SocialMediaItemForm = ({socialMediaLink}: SocialMediaItemFormProps) => {
                     <Button
                       size="icon"
                       variant="outline"
-                      className={cn({"bg-muted": key === value})}
+                      className={cn({ "bg-muted": key === value })}
                       onClick={() => onChange(key)}>
-                      <Icon className="size-4 fill-foreground" aria-hidden="true" />
+                      <Icon className="fill-foreground size-4" aria-hidden="true" />
                       <span className="sr-only">{capitalize(key)}</span>
                     </Button>
                   </li>
@@ -96,7 +96,7 @@ const SocialMediaItemForm = ({socialMediaLink}: SocialMediaItemFormProps) => {
         <FormField
           control={control}
           name="url"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Url</FormLabel>
               <FormControl>
@@ -136,4 +136,4 @@ const SocialMediaItemFormSkeleton = () => {
   );
 };
 
-export {socialMediaIconsDef, SocialMediaItemForm, SocialMediaItemFormSkeleton};
+export { socialMediaIconsDef, SocialMediaItemForm, SocialMediaItemFormSkeleton };

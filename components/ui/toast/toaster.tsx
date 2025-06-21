@@ -1,14 +1,14 @@
 "use client";
 
-import {Toast, ToastProvider, ToastViewport} from "~/components/ui/toast";
-import {TOAST_DURATION, useToast} from "~/hooks/use-toast";
+import { Toast, ToastProvider, ToastViewport } from "~/components/ui/toast";
+import { TOAST_DURATION, useToast } from "~/hooks/use-toast";
 
 const Toaster = () => {
-  const {toasts} = useToast();
+  const { toasts } = useToast();
 
   return (
     <ToastProvider duration={TOAST_DURATION}>
-      {toasts.map(({id, ...props}) => (
+      {toasts.map(({ id, ...props }) => (
         <Toast key={id} {...props} />
       ))}
 
@@ -17,4 +17,4 @@ const Toaster = () => {
   );
 };
 
-export {Toaster};
+export { Toaster };

@@ -1,8 +1,8 @@
-import type {ToastProps} from "~/components/ui/toast";
-import {useAppDispatch} from "~/hooks/use-app-dispatch";
-import {addToast, removeToast, updateToast} from "~/reducers/toast-reducer";
+import type { ToastProps } from "~/components/ui/toast";
+import { useAppDispatch } from "~/hooks/use-app-dispatch";
+import { addToast, removeToast, updateToast } from "~/reducers/toast-reducer";
 
-import {useAppSelector} from "./use-app-selector";
+import { useAppSelector } from "./use-app-selector";
 
 const TOAST_LIMIT = 1;
 const TOAST_DURATION = 4000;
@@ -20,7 +20,7 @@ function genId() {
 
 const useToast = () => {
   const dispatch = useAppDispatch();
-  const toasts = useAppSelector(({toast}) => toast.toasts);
+  const toasts = useAppSelector(({ toast }) => toast.toasts);
 
   function toast(props: Omit<ToasterToast, "id">) {
     const id = genId();
@@ -39,11 +39,11 @@ const useToast = () => {
     );
 
     const update = (props: ToasterToast) => {
-      dispatch(updateToast({...props, id}));
+      dispatch(updateToast({ ...props, id }));
     };
 
     const dismiss = (toastId: number) => {
-      dispatch(updateToast({id, open: false}));
+      dispatch(updateToast({ id, open: false }));
 
       setTimeout(() => {
         dispatch(removeToast(toastId));
@@ -63,6 +63,6 @@ const useToast = () => {
   };
 };
 
-export type {ToasterToast};
+export type { ToasterToast };
 
-export {TOAST_LIMIT, TOAST_DURATION, useToast};
+export { TOAST_LIMIT, TOAST_DURATION, useToast };

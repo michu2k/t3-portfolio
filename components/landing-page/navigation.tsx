@@ -1,12 +1,12 @@
 "use client";
 
-import type {PropsWithChildren} from "react";
-import React, {useContext, useState} from "react";
-import {useMotionValueEvent, useScroll} from "framer-motion";
+import type { PropsWithChildren } from "react";
+import React, { useContext, useState } from "react";
+import { useMotionValueEvent, useScroll } from "framer-motion";
 import Link from "next/link";
 
-import {Sidebar, SidebarContent, SidebarContext, SidebarTrigger} from "~/components/ui/sidebar";
-import {useSmoothScroll} from "~/hooks/use-smooth-scroll";
+import { Sidebar, SidebarContent, SidebarContext, SidebarTrigger } from "~/components/ui/sidebar";
+import { useSmoothScroll } from "~/hooks/use-smooth-scroll";
 
 const homeNavigationItems: Array<NavigationItemDef> = [
   {
@@ -49,7 +49,7 @@ type NavigationProps = PropsWithChildren<{
   isItemActive?: (item: NavigationItemDef) => boolean;
 }>;
 
-const Navigation = ({navItems, isItemActive = () => false, children}: NavigationProps) => {
+const Navigation = ({ navItems, isItemActive = () => false, children }: NavigationProps) => {
   function displayNavigationItems() {
     return navItems.map((item: NavigationItemDef) => (
       <NavigationItem key={item.id} isActive={isItemActive(item)} {...item} />
@@ -59,7 +59,7 @@ const Navigation = ({navItems, isItemActive = () => false, children}: Navigation
   return (
     <Sidebar>
       <div className="relative h-16 md:h-[4.5rem]">
-        <div className="fixed left-0 right-0 top-0 z-40 mx-auto h-16 w-full bg-background px-4 md:h-[4.5rem] md:px-6">
+        <div className="bg-background fixed top-0 right-0 left-0 z-40 mx-auto h-16 w-full px-4 md:h-[4.5rem] md:px-6">
           <nav className="section-container flex h-full items-center justify-between gap-4">
             <SidebarTrigger className="md:hidden" />
             <ul className="section-container hidden flex-1 items-center gap-8 md:flex">{displayNavigationItems()}</ul>
@@ -81,14 +81,14 @@ type TargetElement = {
   target: HTMLElement;
 };
 
-const HomeNavigation = ({children}: {children: React.ReactNode}) => {
+const HomeNavigation = ({ children }: { children: React.ReactNode }) => {
   const [activeTargetId, setActiveTargetId] = useState<string | null>(null);
-  const {scrollY} = useScroll();
+  const { scrollY } = useScroll();
 
   function getTargetList() {
-    return homeNavigationItems.reduce<Array<TargetElement>>((acc, {id}: NavigationItemDef) => {
+    return homeNavigationItems.reduce<Array<TargetElement>>((acc, { id }: NavigationItemDef) => {
       const target = document.getElementById(id);
-      return target ? [...acc, {id, target}] : acc;
+      return target ? [...acc, { id, target }] : acc;
     }, []);
   }
 
@@ -96,20 +96,20 @@ const HomeNavigation = ({children}: {children: React.ReactNode}) => {
     const halfWindowHeight = window.innerHeight / 2;
 
     const targetList = getTargetList();
-    const highlightedElements = targetList.filter(({target}) => target.offsetTop - halfWindowHeight <= latestPos);
+    const highlightedElements = targetList.filter(({ target }) => target.offsetTop - halfWindowHeight <= latestPos);
     const lastHighlightedElement = highlightedElements[highlightedElements.length - 1];
 
     setActiveTargetId(lastHighlightedElement ? lastHighlightedElement.id : null);
   });
 
   return (
-    <Navigation navItems={homeNavigationItems} isItemActive={({id}) => id === activeTargetId}>
+    <Navigation navItems={homeNavigationItems} isItemActive={({ id }) => id === activeTargetId}>
       {children}
     </Navigation>
   );
 };
 
-const SubpageNavigation = ({children}: {children: React.ReactNode}) => {
+const SubpageNavigation = ({ children }: { children: React.ReactNode }) => {
   return <Navigation navItems={subpageNavigationItems}>{children}</Navigation>;
 };
 
@@ -123,8 +123,8 @@ type NavigationItemProps = NavigationItemDef & {
   isActive?: boolean;
 };
 
-const NavigationItem = ({href, text, isActive}: NavigationItemProps) => {
-  const {hideSidebar} = useContext(SidebarContext);
+const NavigationItem = ({ href, text, isActive }: NavigationItemProps) => {
+  const { hideSidebar } = useContext(SidebarContext);
   const scrollToTarget = useSmoothScroll(href.replace("/", ""));
 
   function handleNavigationItemClick(e: React.MouseEvent) {
@@ -137,11 +137,11 @@ const NavigationItem = ({href, text, isActive}: NavigationItemProps) => {
       <Link
         href={href}
         onClick={handleNavigationItemClick}
-        className={`block rounded-md py-1.5 font-poppins text-sm font-medium leading-8 ${isActive ? "text-accent-foreground" : "text-muted-foreground"} transition-colors hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-appearance`}>
+        className={`font-poppins block rounded-md py-1.5 text-sm leading-8 font-medium ${isActive ? "text-accent-foreground" : "text-muted-foreground"} hover:text-accent-foreground focus-visible:ring-appearance transition-colors focus-visible:ring-2 focus-visible:outline-none`}>
         {text}
       </Link>
     </li>
   );
 };
 
-export {HomeNavigation, SubpageNavigation};
+export { HomeNavigation, SubpageNavigation };

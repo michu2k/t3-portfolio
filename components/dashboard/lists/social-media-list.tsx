@@ -1,31 +1,36 @@
 "use client";
 
-import React, {useState} from "react";
-import type {SocialMediaLink} from "@prisma/client";
-import {EllipsisIcon, PencilIcon, PlusIcon, TrashIcon} from "lucide-react";
+import React, { useState } from "react";
+import type { SocialMediaLink } from "@prisma/client";
+import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 
-import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
-import {Button} from "~/components/ui/button";
-import {Dialog, DialogTrigger} from "~/components/ui/dialog";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
-import {EmptySection} from "~/components/ui/empty-section";
-import {Heading} from "~/components/ui/heading";
-import {Skeleton} from "~/components/ui/skeleton";
-import {useToast} from "~/hooks/use-toast";
-import {api} from "~/trpc/react";
-import {getSocialMediaIcon} from "~/utils/get-social-media-icon";
-import {revalidatePath} from "~/utils/revalidate-path";
+import { DeleteEntityDialog } from "~/components/dashboard/dialogs/delete-entity-dialog";
+import { Button } from "~/components/ui/button";
+import { Dialog, DialogTrigger } from "~/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "~/components/ui/dropdown-menu";
+import { EmptySection } from "~/components/ui/empty-section";
+import { Heading } from "~/components/ui/heading";
+import { Skeleton } from "~/components/ui/skeleton";
+import { useToast } from "~/hooks/use-toast";
+import { api } from "~/trpc/react";
+import { getSocialMediaIcon } from "~/utils/get-social-media-icon";
+import { revalidatePath } from "~/utils/revalidate-path";
 
 type SocialMediaListProps = {
   socialMediaLinks?: Array<SocialMediaLink>;
 };
 
-const SocialMediaList = ({socialMediaLinks = []}: SocialMediaListProps) => {
+const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
   const pathname = usePathname();
-  const {toast} = useToast();
+  const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const selectedItem = socialMediaLinks.find((item) => item.id === selectedItemId);
@@ -34,7 +39,7 @@ const SocialMediaList = ({socialMediaLinks = []}: SocialMediaListProps) => {
     if (!selectedItemId) return;
 
     await deleteItemMutation.mutateAsync(
-      {id: selectedItemId},
+      { id: selectedItemId },
       {
         async onSuccess() {
           toast({
@@ -85,15 +90,15 @@ type SocialMediaCardProps = SocialMediaLink & {
   onClickDeleteBtn: (e: React.MouseEvent) => void;
 };
 
-const SocialMediaCard = ({id, icon, url, onClickDeleteBtn}: SocialMediaCardProps) => {
+const SocialMediaCard = ({ id, icon, url, onClickDeleteBtn }: SocialMediaCardProps) => {
   const Icon = getSocialMediaIcon(icon);
 
   return (
-    <article className="flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
-      <Icon className="size-4 flex-shrink-0 fill-foreground" aria-hidden="true" />
+    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+      <Icon className="fill-foreground size-4 flex-shrink-0" aria-hidden="true" />
 
       <div className="flex-1">
-        <p className="text-sm leading-6 text-muted-foreground">{url}</p>
+        <p className="text-muted-foreground text-sm leading-6">{url}</p>
       </div>
 
       <DropdownMenu>
@@ -142,7 +147,7 @@ const SocialMediaListSkeleton = () => {
 
 const SocialMediaCardSkeleton = () => {
   return (
-    <article className="flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
       <Skeleton className="size-4" />
 
       <div className="flex-1">
@@ -152,4 +157,4 @@ const SocialMediaCardSkeleton = () => {
   );
 };
 
-export {SocialMediaList, SocialMediaListSkeleton};
+export { SocialMediaList, SocialMediaListSkeleton };

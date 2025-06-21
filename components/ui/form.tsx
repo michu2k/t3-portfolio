@@ -1,11 +1,11 @@
-import React, {useId} from "react";
-import type {ControllerProps, FieldPath, FieldValues} from "react-hook-form";
-import {Controller} from "react-hook-form";
+import React, { useId } from "react";
+import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import * as LabelPrimitive from "@radix-ui/react-label";
-import {Slot} from "@radix-ui/react-slot";
+import { Slot } from "@radix-ui/react-slot";
 
-import {useFormField} from "~/hooks/use-form-field";
-import {cn} from "~/utils/cn";
+import { useFormField } from "~/hooks/use-form-field";
+import { cn } from "~/utils/cn";
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -23,7 +23,7 @@ const FormField = <
   ...props
 }: ControllerProps<TFieldValues, TName>) => {
   return (
-    <FormFieldContext.Provider value={{name: props.name}}>
+    <FormFieldContext.Provider value={{ name: props.name }}>
       <Controller {...props} />
     </FormFieldContext.Provider>
   );
@@ -36,11 +36,11 @@ type FormItemContextValue = {
 const FormItemContext = React.createContext<FormItemContextValue>({} as FormItemContextValue);
 
 const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({className, ...props}, ref) => {
+  ({ className, ...props }, ref) => {
     const id = useId();
 
     return (
-      <FormItemContext.Provider value={{id}}>
+      <FormItemContext.Provider value={{ id }}>
         <div ref={ref} className={cn("py-4", className)} {...props} />
       </FormItemContext.Provider>
     );
@@ -49,21 +49,21 @@ const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEl
 
 FormItem.displayName = "FormItem";
 
-type FormLabelProps = React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & {isOptional?: boolean};
+type FormLabelProps = React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & { isOptional?: boolean };
 
 const FormLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive.Root>, FormLabelProps>(
-  ({className, isOptional, children, ...props}, ref) => {
-    const {formItemId} = useFormField();
+  ({ className, isOptional, children, ...props }, ref) => {
+    const { formItemId } = useFormField();
 
     return (
       <LabelPrimitive.Root
         ref={ref}
         htmlFor={formItemId}
-        className={cn("block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground", className)}
+        className={cn("font-poppins text-foreground block pb-3 text-sm leading-5 font-semibold", className)}
         {...props}>
         {children}
         {isOptional && (
-          <span className="inline-block pl-2 text-xs font-medium italic leading-4 text-muted-foreground/60">
+          <span className="text-muted-foreground/60 inline-block pl-2 text-xs leading-4 font-medium italic">
             optional
           </span>
         )}
@@ -74,12 +74,12 @@ const FormLabel = React.forwardRef<React.ElementRef<typeof LabelPrimitive.Root>,
 
 FormLabel.displayName = "Label";
 
-const FormLabelSkeleton = ({className, isOptional, children}: FormLabelProps) => {
+const FormLabelSkeleton = ({ className, isOptional, children }: FormLabelProps) => {
   return (
-    <span className={cn("block pb-3 font-poppins text-sm font-semibold leading-5 text-foreground", className)}>
+    <span className={cn("font-poppins text-foreground block pb-3 text-sm leading-5 font-semibold", className)}>
       {children}
       {isOptional && (
-        <span className="inline-block pl-2 text-xs font-medium italic leading-4 text-muted-foreground/60">
+        <span className="text-muted-foreground/60 inline-block pl-2 text-xs leading-4 font-medium italic">
           optional
         </span>
       )}
@@ -89,9 +89,9 @@ const FormLabelSkeleton = ({className, isOptional, children}: FormLabelProps) =>
 
 const FormControl = React.forwardRef<
   React.ElementRef<typeof Slot>,
-  React.ComponentPropsWithoutRef<typeof Slot> & {withDescription?: boolean}
->(({withDescription, ...props}, ref) => {
-  const {error, formItemId, formDescriptionId, formMessageId} = useFormField();
+  React.ComponentPropsWithoutRef<typeof Slot> & { withDescription?: boolean }
+>(({ withDescription, ...props }, ref) => {
+  const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
 
   return (
     <Slot
@@ -109,14 +109,14 @@ const FormControl = React.forwardRef<
 FormControl.displayName = "FormControl";
 
 const FormDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-  ({className, ...props}, ref) => {
-    const {formDescriptionId} = useFormField();
+  ({ className, ...props }, ref) => {
+    const { formDescriptionId } = useFormField();
 
     return (
       <p
         ref={ref}
         id={formDescriptionId}
-        className={cn("pt-3 text-xs leading-5 text-muted-foreground", className)}
+        className={cn("text-muted-foreground pt-3 text-xs leading-5", className)}
         {...props}
       />
     );
@@ -126,8 +126,8 @@ const FormDescription = React.forwardRef<HTMLParagraphElement, React.HTMLAttribu
 FormDescription.displayName = "FormDescription";
 
 const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-  ({className, children, ...props}, ref) => {
-    const {error, formMessageId} = useFormField();
+  ({ className, children, ...props }, ref) => {
+    const { error, formMessageId } = useFormField();
     const body = error ? String(error?.message) : children;
 
     if (!body) {
@@ -138,7 +138,7 @@ const FormMessage = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<
       <p
         ref={ref}
         id={formMessageId}
-        className={cn("pt-2 font-poppins text-xs font-medium text-red-500", className)}
+        className={cn("font-poppins pt-2 text-xs font-medium text-red-500", className)}
         {...props}>
         {body}
       </p>

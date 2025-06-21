@@ -1,5 +1,5 @@
-import {isBefore} from "date-fns";
-import {z} from "zod";
+import { isBefore } from "date-fns";
+import { z } from "zod";
 
 type ExperienceItemFormValues = z.infer<typeof experienceItemSchema>;
 
@@ -13,11 +13,11 @@ const experienceItemSchema = z
     id: z.string().optional(),
     position: z.string().min(3, "Position name must be at least 3 characters long").max(128, "Name is too long"),
     company: z.string().min(3, "Company name must be at least 3 characters long").max(128, "Name is too long"),
-    startDate: z.date({required_error: "Start date is required"}),
+    startDate: z.date({ required_error: "Start date is required" }),
     endDate: z.date().nullable().optional(),
     responsibilities: z.array(experienceItemResponsibilitySchema)
   })
-  .superRefine(({startDate, endDate}, ctx) => {
+  .superRefine(({ startDate, endDate }, ctx) => {
     if (endDate && isBefore(endDate, startDate)) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
@@ -29,6 +29,6 @@ const experienceItemSchema = z
     }
   });
 
-export type {ExperienceItemFormValues};
+export type { ExperienceItemFormValues };
 
-export {experienceItemSchema};
+export { experienceItemSchema };

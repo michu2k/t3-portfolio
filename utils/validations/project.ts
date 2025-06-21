@@ -1,6 +1,6 @@
-import {z} from "zod";
+import { z } from "zod";
 
-import type {FileObj} from "~/utils/file";
+import type { FileObj } from "~/utils/file";
 
 type ProjectItemFormValues = z.infer<typeof projectItemSchema>;
 
@@ -13,13 +13,13 @@ const projectItemSchema = z.object({
   image: z
     .custom<FileObj>()
     .optional()
-    .refine((file) => !!file, {message: "Image is required"}),
+    .refine((file) => !!file, { message: "Image is required" }),
   coverImage: z
     .custom<FileObj>()
     .optional()
-    .refine((file) => !!file, {message: "Cover image is required"})
+    .refine((file) => !!file, { message: "Cover image is required" })
 });
 
-export type {ProjectItemFormValues};
+export type { ProjectItemFormValues };
 
-export {projectItemSchema};
+export { projectItemSchema };
