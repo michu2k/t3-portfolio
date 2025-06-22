@@ -152,12 +152,10 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
                   <FormMessage />
                   <PopoverContent className="w-auto p-0" align="start" side="bottom">
                     <Calendar
-                      initialFocus
-                      captionLayout="dropdown"
                       mode="single"
                       defaultMonth={value || undefined}
                       selected={value || undefined}
-                      onSelect={(date) => onChange(date)}
+                      onSelect={onChange}
                     />
                   </PopoverContent>
                 </Popover>
@@ -185,13 +183,11 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
                   <FormMessage />
                   <PopoverContent className="w-auto p-0" align="start" side="bottom">
                     <Calendar
-                      initialFocus
-                      captionLayout="dropdown"
                       mode="single"
                       defaultMonth={value || undefined}
                       selected={value || undefined}
-                      onSelect={(date) => onChange(date)}
-                      disabled={{before: startDate ? new Date(startDate) : new Date()}}
+                      onSelect={onChange}
+                      disabled={{ before: startDate ? new Date(startDate) : new Date() }}
                     />
                   </PopoverContent>
                 </Popover>
