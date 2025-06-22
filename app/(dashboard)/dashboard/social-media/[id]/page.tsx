@@ -1,23 +1,24 @@
-import React, {Suspense} from "react";
-import type {Metadata} from "next";
+import React, { Suspense } from "react";
+import type { Metadata } from "next";
 
-import {SocialMediaItemForm, SocialMediaItemFormSkeleton} from "~/components/dashboard/forms/social-media-item-form";
-import {PageContent} from "~/components/dashboard/layouts/page-content";
-import {PageHeader} from "~/components/dashboard/layouts/page-header";
-import {ensureAuthenticated} from "~/server/auth";
-import {api} from "~/trpc/server";
+import { SocialMediaItemForm, SocialMediaItemFormSkeleton } from "~/components/dashboard/forms/social-media-item-form";
+import { PageContent } from "~/components/dashboard/layouts/page-content";
+import { PageHeader } from "~/components/dashboard/layouts/page-header";
+import { ensureAuthenticated } from "~/server/auth";
+import { api, HydrateClient } from "~/trpc/server";
 
 export const metadata: Metadata = {
   title: "Dashboard: Social media"
 };
 
 type PageProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
-export default async function Page({params: {id}}: PageProps) {
+export default async function Page({ params }: PageProps) {
+  const { id } = await params;
   await ensureAuthenticated();
 
   const isNew = id === "new";
@@ -25,20 +26,20 @@ export default async function Page({params: {id}}: PageProps) {
   const description = isNew ? "Create a new social media link." : "Edit an existing link.";
 
   return (
-    <>
+    <HydrateClient>
       <PageHeader heading={heading} description={description} />
       <PageContent>
         <Suspense fallback={<SocialMediaItemFormSkeleton />}>
           <SocialMediaItemFormWrapper id={id} />
         </Suspense>
       </PageContent>
-    </>
+    </HydrateClient>
   );
 }
 
-const SocialMediaItemFormWrapper = async ({id}: {id: string}) => {
+const SocialMediaItemFormWrapper = async ({ id }: { id: string }) => {
   const isNew = id === "new";
-  const socialMediaLink = isNew ? null : await api.socialMedia.getItem({id});
+  const socialMediaLink = isNew ? null : await api.socialMedia.getItem({ id });
 
   return <SocialMediaItemForm socialMediaLink={socialMediaLink} />;
 };
