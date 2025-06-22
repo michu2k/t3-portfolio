@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z } from "zod";
 
 type SocialMediaLinkFormValues = z.infer<typeof socialMediaLinkSchema>;
 
@@ -10,6 +10,6 @@ const socialMediaLinkSchema = z.object({
   })
 });
 
-export type {SocialMediaLinkFormValues};
+export type { SocialMediaLinkFormValues };
 
-export {socialMediaLinkSchema};
+export { socialMediaLinkSchema };
