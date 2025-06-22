@@ -6,7 +6,7 @@ import { cn } from "~/utils/cn";
 
 const buttonVariants = cva(
   `font-poppins font-medium shrink-0
-  inline-flex justify-center items-center rounded-md
+  inline-flex justify-center items-center rounded-md cursor-pointer
   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-appearance
   disabled:pointer-events-none disabled:opacity-50 gap-2
   transition-colors`,
@@ -47,4 +47,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = "Button";
 
-export { Button };
+export { Button, buttonVariants };
