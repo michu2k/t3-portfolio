@@ -13,10 +13,13 @@ import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";
 import { api, HydrateClient } from "~/trpc/server";
 
 type MetadataProps = {
-  params: { id: string };
+  params: Promise<{
+    id: string;
+  }>;
 };
 
-export async function generateMetadata({ params: { id } }: MetadataProps): Promise<Metadata> {
+export async function generateMetadata({ params }: MetadataProps): Promise<Metadata> {
+  const { id } = await params;
   const data = await api.project.getItem({ id });
 
   if (data) {
@@ -36,7 +39,8 @@ type PageProps = {
   };
 };
 
-export default async function Page({ params: { id } }: PageProps) {
+export default async function Page({ params }: PageProps) {
+  const { id } = params;
   const data = await api.project.getItem({ id });
 
   if (!data) {
