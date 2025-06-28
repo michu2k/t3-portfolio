@@ -1,14 +1,14 @@
 "use client";
 
 import React from "react";
-import {FormProvider, useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {PencilIcon} from "lucide-react";
-import {useRouter} from "next/navigation";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { PencilIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-import {Button} from "~/components/ui/button";
-import {Dropzone, DropzoneContent} from "~/components/ui/dropzone";
-import {FileThumbnailCard} from "~/components/ui/file-thumbnail";
+import { Button } from "~/components/ui/button";
+import { Dropzone, DropzoneContent } from "~/components/ui/dropzone";
+import { FileThumbnailCard } from "~/components/ui/file-thumbnail";
 import {
   FormControl,
   FormDescription,
@@ -18,24 +18,24 @@ import {
   FormLabelSkeleton,
   FormMessage
 } from "~/components/ui/form";
-import {Input} from "~/components/ui/input";
-import {Skeleton} from "~/components/ui/skeleton";
-import {Textarea} from "~/components/ui/textarea";
-import {useToast} from "~/hooks/use-toast";
-import type {ProjectItem} from "~/server/api/routers/project";
-import {api} from "~/trpc/react";
-import {acceptedImageTypes} from "~/utils/file";
-import {revalidatePath} from "~/utils/revalidate-path";
-import type {ProjectItemFormValues} from "~/utils/validations/project";
-import {projectItemSchema} from "~/utils/validations/project";
+import { Input } from "~/components/ui/input";
+import { Skeleton } from "~/components/ui/skeleton";
+import { Textarea } from "~/components/ui/textarea";
+import { useToast } from "~/hooks/use-toast";
+import type { ProjectItem } from "~/server/api/routers/project";
+import { api } from "~/trpc/react";
+import { acceptedImageTypes } from "~/utils/file";
+import { revalidatePath } from "~/utils/revalidate-path";
+import type { ProjectItemFormValues } from "~/utils/validations/project";
+import { projectItemSchema } from "~/utils/validations/project";
 
 type ProjectItemFormProps = {
   project: ProjectItem | null;
 };
 
-const ProjectItemForm = ({project}: ProjectItemFormProps) => {
+const ProjectItemForm = ({ project }: ProjectItemFormProps) => {
   const router = useRouter();
-  const {toast} = useToast();
+  const { toast } = useToast();
   const utils = api.useUtils();
 
   const createItemMutation = api.project.createItem.useMutation();
@@ -61,13 +61,13 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
     resolver: zodResolver(projectItemSchema)
   });
 
-  const {control, handleSubmit} = formMethods;
+  const { control, handleSubmit } = formMethods;
 
   async function handleFormSubmit(formValues: ProjectItemFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
     const mutation = itemId ? updateItemMutation : createItemMutation;
-    const mutationVariables = itemId ? {id: itemId, ...formValues} : formValues;
+    const mutationVariables = itemId ? { id: itemId, ...formValues } : formValues;
 
     await mutation.mutateAsync(mutationVariables, {
       async onSuccess() {
@@ -91,7 +91,7 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
         <FormField
           control={control}
           name="coverImage"
-          render={({field: {name, value, onChange}}) => (
+          render={({ field: { name, value, onChange } }) => (
             <FormItem>
               <FormLabel>Cover image</FormLabel>
               {value ? (
@@ -121,7 +121,7 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
         <FormField
           control={control}
           name="name"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
@@ -135,7 +135,7 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
         <FormField
           control={control}
           name="shortDescription"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel isOptional>Short description</FormLabel>
               <FormControl>
@@ -150,7 +150,7 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
         <FormField
           control={control}
           name="image"
-          render={({field: {name, value, onChange}}) => (
+          render={({ field: { name, value, onChange } }) => (
             <FormItem>
               <FormLabel>Image</FormLabel>
               {value ? (
@@ -180,7 +180,7 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
         <FormField
           control={control}
           name="description"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
@@ -194,7 +194,7 @@ const ProjectItemForm = ({project}: ProjectItemFormProps) => {
         <FormField
           control={control}
           name="websiteUrl"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel isOptional>Website URL</FormLabel>
               <FormControl>
@@ -232,7 +232,7 @@ const ProjectItemFormSkeleton = () => {
         <Skeleton className="h-10 w-full" />
       </div>
 
-      <div className="pb-12 pt-4">
+      <div className="pt-4 pb-12">
         <FormLabelSkeleton isOptional>Short description</FormLabelSkeleton>
         <Skeleton className="h-28 w-full" />
       </div>
@@ -261,4 +261,4 @@ const ProjectItemFormSkeleton = () => {
   );
 };
 
-export {ProjectItemForm, ProjectItemFormSkeleton};
+export { ProjectItemForm, ProjectItemFormSkeleton };
