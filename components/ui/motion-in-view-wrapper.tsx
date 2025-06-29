@@ -1,7 +1,7 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
-import React from "react";
+import * as React from "react";
 import type { HTMLMotionProps } from "framer-motion";
 import { domAnimation, LazyMotion, m } from "framer-motion";
 
