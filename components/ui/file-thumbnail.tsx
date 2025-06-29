@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 import { FileIcon } from "lucide-react";
@@ -43,29 +43,25 @@ const FileThumbnail = ({ file, size, className }: FileThumbnailProps) => {
   );
 };
 
-type FileThumbnailCardProps = {
+type FileThumbnailCardProps = React.ComponentProps<"div"> & {
   file: FileObj;
   className?: string;
   actions?: React.ReactNode;
 };
 
-const FileThumbnailCard = React.forwardRef<HTMLDivElement, FileThumbnailCardProps>(
-  ({ file, className, actions }, ref) => {
-    return (
-      <div ref={ref} className={cn("flex min-h-[5.5rem] gap-4", className)}>
-        <FileThumbnail file={file} />
+const FileThumbnailCard = ({ file, className, actions }: FileThumbnailCardProps) => {
+  return (
+    <div className={cn("flex min-h-[5.5rem] gap-4", className)}>
+      <FileThumbnail file={file} />
 
-        <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
-          <p className="font-poppins w-full truncate text-xs font-semibold">{file.name}</p>
-          <p className="text-muted-foreground mb-auto text-xs">{convertBytesToMB(file.size)}</p>
+      <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
+        <p className="font-poppins w-full truncate text-xs font-semibold">{file.name}</p>
+        <p className="text-muted-foreground mb-auto text-xs">{convertBytesToMB(file.size)}</p>
 
-          {actions ? <div className="flex items-center gap-2">{actions}</div> : null}
-        </div>
+        {actions ? <div className="flex items-center gap-2">{actions}</div> : null}
       </div>
-    );
-  }
-);
-
-FileThumbnailCard.displayName = "FileThumbnailCard";
+    </div>
+  );
+};
 
 export { FileThumbnail, FileThumbnailCard };

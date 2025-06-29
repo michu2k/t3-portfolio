@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
 import React, { useContext, useEffect, useState } from "react";
 import * as Portal from "@radix-ui/react-portal";
-import type { AnimationProps } from "framer-motion";
+import type { MotionNodeAnimationOptions } from "framer-motion";
 import { AnimatePresence, motion } from "framer-motion";
 import { XIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -45,14 +45,10 @@ const Sidebar = ({ children, isExpandable = true }: SidebarProps) => {
   );
 };
 
-type SidebarOverlayProps = {
-  className?: string;
-};
-
-const SidebarOverlay = React.forwardRef<HTMLDivElement, SidebarOverlayProps>(({ className }, ref) => {
+const SidebarOverlay = ({ className, ...props }: React.ComponentProps<typeof motion.div>) => {
   const { toggleSidebar } = useContext(SidebarContext);
 
-  const overlayAnimation: AnimationProps = {
+  const overlayAnimation: MotionNodeAnimationOptions = {
     transition: { duration: 0.2, ease: "easeInOut" },
     initial: { opacity: 0 },
     animate: { opacity: 1 },
@@ -63,25 +59,26 @@ const SidebarOverlay = React.forwardRef<HTMLDivElement, SidebarOverlayProps>(({ 
     <Portal.Root asChild>
       <motion.div
         key="sidebar-overlay"
-        ref={ref}
         onClick={toggleSidebar}
         className={cn("bg-background/80 fixed inset-0 z-40 backdrop-blur-sm", className)}
         {...overlayAnimation}
+        {...props}
       />
     </Portal.Root>
   );
-});
+};
 
 SidebarOverlay.displayName = "SidebarOverlay";
 
 type SidebarContentProps = PropsWithChildren<{
+  ref?: React.Ref<HTMLElement>;
   className?: string;
 }>;
 
-const SidebarContent = React.forwardRef<HTMLElement, SidebarContentProps>(({ children, className }, ref) => {
+const SidebarContent = ({ className, children, ...props }: SidebarContentProps) => {
   const { isExpanded, isExpandable, toggleSidebar } = useContext(SidebarContext);
 
-  const contentAnimation: AnimationProps = {
+  const contentAnimation: MotionNodeAnimationOptions = {
     transition: { duration: 0.25, ease: "easeInOut" },
     initial: { x: "-100%" },
     animate: { x: 0 },
@@ -98,7 +95,7 @@ const SidebarContent = React.forwardRef<HTMLElement, SidebarContentProps>(({ chi
       <AnimatePresence>
         {isExpanded && (
           <>
-            <motion.aside key="sidebar-content" ref={ref} className={sidebarClassName} {...contentAnimation}>
+            <motion.aside key="sidebar-content" className={sidebarClassName} {...contentAnimation} {...props}>
               <Button variant="ghost" className="absolute top-4 right-4 size-8 p-0" onClick={toggleSidebar}>
                 <XIcon size={22} />
                 <span className="sr-only">Close</span>
@@ -116,42 +113,31 @@ const SidebarContent = React.forwardRef<HTMLElement, SidebarContentProps>(({ chi
 
   // If a sidebar is not expandable (i.e. it's defined as static), it will be visible only on the desktop
   return (
-    <aside ref={ref} className={cn(sidebarClassName, "hidden md:sticky md:flex")}>
+    <aside className={cn(sidebarClassName, "hidden md:sticky md:flex")} {...props}>
       {children}
     </aside>
   );
-});
-
-SidebarContent.displayName = "SidebarContent";
-
-type SidebarTriggerProps = {
-  onClick?: (e: React.MouseEvent) => void;
-  className?: string;
 };
 
-const SidebarTrigger = React.forwardRef<HTMLButtonElement, SidebarTriggerProps>(
-  ({ className, onClick = () => null }, ref) => {
-    const { toggleSidebar } = useContext(SidebarContext);
+const SidebarTrigger = ({ className, onClick, ...props }: React.ComponentProps<"button">) => {
+  const { toggleSidebar } = useContext(SidebarContext);
 
-    function handleBtnClick(e: React.MouseEvent) {
-      toggleSidebar();
-      onClick(e);
-    }
-
-    return (
-      <button
-        ref={ref}
-        onClick={handleBtnClick}
-        className={cn("relative z-40 flex size-8 shrink-0 flex-col justify-center gap-4", className)}>
-        <span className="bg-foreground flex h-0.5 w-6" />
-        <span className="bg-foreground absolute top-0 bottom-0 left-0 m-auto h-0.5 w-8" />
-        <span className="bg-foreground flex h-0.5 w-6" />
-        <span className="sr-only">Toggle sidebar</span>
-      </button>
-    );
+  function handleBtnClick(e: React.MouseEvent<HTMLButtonElement>) {
+    toggleSidebar();
+    onClick?.(e);
   }
-);
 
-SidebarTrigger.displayName = "SidebarTrigger";
+  return (
+    <button
+      onClick={handleBtnClick}
+      className={cn("relative z-40 flex size-8 shrink-0 flex-col justify-center gap-4", className)}
+      {...props}>
+      <span className="bg-foreground flex h-0.5 w-6" />
+      <span className="bg-foreground absolute top-0 bottom-0 left-0 m-auto h-0.5 w-8" />
+      <span className="bg-foreground flex h-0.5 w-6" />
+      <span className="sr-only">Toggle sidebar</span>
+    </button>
+  );
+};
 
 export { Sidebar, SidebarContent, SidebarTrigger, SidebarContext };

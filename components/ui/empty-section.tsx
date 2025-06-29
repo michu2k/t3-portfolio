@@ -1,14 +1,14 @@
-import React from "react";
+import * as React from "react";
 import { ScrollIcon } from "lucide-react";
 
-type EmptySectionProps = {
+type EmptySectionProps = React.ComponentProps<"div"> & {
   heading: string;
   description?: string;
 };
 
-const EmptySection = React.forwardRef<HTMLDivElement, EmptySectionProps>(({ heading, description }, ref) => {
+const EmptySection = ({ heading, description }: EmptySectionProps) => {
   return (
-    <div ref={ref} className="min-h-[6rem] w-full py-4">
+    <div className="min-h-[6rem] w-full py-4">
       <div className="bg-accent flex w-full items-center gap-4 rounded-lg px-3 py-6">
         <ScrollIcon size={56} strokeWidth={1} />
 
@@ -21,8 +21,6 @@ const EmptySection = React.forwardRef<HTMLDivElement, EmptySectionProps>(({ head
       </div>
     </div>
   );
-});
-
-EmptySection.displayName = "EmptySection";
+};
 
 export { EmptySection };
