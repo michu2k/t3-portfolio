@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import * as React from "react";
 import { MoveRightIcon, SendIcon } from "lucide-react";
 
 import { Button } from "~/components/ui/button";

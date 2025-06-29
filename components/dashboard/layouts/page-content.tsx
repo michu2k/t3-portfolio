@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 const PageContent = ({ children }: { children: React.ReactNode }) => {
   return (
