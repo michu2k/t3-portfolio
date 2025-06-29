@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import type { LucideIcon } from "lucide-react";
 import { BookTextIcon, CodeIcon, RocketIcon } from "lucide-react";
 import type { Metadata } from "next";

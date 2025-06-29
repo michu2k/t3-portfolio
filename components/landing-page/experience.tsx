@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { format } from "date-fns";
 
 import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";

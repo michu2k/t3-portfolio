@@ -1,5 +1,5 @@
 import type { PropsWithChildren } from "react";
-import React from "react";
+import * as React from "react";
 
 import { Heading } from "~/components/ui/heading";
 import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";

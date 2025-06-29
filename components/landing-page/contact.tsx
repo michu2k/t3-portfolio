@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { type ContactMethod } from "@prisma/client";
 
 import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";

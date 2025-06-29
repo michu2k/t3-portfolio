@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { GlobeIcon } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
