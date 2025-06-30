@@ -1,9 +1,10 @@
-import type { MotionProps } from "framer-motion";
+import type { MotionNodeAnimationOptions, MotionNodeViewportOptions } from "framer-motion";
 
 export const DEFAULT_ANIMATION_DURATION = 0.6;
+
 export const DEFAULT_ANIMATION_DELAY = 0.3;
 
-export const inViewAnimationProps: MotionProps = {
+export const inViewAnimationProps: MotionNodeAnimationOptions & MotionNodeViewportOptions = {
   initial: { opacity: 0 },
   whileInView: { opacity: 1 },
   transition: {
