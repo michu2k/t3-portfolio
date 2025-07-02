@@ -56,17 +56,33 @@
     --ring: hsl(218 11% 65%); /* slate-400 */
   }
 
-  html {
-    height: 100%;
+  .landing-page-layout {
+    --primary: hsl(221 39% 11%); /* gray-900 */
+
+    --background: hsl(0 0% 100%); /* white */
+    --foreground: hsl(221 39% 11%); /* gray-900 */
+
+    --muted: hsl(214 32% 91%); /* slate-200 */
+    --muted-foreground: hsl(215 19% 35%); /* slate-600 */
+
+    --accent: hsl(210 40% 98%); /* slate-50 */
+    --accent-foreground: hsl(215 20% 65%); /* slate-400 */
+
+    --ring: hsl(218 11% 65%); /* slate-400 */
   }
 
+  html,
   body {
-    @apply bg-background text-foreground;
-    height: 100%;
+    min-height: 100%;
   }
 }
 
 @layer components {
+  .dashboard-layout,
+  .landing-page-layout {
+    @apply bg-background text-foreground;
+  }
+
   .section-container {
     @apply mx-auto w-full max-w-xl md:max-w-4xl;
   }
