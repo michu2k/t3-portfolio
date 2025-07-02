@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default async function SignInLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="flex min-h-full">
+    <main className="dashboard-layout flex min-h-full">
       <div className="mx-auto flex w-full max-w-80 flex-col items-center justify-center px-4">
         {children}
 

@@ -1,13 +1,13 @@
 import * as React from "react";
 import type { Metadata } from "next";
 
-import "~/styles/landing-page-globals.css";
+import "~/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "T3 Portfolio",
-  description: "Portofolio website created using the T3 stack"
+  description: "Portfolio website created using the T3 stack"
 };
 
 export default function LandingPageLayout({ children }: { children: React.ReactNode }) {
-  return <main className="bg-background mx-auto min-h-full">{children}</main>;
+  return <main className="bg-background landing-page-layout mx-auto min-h-full">{children}</main>;
 }

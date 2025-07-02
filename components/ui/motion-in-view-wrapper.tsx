@@ -1,15 +1,11 @@
 "use client";
 
-import type { PropsWithChildren } from "react";
 import * as React from "react";
-import type { HTMLMotionProps } from "framer-motion";
 import { domAnimation, LazyMotion, m } from "framer-motion";
 
 import { inViewAnimationProps } from "~/utils/animations";
 
-type MotionInViewWrapperProps = PropsWithChildren<HTMLMotionProps<"div">>;
-
-const MotionInViewWrapper = ({ children, transition, ...props }: MotionInViewWrapperProps) => {
+const MotionInViewWrapper = ({ children, transition, ...props }: React.ComponentProps<typeof m.div>) => {
   return (
     <LazyMotion features={domAnimation}>
       <m.div
