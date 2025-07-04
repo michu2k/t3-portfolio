@@ -68,8 +68,6 @@ const SidebarOverlay = ({ className, ...props }: React.ComponentProps<typeof mot
   );
 };
 
-SidebarOverlay.displayName = "SidebarOverlay";
-
 type SidebarContentProps = PropsWithChildren<{
   ref?: React.Ref<HTMLElement>;
   className?: string;
