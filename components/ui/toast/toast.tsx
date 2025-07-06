@@ -35,12 +35,14 @@ const toastVariants = cva(
   }
 );
 
-type ToastProps = React.ComponentProps<typeof ToastPrimitives.Root> &
-  VariantProps<typeof toastVariants> & {
-    title?: React.ReactNode;
-    description?: React.ReactNode;
-    action?: ToastActionElement;
-  };
+type ToastProps = VariantProps<typeof toastVariants> & {
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  action?: ToastActionElement;
+  className?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+};
 
 const Toast = ({ className, variant, title, description, action, ...props }: ToastProps) => {
   return (
@@ -51,6 +53,7 @@ const Toast = ({ className, variant, title, description, action, ...props }: Toa
         {title && <ToastTitle>{title}</ToastTitle>}
         {description && <ToastDescription>{description}</ToastDescription>}
       </div>
+
       {action}
       <ToastClose />
     </ToastPrimitives.Root>

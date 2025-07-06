@@ -7,10 +7,6 @@ import { useAppSelector } from "./use-app-selector";
 const TOAST_LIMIT = 1;
 const TOAST_DURATION = 4000;
 
-type ToasterToast = Omit<ToastProps, "id"> & {
-  id: number;
-};
-
 let count = 0;
 
 function genId() {
@@ -22,7 +18,7 @@ const useToast = () => {
   const dispatch = useAppDispatch();
   const toasts = useAppSelector(({ toast }) => toast.toasts);
 
-  function toast(props: Omit<ToasterToast, "id">) {
+  function toast(props: ToastProps) {
     const id = genId();
 
     dispatch(
@@ -32,21 +28,21 @@ const useToast = () => {
         open: true,
         onOpenChange: (open) => {
           if (!open) {
-            dismiss(id);
+            dismiss();
           }
         }
       })
     );
 
-    const update = (props: ToasterToast) => {
+    const update = (props: ToastProps) => {
       dispatch(updateToast({ ...props, id }));
     };
 
-    const dismiss = (toastId: number) => {
-      dispatch(updateToast({ id, open: false }));
+    const dismiss = () => {
+      dispatch(updateToast({ open: false, id }));
 
       setTimeout(() => {
-        dispatch(removeToast(toastId));
+        dispatch(removeToast(id));
       }, TOAST_DURATION);
     };
 
@@ -62,7 +58,5 @@ const useToast = () => {
     toast
   };
 };
-
-export type { ToasterToast };
 
 export { TOAST_LIMIT, TOAST_DURATION, useToast };
