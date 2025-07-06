@@ -1,28 +1,28 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
 
-import { TOAST_LIMIT, type ToasterToast } from "~/hooks/use-toast";
+import type { ToastProps } from "~/components/ui/toast";
+import { TOAST_LIMIT } from "~/hooks/use-toast";
 
-type ToastState = {
-  toasts: Array<ToasterToast>;
+type ToasterToast = ToastProps & {
+  id: number;
 };
 
-const initialState: ToastState = {
+const initialState: { toasts: Array<ToasterToast> } = {
   toasts: []
 };
 
 const toastSlice = createSlice({
-  name: "TOST",
+  name: "TOAST",
   initialState,
   reducers: {
-    addToast: (state: ToastState, action: PayloadAction<ToasterToast>) => {
-      state.toasts = [action.payload, ...state.toasts].slice(0, TOAST_LIMIT);
+    addToast: (state, { payload: toast }: PayloadAction<ToasterToast>) => {
+      state.toasts = [toast, ...state.toasts].slice(0, TOAST_LIMIT);
     },
-    updateToast: (state: ToastState, action: PayloadAction<ToasterToast>) => {
-      state.toasts = state.toasts.map((t) => (t.id === action.payload.id ? { ...t, ...action.payload } : t));
+    updateToast: (state, { payload: toast }: PayloadAction<ToasterToast>) => {
+      state.toasts = state.toasts.map((t) => (t.id === toast.id ? { ...t, ...toast } : t));
     },
-    removeToast: (state, action: PayloadAction<number>) => {
-      const toastId = action.payload;
+    removeToast: (state, { payload: toastId }: PayloadAction<number>) => {
       state.toasts = state.toasts.filter(({ id }) => id !== toastId);
     }
   }
