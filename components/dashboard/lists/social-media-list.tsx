@@ -33,7 +33,7 @@ const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
   const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
-  const selectedItem = socialMediaLinks.find((item) => item.id === selectedItemId);
+  const [selectedItemName, setSelectedItemName] = useState<string>("link");
 
   async function handleDeleteItem() {
     if (!selectedItemId) return;
@@ -54,14 +54,28 @@ const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
     revalidatePath(pathname);
   }
 
+  function handleDialogOpenChange(open: boolean) {
+    if (open) return;
+
+    setSelectedItemId(null);
+  }
+
   function displayItems() {
     return socialMediaLinks.map((item) => (
-      <SocialMediaCard key={item.id} onClickDeleteBtn={() => setSelectedItemId(item.id)} {...item} />
+      <SocialMediaCard
+        key={item.id}
+        onClickDeleteBtn={() => {
+          setSelectedItemId(item.id);
+          setSelectedItemName(`${item.icon.toLowerCase()} link`);
+        }}
+        {...item}
+        {...item}
+      />
     ));
   }
 
   return (
-    <Dialog onOpenChange={(open) => (open ? undefined : setSelectedItemId(null))}>
+    <Dialog onOpenChange={handleDialogOpenChange}>
       <Heading as="h2" size="sm">
         Links
       </Heading>
@@ -79,7 +93,7 @@ const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
 
       <DeleteEntityDialog
         title="Delete link"
-        entityName={`${selectedItem?.icon || ""} url`}
+        entityName={selectedItemName}
         onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>

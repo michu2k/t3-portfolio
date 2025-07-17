@@ -33,8 +33,7 @@ const ExperienceList = ({ experience }: ExperienceListProps) => {
   const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
-  const selectedItem = experience.find((item) => item.id === selectedItemId);
-  const { position, company } = selectedItem || {};
+  const [selectedItemName, setSelectedItemName] = useState<string>("position");
 
   async function handleDeleteItem() {
     if (!selectedItemId) return;
@@ -55,14 +54,27 @@ const ExperienceList = ({ experience }: ExperienceListProps) => {
     revalidatePath(pathname);
   }
 
+  function handleDialogOpenChange(open: boolean) {
+    if (open) return;
+
+    setSelectedItemId(null);
+  }
+
   function displayItems() {
     return experience.map((item) => (
-      <ExperienceCard key={item.id} onClickDeleteBtn={() => setSelectedItemId(item.id)} {...item} />
+      <ExperienceCard
+        key={item.id}
+        onClickDeleteBtn={() => {
+          setSelectedItemId(item.id);
+          setSelectedItemName(`${item.position} @ ${item.company || "-"}`);
+        }}
+        {...item}
+      />
     ));
   }
 
   return (
-    <Dialog onOpenChange={(open) => (open ? undefined : setSelectedItemId(null))}>
+    <Dialog onOpenChange={handleDialogOpenChange}>
       <Heading as="h2" size="sm">
         Experience items
       </Heading>
@@ -80,7 +92,7 @@ const ExperienceList = ({ experience }: ExperienceListProps) => {
 
       <DeleteEntityDialog
         title="Delete experience"
-        entityName={position ? `${position} @ ${company || "-"}` : "position"}
+        entityName={selectedItemName}
         onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>
