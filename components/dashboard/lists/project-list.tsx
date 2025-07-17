@@ -33,7 +33,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
   const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
-  const selectedItem = projects.find((item) => item.id === selectedItemId);
+  const [selectedItemName, setSelectedItemName] = useState<string>("project");
 
   async function handleDeleteItem() {
     if (!selectedItemId) return;
@@ -54,14 +54,27 @@ const ProjectList = ({ projects }: ProjectListProps) => {
     revalidatePath(pathname);
   }
 
+  function handleDialogOpenChange(open: boolean) {
+    if (open) return;
+
+    setSelectedItemId(null);
+  }
+
   function displayItems() {
     return projects.map((item) => (
-      <ProjectCard key={item.id} onClickDeleteBtn={() => setSelectedItemId(item.id)} {...item} />
+      <ProjectCard
+        key={item.id}
+        onClickDeleteBtn={() => {
+          setSelectedItemId(item.id);
+          setSelectedItemName(item.name);
+        }}
+        {...item}
+      />
     ));
   }
 
   return (
-    <Dialog onOpenChange={(open) => (open ? undefined : setSelectedItemId(null))}>
+    <Dialog onOpenChange={handleDialogOpenChange}>
       <Heading as="h2" size="sm">
         Project items
       </Heading>
@@ -79,7 +92,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
 
       <DeleteEntityDialog
         title="Delete project"
-        entityName={(selectedItem?.name || "Project").toLowerCase()}
+        entityName={selectedItemName}
         onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>

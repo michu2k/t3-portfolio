@@ -32,7 +32,7 @@ const ContactList = ({ contactMethods }: ContactListProps) => {
   const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
-  const selectedItem = contactMethods.find((item) => item.id === selectedItemId);
+  const [selectedItemName, setSelectedItemName] = useState<string>("contact method");
 
   async function handleDeleteItem() {
     if (!selectedItemId) return;
@@ -53,14 +53,27 @@ const ContactList = ({ contactMethods }: ContactListProps) => {
     revalidatePath(pathname);
   }
 
+  function handleDialogOpenChange(open: boolean) {
+    if (open) return;
+
+    setSelectedItemId(null);
+  }
+
   function displayItems() {
     return contactMethods.map((item) => (
-      <ContactMethodCard key={item.id} onClickDeleteBtn={() => setSelectedItemId(item.id)} {...item} />
+      <ContactMethodCard
+        key={item.id}
+        onClickDeleteBtn={() => {
+          setSelectedItemId(item.id);
+          setSelectedItemName(item.type.toLowerCase());
+        }}
+        {...item}
+      />
     ));
   }
 
   return (
-    <Dialog onOpenChange={(open) => (open ? undefined : setSelectedItemId(null))}>
+    <Dialog onOpenChange={handleDialogOpenChange}>
       <Heading as="h2" size="sm">
         Contact methods
       </Heading>
@@ -78,7 +91,7 @@ const ContactList = ({ contactMethods }: ContactListProps) => {
 
       <DeleteEntityDialog
         title="Delete contact method"
-        entityName={(selectedItem?.type || "Method").toLowerCase()}
+        entityName={selectedItemName}
         onClickDeleteBtn={() => handleDeleteItem()}
       />
     </Dialog>
