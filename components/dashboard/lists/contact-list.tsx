@@ -60,6 +60,10 @@ const ContactList = ({ contactMethods }: ContactListProps) => {
   }
 
   function displayItems() {
+    if (!contactMethods.length) {
+      return <EmptySection heading="No contact methods found" />;
+    }
+
     return contactMethods.map((item) => (
       <ContactMethodCard
         key={item.id}
@@ -79,7 +83,7 @@ const ContactList = ({ contactMethods }: ContactListProps) => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {contactMethods.length ? displayItems() : <EmptySection heading="No contact methods found" />}
+        {displayItems()}
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/contact/new">
