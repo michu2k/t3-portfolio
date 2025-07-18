@@ -94,11 +94,7 @@ const ExperienceList = ({ experience }: ExperienceListProps) => {
         </Button>
       </div>
 
-      <DeleteEntityDialog
-        title="Delete experience"
-        entityName={selectedItemName}
-        onClickDeleteBtn={() => handleDeleteItem()}
-      />
+      <DeleteEntityDialog title="Delete experience" entityName={selectedItemName} onClickDeleteBtn={handleDeleteItem} />
     </Dialog>
   );
 };

@@ -94,11 +94,7 @@ const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
         </Button>
       </div>
 
-      <DeleteEntityDialog
-        title="Delete link"
-        entityName={selectedItemName}
-        onClickDeleteBtn={() => handleDeleteItem()}
-      />
+      <DeleteEntityDialog title="Delete link" entityName={selectedItemName} onClickDeleteBtn={handleDeleteItem} />
     </Dialog>
   );
 };

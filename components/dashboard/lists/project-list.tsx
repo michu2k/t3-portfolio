@@ -94,11 +94,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
         </Button>
       </div>
 
-      <DeleteEntityDialog
-        title="Delete project"
-        entityName={selectedItemName}
-        onClickDeleteBtn={() => handleDeleteItem()}
-      />
+      <DeleteEntityDialog title="Delete project" entityName={selectedItemName} onClickDeleteBtn={handleDeleteItem} />
     </Dialog>
   );
 };
