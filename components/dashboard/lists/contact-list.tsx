@@ -96,7 +96,7 @@ const ContactList = ({ contactMethods }: ContactListProps) => {
       <DeleteEntityDialog
         title="Delete contact method"
         entityName={selectedItemName}
-        onClickDeleteBtn={() => handleDeleteItem()}
+        onClickDeleteBtn={handleDeleteItem}
       />
     </Dialog>
   );
