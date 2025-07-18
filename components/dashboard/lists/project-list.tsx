@@ -61,6 +61,10 @@ const ProjectList = ({ projects }: ProjectListProps) => {
   }
 
   function displayItems() {
+    if (!projects.length) {
+      return <EmptySection heading="No project items found" />;
+    }
+
     return projects.map((item) => (
       <ProjectCard
         key={item.id}
@@ -80,7 +84,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {projects.length ? displayItems() : <EmptySection heading="No project items found" />}
+        {displayItems()}
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/projects/new">

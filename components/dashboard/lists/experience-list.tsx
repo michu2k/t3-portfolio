@@ -61,6 +61,10 @@ const ExperienceList = ({ experience }: ExperienceListProps) => {
   }
 
   function displayItems() {
+    if (!experience.length) {
+      return <EmptySection heading="No experience items found" />;
+    }
+
     return experience.map((item) => (
       <ExperienceCard
         key={item.id}
@@ -80,7 +84,7 @@ const ExperienceList = ({ experience }: ExperienceListProps) => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {experience.length ? displayItems() : <EmptySection heading="No experience items found" />}
+        {displayItems()}
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/experience/new">

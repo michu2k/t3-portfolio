@@ -61,6 +61,10 @@ const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
   }
 
   function displayItems() {
+    if (!socialMediaLinks.length) {
+      return <EmptySection heading="No links found" />;
+    }
+
     return socialMediaLinks.map((item) => (
       <SocialMediaCard
         key={item.id}
@@ -68,7 +72,6 @@ const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
           setSelectedItemId(item.id);
           setSelectedItemName(`${item.icon.toLowerCase()} link`);
         }}
-        {...item}
         {...item}
       />
     ));
@@ -81,7 +84,7 @@ const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
       </Heading>
 
       <div className="flex flex-col items-start">
-        {socialMediaLinks.length ? displayItems() : <EmptySection heading="No links found" />}
+        {displayItems()}
 
         <Button className="mt-6" asChild>
           <Link href="/dashboard/social-media/new">
