@@ -16,6 +16,7 @@ import { useSnippets } from "~/hooks/use-snippets";
 import { useToast } from "~/hooks/use-toast";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/react";
+import { dashboardPaths } from "~/utils/dashboard.config";
 import { extractSnippetValues } from "~/utils/extract-snippet-values";
 import type { FileObj } from "~/utils/file";
 import { acceptedImageTypes } from "~/utils/file";
@@ -73,7 +74,7 @@ const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
 
     await updateSnippets({ description, image: imageKey });
 
-    revalidatePath("/dashboard/about");
+    revalidatePath(dashboardPaths.about);
 
     toast({
       title: "Success",

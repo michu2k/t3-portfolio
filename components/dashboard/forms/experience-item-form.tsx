@@ -24,6 +24,7 @@ import { Skeleton } from "~/components/ui/skeleton";
 import { useToast } from "~/hooks/use-toast";
 import type { ExperienceItemWithResponsibilities } from "~/server/api/routers/experience";
 import { api } from "~/trpc/react";
+import { dashboardPaths } from "~/utils/dashboard.config";
 import { revalidatePath } from "~/utils/revalidate-path";
 import type { ExperienceItemFormValues } from "~/utils/validations/experience";
 import { experienceItemSchema } from "~/utils/validations/experience";
@@ -96,8 +97,8 @@ const ExperienceItemForm = ({ experienceItem }: ExperienceItemFormProps) => {
       }
     });
 
-    revalidatePath("/dashboard/experience");
-    router.push("/dashboard/experience");
+    revalidatePath(dashboardPaths.experience);
+    router.push(dashboardPaths.experience);
   }
 
   return (

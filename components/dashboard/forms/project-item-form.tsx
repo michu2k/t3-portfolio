@@ -24,6 +24,7 @@ import { Textarea } from "~/components/ui/textarea";
 import { useToast } from "~/hooks/use-toast";
 import type { ProjectItem } from "~/server/api/routers/project";
 import { api } from "~/trpc/react";
+import { dashboardPaths } from "~/utils/dashboard.config";
 import { acceptedImageTypes } from "~/utils/file";
 import { revalidatePath } from "~/utils/revalidate-path";
 import type { ProjectItemFormValues } from "~/utils/validations/project";
@@ -81,8 +82,8 @@ const ProjectItemForm = ({ project }: ProjectItemFormProps) => {
       }
     });
 
-    revalidatePath("/dashboard/projects");
-    router.push("/dashboard/projects");
+    revalidatePath(dashboardPaths.projects);
+    router.push(dashboardPaths.projects);
   }
 
   return (
