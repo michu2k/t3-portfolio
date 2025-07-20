@@ -4,7 +4,7 @@ import type { Snippets } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/react";
 import type { SnippetValues } from "~/utils/extract-snippet-values";
 
-const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
+export const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
   const updateSnippet = api.snippet.updateSnippet.useMutation();
   const createSnippet = api.snippet.createSnippet.useMutation();
   const utils = api.useUtils();
@@ -28,5 +28,3 @@ const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
 
   return updateSnippets;
 };
-
-export { useSnippets };

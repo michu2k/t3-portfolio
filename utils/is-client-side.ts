@@ -1,5 +1,3 @@
-function isClientSide() {
+export function isClientSide() {
   return typeof window !== "undefined";
 }
-
-export { isClientSide };

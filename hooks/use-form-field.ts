@@ -3,7 +3,7 @@ import { useFormContext } from "react-hook-form";
 
 import { FormFieldContext, FormItemContext } from "~/components/ui/form";
 
-const useFormField = () => {
+export const useFormField = () => {
   const fieldContext = useContext(FormFieldContext);
   const itemContext = useContext(FormItemContext);
   const { getFieldState, formState } = useFormContext();
@@ -25,5 +25,3 @@ const useFormField = () => {
     ...fieldState
   };
 };
-
-export { useFormField };
