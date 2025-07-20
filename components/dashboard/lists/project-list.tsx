@@ -21,6 +21,7 @@ import { Skeleton } from "~/components/ui/skeleton";
 import { useToast } from "~/hooks/use-toast";
 import type { ProjectItem } from "~/server/api/routers/project";
 import { api } from "~/trpc/react";
+import { dashboardPaths } from "~/utils/dashboard.config";
 import { revalidatePath } from "~/utils/revalidate-path";
 
 type ProjectListProps = {
@@ -87,7 +88,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
         {displayItems()}
 
         <Button className="mt-6" asChild>
-          <Link href="/dashboard/projects/new">
+          <Link href={`${dashboardPaths.projects}/new`}>
             <PlusIcon size={16} className="mr-1" />
             Add new item
           </Link>

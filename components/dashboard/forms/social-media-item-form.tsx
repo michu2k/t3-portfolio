@@ -14,6 +14,7 @@ import { useToast } from "~/hooks/use-toast";
 import { api } from "~/trpc/react";
 import { capitalize } from "~/utils/capitalize";
 import { cn } from "~/utils/cn";
+import { dashboardPaths } from "~/utils/dashboard.config";
 import { socialMediaIconsDef } from "~/utils/get-social-media-icon";
 import { revalidatePath } from "~/utils/revalidate-path";
 import type { SocialMediaLinkFormValues } from "~/utils/validations/social-media";
@@ -61,8 +62,8 @@ const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
       }
     });
 
-    revalidatePath("/dashboard/social-media");
-    router.push("/dashboard/social-media");
+    revalidatePath(dashboardPaths.socialMedia);
+    router.push(dashboardPaths.socialMedia);
   }
 
   return (

@@ -21,6 +21,7 @@ import { Heading } from "~/components/ui/heading";
 import { Skeleton } from "~/components/ui/skeleton";
 import { useToast } from "~/hooks/use-toast";
 import { api } from "~/trpc/react";
+import { dashboardPaths } from "~/utils/dashboard.config";
 import { revalidatePath } from "~/utils/revalidate-path";
 
 type ExperienceListProps = {
@@ -87,7 +88,7 @@ const ExperienceList = ({ experience }: ExperienceListProps) => {
         {displayItems()}
 
         <Button className="mt-6" asChild>
-          <Link href="/dashboard/experience/new">
+          <Link href={`${dashboardPaths.experience}/new`}>
             <PlusIcon size={16} />
             Add new item
           </Link>

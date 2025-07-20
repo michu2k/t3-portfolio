@@ -25,49 +25,50 @@ import { Skeleton } from "~/components/ui/skeleton";
 import { ThemeSwitch } from "~/components/ui/theme-switch";
 import { useIsMobile } from "~/hooks/use-is-mobile";
 import pkg from "~/package.json";
+import { dashboardPaths } from "~/utils/dashboard.config";
 import { getUserInitials } from "~/utils/get-user-initials";
 
 const navigationItems: Array<NavigationItemDef> = [
   {
     id: "general",
     text: "General",
-    href: "/dashboard",
+    href: dashboardPaths.general,
     icon: LayoutDashboardIcon
   },
   {
     id: "social-media",
     text: "Social Media",
-    href: "/dashboard/social-media",
+    href: dashboardPaths.socialMedia,
     icon: HeartIcon
   },
   {
     id: "header",
     text: "Header",
-    href: "/dashboard/header",
+    href: dashboardPaths.header,
     icon: WallpaperIcon
   },
   {
     id: "about",
     text: "About",
-    href: "/dashboard/about",
+    href: dashboardPaths.about,
     icon: User2Icon
   },
   {
     id: "projects",
     text: "Projects",
-    href: "/dashboard/projects",
+    href: dashboardPaths.projects,
     icon: ImageIcon
   },
   {
     id: "experience",
     text: "Experience",
-    href: "/dashboard/experience",
+    href: dashboardPaths.experience,
     icon: BriefcaseIcon
   },
   {
     id: "contact",
     text: "Contact",
-    href: "/dashboard/contact",
+    href: dashboardPaths.contact,
     icon: MailIcon
   }
 ];

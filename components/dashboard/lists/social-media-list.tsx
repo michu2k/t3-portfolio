@@ -20,6 +20,7 @@ import { Heading } from "~/components/ui/heading";
 import { Skeleton } from "~/components/ui/skeleton";
 import { useToast } from "~/hooks/use-toast";
 import { api } from "~/trpc/react";
+import { dashboardPaths } from "~/utils/dashboard.config";
 import { getSocialMediaIcon } from "~/utils/get-social-media-icon";
 import { revalidatePath } from "~/utils/revalidate-path";
 
@@ -87,7 +88,7 @@ const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
         {displayItems()}
 
         <Button className="mt-6" asChild>
-          <Link href="/dashboard/social-media/new">
+          <Link href={`${dashboardPaths.socialMedia}/new`}>
             <PlusIcon size={16} />
             Add new link
           </Link>
