@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import theme from "tailwindcss/defaultTheme";
 
-const useIsMobile = () => {
+export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -20,5 +20,3 @@ const useIsMobile = () => {
 
   return isMobile;
 };
-
-export { useIsMobile };

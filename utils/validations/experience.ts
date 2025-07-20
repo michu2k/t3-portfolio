@@ -1,14 +1,14 @@
 import { isBefore } from "date-fns";
 import { z } from "zod";
 
-type ExperienceItemFormValues = z.infer<typeof experienceItemSchema>;
+export type ExperienceItemFormValues = z.infer<typeof experienceItemSchema>;
 
 const experienceItemResponsibilitySchema = z.object({
   id: z.string().optional(),
   name: z.string().max(256, "Name is too long")
 });
 
-const experienceItemSchema = z
+export const experienceItemSchema = z
   .object({
     id: z.string().optional(),
     position: z.string().min(3, "Position name must be at least 3 characters long").max(128, "Name is too long"),
@@ -28,7 +28,3 @@ const experienceItemSchema = z
       return z.NEVER;
     }
   });
-
-export type { ExperienceItemFormValues };
-
-export { experienceItemSchema };

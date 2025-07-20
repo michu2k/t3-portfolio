@@ -4,8 +4,8 @@ import { addToast, removeToast, updateToast } from "~/reducers/toast-reducer";
 
 import { useAppSelector } from "./use-app-selector";
 
-const TOAST_LIMIT = 1;
-const TOAST_DURATION = 4000;
+export const TOAST_LIMIT = 1;
+export const TOAST_DURATION = 4000;
 
 let count = 0;
 
@@ -14,7 +14,7 @@ function genId() {
   return count;
 }
 
-const useToast = () => {
+export const useToast = () => {
   const dispatch = useAppDispatch();
   const toasts = useAppSelector(({ toast }) => toast.toasts);
 
@@ -58,5 +58,3 @@ const useToast = () => {
     toast
   };
 };
-
-export { TOAST_LIMIT, TOAST_DURATION, useToast };

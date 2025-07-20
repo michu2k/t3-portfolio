@@ -6,10 +6,10 @@ type ResizeImageOptions = {
   height?: number;
 };
 
-const BUFFER_ENCODING = "base64";
+export const BUFFER_ENCODING = "base64";
 
 /** Resize the given image in base64 format */
-async function resizeImage({ base64String, width, height }: ResizeImageOptions) {
+export async function resizeImage({ base64String, width, height }: ResizeImageOptions) {
   if (!width || !height) {
     return base64String;
   }
@@ -22,5 +22,3 @@ async function resizeImage({ base64String, width, height }: ResizeImageOptions) 
   // Apply the previously deleted dataUrl to the new base64
   return `${dataUrl}base64,${resizedImgBuffer.toString(BUFFER_ENCODING)}`;
 }
-
-export { BUFFER_ENCODING, resizeImage };
