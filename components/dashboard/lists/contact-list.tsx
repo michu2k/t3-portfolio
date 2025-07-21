@@ -124,7 +124,7 @@ const ContactMethodCard = ({ id, name, description, onClickDeleteBtn }: ContactM
         </DropdownMenuTrigger>
 
         <DropdownMenuContent>
-          <Link href={`/dashboard/contact/${id}`}>
+          <Link href={`${dashboardPaths.contact}/${id}`}>
             <DropdownMenuItem>
               <PencilIcon size={16} />
               Edit

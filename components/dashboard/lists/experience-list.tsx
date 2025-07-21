@@ -125,7 +125,7 @@ const ExperienceCard = ({ id, company, startDate, endDate, position, onClickDele
         </DropdownMenuTrigger>
 
         <DropdownMenuContent>
-          <Link href={`/dashboard/experience/${id}`}>
+          <Link href={`${dashboardPaths.experience}/${id}`}>
             <DropdownMenuItem>
               <PencilIcon size={16} />
               Edit

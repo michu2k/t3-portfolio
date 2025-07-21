@@ -137,7 +137,7 @@ const ProjectCard = ({ id, name, shortDescription, description, coverImage, onCl
             </DropdownMenuItem>
           </Link>
 
-          <Link href={`/dashboard/projects/${id}`}>
+          <Link href={`${dashboardPaths.projects}/${id}`}>
             <DropdownMenuItem>
               <PencilIcon size={16} />
               Edit

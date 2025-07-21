@@ -124,7 +124,7 @@ const SocialMediaCard = ({ id, icon, url, onClickDeleteBtn }: SocialMediaCardPro
         </DropdownMenuTrigger>
 
         <DropdownMenuContent>
-          <Link href={`/dashboard/social-media/${id}`}>
+          <Link href={`${dashboardPaths.socialMedia}/${id}`}>
             <DropdownMenuItem>
               <PencilIcon size={16} />
               Edit
