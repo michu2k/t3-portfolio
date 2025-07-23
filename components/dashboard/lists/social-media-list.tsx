@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import type { SocialMediaLink } from "@prisma/client";
 import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 import { DeleteEntityDialog } from "~/components/dashboard/dialogs/delete-entity-dialog";
 import { Button } from "~/components/ui/button";
@@ -22,7 +21,6 @@ import { useToast } from "~/hooks/use-toast";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
 import { getSocialMediaIcon } from "~/utils/get-social-media-icon";
-import { revalidatePath } from "~/utils/revalidate-path";
 
 type SocialMediaListProps = {
   socialMediaLinks?: Array<SocialMediaLink>;
@@ -30,7 +28,6 @@ type SocialMediaListProps = {
 
 const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
-  const pathname = usePathname();
   const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -51,8 +48,6 @@ const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
         }
       }
     );
-
-    revalidatePath(pathname);
   }
 
   function handleDialogOpenChange(open: boolean) {

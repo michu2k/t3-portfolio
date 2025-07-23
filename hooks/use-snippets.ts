@@ -7,7 +7,6 @@ import type { SnippetValues } from "~/utils/extract-snippet-values";
 export const useSnippets = <T extends string>(type: SnippetType, data: Snippets) => {
   const updateSnippet = api.snippet.updateSnippet.useMutation();
   const createSnippet = api.snippet.createSnippet.useMutation();
-  const utils = api.useUtils();
 
   /** Bulk update section snippets for the given type */
   async function updateSnippets(snippets: Partial<SnippetValues<T>>) {
@@ -21,9 +20,7 @@ export const useSnippets = <T extends string>(type: SnippetType, data: Snippets)
       return await createSnippet.mutateAsync({ type, name: key, value: value ?? "" });
     });
 
-    await Promise.all(promises).then(async () => {
-      await utils.snippet.getSnippetsByType.invalidate({ type });
-    });
+    await Promise.all(promises);
   }
 
   return updateSnippets;

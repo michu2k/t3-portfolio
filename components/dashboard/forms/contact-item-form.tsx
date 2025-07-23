@@ -24,7 +24,6 @@ import { useToast } from "~/hooks/use-toast";
 import { api } from "~/trpc/react";
 import { capitalize } from "~/utils/capitalize";
 import { dashboardPaths } from "~/utils/dashboard.config";
-import { revalidatePath } from "~/utils/revalidate-path";
 import type { ContactMethodFormValues } from "~/utils/validations/contact";
 import { contactMethodSchema } from "~/utils/validations/contact";
 
@@ -57,7 +56,6 @@ type ContactItemFormProps = {
 const ContactItemForm = ({ contact }: ContactItemFormProps) => {
   const router = useRouter();
   const { toast } = useToast();
-  const utils = api.useUtils();
 
   const createItemMutation = api.contact.createItem.useMutation();
   const updateItemMutation = api.contact.updateItem.useMutation();
@@ -91,12 +89,9 @@ const ContactItemForm = ({ contact }: ContactItemFormProps) => {
           description: itemId ? "Your changes have been saved." : "A new item has been added.",
           variant: "success"
         });
-
-        await utils.contact.getItem.invalidate();
       }
     });
 
-    revalidatePath(dashboardPaths.contact);
     router.push(dashboardPaths.contact);
   }
 

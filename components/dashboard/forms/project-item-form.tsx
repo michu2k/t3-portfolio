@@ -26,7 +26,6 @@ import type { ProjectItem } from "~/server/api/routers/project";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
 import { acceptedImageTypes } from "~/utils/file";
-import { revalidatePath } from "~/utils/revalidate-path";
 import type { ProjectItemFormValues } from "~/utils/validations/project";
 import { projectItemSchema } from "~/utils/validations/project";
 
@@ -37,7 +36,6 @@ type ProjectItemFormProps = {
 const ProjectItemForm = ({ project }: ProjectItemFormProps) => {
   const router = useRouter();
   const { toast } = useToast();
-  const utils = api.useUtils();
 
   const createItemMutation = api.project.createItem.useMutation();
   const updateItemMutation = api.project.updateItem.useMutation();
@@ -77,12 +75,9 @@ const ProjectItemForm = ({ project }: ProjectItemFormProps) => {
           description: itemId ? "Your changes have been saved." : "A new item has been added.",
           variant: "success"
         });
-
-        await utils.project.getItem.invalidate();
       }
     });
 
-    revalidatePath(dashboardPaths.projects);
     router.push(dashboardPaths.projects);
   }
 
