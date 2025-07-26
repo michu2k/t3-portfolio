@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import type { ContactMethod } from "@prisma/client";
 import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { DeleteEntityDialog } from "~/components/dashboard/dialogs/delete-entity-dialog";
 import { Button } from "~/components/ui/button";
@@ -27,6 +28,7 @@ type ContactListProps = {
 
 const ContactList = ({ contactMethods }: ContactListProps) => {
   const deleteItemMutation = api.contact.deleteItem.useMutation();
+  const router = useRouter();
   const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -44,6 +46,8 @@ const ContactList = ({ contactMethods }: ContactListProps) => {
             description: "Contact method deleted successfully",
             variant: "success"
           });
+
+          router.refresh();
         }
       }
     );

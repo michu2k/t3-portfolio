@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { EllipsisIcon, ExternalLinkIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { DeleteEntityDialog } from "~/components/dashboard/dialogs/delete-entity-dialog";
 import { Button } from "~/components/ui/button";
@@ -28,6 +29,7 @@ type ProjectListProps = {
 
 const ProjectList = ({ projects }: ProjectListProps) => {
   const deleteItemMutation = api.project.deleteItem.useMutation();
+  const router = useRouter();
   const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -45,6 +47,8 @@ const ProjectList = ({ projects }: ProjectListProps) => {
             description: "Project item deleted successfully",
             variant: "success"
           });
+
+          router.refresh();
         }
       }
     );

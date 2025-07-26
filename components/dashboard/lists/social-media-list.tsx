@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import type { SocialMediaLink } from "@prisma/client";
 import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { DeleteEntityDialog } from "~/components/dashboard/dialogs/delete-entity-dialog";
 import { Button } from "~/components/ui/button";
@@ -28,6 +29,7 @@ type SocialMediaListProps = {
 
 const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
+  const router = useRouter();
   const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -45,6 +47,8 @@ const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
             description: "Social media link deleted successfully",
             variant: "success"
           });
+
+          router.refresh();
         }
       }
     );
