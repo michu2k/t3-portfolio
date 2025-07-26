@@ -74,7 +74,7 @@ const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
             <FormItem>
               <FormLabel>Icon</FormLabel>
               <ul className="flex flex-wrap gap-2">
-                {!isIconValid && (
+                {itemId && !isIconValid && (
                   <div className="text-foreground border-muted bg-muted inline-flex size-10 items-center justify-center rounded-md border text-sm">
                     <DefaultSocialMediaIcon className="fill-foreground size-4" aria-hidden="true" />
                   </div>
