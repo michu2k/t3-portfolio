@@ -19,7 +19,14 @@ export const socialMediaIconsDef = {
   youtube: YouTubeSvg
 } as const;
 
+export const DefaultSocialMediaIcon = DefaultSvg;
+
+export function isSocialMediaIconNameValid(key: string) {
+  return Object.keys(socialMediaIconsDef).includes(key);
+}
 
 export function getSocialMediaIcon(key: string) {
-  return socialMediaIconsDef[key as SocialMediaIconsKeys];
+  const icon = socialMediaIconsDef[key as SocialMediaIconsKeys];
+
+  return icon ?? DefaultSocialMediaIcon;
 }

@@ -15,7 +15,7 @@ import { api } from "~/trpc/react";
 import { capitalize } from "~/utils/capitalize";
 import { cn } from "~/utils/cn";
 import { dashboardPaths } from "~/utils/dashboard.config";
-import { socialMediaIconsDef } from "~/utils/get-social-media-icon";
+import { DefaultSocialMediaIcon, isSocialMediaIconNameValid, socialMediaIconsDef } from "~/utils/get-social-media-icon";
 import type { SocialMediaLinkFormValues } from "~/utils/validations/social-media";
 import { socialMediaLinkSchema } from "~/utils/validations/social-media";
 
@@ -40,7 +40,10 @@ const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
     resolver: zodResolver(socialMediaLinkSchema)
   });
 
-  const { control, handleSubmit } = formMethods;
+  const { control, handleSubmit, getValues } = formMethods;
+
+  const currentIcon = getValues("icon");
+  const isIconValid = isSocialMediaIconNameValid(currentIcon);
 
   async function handleFormSubmit(formValues: SocialMediaLinkFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
@@ -71,6 +74,12 @@ const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
             <FormItem>
               <FormLabel>Icon</FormLabel>
               <ul className="flex flex-wrap gap-2">
+                {!isIconValid && (
+                  <div className="text-foreground border-muted bg-muted inline-flex size-10 items-center justify-center rounded-md border text-sm">
+                    <DefaultSocialMediaIcon className="fill-foreground size-4" aria-hidden="true" />
+                  </div>
+                )}
+
                 {Object.entries(socialMediaIconsDef).map(([key, Icon]) => (
                   <li key={key} value={key}>
                     <Button
@@ -117,10 +126,9 @@ const SocialMediaItemFormSkeleton = () => {
       <div className="py-4">
         <FormLabelSkeleton>Icon</FormLabelSkeleton>
         <div className="flex flex-wrap gap-2">
-          <Skeleton className="size-10" />
-          <Skeleton className="size-10" />
-          <Skeleton className="size-10" />
-          <Skeleton className="size-10" />
+          {Object.entries(socialMediaIconsDef).map(([key]) => (
+            <Skeleton key={key} className="size-10" />
+          ))}
         </div>
       </div>
 
