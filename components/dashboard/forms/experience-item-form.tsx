@@ -25,7 +25,6 @@ import { useToast } from "~/hooks/use-toast";
 import type { ExperienceItemWithResponsibilities } from "~/server/api/routers/experience";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
-import { revalidatePath } from "~/utils/revalidate-path";
 import type { ExperienceItemFormValues } from "~/utils/validations/experience";
 import { experienceItemSchema } from "~/utils/validations/experience";
 
@@ -36,7 +35,6 @@ type ExperienceItemFormProps = {
 const ExperienceItemForm = ({ experienceItem }: ExperienceItemFormProps) => {
   const router = useRouter();
   const { toast } = useToast();
-  const utils = api.useUtils();
   const newResponsibilityItem = { id: undefined, name: "" };
 
   const createItemMutation = api.experience.createItem.useMutation();
@@ -92,12 +90,9 @@ const ExperienceItemForm = ({ experienceItem }: ExperienceItemFormProps) => {
           description: itemId ? "Your changes have been saved." : "A new item has been added.",
           variant: "success"
         });
-
-        await utils.experience.getItem.invalidate();
       }
     });
 
-    revalidatePath(dashboardPaths.experience);
     router.push(dashboardPaths.experience);
   }
 

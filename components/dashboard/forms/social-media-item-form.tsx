@@ -16,7 +16,6 @@ import { capitalize } from "~/utils/capitalize";
 import { cn } from "~/utils/cn";
 import { dashboardPaths } from "~/utils/dashboard.config";
 import { socialMediaIconsDef } from "~/utils/get-social-media-icon";
-import { revalidatePath } from "~/utils/revalidate-path";
 import type { SocialMediaLinkFormValues } from "~/utils/validations/social-media";
 import { socialMediaLinkSchema } from "~/utils/validations/social-media";
 
@@ -27,7 +26,6 @@ type SocialMediaItemFormProps = {
 const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
   const router = useRouter();
   const { toast } = useToast();
-  const utils = api.useUtils();
 
   const createItemMutation = api.socialMedia.createItem.useMutation();
   const updateItemMutation = api.socialMedia.updateItem.useMutation();
@@ -57,12 +55,9 @@ const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
           description: itemId ? "Your changes have been saved." : "A new item has been added.",
           variant: "success"
         });
-
-        await utils.socialMedia.getItem.invalidate();
       }
     });
 
-    revalidatePath(dashboardPaths.socialMedia);
     router.push(dashboardPaths.socialMedia);
   }
 

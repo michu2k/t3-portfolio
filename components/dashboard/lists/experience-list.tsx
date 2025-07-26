@@ -5,7 +5,7 @@ import type { ExperienceItem } from "@prisma/client";
 import { format } from "date-fns";
 import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { DeleteEntityDialog } from "~/components/dashboard/dialogs/delete-entity-dialog";
 import { Button } from "~/components/ui/button";
@@ -22,7 +22,6 @@ import { Skeleton } from "~/components/ui/skeleton";
 import { useToast } from "~/hooks/use-toast";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
-import { revalidatePath } from "~/utils/revalidate-path";
 
 type ExperienceListProps = {
   experience: Array<ExperienceItem>;
@@ -30,7 +29,7 @@ type ExperienceListProps = {
 
 const ExperienceList = ({ experience }: ExperienceListProps) => {
   const deleteItemMutation = api.experience.deleteItem.useMutation();
-  const pathname = usePathname();
+  const router = useRouter();
   const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -48,11 +47,11 @@ const ExperienceList = ({ experience }: ExperienceListProps) => {
             description: "Experience item deleted successfully",
             variant: "success"
           });
+
+          router.refresh();
         }
       }
     );
-
-    revalidatePath(pathname);
   }
 
   function handleDialogOpenChange(open: boolean) {
@@ -125,7 +124,7 @@ const ExperienceCard = ({ id, company, startDate, endDate, position, onClickDele
         </DropdownMenuTrigger>
 
         <DropdownMenuContent>
-          <Link href={`/dashboard/experience/${id}`}>
+          <Link href={`${dashboardPaths.experience}/${id}`}>
             <DropdownMenuItem>
               <PencilIcon size={16} />
               Edit

@@ -12,9 +12,7 @@ import { Textarea } from "~/components/ui/textarea";
 import { useSnippets } from "~/hooks/use-snippets";
 import { useToast } from "~/hooks/use-toast";
 import type { Snippets } from "~/server/api/routers/snippet";
-import { dashboardPaths } from "~/utils/dashboard.config";
 import { extractSnippetValues } from "~/utils/extract-snippet-values";
-import { revalidatePath } from "~/utils/revalidate-path";
 import type { ContactSnippetsFormValues } from "~/utils/validations/contact";
 import { contactSnippetsSchema } from "~/utils/validations/contact";
 
@@ -41,8 +39,6 @@ const ContactForm = ({ snippets }: ContactFormProps) => {
     e?.preventDefault();
 
     await updateSnippets(snippets);
-
-    revalidatePath(dashboardPaths.contact);
 
     toast({
       title: "Success",

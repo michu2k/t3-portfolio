@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import type { ContactMethod } from "@prisma/client";
 import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { DeleteEntityDialog } from "~/components/dashboard/dialogs/delete-entity-dialog";
 import { Button } from "~/components/ui/button";
@@ -21,7 +21,6 @@ import { Skeleton } from "~/components/ui/skeleton";
 import { useToast } from "~/hooks/use-toast";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
-import { revalidatePath } from "~/utils/revalidate-path";
 
 type ContactListProps = {
   contactMethods: Array<ContactMethod>;
@@ -29,7 +28,7 @@ type ContactListProps = {
 
 const ContactList = ({ contactMethods }: ContactListProps) => {
   const deleteItemMutation = api.contact.deleteItem.useMutation();
-  const pathname = usePathname();
+  const router = useRouter();
   const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -47,11 +46,11 @@ const ContactList = ({ contactMethods }: ContactListProps) => {
             description: "Contact method deleted successfully",
             variant: "success"
           });
+
+          router.refresh();
         }
       }
     );
-
-    revalidatePath(pathname);
   }
 
   function handleDialogOpenChange(open: boolean) {
@@ -124,7 +123,7 @@ const ContactMethodCard = ({ id, name, description, onClickDeleteBtn }: ContactM
         </DropdownMenuTrigger>
 
         <DropdownMenuContent>
-          <Link href={`/dashboard/contact/${id}`}>
+          <Link href={`${dashboardPaths.contact}/${id}`}>
             <DropdownMenuItem>
               <PencilIcon size={16} />
               Edit

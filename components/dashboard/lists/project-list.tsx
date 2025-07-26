@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { EllipsisIcon, ExternalLinkIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { DeleteEntityDialog } from "~/components/dashboard/dialogs/delete-entity-dialog";
 import { Button } from "~/components/ui/button";
@@ -22,7 +22,6 @@ import { useToast } from "~/hooks/use-toast";
 import type { ProjectItem } from "~/server/api/routers/project";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
-import { revalidatePath } from "~/utils/revalidate-path";
 
 type ProjectListProps = {
   projects: Array<ProjectItem>;
@@ -30,7 +29,7 @@ type ProjectListProps = {
 
 const ProjectList = ({ projects }: ProjectListProps) => {
   const deleteItemMutation = api.project.deleteItem.useMutation();
-  const pathname = usePathname();
+  const router = useRouter();
   const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
@@ -48,11 +47,11 @@ const ProjectList = ({ projects }: ProjectListProps) => {
             description: "Project item deleted successfully",
             variant: "success"
           });
+
+          router.refresh();
         }
       }
     );
-
-    revalidatePath(pathname);
   }
 
   function handleDialogOpenChange(open: boolean) {
@@ -137,7 +136,7 @@ const ProjectCard = ({ id, name, shortDescription, description, coverImage, onCl
             </DropdownMenuItem>
           </Link>
 
-          <Link href={`/dashboard/projects/${id}`}>
+          <Link href={`${dashboardPaths.projects}/${id}`}>
             <DropdownMenuItem>
               <PencilIcon size={16} />
               Edit
