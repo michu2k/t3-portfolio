@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React from "react";
 import type { SocialMediaLink } from "@prisma/client";
 
 import { api } from "~/trpc/server";
@@ -10,7 +10,7 @@ type SocialMediaProps = {
   className?: string;
 };
 
-const SocialMedia = memo(async ({ className }: SocialMediaProps) => {
+const SocialMedia = async ({ className }: SocialMediaProps) => {
   const socialMediaItems = await api.socialMedia.getItems();
 
   function displaySocialMediaIcons() {
@@ -24,9 +24,7 @@ const SocialMedia = memo(async ({ className }: SocialMediaProps) => {
       {displaySocialMediaIcons()}
     </ul>
   );
-});
-
-SocialMedia.displayName = "SocialMedia";
+};
 
 const SocialMediaItem = ({ icon, url }: SocialMediaLink) => {
   const Icon = getSocialMediaIcon(icon);

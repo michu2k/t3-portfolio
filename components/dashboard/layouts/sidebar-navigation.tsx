@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo } from "react";
+import React from "react";
 import type { LucideIcon } from "lucide-react";
 import {
   BriefcaseIcon,
@@ -127,7 +127,7 @@ type NavigationItemDef = {
   icon: LucideIcon;
 };
 
-const NavigationItem = memo(({ text, href, icon: Icon }: NavigationItemDef) => {
+const NavigationItem = ({ text, href, icon: Icon }: NavigationItemDef) => {
   const pathname = usePathname();
   const params = useParams<{ id: string }>();
 
@@ -143,9 +143,7 @@ const NavigationItem = memo(({ text, href, icon: Icon }: NavigationItemDef) => {
       </Link>
     </li>
   );
-});
-
-NavigationItem.displayName = "NavigationItem";
+};
 
 const UserPanel = () => {
   const { data: sessionData } = useSession();
