@@ -1,20 +1,22 @@
-import React, { memo } from "react";
+import React from "react";
 import type { SocialMediaLink } from "@prisma/client";
 
 import { api } from "~/trpc/server";
 import { capitalize } from "~/utils/capitalize";
 import { cn } from "~/utils/cn";
-import { getSocialMediaIcon } from "~/utils/get-social-media-icon";
+import { getSocialMediaIcon, isSocialMediaIconNameValid } from "~/utils/get-social-media-icon";
 
 type SocialMediaProps = {
   className?: string;
 };
 
-const SocialMedia = memo(async ({ className }: SocialMediaProps) => {
+const SocialMedia = async ({ className }: SocialMediaProps) => {
   const socialMediaItems = await api.socialMedia.getItems();
 
   function displaySocialMediaIcons() {
-    return socialMediaItems.map((item) => <SocialMediaItem key={item.id} {...item} />);
+    return socialMediaItems
+      .filter(({ icon }) => isSocialMediaIconNameValid(icon))
+      .map((item) => <SocialMediaItem key={item.id} {...item} />);
   }
 
   return (
@@ -22,9 +24,7 @@ const SocialMedia = memo(async ({ className }: SocialMediaProps) => {
       {displaySocialMediaIcons()}
     </ul>
   );
-});
-
-SocialMedia.displayName = "SocialMedia";
+};
 
 const SocialMediaItem = ({ icon, url }: SocialMediaLink) => {
   const Icon = getSocialMediaIcon(icon);
