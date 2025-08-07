@@ -20,7 +20,7 @@ _Dashboard and landing page view_
 - [Zod](https://zod.dev/) - API and forms validation
 - [React Hook Form](https://www.react-hook-form.com/) - Managing forms
 - [Framer motion](https://www.framer.com/motion/) - Animations
-- [Supabase](https://supabase.com) - PostgreSQL Database
+- [PostgreSQL](https://www.postgresql.org/) - Database
 
 ## Getting started
 
@@ -32,11 +32,21 @@ _Dashboard and landing page view_
 
 ## Environment variables
 
-- Supabase PostgreSQL database URL. [Supabase Documentation](https://supabase.com/partners/integrations/prisma)
+- Supabase or Docker PostgreSQL database URL. [Supabase Documentation](https://supabase.com/partners/integrations/prisma)
 
 ```
 DATABASE_URL=
 DATABASE_DIRECT_URL=
+```
+
+If you want to use PostgreSQL with Docker, you can configure the PostgreSQL database using the following environment variables. [PostgreSQL documentation](https://hub.docker.com/_/postgres)
+
+- Database config for Docker _(optional)_
+
+```
+POSTGRES_USER=
+POSTGRES_PASSWORD=
+POSTGRES_DB=
 ```
 
 - NextAuth.js authentication variables. [NextAuth Documentation](https://next-auth.js.org/configuration/options#environment-variables)
