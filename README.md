@@ -39,9 +39,7 @@ DATABASE_URL=
 DATABASE_DIRECT_URL=
 ```
 
-If you want to use PostgreSQL with Docker, you can configure the PostgreSQL database using the following environment variables. [PostgreSQL documentation](https://hub.docker.com/_/postgres)
-
-- Database config for Docker _(optional)_
+- If you want to use PostgreSQL with Docker, you can configure the following environment variables. _(optional)_ [PostgreSQL documentation](https://hub.docker.com/_/postgres)
 
 ```
 POSTGRES_USER=
