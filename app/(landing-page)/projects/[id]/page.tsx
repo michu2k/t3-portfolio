@@ -34,13 +34,13 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
 }
 
 type PageProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export default async function Page({ params }: PageProps) {
-  const { id } = params;
+  const { id } = await params;
   const data = await api.project.getItem({ id });
 
   if (!data) {
