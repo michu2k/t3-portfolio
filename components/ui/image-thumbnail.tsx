@@ -1,13 +1,13 @@
 import * as React from "react";
 import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
-import { FileIcon } from "lucide-react";
+import { FileImageIcon } from "lucide-react";
 import Image from "next/image";
 
 import { cn } from "~/utils/cn";
 import { convertBytesToMB, type FileObj } from "~/utils/file";
 
-const fileThumbnailVariants = cva(
+const imageThumbnailVariants = cva(
   "relative flex items-center justify-center overflow-hidden rounded-md bg-accent shrink-0",
   {
     variants: {
@@ -22,37 +22,37 @@ const fileThumbnailVariants = cva(
   }
 );
 
-type FileThumbnailProps = VariantProps<typeof fileThumbnailVariants> & {
-  file: FileObj;
+type ImageThumbnailProps = VariantProps<typeof imageThumbnailVariants> & {
+  file: FileObj | null;
   className?: string;
 };
 
-const FileThumbnail = ({ file, size, className }: FileThumbnailProps) => {
-  const { url, type } = file;
-  const isImage = type.includes("image");
+const ImageThumbnail = ({ file, size, className }: ImageThumbnailProps) => {
+  const { url, type } = file ?? {};
+  const isImage = type?.includes("image");
 
   return (
-    <div className={cn(fileThumbnailVariants({ size }), className)}>
+    <div className={cn(imageThumbnailVariants({ size }), className)}>
       {url && isImage ? (
         // Priority is set to true by default as the component will always be above the fold
         <Image src={url} fill style={{ objectFit: "cover" }} sizes="192px" alt="" priority />
       ) : (
-        <FileIcon size={40} className="text-muted-foreground stroke-1" />
+        <FileImageIcon size={32} className="text-muted-foreground stroke-1" />
       )}
     </div>
   );
 };
 
-type FileThumbnailCardProps = React.ComponentProps<"div"> & {
+type ImageThumbnailCardProps = React.ComponentProps<"div"> & {
   file: FileObj;
   className?: string;
   actions?: React.ReactNode;
 };
 
-const FileThumbnailCard = ({ file, className, actions }: FileThumbnailCardProps) => {
+const ImageThumbnailCard = ({ file, className, actions }: ImageThumbnailCardProps) => {
   return (
     <div className={cn("flex min-h-[5.5rem] gap-4", className)}>
-      <FileThumbnail file={file} />
+      <ImageThumbnail file={file} />
 
       <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
         <p className="font-poppins w-full truncate text-xs font-semibold">{file.name}</p>
@@ -64,4 +64,4 @@ const FileThumbnailCard = ({ file, className, actions }: FileThumbnailCardProps)
   );
 };
 
-export { FileThumbnail, FileThumbnailCard };
+export { ImageThumbnail, ImageThumbnailCard };

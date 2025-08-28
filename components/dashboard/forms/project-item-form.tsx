@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 
 import { Button } from "~/components/ui/button";
 import { Dropzone, DropzoneContent } from "~/components/ui/dropzone";
-import { FileThumbnailCard } from "~/components/ui/file-thumbnail";
 import {
   FormControl,
   FormDescription,
@@ -18,6 +17,7 @@ import {
   FormLabelSkeleton,
   FormMessage
 } from "~/components/ui/form";
+import { ImageThumbnailCard } from "~/components/ui/image-thumbnail";
 import { Input } from "~/components/ui/input";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Textarea } from "~/components/ui/textarea";
@@ -91,7 +91,7 @@ const ProjectItemForm = ({ project }: ProjectItemFormProps) => {
             <FormItem>
               <FormLabel>Cover image</FormLabel>
               {value ? (
-                <FileThumbnailCard
+                <ImageThumbnailCard
                   file={value}
                   actions={
                     <Dropzone
@@ -150,7 +150,7 @@ const ProjectItemForm = ({ project }: ProjectItemFormProps) => {
             <FormItem>
               <FormLabel>Image</FormLabel>
               {value ? (
-                <FileThumbnailCard
+                <ImageThumbnailCard
                   file={value}
                   actions={
                     <Dropzone
