@@ -8,8 +8,8 @@ import type { FileObj } from "~/utils/file";
 import { projectItemSchema } from "~/utils/validations/project";
 
 type ProjectItem = Omit<PrismaProjectItem, "coverImage" | "image"> & {
-  coverImage: FileObj;
-  image: FileObj;
+  coverImage: FileObj | null;
+  image: FileObj | null;
 };
 
 const S3_DIRECTORY_NAME = "projects";
