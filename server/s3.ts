@@ -40,7 +40,7 @@ export async function uploadFileToS3(file: FileObj, directory?: string) {
 }
 
 /** Get presigned url for a file from S3 */
-export async function getPresignedUrl(key: string): Promise<FileObj> {
+export async function getPresignedUrl(key: string): Promise<FileObj | null> {
   try {
     const command = new GetObjectCommand({
       Bucket: env.AWS_S3_BUCKET,
@@ -57,8 +57,9 @@ export async function getPresignedUrl(key: string): Promise<FileObj> {
       type: ContentType
     };
   } catch (error) {
-    console.error(error);
-    throw new Error(`An error occured while retrieving "${key}" from S3`);
+    console.error(`An error occured while retrieving "${key}" from S3`, error);
+
+    return null;
   }
 }
 
