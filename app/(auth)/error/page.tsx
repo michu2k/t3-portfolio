@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import Link from "next/link";
 
@@ -14,13 +12,13 @@ const errors = {
 };
 
 type PageProps = {
-  searchParams: {
+  searchParams: Promise<{
     error?: string;
-  };
+  }>;
 };
 
-export default function Page({ searchParams }: PageProps) {
-  const error = searchParams.error;
+export default async function Page({ searchParams }: PageProps) {
+  const { error } = await searchParams;
   const heading = error && Object.keys(errors).includes(error) ? error : "Error";
   const description = (error && errors[error as keyof typeof errors]) ?? errors.default;
 
