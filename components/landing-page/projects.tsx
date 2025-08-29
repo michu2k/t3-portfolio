@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";
+import ImageSvg from "~/public/svgs/image.svg";
 import type { ProjectItem } from "~/server/api/routers/project";
 import { api } from "~/trpc/server";
 
@@ -31,14 +32,20 @@ const ProjectCard = ({ id, name, shortDescription, description, coverImage }: Pr
         href={projectUrl}
         className="focus-visible:ring-appearance flex gap-4 rounded-md focus-visible:ring-2 focus-visible:outline-none sm:flex-col sm:gap-6">
         <MotionInViewWrapper className="relative h-32 w-32 shrink-0 overflow-hidden rounded-md sm:h-56 sm:w-full lg:h-80">
-          <Image
-            src={coverImage.url}
-            fill
-            style={{ objectFit: "cover" }}
-            className="bg-accent transition-transform group-hover:scale-110"
-            sizes="(min-width: 640px) 50vw, 45vw"
-            alt={`${name} preview`}
-          />
+          {coverImage ? (
+            <Image
+              src={coverImage.url}
+              fill
+              style={{ objectFit: "cover" }}
+              className="bg-accent transition-transform group-hover:scale-110"
+              sizes="(min-width: 640px) 50vw, 45vw"
+              alt={`${name} preview`}
+            />
+          ) : (
+            <div className="bg-accent flex h-full w-full flex-col items-center justify-center">
+              <ImageSvg className="fill-accent-foreground size-8" />
+            </div>
+          )}
         </MotionInViewWrapper>
 
         <div className="flex h-full w-full flex-1 flex-col gap-2">

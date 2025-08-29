@@ -35,7 +35,7 @@ const DropdownMenuContent = ({
 const DropdownMenuItem = ({ className, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Item>) => (
   <DropdownMenuPrimitive.Item
     className={cn(
-      "focus:bg-muted/40 relative flex cursor-default items-center gap-2 rounded-md px-2 py-2.5 text-xs transition-colors outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "focus:bg-muted/40 relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2.5 text-xs transition-colors outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className
     )}
     {...props}

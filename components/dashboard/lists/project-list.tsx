@@ -15,8 +15,8 @@ import {
   DropdownMenuTrigger
 } from "~/components/ui/dropdown-menu";
 import { EmptySection } from "~/components/ui/empty-section";
-import { FileThumbnail } from "~/components/ui/file-thumbnail";
 import { Heading } from "~/components/ui/heading";
+import { ImageThumbnail } from "~/components/ui/image-thumbnail";
 import { Skeleton } from "~/components/ui/skeleton";
 import { useToast } from "~/hooks/use-toast";
 import type { ProjectItem } from "~/server/api/routers/project";
@@ -110,7 +110,7 @@ const ProjectCard = ({ id, name, shortDescription, description, coverImage, onCl
 
   return (
     <article className="border-muted flex min-h-[5.25rem] w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
-      <FileThumbnail file={coverImage} size="sm" />
+      <ImageThumbnail file={coverImage} size="sm" />
 
       <div className="flex flex-1 flex-col items-start">
         <p className="font-poppins mr-2 text-sm leading-6 font-semibold">{name}</p>

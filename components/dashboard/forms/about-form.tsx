@@ -7,9 +7,9 @@ import { PencilIcon, TrashIcon } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 import { Dropzone, DropzoneContent } from "~/components/ui/dropzone";
-import { FileThumbnailCard } from "~/components/ui/file-thumbnail";
 import { FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage } from "~/components/ui/form";
 import { Heading } from "~/components/ui/heading";
+import { ImageThumbnailCard } from "~/components/ui/image-thumbnail";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Textarea } from "~/components/ui/textarea";
 import { useSnippets } from "~/hooks/use-snippets";
@@ -93,7 +93,7 @@ const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
             <FormItem>
               <FormLabel isOptional>Image</FormLabel>
               {value ? (
-                <FileThumbnailCard
+                <ImageThumbnailCard
                   file={value}
                   actions={
                     <>

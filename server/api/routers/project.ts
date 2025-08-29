@@ -7,9 +7,9 @@ import { deleteFileFromS3, getPresignedUrl, uploadFileToS3 } from "~/server/s3";
 import type { FileObj } from "~/utils/file";
 import { projectItemSchema } from "~/utils/validations/project";
 
-type ProjectItem = Omit<PrismaProjectItem, "coverImage" | "image"> & {
-  coverImage: FileObj;
-  image: FileObj;
+export type ProjectItem = Omit<PrismaProjectItem, "coverImage" | "image"> & {
+  coverImage: FileObj | null;
+  image: FileObj | null;
 };
 
 const S3_DIRECTORY_NAME = "projects";
@@ -132,5 +132,3 @@ export const projectRouter = createTRPCRouter({
       });
     })
 });
-
-export type { ProjectItem };

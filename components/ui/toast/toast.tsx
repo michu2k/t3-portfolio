@@ -35,10 +35,10 @@ const toastVariants = cva(
   }
 );
 
-type ToastProps = VariantProps<typeof toastVariants> & {
+export type ToastProps = VariantProps<typeof toastVariants> & {
   title?: React.ReactNode;
   description?: React.ReactNode;
-  action?: ToastActionElement;
+  action?: React.ReactElement<typeof ToastAction>;
   className?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -120,9 +120,5 @@ const ToastIcon = ({ variant }: ToastIconProps) => {
 const ToastDescription = ({ className, ...props }: React.ComponentProps<typeof ToastPrimitives.Description>) => (
   <ToastPrimitives.Description className={cn("text-muted-foreground text-sm", className)} {...props} />
 );
-
-type ToastActionElement = React.ReactElement<typeof ToastAction>;
-
-export type { ToastProps };
 
 export { ToastProvider, ToastViewport, Toast, ToastTitle, ToastDescription, ToastClose, ToastAction };
