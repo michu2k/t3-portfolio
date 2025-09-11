@@ -21,7 +21,7 @@ import { ImageThumbnailCard } from "~/components/ui/image-thumbnail";
 import { Input } from "~/components/ui/input";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Textarea } from "~/components/ui/textarea";
-import { useToast } from "~/hooks/use-toast";
+import { toast } from "~/components/ui/toaster";
 import type { ProjectItem } from "~/server/api/routers/project";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
@@ -35,7 +35,6 @@ type ProjectItemFormProps = {
 
 const ProjectItemForm = ({ project }: ProjectItemFormProps) => {
   const router = useRouter();
-  const { toast } = useToast();
 
   const createItemMutation = api.project.createItem.useMutation();
   const updateItemMutation = api.project.updateItem.useMutation();

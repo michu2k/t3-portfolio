@@ -20,7 +20,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { Skeleton } from "~/components/ui/skeleton";
-import { useToast } from "~/hooks/use-toast";
+import { toast } from "~/components/ui/toaster";
 import { api } from "~/trpc/react";
 import { capitalize } from "~/utils/capitalize";
 import { dashboardPaths } from "~/utils/dashboard.config";
@@ -55,7 +55,6 @@ type ContactItemFormProps = {
 
 const ContactItemForm = ({ contact }: ContactItemFormProps) => {
   const router = useRouter();
-  const { toast } = useToast();
 
   const createItemMutation = api.contact.createItem.useMutation();
   const updateItemMutation = api.contact.updateItem.useMutation();

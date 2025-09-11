@@ -12,8 +12,8 @@ import { Heading } from "~/components/ui/heading";
 import { ImageThumbnailCard } from "~/components/ui/image-thumbnail";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Textarea } from "~/components/ui/textarea";
+import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
-import { useToast } from "~/hooks/use-toast";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/react";
 import { extractSnippetValues } from "~/utils/extract-snippet-values";
@@ -31,7 +31,6 @@ type AboutFormProps = {
 };
 
 const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
-  const { toast } = useToast();
   const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", snippets);
   const { description = "", image: currentImageKey } = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
 

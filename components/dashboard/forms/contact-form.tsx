@@ -9,8 +9,8 @@ import { FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMes
 import { Heading } from "~/components/ui/heading";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Textarea } from "~/components/ui/textarea";
+import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
-import { useToast } from "~/hooks/use-toast";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { extractSnippetValues } from "~/utils/extract-snippet-values";
 import type { ContactSnippetsFormValues } from "~/utils/validations/contact";
@@ -21,7 +21,6 @@ type ContactFormProps = {
 };
 
 const ContactForm = ({ snippets }: ContactFormProps) => {
-  const { toast } = useToast();
   const updateSnippets = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", snippets);
   const snippetValues = extractSnippetValues<keyof ContactSnippetsFormValues>(snippets);
 
