@@ -1,12 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { toastReducer } from "~/reducers/toast-reducer";
-
 export const reduxStore = () =>
   configureStore({
-    reducer: {
-      toast: toastReducer
-    },
+    reducer: {},
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false
