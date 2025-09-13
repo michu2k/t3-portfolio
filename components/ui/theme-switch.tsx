@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useSyncExternalStore } from "react";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -8,13 +8,13 @@ import { capitalize } from "~/utils/capitalize";
 
 const ThemeSwitch = () => {
   const { theme = "", setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const isMounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   const isDarkMode = theme === "dark";
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <div className="flex min-w-28 items-center gap-2 px-2">
@@ -36,7 +36,7 @@ const ThemeSwitch = () => {
             onChange={() => setTheme(isDarkMode ? "light" : "dark")}
           />
 
-          {mounted ? (
+          {isMounted ? (
             <span
               className={`animate-in fade-in before:bg-muted absolute size-full rounded-full p-1 before:absolute before:block before:size-5 before:rounded-full ${
                 isDarkMode ? "before:translate-x-7" : ""
@@ -46,7 +46,7 @@ const ThemeSwitch = () => {
         </label>
       </div>
 
-      {mounted ? <p className="font-poppins text-muted-foreground text-xs font-medium">{capitalize(theme)}</p> : null}
+      {isMounted ? <p className="font-poppins text-muted-foreground text-xs font-medium">{capitalize(theme)}</p> : null}
     </div>
   );
 };
