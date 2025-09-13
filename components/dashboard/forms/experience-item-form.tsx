@@ -21,7 +21,7 @@ import {
 import { Input } from "~/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover";
 import { Skeleton } from "~/components/ui/skeleton";
-import { useToast } from "~/hooks/use-toast";
+import { toast } from "~/components/ui/toaster";
 import type { ExperienceItemWithResponsibilities } from "~/server/api/routers/experience";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
@@ -34,7 +34,6 @@ type ExperienceItemFormProps = {
 
 const ExperienceItemForm = ({ experienceItem }: ExperienceItemFormProps) => {
   const router = useRouter();
-  const { toast } = useToast();
   const newResponsibilityItem = { id: undefined, name: "" };
 
   const createItemMutation = api.experience.createItem.useMutation();

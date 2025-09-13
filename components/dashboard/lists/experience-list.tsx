@@ -19,7 +19,7 @@ import {
 import { EmptySection } from "~/components/ui/empty-section";
 import { Heading } from "~/components/ui/heading";
 import { Skeleton } from "~/components/ui/skeleton";
-import { useToast } from "~/hooks/use-toast";
+import { toast } from "~/components/ui/toaster";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
 
@@ -30,7 +30,6 @@ type ExperienceListProps = {
 const ExperienceList = ({ experience }: ExperienceListProps) => {
   const deleteItemMutation = api.experience.deleteItem.useMutation();
   const router = useRouter();
-  const { toast } = useToast();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const [selectedItemName, setSelectedItemName] = useState<string>("position");

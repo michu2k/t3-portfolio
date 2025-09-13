@@ -10,7 +10,7 @@ import { Button } from "~/components/ui/button";
 import { FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
 import { Skeleton } from "~/components/ui/skeleton";
-import { useToast } from "~/hooks/use-toast";
+import { toast } from "~/components/ui/toaster";
 import { api } from "~/trpc/react";
 import { capitalize } from "~/utils/capitalize";
 import { cn } from "~/utils/cn";
@@ -25,7 +25,6 @@ type SocialMediaItemFormProps = {
 
 const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
   const router = useRouter();
-  const { toast } = useToast();
 
   const createItemMutation = api.socialMedia.createItem.useMutation();
   const updateItemMutation = api.socialMedia.updateItem.useMutation();

@@ -2,7 +2,7 @@ import * as React from "react";
 import type { Metadata } from "next";
 
 import { SidebarNavigation } from "~/components/dashboard/layouts/sidebar-navigation";
-import { Toaster } from "~/components/ui/toast";
+import { Toaster } from "~/components/ui/toaster";
 
 import "~/styles/globals.css";
 

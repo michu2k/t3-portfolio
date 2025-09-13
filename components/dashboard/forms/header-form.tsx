@@ -10,8 +10,8 @@ import { Heading } from "~/components/ui/heading";
 import { Input } from "~/components/ui/input";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Textarea } from "~/components/ui/textarea";
+import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
-import { useToast } from "~/hooks/use-toast";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { extractSnippetValues } from "~/utils/extract-snippet-values";
 import type { HeaderSnippetsFormValues } from "~/utils/validations/header";
@@ -22,7 +22,6 @@ type HeaderFormProps = {
 };
 
 const HeaderForm = ({ snippets }: HeaderFormProps) => {
-  const { toast } = useToast();
   const updateSnippets = useSnippets<keyof HeaderSnippetsFormValues>("HEADER", snippets);
   const { heading = "", description = "" } = extractSnippetValues<keyof HeaderSnippetsFormValues>(snippets);
 
