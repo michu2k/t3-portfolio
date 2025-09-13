@@ -2,7 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 
 export const reduxStore = () =>
   configureStore({
-    reducer: {},
+    reducer: {
+      // There are no reducers yet, so we just add a placeholder
+      example: () => null
+    },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false
