@@ -72,7 +72,7 @@ const Toast = ({ className, variant, title, description, ...props }: ToastProps)
   return (
     <div
       className={cn(
-        "bg-background flex w-full items-center gap-4 rounded-lg p-4 shadow-lg ring-1 ring-black/5",
+        "bg-background ring-ring/25 flex w-full items-center gap-4 rounded-lg p-4 shadow-md ring-1",
         className
       )}
       {...props}>
