@@ -1,20 +1,6 @@
 import { SnippetType } from "@prisma/client";
 
-import type { Snippets } from "~/server/api/routers/snippet";
-
-export type SnippetTypeMap = {
-  [SnippetType.HEADER]: {
-    heading: string;
-    description: string;
-  };
-  [SnippetType.ABOUT_ME]: {
-    description: string;
-    image: string;
-  };
-  [SnippetType.CONTACT]: {
-    description: string;
-  };
-};
+import type { Snippets, SnippetTypeMap } from "~/server/api/routers/snippet";
 
 /** Get the snippet values from the array */
 export function extractSnippetValues<T extends SnippetType>(data: Snippets): Partial<SnippetTypeMap[T]> {

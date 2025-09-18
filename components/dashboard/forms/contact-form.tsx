@@ -22,7 +22,7 @@ type ContactFormProps = {
 };
 
 const ContactForm = ({ snippets }: ContactFormProps) => {
-  const updateSnippets = useSnippets<typeof SnippetType.CONTACT>(SnippetType.CONTACT, snippets);
+  const updateSnippets = useSnippets<typeof SnippetType.CONTACT>(snippets);
   const snippetValues = extractSnippetValues<typeof SnippetType.CONTACT>(snippets);
 
   const formMethods = useForm<ContactSnippetsFormValues>({
@@ -38,7 +38,7 @@ const ContactForm = ({ snippets }: ContactFormProps) => {
   async function handleFormSubmit(snippets: ContactSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    await updateSnippets(snippets);
+    await updateSnippets(SnippetType.CONTACT, snippets);
 
     toast({
       title: "Success",

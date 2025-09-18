@@ -7,7 +7,21 @@ import { snippetSchema } from "~/utils/validations/snippet";
 
 export type Snippets = Array<Pick<Snippet, "id" | "name" | "value">>;
 
-const snippetKeys: { [key in SnippetType]: Array<string> } = {
+export type SnippetTypeMap = {
+  [SnippetType.HEADER]: {
+    heading: string;
+    description: string;
+  };
+  [SnippetType.ABOUT_ME]: {
+    description: string;
+    image: string;
+  };
+  [SnippetType.CONTACT]: {
+    description: string;
+  };
+};
+
+const snippetKeys: { [key in SnippetType]: Array<keyof SnippetTypeMap[key]> } = {
   [SnippetType.HEADER]: ["heading", "description"],
   [SnippetType.ABOUT_ME]: ["description", "image"],
   [SnippetType.CONTACT]: ["description"]

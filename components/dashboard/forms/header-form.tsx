@@ -23,7 +23,7 @@ type HeaderFormProps = {
 };
 
 const HeaderForm = ({ snippets }: HeaderFormProps) => {
-  const updateSnippets = useSnippets<typeof SnippetType.HEADER>(SnippetType.HEADER, snippets);
+  const updateSnippets = useSnippets<typeof SnippetType.HEADER>(snippets);
   const { heading = "", description = "" } = extractSnippetValues<typeof SnippetType.HEADER>(snippets);
 
   const formMethods = useForm<HeaderSnippetsFormValues>({
@@ -43,7 +43,7 @@ const HeaderForm = ({ snippets }: HeaderFormProps) => {
   async function handleFormSubmit({ heading, description }: HeaderSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    await updateSnippets({ heading, description });
+    await updateSnippets(SnippetType.HEADER, { heading, description });
 
     toast({
       title: "Success",

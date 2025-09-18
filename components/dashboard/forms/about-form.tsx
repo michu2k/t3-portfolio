@@ -32,7 +32,7 @@ type AboutFormProps = {
 };
 
 const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
-  const updateSnippets = useSnippets<typeof SnippetType.ABOUT_ME>(SnippetType.ABOUT_ME, snippets);
+  const updateSnippets = useSnippets<typeof SnippetType.ABOUT_ME>(snippets);
   const { description = "", image: currentImageKey } = extractSnippetValues<typeof SnippetType.ABOUT_ME>(snippets);
 
   const uploadImage = api.image.uploadImage.useMutation();
@@ -70,7 +70,7 @@ const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
       }
     }
 
-    await updateSnippets({ description, image: imageKey });
+    await updateSnippets(SnippetType.ABOUT_ME, { description, image: imageKey });
 
     toast({
       title: "Success",
