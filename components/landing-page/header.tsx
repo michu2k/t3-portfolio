@@ -1,9 +1,9 @@
 import * as React from "react";
+import type { SnippetType } from "@prisma/client";
 
 import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { extractSnippetValues } from "~/utils/extract-snippet-values";
-import type { HeaderSnippetsFormValues } from "~/utils/validations/header";
 
 import { HeaderButtons } from "./header-buttons";
 
@@ -12,7 +12,7 @@ type HeaderProps = {
 };
 
 const Header = async ({ snippets }: HeaderProps) => {
-  const snippetValues = extractSnippetValues<keyof HeaderSnippetsFormValues>(snippets);
+  const snippetValues = extractSnippetValues<typeof SnippetType.HEADER>(snippets);
   const { heading = "", description = "" } = snippetValues;
 
   return (

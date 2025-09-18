@@ -3,6 +3,7 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SnippetType } from "@prisma/client";
 import { PencilIcon, TrashIcon } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
@@ -31,8 +32,8 @@ type AboutFormProps = {
 };
 
 const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
-  const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", snippets);
-  const { description = "", image: currentImageKey } = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
+  const updateSnippets = useSnippets<typeof SnippetType.ABOUT_ME>(SnippetType.ABOUT_ME, snippets);
+  const { description = "", image: currentImageKey } = extractSnippetValues<typeof SnippetType.ABOUT_ME>(snippets);
 
   const uploadImage = api.image.uploadImage.useMutation();
   const deleteImage = api.image.deleteImage.useMutation();

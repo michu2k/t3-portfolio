@@ -3,6 +3,7 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SnippetType } from "@prisma/client";
 
 import { Button } from "~/components/ui/button";
 import { FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage } from "~/components/ui/form";
@@ -21,8 +22,8 @@ type ContactFormProps = {
 };
 
 const ContactForm = ({ snippets }: ContactFormProps) => {
-  const updateSnippets = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", snippets);
-  const snippetValues = extractSnippetValues<keyof ContactSnippetsFormValues>(snippets);
+  const updateSnippets = useSnippets<typeof SnippetType.CONTACT>(SnippetType.CONTACT, snippets);
+  const snippetValues = extractSnippetValues<typeof SnippetType.CONTACT>(snippets);
 
   const formMethods = useForm<ContactSnippetsFormValues>({
     defaultValues: {
