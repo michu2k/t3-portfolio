@@ -13,38 +13,39 @@ const snippetKeys: { [key in SnippetType]: Array<string> } = {
   [SnippetType.CONTACT]: ["description"]
 };
 
-// prettier-ignore
 export const snippetRouter = createTRPCRouter({
-  getAllSnippets: publicProcedure
-    .query(async ({ctx}) => {
-      const snippets = await ctx.prisma.snippet.findMany({
-        select: {
-          id: true,
-          name: true,
-          value: true,
-          type: true
-        }
-      });
+  getAllSnippets: publicProcedure.query(async ({ ctx }) => {
+    const snippets = await ctx.prisma.snippet.findMany({
+      select: {
+        id: true,
+        name: true,
+        value: true,
+        type: true
+      }
+    });
 
-      // Group snippets by type
-      const groupedSnippets = snippets.reduce<{[key in SnippetType]: Snippets}>((acc, {type, ...snippet}) => (
-        {...acc, [type]: [...acc[type] || [], snippet]}
-      ), {
+    // Group snippets by type
+    const groupedSnippets = snippets.reduce<{ [key in SnippetType]: Snippets }>(
+      (acc, { type, ...snippet }) => ({ ...acc, [type]: [...(acc[type] || []), snippet] }),
+      {
         [SnippetType.HEADER]: [],
         [SnippetType.ABOUT_ME]: [],
         [SnippetType.CONTACT]: []
-      });
+      }
+    );
 
-      return groupedSnippets;
-    }),
+    return groupedSnippets;
+  }),
 
   getSnippetsByType: publicProcedure
-    .input(z.object({
-      type: z.nativeEnum(SnippetType)
-    }))
-    .query(async ({ctx, input: {type}}) => {
+    .input(
+      z.object({
+        type: z.nativeEnum(SnippetType)
+      })
+    )
+    .query(async ({ ctx, input: { type } }) => {
       return await ctx.prisma.snippet.findMany({
-        where: {AND: {type, name: {in: snippetKeys[type]}}},
+        where: { AND: { type, name: { in: snippetKeys[type] } } },
         select: {
           id: true,
           name: true,
@@ -53,28 +54,24 @@ export const snippetRouter = createTRPCRouter({
       });
     }),
 
-  createSnippet: protectedProcedure
-    .input(snippetSchema)
-    .mutation(async ({ctx, input}) => {
-      return await ctx.prisma.snippet.create({
-        data: input
-      });
-    }),
+  createSnippet: protectedProcedure.input(snippetSchema).mutation(async ({ ctx, input }) => {
+    return await ctx.prisma.snippet.create({
+      data: input
+    });
+  }),
 
   updateSnippet: protectedProcedure
     .input(snippetSchema.partial())
-    .mutation(async ({ctx, input: {id, ...input}}) => {
+    .mutation(async ({ ctx, input: { id, ...input } }) => {
       return await ctx.prisma.snippet.update({
-        where: {id},
+        where: { id },
         data: input
       });
     }),
 
-  deleteSnippet: protectedProcedure
-    .input(z.object({id: z.string()}))
-    .mutation(async ({ctx, input: {id}}) => {
-      return await ctx.prisma.snippet.delete({
-        where: {id}
-      });
-    })
+  deleteSnippet: protectedProcedure.input(z.object({ id: z.string() })).mutation(async ({ ctx, input: { id } }) => {
+    return await ctx.prisma.snippet.delete({
+      where: { id }
+    });
+  })
 });
