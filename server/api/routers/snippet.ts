@@ -9,15 +9,15 @@ export type Snippets = Array<Pick<Snippet, "id" | "name" | "value">>;
 
 export type SnippetTypeMap = {
   [SnippetType.HEADER]: {
-    heading: string;
-    description: string;
+    heading?: string;
+    description?: string;
   };
   [SnippetType.ABOUT_ME]: {
-    description: string;
-    image: string;
+    description?: string;
+    image?: string;
   };
   [SnippetType.CONTACT]: {
-    description: string;
+    description?: string;
   };
 };
 
