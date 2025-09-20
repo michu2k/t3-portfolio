@@ -24,9 +24,9 @@ export const useSnippets = <T extends SnippetType>(type: T, data: Snippets) => {
   }
 
   /** Get the snippet values from the array */
-  function _extractSnippetValues() {
+  function getValues() {
     return extractSnippetValues<T>(data);
   }
 
-  return { updateSnippets, extractSnippetValues: _extractSnippetValues };
+  return { updateSnippets, extractSnippetValues: getValues };
 };
