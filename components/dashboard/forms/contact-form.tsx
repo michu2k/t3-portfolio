@@ -22,7 +22,7 @@ type ContactFormProps = {
 };
 
 const ContactForm = ({ snippets }: ContactFormProps) => {
-  const updateSnippets = useSnippets<typeof SnippetType.CONTACT>(snippets);
+  const { updateSnippets } = useSnippets(snippets);
   const snippetValues = extractSnippetValues<typeof SnippetType.CONTACT>(snippets);
 
   const formMethods = useForm<ContactSnippetsFormValues>({

@@ -23,7 +23,7 @@ type HeaderFormProps = {
 };
 
 const HeaderForm = ({ snippets }: HeaderFormProps) => {
-  const updateSnippets = useSnippets<typeof SnippetType.HEADER>(snippets);
+  const { updateSnippets } = useSnippets(snippets);
   const { heading = "", description = "" } = extractSnippetValues<typeof SnippetType.HEADER>(snippets);
 
   const formMethods = useForm<HeaderSnippetsFormValues>({
