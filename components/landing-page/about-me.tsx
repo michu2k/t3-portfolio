@@ -14,9 +14,7 @@ type AboutMeProps = {
 };
 
 const AboutMe = async ({ snippets }: AboutMeProps) => {
-  const snippetValues = extractSnippetValues<typeof SnippetType.ABOUT_ME>(snippets);
-  const { description = "", image: imageId } = snippetValues;
-
+  const { description = "", image: imageId } = extractSnippetValues<typeof SnippetType.ABOUT_ME>(snippets);
   const imageObj = imageId ? await api.image.getImage({ key: imageId }) : null;
 
   return (

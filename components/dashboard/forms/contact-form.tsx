@@ -13,7 +13,6 @@ import { Textarea } from "~/components/ui/textarea";
 import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
 import type { Snippets } from "~/server/api/routers/snippet";
-import { extractSnippetValues } from "~/utils/extract-snippet-values";
 import type { ContactSnippetsFormValues } from "~/utils/validations/contact";
 import { contactSnippetsSchema } from "~/utils/validations/contact";
 
@@ -22,8 +21,8 @@ type ContactFormProps = {
 };
 
 const ContactForm = ({ snippets }: ContactFormProps) => {
-  const { updateSnippets } = useSnippets(snippets);
-  const snippetValues = extractSnippetValues<typeof SnippetType.CONTACT>(snippets);
+  const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.CONTACT, snippets);
+  const snippetValues = extractSnippetValues();
 
   const formMethods = useForm<ContactSnippetsFormValues>({
     defaultValues: {
@@ -38,7 +37,7 @@ const ContactForm = ({ snippets }: ContactFormProps) => {
   async function handleFormSubmit(snippets: ContactSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    await updateSnippets(SnippetType.CONTACT, snippets);
+    await updateSnippets(snippets);
 
     toast({
       title: "Success",

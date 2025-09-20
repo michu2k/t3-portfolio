@@ -15,9 +15,7 @@ type ContactProps = {
 
 const Contact = async ({ snippets }: ContactProps) => {
   const contactMethods = await api.contact.getItems();
-
-  const snippetValues = extractSnippetValues<typeof SnippetType.CONTACT>(snippets);
-  const { description = "" } = snippetValues;
+  const { description = "" } = extractSnippetValues<typeof SnippetType.CONTACT>(snippets);
 
   function displayContactItems() {
     return contactMethods.map((item) => <ContactMethodListItem key={item.id} {...item} />);

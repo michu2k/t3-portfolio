@@ -12,8 +12,7 @@ type HeaderProps = {
 };
 
 const Header = async ({ snippets }: HeaderProps) => {
-  const snippetValues = extractSnippetValues<typeof SnippetType.HEADER>(snippets);
-  const { heading = "", description = "" } = snippetValues;
+  const { heading = "", description = "" } = extractSnippetValues<typeof SnippetType.HEADER>(snippets);
 
   return (
     <header id="top" className="px-4 py-20 md:px-6 md:py-24">

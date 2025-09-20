@@ -2,13 +2,14 @@ import type { SnippetType } from "@prisma/client";
 
 import type { Snippets, SnippetTypeMap } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/react";
+import { extractSnippetValues } from "~/utils/extract-snippet-values";
 
-export const useSnippets = (data: Snippets) => {
+export const useSnippets = <T extends SnippetType>(type: T, data: Snippets) => {
   const updateSnippet = api.snippet.updateSnippet.useMutation();
   const createSnippet = api.snippet.createSnippet.useMutation();
 
   /** Bulk update section snippets for the given type */
-  async function updateSnippets<T extends SnippetType>(type: T, snippets: Partial<SnippetTypeMap[T]>) {
+  async function updateSnippets<T extends SnippetType>(snippets: Partial<SnippetTypeMap[T]>) {
     const promises = Object.entries(snippets).map(async ([key, value]) => {
       const { id, value: dbValue } = data.find((snippet) => snippet.name === key) || {};
 
@@ -22,5 +23,10 @@ export const useSnippets = (data: Snippets) => {
     await Promise.all(promises);
   }
 
-  return { updateSnippets };
+  /** Get the snippet values from the array */
+  function _extractSnippetValues() {
+    return extractSnippetValues<T>(data);
+  }
+
+  return { updateSnippets, extractSnippetValues: _extractSnippetValues };
 };

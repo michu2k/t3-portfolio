@@ -17,7 +17,6 @@ import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/react";
-import { extractSnippetValues } from "~/utils/extract-snippet-values";
 import type { FileObj } from "~/utils/file";
 import { acceptedImageTypes } from "~/utils/file";
 import type { AboutMeSnippetsFormValues } from "~/utils/validations/about-me";
@@ -32,8 +31,8 @@ type AboutFormProps = {
 };
 
 const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
-  const { updateSnippets } = useSnippets(snippets);
-  const { description = "", image: currentImageKey } = extractSnippetValues<typeof SnippetType.ABOUT_ME>(snippets);
+  const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.ABOUT_ME, snippets);
+  const { description = "", image: currentImageKey } = extractSnippetValues();
 
   const uploadImage = api.image.uploadImage.useMutation();
   const deleteImage = api.image.deleteImage.useMutation();
@@ -70,7 +69,7 @@ const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
       }
     }
 
-    await updateSnippets(SnippetType.ABOUT_ME, { description, image: imageKey });
+    await updateSnippets({ description, image: imageKey });
 
     toast({
       title: "Success",

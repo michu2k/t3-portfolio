@@ -14,7 +14,6 @@ import { Textarea } from "~/components/ui/textarea";
 import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
 import type { Snippets } from "~/server/api/routers/snippet";
-import { extractSnippetValues } from "~/utils/extract-snippet-values";
 import type { HeaderSnippetsFormValues } from "~/utils/validations/header";
 import { headerSnippetsSchema } from "~/utils/validations/header";
 
@@ -23,8 +22,8 @@ type HeaderFormProps = {
 };
 
 const HeaderForm = ({ snippets }: HeaderFormProps) => {
-  const { updateSnippets } = useSnippets(snippets);
-  const { heading = "", description = "" } = extractSnippetValues<typeof SnippetType.HEADER>(snippets);
+  const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.HEADER, snippets);
+  const { heading = "", description = "" } = extractSnippetValues();
 
   const formMethods = useForm<HeaderSnippetsFormValues>({
     defaultValues: {
@@ -43,7 +42,7 @@ const HeaderForm = ({ snippets }: HeaderFormProps) => {
   async function handleFormSubmit({ heading, description }: HeaderSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    await updateSnippets(SnippetType.HEADER, { heading, description });
+    await updateSnippets({ heading, description });
 
     toast({
       title: "Success",
