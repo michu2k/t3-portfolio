@@ -8,7 +8,6 @@ import { PageHeader } from "~/components/dashboard/layouts/page-header";
 import { ensureAuthenticated } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
 import { extractSnippetValues } from "~/utils/extract-snippet-values";
-import type { AboutMeSnippetsFormValues } from "~/utils/validations/about-me";
 
 export const metadata: Metadata = {
   title: "Dashboard: About Me"
@@ -32,7 +31,7 @@ export default async function Page() {
 const AboutFormWrapper = async () => {
   const snippets = await api.snippet.getSnippetsByType({ type: SnippetType.ABOUT_ME });
 
-  const { image } = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
+  const { image } = extractSnippetValues<typeof SnippetType.ABOUT_ME>(snippets);
   const currentImage = await api.image.getImage({ key: image });
 
   return <AboutForm snippets={snippets} currentImage={currentImage} />;

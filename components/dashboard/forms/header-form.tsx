@@ -3,6 +3,7 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SnippetType } from "@prisma/client";
 
 import { Button } from "~/components/ui/button";
 import { FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage } from "~/components/ui/form";
@@ -13,7 +14,6 @@ import { Textarea } from "~/components/ui/textarea";
 import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
 import type { Snippets } from "~/server/api/routers/snippet";
-import { extractSnippetValues } from "~/utils/extract-snippet-values";
 import type { HeaderSnippetsFormValues } from "~/utils/validations/header";
 import { headerSnippetsSchema } from "~/utils/validations/header";
 
@@ -22,8 +22,8 @@ type HeaderFormProps = {
 };
 
 const HeaderForm = ({ snippets }: HeaderFormProps) => {
-  const updateSnippets = useSnippets<keyof HeaderSnippetsFormValues>("HEADER", snippets);
-  const { heading = "", description = "" } = extractSnippetValues<keyof HeaderSnippetsFormValues>(snippets);
+  const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.HEADER, snippets);
+  const { heading = "", description = "" } = extractSnippetValues();
 
   const formMethods = useForm<HeaderSnippetsFormValues>({
     defaultValues: {

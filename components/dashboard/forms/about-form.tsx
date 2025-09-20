@@ -3,6 +3,7 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { SnippetType } from "@prisma/client";
 import { PencilIcon, TrashIcon } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
@@ -16,7 +17,6 @@ import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/react";
-import { extractSnippetValues } from "~/utils/extract-snippet-values";
 import type { FileObj } from "~/utils/file";
 import { acceptedImageTypes } from "~/utils/file";
 import type { AboutMeSnippetsFormValues } from "~/utils/validations/about-me";
@@ -31,8 +31,8 @@ type AboutFormProps = {
 };
 
 const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
-  const updateSnippets = useSnippets<keyof AboutMeSnippetsFormValues>("ABOUT_ME", snippets);
-  const { description = "", image: currentImageKey } = extractSnippetValues<keyof AboutMeSnippetsFormValues>(snippets);
+  const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.ABOUT_ME, snippets);
+  const { description = "", image: currentImageKey } = extractSnippetValues();
 
   const uploadImage = api.image.uploadImage.useMutation();
   const deleteImage = api.image.deleteImage.useMutation();
