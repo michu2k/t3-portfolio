@@ -7,7 +7,9 @@ const compat = new FlatCompat({
   baseDirectory: import.meta.dirname
 });
 
-export default eslintTs.config(
+/** @type {import("eslint").Linter.Config[]} */
+const eslintConfig = [
+  ...eslintTs.configs.recommended,
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     name: "Common config",
@@ -68,6 +70,8 @@ export default eslintTs.config(
     }
   },
   {
-    ignores: [".next"]
+    ignores: [".next", "next-env.d.ts"]
   }
-);
+];
+
+export default eslintConfig;
