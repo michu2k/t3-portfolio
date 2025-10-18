@@ -21,6 +21,7 @@ export const socialMediaIconsDef = {
 
 export const DefaultSocialMediaIcon = DefaultSvg;
 
+/** Checks if the provided key is a valid social media icon name */
 export function isSocialMediaIconNameValid(key: string) {
   return Object.keys(socialMediaIconsDef).includes(key);
 }

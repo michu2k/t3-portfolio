@@ -39,10 +39,7 @@ const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
     resolver: zodResolver(socialMediaLinkSchema)
   });
 
-  const { control, handleSubmit, getValues } = formMethods;
-
-  const currentIcon = getValues("icon");
-  const isIconValid = isSocialMediaIconNameValid(currentIcon);
+  const { control, handleSubmit, watch } = formMethods;
 
   async function handleFormSubmit(formValues: SocialMediaLinkFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
@@ -63,6 +60,27 @@ const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
     router.push(dashboardPaths.socialMedia);
   }
 
+  function displaySelectedIcon() {
+    const isInitialIconValid = isSocialMediaIconNameValid(socialMediaLink?.icon ?? "");
+
+    if (!itemId || isInitialIconValid) {
+      return null;
+    }
+
+    const currentIcon = watch("icon");
+    const isNewIconValid = isSocialMediaIconNameValid(currentIcon);
+
+    return (
+      <div
+        className={cn(
+          "text-foreground border-muted inline-flex size-10 items-center justify-center rounded-md border text-sm",
+          { "bg-muted": !isNewIconValid }
+        )}>
+        <DefaultSocialMediaIcon className="fill-foreground size-4" aria-hidden="true" />
+      </div>
+    );
+  }
+
   return (
     <FormProvider {...formMethods}>
       <form onSubmit={(e) => handleSubmit(handleFormSubmit)(e)}>
@@ -73,11 +91,7 @@ const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
             <FormItem>
               <FormLabel>Icon</FormLabel>
               <ul className="flex flex-wrap gap-2">
-                {itemId && !isIconValid && (
-                  <div className="text-foreground border-muted bg-muted inline-flex size-10 items-center justify-center rounded-md border text-sm">
-                    <DefaultSocialMediaIcon className="fill-foreground size-4" aria-hidden="true" />
-                  </div>
-                )}
+                {displaySelectedIcon()}
 
                 {Object.entries(socialMediaIconsDef).map(([key, Icon]) => (
                   <li key={key} value={key}>
