@@ -123,8 +123,8 @@ model ProjectItem {
     name             String
     description      String   @db.Text
     shortDescription String?  @db.Text
-    image            String
-    coverImage       String
+    imageKey         String
+    coverImageKey    String
     createdAt        DateTime @default(now())
     updatedAt        DateTime @updatedAt
     websiteUrl       String?
