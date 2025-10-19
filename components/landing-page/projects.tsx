@@ -4,7 +4,7 @@ import Link from "next/link";
 
 import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";
 import ImageSvg from "~/public/svgs/image.svg";
-import type { ProjectItem } from "~/server/api/routers/project";
+import type { ProjectItemWithImages } from "~/server/api/routers/project";
 import { api } from "~/trpc/server";
 
 import { PageSection } from "./page-section";
@@ -23,7 +23,7 @@ const Projects = async () => {
   );
 };
 
-const ProjectCard = ({ id, name, shortDescription, description, coverImage }: ProjectItem) => {
+const ProjectCard = ({ id, name, shortDescription, description, coverImage }: ProjectItemWithImages) => {
   const projectUrl = `/projects/${id}`;
 
   return (

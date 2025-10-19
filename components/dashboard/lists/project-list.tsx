@@ -19,12 +19,12 @@ import { Heading } from "~/components/ui/heading";
 import { ImageThumbnail } from "~/components/ui/image-thumbnail";
 import { Skeleton } from "~/components/ui/skeleton";
 import { toast } from "~/components/ui/toaster";
-import type { ProjectItem } from "~/server/api/routers/project";
+import type { ProjectItemWithImages } from "~/server/api/routers/project";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
 
 type ProjectListProps = {
-  projects: Array<ProjectItem>;
+  projects: Array<ProjectItemWithImages>;
 };
 
 const ProjectList = ({ projects }: ProjectListProps) => {
@@ -98,7 +98,7 @@ const ProjectList = ({ projects }: ProjectListProps) => {
   );
 };
 
-type ProjectCardProps = ProjectItem & {
+type ProjectCardProps = ProjectItemWithImages & {
   onClickDeleteBtn: (e: React.MouseEvent) => void;
 };
 
