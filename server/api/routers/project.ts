@@ -1,4 +1,4 @@
-import type { ProjectItem as PrismaProjectItem } from "@prisma/client";
+import type { ProjectItem } from "@prisma/client";
 import { z } from "zod";
 
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
@@ -7,7 +7,7 @@ import { deleteFileFromS3, getPresignedUrl, uploadFileToS3 } from "~/server/s3";
 import type { FileObj } from "~/utils/file";
 import { projectItemSchema } from "~/utils/validations/project";
 
-export type ProjectItem = Omit<PrismaProjectItem, "coverImage" | "image"> & {
+export type ProjectItemWithImages = ProjectItem & {
   coverImage: FileObj | null;
   image: FileObj | null;
 };
@@ -20,12 +20,12 @@ export const projectRouter = createTRPCRouter({
   getItems: publicProcedure.query(async ({ ctx }) => {
     const items = await ctx.prisma.projectItem.findMany({ orderBy: { createdAt: "desc" } });
 
-    const itemsWithImageObjects = await Promise.all(
+    const itemsWithImageObjects: Array<ProjectItemWithImages> = await Promise.all(
       items.map(async (item) => {
-        const coverImage = await getPresignedUrl(item.coverImage);
-        const image = await getPresignedUrl(item.image);
+        const coverImage = await getPresignedUrl(item.coverImageKey);
 
-        return { ...item, coverImage, image };
+        // Don't fetch the main image as it's not used in lists
+        return { ...item, coverImage, image: null };
       })
     );
 
@@ -38,8 +38,8 @@ export const projectRouter = createTRPCRouter({
     });
 
     if (item) {
-      const coverImage = await getPresignedUrl(item.coverImage);
-      const image = await getPresignedUrl(item.image);
+      const coverImage = await getPresignedUrl(item.coverImageKey);
+      const image = await getPresignedUrl(item.imageKey);
 
       return { ...item, coverImage, image };
     }
@@ -69,8 +69,8 @@ export const projectRouter = createTRPCRouter({
         return await tx.projectItem.create({
           data: {
             ...input,
-            coverImage: coverImageKey,
-            image: imageKey
+            coverImageKey,
+            imageKey
           }
         });
       });
@@ -96,8 +96,8 @@ export const projectRouter = createTRPCRouter({
         let imageKey: string | undefined;
 
         // If the coverImage has changed, delete the current image and upload the new one
-        if (coverImage.name !== item.coverImage) {
-          await deleteFileFromS3(item.coverImage);
+        if (coverImage.name !== item.coverImageKey) {
+          await deleteFileFromS3(item.coverImageKey);
 
           const newCoverImageUrl = await resizeImage({
             base64String: image.url,
@@ -109,8 +109,8 @@ export const projectRouter = createTRPCRouter({
         }
 
         // If the image has changed, delete the current image and upload the new one
-        if (image.name !== item.image) {
-          await deleteFileFromS3(item.image);
+        if (image.name !== item.imageKey) {
+          await deleteFileFromS3(item.imageKey);
           const { key } = await uploadFileToS3(image, S3_DIRECTORY_NAME);
           imageKey = key;
         }
@@ -119,8 +119,8 @@ export const projectRouter = createTRPCRouter({
           where: { id },
           data: {
             ...input,
-            coverImage: coverImageKey ?? item.coverImage,
-            image: imageKey ?? item.image
+            coverImageKey: coverImageKey ?? item.coverImageKey,
+            imageKey: imageKey ?? item.imageKey
           }
         });
       });
@@ -132,8 +132,8 @@ export const projectRouter = createTRPCRouter({
         where: { id }
       });
 
-      await deleteFileFromS3(item.image);
-      await deleteFileFromS3(item.coverImage);
+      await deleteFileFromS3(item.imageKey);
+      await deleteFileFromS3(item.coverImageKey);
 
       return item;
     });

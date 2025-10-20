@@ -22,7 +22,7 @@ import { Input } from "~/components/ui/input";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Textarea } from "~/components/ui/textarea";
 import { toast } from "~/components/ui/toaster";
-import type { ProjectItem } from "~/server/api/routers/project";
+import type { ProjectItemWithImages } from "~/server/api/routers/project";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
 import { acceptedImageTypes } from "~/utils/file";
@@ -30,7 +30,7 @@ import type { ProjectItemFormValues } from "~/utils/validations/project";
 import { projectItemSchema } from "~/utils/validations/project";
 
 type ProjectItemFormProps = {
-  project: ProjectItem | null;
+  project: ProjectItemWithImages | null;
 };
 
 const ProjectItemForm = ({ project }: ProjectItemFormProps) => {
