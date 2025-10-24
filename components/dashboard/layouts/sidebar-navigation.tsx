@@ -30,43 +30,36 @@ import { getUserInitials } from "~/utils/get-user-initials";
 
 const navigationItems: Array<NavigationItemDef> = [
   {
-    id: "general",
     text: "General",
     href: dashboardPaths.general,
     icon: LayoutDashboardIcon
   },
   {
-    id: "social-media",
     text: "Social Media",
     href: dashboardPaths.socialMedia,
     icon: HeartIcon
   },
   {
-    id: "header",
     text: "Header",
     href: dashboardPaths.header,
     icon: WallpaperIcon
   },
   {
-    id: "about",
     text: "About",
     href: dashboardPaths.about,
     icon: User2Icon
   },
   {
-    id: "projects",
     text: "Projects",
     href: dashboardPaths.projects,
     icon: ImageIcon
   },
   {
-    id: "experience",
     text: "Experience",
     href: dashboardPaths.experience,
     icon: BriefcaseIcon
   },
   {
-    id: "contact",
     text: "Contact",
     href: dashboardPaths.contact,
     icon: MailIcon
@@ -77,7 +70,7 @@ const SidebarNavigation = () => {
   const isMobile = useIsMobile();
 
   function displayNavigationItems() {
-    return navigationItems.map((item) => <NavigationItem key={item.id} {...item} />);
+    return navigationItems.map((item) => <NavigationItem key={item.text} {...item} />);
   }
 
   return (
@@ -121,7 +114,6 @@ const SidebarNavigation = () => {
 };
 
 type NavigationItemDef = {
-  id: string;
   text: string;
   href: string;
   icon: LucideIcon;
@@ -137,7 +129,7 @@ const NavigationItem = ({ text, href, icon: Icon }: NavigationItemDef) => {
     <li>
       <Link
         href={href}
-        className={`font-poppins flex items-center gap-3 rounded-md px-3 py-2.5 text-sm leading-5 font-medium ${isActive ? "text-primary" : "text-foreground"} hover:text-primary focus-visible:ring-appearance transition-colors focus-visible:ring-2 focus-visible:outline-none`}>
+        className={`font-poppins flex items-center gap-3 rounded-md px-3 py-2 text-sm leading-5 font-medium ${isActive ? "text-primary" : "text-foreground"} hover:text-primary focus-visible:ring-appearance transition-colors focus-visible:ring-2 focus-visible:outline-none`}>
         <Icon size={16} />
         {text}
       </Link>

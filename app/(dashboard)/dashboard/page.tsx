@@ -12,21 +12,18 @@ import { HydrateClient } from "~/trpc/server";
 
 const projectLinks: Array<UsefulLinkDef> = [
   {
-    id: "github-repo",
     text: "Repository",
     description: "View the source code on GitHub",
     href: "https://github.com/michu2k/t3-stack-portfolio-website",
     icon: CodeIcon
   },
   {
-    id: "documentation",
     text: "Documentation",
     description: "Learn how to configure the project",
     href: "https://github.com/michu2k/t3-stack-portfolio-website/blob/master/README.md",
     icon: BookTextIcon
   },
   {
-    id: "releases",
     text: "Releases",
     description: "View the latest releases",
     href: "https://github.com/michu2k/t3-stack-portfolio-website/releases",
@@ -42,7 +39,7 @@ export default async function Page() {
   await ensureAuthenticated();
 
   function displayLinks() {
-    return projectLinks.map((item) => <LinkCard key={item.id} {...item} />);
+    return projectLinks.map((item) => <LinkCard key={item.text} {...item} />);
   }
 
   return (
@@ -74,7 +71,6 @@ export default async function Page() {
 }
 
 type UsefulLinkDef = {
-  id: string;
   text: string;
   description: string;
   href: string;
@@ -89,7 +85,7 @@ const LinkCard = ({ text, description, icon: Icon, href }: UsefulLinkDef) => {
           <Icon size={24} className="text-foreground group-hover:text-primary transition-colors" />
           <span className="flex flex-col gap-1">
             <span className="text-foreground text-sm">{text}</span>
-            <span className="text-muted-foreground font-sans text-xs font-normal">{description}</span>
+            <span className="text-muted-foreground text-xs">{description}</span>
           </span>
         </a>
       </Button>
