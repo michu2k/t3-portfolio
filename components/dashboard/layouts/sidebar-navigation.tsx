@@ -96,7 +96,7 @@ const SidebarNavigation = () => {
         </div>
 
         <nav className="flex flex-grow flex-col">
-          <ul className="flex flex-col gap-2 md:gap-3">{displayNavigationItems()}</ul>
+          <ul className="flex flex-col gap-3">{displayNavigationItems()}</ul>
 
           <Button
             variant="ghost"
