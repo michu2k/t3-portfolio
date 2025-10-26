@@ -3,9 +3,9 @@
 import { useRef } from "react";
 import { domAnimation, LazyMotion, m, useInView } from "framer-motion";
 
-export const DEFAULT_ANIMATION_DURATION = 0.6;
+const DEFAULT_ANIMATION_DURATION = 0.6;
 
-export const DEFAULT_ANIMATION_DELAY = 0.3;
+const DEFAULT_ANIMATION_DELAY = 0.3;
 
 const MotionInViewWrapper = ({ children, transition, ...props }: React.ComponentProps<typeof m.div>) => {
   const ref = useRef(null);
