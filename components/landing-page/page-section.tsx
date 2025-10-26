@@ -19,7 +19,7 @@ const PageSection = ({ id, heading, subheading, className, children }: PageSecti
         <div className="flex flex-col gap-2 pb-14">
           <p className="text-primary text-xl">/ {subheading}</p>
 
-          <MotionInViewWrapper initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }}>
+          <MotionInViewWrapper initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
             <Heading as="h2" size="2xl">
               {heading}
             </Heading>

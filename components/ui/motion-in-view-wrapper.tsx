@@ -7,16 +7,25 @@ const DEFAULT_ANIMATION_DURATION = 0.6;
 
 const DEFAULT_ANIMATION_DELAY = 0.3;
 
-const MotionInViewWrapper = ({ children, transition, ...props }: React.ComponentProps<typeof m.div>) => {
+const MotionInViewWrapper = ({
+  children,
+  transition,
+  initial,
+  animate,
+  ...props
+}: React.ComponentProps<typeof m.div>) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
+
+  const initialState = initial ?? { opacity: 0 };
+  const animateState = animate ?? { opacity: 1 };
 
   return (
     <LazyMotion features={domAnimation}>
       <m.div
         ref={ref}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isInView ? 1 : 0 }}
+        initial={initialState}
+        animate={isInView ? animateState : initialState}
         transition={{
           duration: DEFAULT_ANIMATION_DURATION,
           delay: DEFAULT_ANIMATION_DELAY,
