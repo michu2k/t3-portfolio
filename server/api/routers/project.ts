@@ -1,71 +1,76 @@
-import type {ProjectItem as PrismaProjectItem} from "@prisma/client";
-import {z} from "zod";
+import type { ProjectItem } from "@prisma/client";
+import { z } from "zod";
 
-import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
-import {resizeImage} from "~/server/image";
-import {deleteFileFromS3, getPresignedUrl, uploadFileToS3} from "~/server/s3";
-import type {FileObj} from "~/utils/file";
-import {projectItemSchema} from "~/utils/validations/project";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
+import { resizeImage } from "~/server/image";
+import { deleteFileFromS3, getPresignedUrl, uploadFileToS3 } from "~/server/s3";
+import type { FileObj } from "~/utils/file";
+import { projectItemSchema } from "~/utils/validations/project";
 
-type ProjectItem = Omit<PrismaProjectItem, "coverImage" | "image"> & {
-  coverImage: FileObj;
-  image: FileObj;
+export type ProjectItemWithImages = ProjectItem & {
+  coverImage: FileObj | null;
+  image: FileObj | null;
 };
 
 const S3_DIRECTORY_NAME = "projects";
 const THUMBNAIL_WIDTH = 512;
 const THUMBNAIL_HEIGHT = 512;
 
-// prettier-ignore
 export const projectRouter = createTRPCRouter({
-  getItems: publicProcedure
-    .query(async ({ctx}) => {
-      const items = await ctx.prisma.projectItem.findMany({orderBy: {createdAt: "desc"}});
+  getItems: publicProcedure.query(async ({ ctx }) => {
+    const items = await ctx.prisma.projectItem.findMany({ orderBy: { createdAt: "desc" } });
 
-      const itemsWithImageObjects = await Promise.all(items.map(async (item) => {
-        const coverImage = await getPresignedUrl(item.coverImage);
-        const image = await getPresignedUrl(item.image);
+    const itemsWithImageObjects: Array<ProjectItemWithImages> = await Promise.all(
+      items.map(async (item) => {
+        const coverImage = await getPresignedUrl(item.coverImageKey);
 
-        return {...item, coverImage, image};
-      }));
+        // Don't fetch the main image as it's not used in lists
+        return { ...item, coverImage, image: null };
+      })
+    );
 
-      return itemsWithImageObjects;
-    }),
+    return itemsWithImageObjects;
+  }),
 
-  getItem: publicProcedure
-    .input(z.object({id: z.string()}))
-    .query(async ({ctx, input: {id}}) => {
-      const item = await ctx.prisma.projectItem.findUnique({
-        where: {id}
-      });
+  getItem: publicProcedure.input(z.object({ id: z.string() })).query(async ({ ctx, input: { id } }) => {
+    const item = await ctx.prisma.projectItem.findUnique({
+      where: { id }
+    });
 
-      if (item) {
-        const coverImage = await getPresignedUrl(item.coverImage);
-        const image = await getPresignedUrl(item.image);
+    if (item) {
+      const coverImage = await getPresignedUrl(item.coverImageKey);
+      const image = await getPresignedUrl(item.imageKey);
 
-        return {...item, coverImage, image};
-      }
+      return { ...item, coverImage, image };
+    }
 
-      return null;
-    }),
+    return null;
+  }),
 
   createItem: protectedProcedure
     .input(projectItemSchema)
-    .mutation(async ({ctx, input: {image, coverImage, ...input}}) => {
+    .mutation(async ({ ctx, input: { image, coverImage, ...input } }) => {
       if (!image || !coverImage) {
         throw new Error("Image and coverImage are required");
       }
 
       return await ctx.prisma.$transaction(async (tx) => {
-        const newCoverImageUrl = await resizeImage({base64String: image.url, width: THUMBNAIL_WIDTH, height: THUMBNAIL_HEIGHT});
-        const {key: coverImageKey} = await uploadFileToS3({...coverImage, url: newCoverImageUrl}, S3_DIRECTORY_NAME);
-        const {key: imageKey} = await uploadFileToS3(image, S3_DIRECTORY_NAME);
+        const newCoverImageUrl = await resizeImage({
+          base64String: image.url,
+          width: THUMBNAIL_WIDTH,
+          height: THUMBNAIL_HEIGHT
+        });
+        const { key: coverImageKey } = await uploadFileToS3(
+          { ...coverImage, url: newCoverImageUrl },
+          S3_DIRECTORY_NAME
+        );
+        const { key: imageKey } = await uploadFileToS3(image, S3_DIRECTORY_NAME);
 
         return await tx.projectItem.create({
           data: {
             ...input,
-            coverImage: coverImageKey,
-            image: imageKey
+            coverImageKey,
+            imageKey
           }
         });
       });
@@ -73,14 +78,14 @@ export const projectRouter = createTRPCRouter({
 
   updateItem: protectedProcedure
     .input(projectItemSchema)
-    .mutation(async ({ctx, input: {id, image, coverImage, ...input}}) => {
+    .mutation(async ({ ctx, input: { id, image, coverImage, ...input } }) => {
       if (!image || !coverImage) {
         throw new Error("Image and coverImage are required");
       }
 
       return await ctx.prisma.$transaction(async (tx) => {
         const item = await ctx.prisma.projectItem.findUnique({
-          where: {id}
+          where: { id }
         });
 
         if (!item) {
@@ -91,46 +96,46 @@ export const projectRouter = createTRPCRouter({
         let imageKey: string | undefined;
 
         // If the coverImage has changed, delete the current image and upload the new one
-        if (coverImage.name !== item.coverImage) {
-          await deleteFileFromS3(item.coverImage);
+        if (coverImage.name !== item.coverImageKey) {
+          await deleteFileFromS3(item.coverImageKey);
 
-          const newCoverImageUrl = await resizeImage({base64String: image.url, width: THUMBNAIL_WIDTH, height: THUMBNAIL_HEIGHT});
-          const {key} = await uploadFileToS3({...coverImage, url: newCoverImageUrl}, S3_DIRECTORY_NAME);
+          const newCoverImageUrl = await resizeImage({
+            base64String: image.url,
+            width: THUMBNAIL_WIDTH,
+            height: THUMBNAIL_HEIGHT
+          });
+          const { key } = await uploadFileToS3({ ...coverImage, url: newCoverImageUrl }, S3_DIRECTORY_NAME);
           coverImageKey = key;
         }
 
         // If the image has changed, delete the current image and upload the new one
-        if (image.name !== item.image) {
-          await deleteFileFromS3(item.image);
-          const {key} = await uploadFileToS3(image, S3_DIRECTORY_NAME);
+        if (image.name !== item.imageKey) {
+          await deleteFileFromS3(item.imageKey);
+          const { key } = await uploadFileToS3(image, S3_DIRECTORY_NAME);
           imageKey = key;
         }
 
         return await tx.projectItem.update({
-          where: {id},
+          where: { id },
           data: {
             ...input,
-            coverImage: coverImageKey ?? item.coverImage,
-            image: imageKey ?? item.image
+            coverImageKey: coverImageKey ?? item.coverImageKey,
+            imageKey: imageKey ?? item.imageKey
           }
         });
       });
     }),
 
-  deleteItem: protectedProcedure
-    .input(z.object({id: z.string()}))
-    .mutation(async ({ctx, input: {id}}) => {
-      return await ctx.prisma.$transaction(async (tx) => {
-        const item = await tx.projectItem.delete({
-          where: {id}
-        });
-
-        await deleteFileFromS3(item.image);
-        await deleteFileFromS3(item.coverImage);
-
-        return item;
+  deleteItem: protectedProcedure.input(z.object({ id: z.string() })).mutation(async ({ ctx, input: { id } }) => {
+    return await ctx.prisma.$transaction(async (tx) => {
+      const item = await tx.projectItem.delete({
+        where: { id }
       });
-    })
-});
 
-export type {ProjectItem};
+      await deleteFileFromS3(item.imageKey);
+      await deleteFileFromS3(item.coverImageKey);
+
+      return item;
+    });
+  })
+});

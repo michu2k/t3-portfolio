@@ -1,8 +1,8 @@
-import React from "react";
-import type {Metadata} from "next";
+import * as React from "react";
+import type { Metadata } from "next";
 
-import {SidebarNavigation} from "~/components/dashboard/layouts/sidebar-navigation";
-import {Toaster} from "~/components/ui/toast";
+import { SidebarNavigation } from "~/components/dashboard/layouts/sidebar-navigation";
+import { Toaster } from "~/components/ui/toaster";
 
 import "~/styles/globals.css";
 
@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   description: "Simple, user-friendly interface for portfolio management"
 };
 
-export default async function DashboardLayout({children}: {children: React.ReactNode}) {
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <main className="min-h-full md:flex">
+    <main className="dashboard-layout min-h-full md:flex">
       <SidebarNavigation />
       <div className="min-w-0 flex-1">{children}</div>
       <Toaster />

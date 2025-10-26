@@ -1,5 +1,5 @@
 import type React from "react";
-import type {ContactMethodType} from "@prisma/client";
+import type { ContactMethodType } from "@prisma/client";
 
 import EnvelopeSvg from "~/public/svgs/contact/envelope.svg";
 import HouseSvg from "~/public/svgs/contact/house.svg";
@@ -9,14 +9,12 @@ type ContactMethodIconsKeys = {
   [key in ContactMethodType]: React.FC<React.SVGProps<SVGSVGElement>>;
 };
 
-const contactMethodIconsDef: ContactMethodIconsKeys = {
+export const contactMethodIconsDef: ContactMethodIconsKeys = {
   ADDRESS: HouseSvg,
   EMAIL: EnvelopeSvg,
   PHONE: PhoneSvg
 };
 
-function getContactIcon(key: ContactMethodType) {
+export function getContactIcon(key: ContactMethodType) {
   return contactMethodIconsDef[key];
 }
-
-export {getContactIcon, contactMethodIconsDef};

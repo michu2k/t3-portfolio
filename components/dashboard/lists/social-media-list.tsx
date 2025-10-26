@@ -1,40 +1,44 @@
 "use client";
 
-import React, {useState} from "react";
-import type {SocialMediaLink} from "@prisma/client";
-import {EllipsisIcon, PencilIcon, PlusIcon, TrashIcon} from "lucide-react";
+import React, { useState } from "react";
+import type { SocialMediaLink } from "@prisma/client";
+import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
-import {usePathname} from "next/navigation";
+import { useRouter } from "next/navigation";
 
-import {DeleteEntityDialog} from "~/components/dashboard/dialogs/delete-entity-dialog";
-import {Button} from "~/components/ui/button";
-import {Dialog, DialogTrigger} from "~/components/ui/dialog";
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "~/components/ui/dropdown-menu";
-import {EmptySection} from "~/components/ui/empty-section";
-import {Heading} from "~/components/ui/heading";
-import {Skeleton} from "~/components/ui/skeleton";
-import {useToast} from "~/hooks/use-toast";
-import {api} from "~/trpc/react";
-import {getSocialMediaIcon} from "~/utils/get-social-media-icon";
-import {revalidatePath} from "~/utils/revalidate-path";
+import { DeleteEntityDialog } from "~/components/dashboard/dialogs/delete-entity-dialog";
+import { Button } from "~/components/ui/button";
+import { Dialog, DialogTrigger } from "~/components/ui/dialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from "~/components/ui/dropdown-menu";
+import { EmptySection } from "~/components/ui/empty-section";
+import { Heading } from "~/components/ui/heading";
+import { Skeleton } from "~/components/ui/skeleton";
+import { toast } from "~/components/ui/toaster";
+import { api } from "~/trpc/react";
+import { dashboardPaths } from "~/utils/dashboard.config";
+import { getSocialMediaIcon } from "~/utils/get-social-media-icon";
 
 type SocialMediaListProps = {
   socialMediaLinks?: Array<SocialMediaLink>;
 };
 
-const SocialMediaList = ({socialMediaLinks = []}: SocialMediaListProps) => {
+const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
-  const pathname = usePathname();
-  const {toast} = useToast();
+  const router = useRouter();
 
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
-  const selectedItem = socialMediaLinks.find((item) => item.id === selectedItemId);
+  const [selectedItemName, setSelectedItemName] = useState<string>("link");
 
   async function handleDeleteItem() {
     if (!selectedItemId) return;
 
     await deleteItemMutation.mutateAsync(
-      {id: selectedItemId},
+      { id: selectedItemId },
       {
         async onSuccess() {
           toast({
@@ -42,41 +46,54 @@ const SocialMediaList = ({socialMediaLinks = []}: SocialMediaListProps) => {
             description: "Social media link deleted successfully",
             variant: "success"
           });
+
+          router.refresh();
         }
       }
     );
+  }
 
-    revalidatePath(pathname);
+  function handleDialogOpenChange(open: boolean) {
+    if (open) return;
+
+    setSelectedItemId(null);
   }
 
   function displayItems() {
+    if (!socialMediaLinks.length) {
+      return <EmptySection heading="No links found" />;
+    }
+
     return socialMediaLinks.map((item) => (
-      <SocialMediaCard key={item.id} onClickDeleteBtn={() => setSelectedItemId(item.id)} {...item} />
+      <SocialMediaCard
+        key={item.id}
+        onClickDeleteBtn={() => {
+          setSelectedItemId(item.id);
+          setSelectedItemName(`${item.icon.toLowerCase()} link`);
+        }}
+        {...item}
+      />
     ));
   }
 
   return (
-    <Dialog onOpenChange={(open) => (open ? undefined : setSelectedItemId(null))}>
+    <Dialog onOpenChange={handleDialogOpenChange}>
       <Heading as="h2" size="sm">
         Links
       </Heading>
 
       <div className="flex flex-col items-start">
-        {socialMediaLinks.length ? displayItems() : <EmptySection heading="No links found" />}
+        {displayItems()}
 
         <Button className="mt-6" asChild>
-          <Link href="/dashboard/social-media/new">
+          <Link href={`${dashboardPaths.socialMedia}/new`}>
             <PlusIcon size={16} />
             Add new link
           </Link>
         </Button>
       </div>
 
-      <DeleteEntityDialog
-        title="Delete link"
-        entityName={`${selectedItem?.icon || ""} url`}
-        onClickDeleteBtn={() => handleDeleteItem()}
-      />
+      <DeleteEntityDialog title="Delete link" entityName={selectedItemName} onClickDeleteBtn={handleDeleteItem} />
     </Dialog>
   );
 };
@@ -85,15 +102,15 @@ type SocialMediaCardProps = SocialMediaLink & {
   onClickDeleteBtn: (e: React.MouseEvent) => void;
 };
 
-const SocialMediaCard = ({id, icon, url, onClickDeleteBtn}: SocialMediaCardProps) => {
+const SocialMediaCard = ({ id, icon, url, onClickDeleteBtn }: SocialMediaCardProps) => {
   const Icon = getSocialMediaIcon(icon);
 
   return (
-    <article className="flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
-      <Icon className="size-4 flex-shrink-0 fill-foreground" aria-hidden="true" />
+    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+      <Icon className="fill-foreground size-4 flex-shrink-0" aria-hidden="true" />
 
       <div className="flex-1">
-        <p className="text-sm leading-6 text-muted-foreground">{url}</p>
+        <p className="text-muted-foreground text-sm leading-6">{url}</p>
       </div>
 
       <DropdownMenu>
@@ -105,7 +122,7 @@ const SocialMediaCard = ({id, icon, url, onClickDeleteBtn}: SocialMediaCardProps
         </DropdownMenuTrigger>
 
         <DropdownMenuContent>
-          <Link href={`/dashboard/social-media/${id}`}>
+          <Link href={`${dashboardPaths.socialMedia}/${id}`}>
             <DropdownMenuItem>
               <PencilIcon size={16} />
               Edit
@@ -142,7 +159,7 @@ const SocialMediaListSkeleton = () => {
 
 const SocialMediaCardSkeleton = () => {
   return (
-    <article className="flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid border-muted py-2 last-of-type:border-0">
+    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
       <Skeleton className="size-4" />
 
       <div className="flex-1">
@@ -152,4 +169,4 @@ const SocialMediaCardSkeleton = () => {
   );
 };
 
-export {SocialMediaList, SocialMediaListSkeleton};
+export { SocialMediaList, SocialMediaListSkeleton };

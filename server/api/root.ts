@@ -1,11 +1,11 @@
-import {createCallerFactory, createTRPCRouter} from "~/server/api/trpc";
+import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
-import {contactRouter} from "./routers/contact";
-import {experienceRouter} from "./routers/experience";
-import {imageRouter} from "./routers/image";
-import {projectRouter} from "./routers/project";
-import {snippetRouter} from "./routers/snippet";
-import {socialMediaRouter} from "./routers/social-media";
+import { contactRouter } from "./routers/contact";
+import { experienceRouter } from "./routers/experience";
+import { imageRouter } from "./routers/image";
+import { projectRouter } from "./routers/project";
+import { snippetRouter } from "./routers/snippet";
+import { socialMediaRouter } from "./routers/social-media";
 
 /**
  * This is the primary router for your server.

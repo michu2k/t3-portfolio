@@ -1,11 +1,10 @@
-import {configureStore} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 
-import {toastReducer} from "~/reducers/toast-reducer";
-
-const reduxStore = () =>
+export const reduxStore = () =>
   configureStore({
     reducer: {
-      toast: toastReducer
+      // There are no reducers yet, so we just add a placeholder
+      example: () => null
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
@@ -13,10 +12,6 @@ const reduxStore = () =>
       })
   });
 
-type AppStore = ReturnType<typeof reduxStore>;
-type RootState = ReturnType<AppStore["getState"]>;
-type AppDispatch = AppStore["dispatch"];
-
-export type {AppStore, RootState, AppDispatch};
-
-export {reduxStore};
+export type AppStore = ReturnType<typeof reduxStore>;
+export type RootState = ReturnType<AppStore["getState"]>;
+export type AppDispatch = AppStore["dispatch"];

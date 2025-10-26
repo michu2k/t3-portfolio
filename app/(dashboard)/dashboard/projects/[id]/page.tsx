@@ -1,23 +1,24 @@
-import React, {Suspense} from "react";
-import type {Metadata} from "next";
+import React, { Suspense } from "react";
+import type { Metadata } from "next";
 
-import {ProjectItemForm, ProjectItemFormSkeleton} from "~/components/dashboard/forms/project-item-form";
-import {PageContent} from "~/components/dashboard/layouts/page-content";
-import {PageHeader} from "~/components/dashboard/layouts/page-header";
-import {ensureAuthenticated} from "~/server/auth";
-import {api} from "~/trpc/server";
+import { ProjectItemForm, ProjectItemFormSkeleton } from "~/components/dashboard/forms/project-item-form";
+import { PageContent } from "~/components/dashboard/layouts/page-content";
+import { PageHeader } from "~/components/dashboard/layouts/page-header";
+import { ensureAuthenticated } from "~/server/auth";
+import { api, HydrateClient } from "~/trpc/server";
 
 export const metadata: Metadata = {
   title: "Dashboard: Projects"
 };
 
 type PageProps = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
-export default async function Page({params: {id}}: PageProps) {
+export default async function Page({ params }: PageProps) {
+  const { id } = await params;
   await ensureAuthenticated();
 
   const isNew = id === "new";
@@ -25,20 +26,20 @@ export default async function Page({params: {id}}: PageProps) {
   const description = isNew ? "Create a new project item." : "Edit an existing project item.";
 
   return (
-    <>
+    <HydrateClient>
       <PageHeader heading={heading} description={description} />
       <PageContent>
         <Suspense fallback={<ProjectItemFormSkeleton />}>
           <ProjectItemFormWrapper id={id} />
         </Suspense>
       </PageContent>
-    </>
+    </HydrateClient>
   );
 }
 
-const ProjectItemFormWrapper = async ({id}: {id: string}) => {
+const ProjectItemFormWrapper = async ({ id }: { id: string }) => {
   const isNew = id === "new";
-  const project = isNew ? null : await api.project.getItem({id});
+  const project = isNew ? null : await api.project.getItem({ id });
 
   return <ProjectItemForm project={project} />;
 };

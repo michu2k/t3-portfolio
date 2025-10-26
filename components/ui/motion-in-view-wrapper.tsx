@@ -1,21 +1,34 @@
 "use client";
 
-import type {PropsWithChildren} from "react";
-import React from "react";
-import type {HTMLMotionProps} from "framer-motion";
-import {domAnimation, LazyMotion, m} from "framer-motion";
+import { useRef } from "react";
+import { domAnimation, LazyMotion, m, useInView } from "framer-motion";
 
-import {inViewAnimationProps} from "~/utils/animations";
+const DEFAULT_ANIMATION_DURATION = 0.6;
 
-type MotionInViewWrapperProps = PropsWithChildren<HTMLMotionProps<"div">>;
+const DEFAULT_ANIMATION_DELAY = 0.3;
 
-const MotionInViewWrapper = ({children, transition, ...props}: MotionInViewWrapperProps) => {
+const MotionInViewWrapper = ({
+  children,
+  transition,
+  initial,
+  animate,
+  ...props
+}: React.ComponentProps<typeof m.div>) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  const initialState = initial ?? { opacity: 0 };
+  const animateState = animate ?? { opacity: 1 };
+
   return (
     <LazyMotion features={domAnimation}>
       <m.div
-        {...inViewAnimationProps}
+        ref={ref}
+        initial={initialState}
+        animate={isInView ? animateState : initialState}
         transition={{
-          ...inViewAnimationProps.transition,
+          duration: DEFAULT_ANIMATION_DURATION,
+          delay: DEFAULT_ANIMATION_DELAY,
           ...transition
         }}
         {...props}>
@@ -25,4 +38,4 @@ const MotionInViewWrapper = ({children, transition, ...props}: MotionInViewWrapp
   );
 };
 
-export {MotionInViewWrapper};
+export { MotionInViewWrapper };

@@ -1,11 +1,10 @@
-import {PrismaAdapter} from "@auth/prisma-adapter";
-import {redirect} from "next/navigation";
-import {type DefaultSession, getServerSession, type NextAuthOptions} from "next-auth";
-import type {Adapter} from "next-auth/adapters";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { redirect } from "next/navigation";
+import { type DefaultSession, getServerSession, type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
-import {env} from "~/env";
-import {prisma} from "~/server/db";
+import { env } from "~/env";
+import { prisma } from "~/server/db";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -19,11 +18,6 @@ declare module "next-auth" {
       id: string;
     } & DefaultSession["user"];
   }
-
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
 }
 
 /**
@@ -33,11 +27,11 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    async signIn({user}) {
+    async signIn({ user }) {
       const isEmailAllowed = env.ALLOWED_EMAIL_ADDRESSES.split(",").find((e) => e.trim() === user.email);
       return !!isEmailAllowed;
     },
-    session: ({session, user}) => ({
+    session: ({ session, user }) => ({
       ...session,
       user: {
         ...session.user,
@@ -45,7 +39,7 @@ export const authOptions: NextAuthOptions = {
       }
     })
   },
-  adapter: PrismaAdapter(prisma) as Adapter,
+  adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,

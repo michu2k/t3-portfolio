@@ -1,31 +1,29 @@
 "use client";
 
-import React from "react";
-import {FormProvider, useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
+import * as React from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SnippetType } from "@prisma/client";
 
-import {Button} from "~/components/ui/button";
-import {FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage} from "~/components/ui/form";
-import {Heading} from "~/components/ui/heading";
-import {Input} from "~/components/ui/input";
-import {Skeleton} from "~/components/ui/skeleton";
-import {Textarea} from "~/components/ui/textarea";
-import {useSnippets} from "~/hooks/use-snippets";
-import {useToast} from "~/hooks/use-toast";
-import type {Snippets} from "~/server/api/routers/snippet";
-import {extractSnippetValues} from "~/utils/extract-snippet-values";
-import {revalidatePath} from "~/utils/revalidate-path";
-import type {HeaderSnippetsFormValues} from "~/utils/validations/header";
-import {headerSnippetsSchema} from "~/utils/validations/header";
+import { Button } from "~/components/ui/button";
+import { FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage } from "~/components/ui/form";
+import { Heading } from "~/components/ui/heading";
+import { Input } from "~/components/ui/input";
+import { Skeleton } from "~/components/ui/skeleton";
+import { Textarea } from "~/components/ui/textarea";
+import { toast } from "~/components/ui/toaster";
+import { useSnippets } from "~/hooks/use-snippets";
+import type { Snippets } from "~/server/api/routers/snippet";
+import type { HeaderSnippetsFormValues } from "~/utils/validations/header";
+import { headerSnippetsSchema } from "~/utils/validations/header";
 
 type HeaderFormProps = {
   snippets: Snippets;
 };
 
-const HeaderForm = ({snippets}: HeaderFormProps) => {
-  const {toast} = useToast();
-  const updateSnippets = useSnippets<keyof HeaderSnippetsFormValues>("HEADER", snippets);
-  const {heading = "", description = ""} = extractSnippetValues<keyof HeaderSnippetsFormValues>(snippets);
+const HeaderForm = ({ snippets }: HeaderFormProps) => {
+  const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.HEADER, snippets);
+  const { heading = "", description = "" } = extractSnippetValues();
 
   const formMethods = useForm<HeaderSnippetsFormValues>({
     defaultValues: {
@@ -39,14 +37,12 @@ const HeaderForm = ({snippets}: HeaderFormProps) => {
     resolver: zodResolver(headerSnippetsSchema)
   });
 
-  const {control, handleSubmit} = formMethods;
+  const { control, handleSubmit } = formMethods;
 
-  async function handleFormSubmit({heading, description}: HeaderSnippetsFormValues, e?: React.BaseSyntheticEvent) {
+  async function handleFormSubmit({ heading, description }: HeaderSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
-    await updateSnippets({heading, description});
-
-    revalidatePath("/dashboard/header");
+    await updateSnippets({ heading, description });
 
     toast({
       title: "Success",
@@ -65,7 +61,7 @@ const HeaderForm = ({snippets}: HeaderFormProps) => {
         <FormField
           control={control}
           name="heading"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Heading</FormLabel>
               <FormControl>
@@ -79,7 +75,7 @@ const HeaderForm = ({snippets}: HeaderFormProps) => {
         <FormField
           control={control}
           name="description"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel isOptional>Description</FormLabel>
               <FormControl>
@@ -118,4 +114,4 @@ const HeaderFormSkeleton = () => {
   );
 };
 
-export {HeaderForm, HeaderFormSkeleton};
+export { HeaderForm, HeaderFormSkeleton };

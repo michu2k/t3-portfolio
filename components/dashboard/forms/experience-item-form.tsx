@@ -1,14 +1,14 @@
 "use client";
 
-import React, {useEffect} from "react";
-import {FormProvider, useFieldArray, useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {format} from "date-fns";
-import {CalendarIcon, PlusIcon, Trash2Icon} from "lucide-react";
-import {useRouter} from "next/navigation";
+import React, { useEffect } from "react";
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { format } from "date-fns";
+import { CalendarIcon, PlusIcon, Trash2Icon } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-import {Button} from "~/components/ui/button";
-import {Calendar} from "~/components/ui/calendar";
+import { Button } from "~/components/ui/button";
+import { Calendar } from "~/components/ui/calendar";
 import {
   FormControl,
   FormDescription,
@@ -18,29 +18,27 @@ import {
   FormLabelSkeleton,
   FormMessage
 } from "~/components/ui/form";
-import {Input} from "~/components/ui/input";
-import {Popover, PopoverContent, PopoverTrigger} from "~/components/ui/popover";
-import {Skeleton} from "~/components/ui/skeleton";
-import {useToast} from "~/hooks/use-toast";
-import type {ExperienceItemWithResponsibilities} from "~/server/api/routers/experience";
-import {api} from "~/trpc/react";
-import {revalidatePath} from "~/utils/revalidate-path";
-import type {ExperienceItemFormValues} from "~/utils/validations/experience";
-import {experienceItemSchema} from "~/utils/validations/experience";
+import { Input } from "~/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "~/components/ui/popover";
+import { Skeleton } from "~/components/ui/skeleton";
+import { toast } from "~/components/ui/toaster";
+import type { ExperienceItemWithResponsibilities } from "~/server/api/routers/experience";
+import { api } from "~/trpc/react";
+import { dashboardPaths } from "~/utils/dashboard.config";
+import type { ExperienceItemFormValues } from "~/utils/validations/experience";
+import { experienceItemSchema } from "~/utils/validations/experience";
 
 type ExperienceItemFormProps = {
   experienceItem: ExperienceItemWithResponsibilities | null;
 };
 
-const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
+const ExperienceItemForm = ({ experienceItem }: ExperienceItemFormProps) => {
   const router = useRouter();
-  const {toast} = useToast();
-  const utils = api.useUtils();
-  const newResponsibilityItem = {id: undefined, name: ""};
+  const newResponsibilityItem = { id: undefined, name: "" };
 
   const createItemMutation = api.experience.createItem.useMutation();
   const updateItemMutation = api.experience.updateItem.useMutation();
-  const {responsibilities = []} = experienceItem || {};
+  const { responsibilities = [] } = experienceItem || {};
   const itemId = experienceItem?.id;
 
   const formMethods = useForm<ExperienceItemFormValues>({
@@ -55,10 +53,10 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
     resolver: zodResolver(experienceItemSchema)
   });
 
-  const {control, handleSubmit, watch} = formMethods;
+  const { control, handleSubmit, watch } = formMethods;
   const startDate = watch("startDate");
 
-  const {fields, append, remove, replace} = useFieldArray({
+  const { fields, append, remove, replace } = useFieldArray({
     control,
     name: "responsibilities"
   });
@@ -71,18 +69,18 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
   }, [responsibilities, replace]);
 
   async function handleFormSubmit(
-    {responsibilities: formResponsibilities, ...formValues}: ExperienceItemFormValues,
+    { responsibilities: formResponsibilities, ...formValues }: ExperienceItemFormValues,
     e?: React.BaseSyntheticEvent
   ) {
     e?.preventDefault();
 
     // Filter out empty responsibilities
-    const responsibilities = formResponsibilities.filter(({name}) => !!name);
+    const responsibilities = formResponsibilities.filter(({ name }) => !!name);
 
     const mutation = itemId ? updateItemMutation : createItemMutation;
     const mutationVariables = itemId
-      ? {id: itemId, ...formValues, responsibilities}
-      : {...formValues, responsibilities};
+      ? { id: itemId, ...formValues, responsibilities }
+      : { ...formValues, responsibilities };
 
     await mutation.mutateAsync(mutationVariables, {
       async onSuccess() {
@@ -91,13 +89,10 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
           description: itemId ? "Your changes have been saved." : "A new item has been added.",
           variant: "success"
         });
-
-        await utils.experience.getItem.invalidate();
       }
     });
 
-    revalidatePath("/dashboard/experience");
-    router.push("/dashboard/experience");
+    router.push(dashboardPaths.experience);
   }
 
   return (
@@ -106,7 +101,7 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
         <FormField
           control={control}
           name="position"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Position name</FormLabel>
               <FormControl>
@@ -120,7 +115,7 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
         <FormField
           control={control}
           name="company"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Company name</FormLabel>
               <FormControl>
@@ -135,7 +130,7 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
           <FormField
             control={control}
             name="startDate"
-            render={({field: {value, onChange}}) => (
+            render={({ field: { value, onChange } }) => (
               <FormItem className="max-w-[14rem] flex-1">
                 <FormLabel>From</FormLabel>
 
@@ -152,12 +147,10 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
                   <FormMessage />
                   <PopoverContent className="w-auto p-0" align="start" side="bottom">
                     <Calendar
-                      initialFocus
-                      captionLayout="dropdown"
                       mode="single"
                       defaultMonth={value || undefined}
                       selected={value || undefined}
-                      onSelect={(date) => onChange(date)}
+                      onSelect={onChange}
                     />
                   </PopoverContent>
                 </Popover>
@@ -168,7 +161,7 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
           <FormField
             control={control}
             name="endDate"
-            render={({field: {value, onChange}}) => (
+            render={({ field: { value, onChange } }) => (
               <FormItem className="max-w-[14rem] flex-1">
                 <FormLabel isOptional>To</FormLabel>
 
@@ -185,13 +178,11 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
                   <FormMessage />
                   <PopoverContent className="w-auto p-0" align="start" side="bottom">
                     <Calendar
-                      initialFocus
-                      captionLayout="dropdown"
                       mode="single"
                       defaultMonth={value || undefined}
                       selected={value || undefined}
-                      onSelect={(date) => onChange(date)}
-                      disabled={{before: startDate ? new Date(startDate) : new Date()}}
+                      onSelect={onChange}
+                      disabled={{ before: startDate ? new Date(startDate) : new Date() }}
                     />
                   </PopoverContent>
                 </Popover>
@@ -202,16 +193,16 @@ const ExperienceItemForm = ({experienceItem}: ExperienceItemFormProps) => {
 
         <FormItem>
           <FormLabel isOptional>Responsibilities</FormLabel>
-          <FormDescription className="pb-3 pt-0">
+          <FormDescription className="pt-0 pb-3">
             Add the responsibilities you had while working at this position.
           </FormDescription>
 
-          {fields.map(({id}, idx) => (
+          {fields.map(({ id }, idx) => (
             <FormField
               key={id}
               control={control}
               name={`responsibilities.${idx}.name`}
-              render={({field}) => (
+              render={({ field }) => (
                 <FormItem className="py-2">
                   <div className="flex items-center">
                     <FormLabel className="sr-only">Responsibility</FormLabel>
@@ -280,4 +271,4 @@ const ExperienceItemFormSkeleton = () => {
   );
 };
 
-export {ExperienceItemForm, ExperienceItemFormSkeleton};
+export { ExperienceItemForm, ExperienceItemFormSkeleton };

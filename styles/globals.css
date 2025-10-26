@@ -1,48 +1,95 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --font-sans: var(--font-inter);
+  --font-poppins: var(--font-poppins);
+
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-placeholder: var(--placeholder);
+  --color-ring: var(--ring);
+}
 
 @layer base {
   :root {
-    --primary: 217 91% 60%; /* blue-500 */
-    --secondary: 221 39% 11%; /* gray-900 */
+    --primary: hsl(217 91% 60%); /* blue-500 */
+    --secondary: hsl(221 39% 11%); /* gray-900 */
 
-    --background: 0 0% 100%; /* white */
-    --foreground: 221 39% 11%; /* gray-900 */
+    --background: hsl(0 0% 100%); /* white */
+    --foreground: hsl(221 39% 11%); /* gray-900 */
 
-    --muted: 214 32% 91%; /* slate-200 */
-    --muted-foreground: 215 19% 35%; /* slate-600 */
+    --muted: hsl(214 32% 91%); /* slate-200 */
+    --muted-foreground: hsl(215 19% 35%); /* slate-600 */
 
-    --accent: 210 40% 98%; /* slate-50 */
-    --accent-foreground: 210 40% 98%; /* slate-50 */
+    --accent: hsl(210 40% 98%); /* slate-50 */
+    --accent-foreground: hsl(210 40% 98%); /* slate-50 */
 
-    --placeholder: 213 27% 84%; /* slate-300 */
-    --ring: 218 11% 65%; /* slate-400 */
+    --placeholder: hsl(213 27% 84%); /* slate-300 */
+    --ring: hsl(218 11% 65%); /* slate-400 */
   }
 
   .dark {
-    --primary: 217 91% 60%; /* blue-500 */
-    --secondary: 0 0% 100%; /* white */
+    --primary: hsl(217 91% 60%); /* blue-500 */
+    --secondary: hsl(0 0% 100%); /* white */
 
-    --background: 0 0% 9%; /* neutral-900 */
-    --foreground: 214 32% 91%; /* slate-200 */
+    --background: hsl(0 0% 9%); /* neutral-900 */
+    --foreground: hsl(214 32% 91%); /* slate-200 */
 
-    --muted: 0 0% 25%; /* neutral-700 */
-    --muted-foreground: 218 11% 65%; /* slate-400 */
+    --muted: hsl(0 0% 25%); /* neutral-700 */
+    --muted-foreground: hsl(218 11% 65%); /* slate-400 */
 
-    --accent: 0 0% 15%; /* neutral-800 */
-    --accent-foreground: 221 39% 11%; /* gray-900 */
+    --accent: hsl(0 0% 15%); /* neutral-800 */
+    --accent-foreground: hsl(221 39% 11%); /* gray-900 */
 
-    --placeholder: 215 19% 35%; /* slate-600 */
-    --ring: 218 11% 65%; /* slate-400 */
+    --placeholder: hsl(215 19% 35%); /* slate-600 */
+    --ring: hsl(218 11% 65%); /* slate-400 */
   }
 
-  html {
-    height: 100%;
+  .landing-page-layout {
+    --primary: hsl(221 39% 11%); /* gray-900 */
+
+    --background: hsl(0 0% 100%); /* white */
+    --foreground: hsl(221 39% 11%); /* gray-900 */
+
+    --muted: hsl(214 32% 91%); /* slate-200 */
+    --muted-foreground: hsl(215 19% 35%); /* slate-600 */
+
+    --accent: hsl(210 40% 98%); /* slate-50 */
+    --accent-foreground: hsl(215 20% 65%); /* slate-400 */
+
+    --ring: hsl(218 11% 65%); /* slate-400 */
   }
 
+  html,
   body {
-    @apply bg-background text-foreground;
     height: 100%;
+  }
+}
+
+@layer components {
+  .dashboard-layout,
+  .landing-page-layout {
+    @apply bg-background text-foreground;
+  }
+
+  .section-container {
+    @apply mx-auto w-full max-w-xl md:max-w-4xl;
+  }
+}
+
+@layer utilities {
+  .focus-visible\:ring-appearance {
+    @apply ring-offset-background ring-ring/50 ring-offset-2;
   }
 }

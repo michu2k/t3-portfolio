@@ -1,10 +1,8 @@
-"use client";
-
-import React from "react";
+import * as React from "react";
 import Link from "next/link";
 
-import {Button} from "~/components/ui/button";
-import {Heading} from "~/components/ui/heading";
+import { Button } from "~/components/ui/button";
+import { Heading } from "~/components/ui/heading";
 
 // NextAuth errors
 const errors = {
@@ -14,13 +12,13 @@ const errors = {
 };
 
 type PageProps = {
-  searchParams: {
+  searchParams: Promise<{
     error?: string;
-  };
+  }>;
 };
 
-export default function Page({searchParams}: PageProps) {
-  const error = searchParams.error;
+export default async function Page({ searchParams }: PageProps) {
+  const { error } = await searchParams;
   const heading = error && Object.keys(errors).includes(error) ? error : "Error";
   const description = (error && errors[error as keyof typeof errors]) ?? errors.default;
 
@@ -33,7 +31,7 @@ export default function Page({searchParams}: PageProps) {
         <p className="text-center text-sm">{description}</p>
       </header>
 
-      <div className="flex w-full flex-col justify-center gap-4 pb-12 pt-8">
+      <div className="flex w-full flex-col justify-center gap-4 pt-8 pb-12">
         <Button variant="secondary" asChild>
           <Link href="/sign-in">Go back to Sign In page</Link>
         </Button>

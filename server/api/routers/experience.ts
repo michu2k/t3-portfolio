@@ -1,38 +1,39 @@
-import type {ExperienceItem, ExperienceItemResponsibility} from "@prisma/client";
-import {z} from "zod";
+import type { ExperienceItem, ExperienceItemResponsibility } from "@prisma/client";
+import { z } from "zod";
 
-import {createTRPCRouter, protectedProcedure, publicProcedure} from "~/server/api/trpc";
-import {experienceItemSchema} from "~/utils/validations/experience";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
+import { experienceItemSchema } from "~/utils/validations/experience";
 
 export type ExperienceItemWithResponsibilities = ExperienceItem & {
   responsibilities: Array<ExperienceItemResponsibility>;
 };
 
-// prettier-ignore
 export const experienceRouter = createTRPCRouter({
   getItems: publicProcedure
-    .input(z.object({
-      include: z.object({responsibilities: z.boolean()})
-    }).optional())
-    .query(async ({ctx, input: {include} = {}}) => {
+    .input(
+      z
+        .object({
+          include: z.object({ responsibilities: z.boolean() })
+        })
+        .optional()
+    )
+    .query(async ({ ctx, input: { include } = {} }) => {
       return await ctx.prisma.experienceItem.findMany({
         include,
-        orderBy: {endDate: "desc"}
+        orderBy: { endDate: "desc" }
       });
     }),
 
-  getItem: protectedProcedure
-    .input(z.object({id: z.string()}))
-    .query(async ({ctx, input: {id}}) => {
-      return await ctx.prisma.experienceItem.findUnique({
-        where: {id},
-        include: {responsibilities: true}
-      });
-    }),
+  getItem: protectedProcedure.input(z.object({ id: z.string() })).query(async ({ ctx, input: { id } }) => {
+    return await ctx.prisma.experienceItem.findUnique({
+      where: { id },
+      include: { responsibilities: true }
+    });
+  }),
 
   createItem: protectedProcedure
     .input(experienceItemSchema)
-    .mutation(async ({ctx, input: {responsibilities, ...input}}) => {
+    .mutation(async ({ ctx, input: { responsibilities, ...input } }) => {
       return await ctx.prisma.experienceItem.create({
         data: {
           ...input,
@@ -42,20 +43,19 @@ export const experienceRouter = createTRPCRouter({
             }
           }
         },
-        include: {responsibilities: true}
+        include: { responsibilities: true }
       });
     }),
 
   updateItem: protectedProcedure
     .input(experienceItemSchema)
-    .mutation(async ({ctx, input: {id, responsibilities, ...input}}) => {
-
-      const updatedResponsibilities = responsibilities.filter(({id}) => !!id);
-      const currentResponsibilities = updatedResponsibilities.map(({id}) => ({id}));
-      const newResponsibilities = responsibilities.filter(({id}) => !id);
+    .mutation(async ({ ctx, input: { id, responsibilities, ...input } }) => {
+      const updatedResponsibilities = responsibilities.filter(({ id }) => !!id);
+      const currentResponsibilities = updatedResponsibilities.map(({ id }) => ({ id }));
+      const newResponsibilities = responsibilities.filter(({ id }) => !id);
 
       return await ctx.prisma.experienceItem.update({
-        where: {id},
+        where: { id },
         data: {
           ...input,
           responsibilities: {
@@ -65,22 +65,20 @@ export const experienceRouter = createTRPCRouter({
             createMany: {
               data: newResponsibilities
             },
-            update: updatedResponsibilities.map(({id, ...data}) => ({
-              where: {id},
+            update: updatedResponsibilities.map(({ id, ...data }) => ({
+              where: { id },
               data
             }))
           }
         },
-        include: {responsibilities: true}
+        include: { responsibilities: true }
       });
     }),
 
-  deleteItem: protectedProcedure
-    .input(z.object({id: z.string()}))
-    .mutation(async ({ctx, input: {id}}) => {
-      return await ctx.prisma.experienceItem.delete({
-        where: {id},
-        include: {responsibilities: true}
-      });
-    })
+  deleteItem: protectedProcedure.input(z.object({ id: z.string() })).mutation(async ({ ctx, input: { id } }) => {
+    return await ctx.prisma.experienceItem.delete({
+      where: { id },
+      include: { responsibilities: true }
+    });
+  })
 });

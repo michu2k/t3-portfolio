@@ -1,12 +1,12 @@
-import {useEffect, useState} from "react";
-import theme from "tailwindcss/defaultTheme";
+import { useEffect, useState } from "react";
 
-const useIsMobile = () => {
+const BREAKPOINT_MD = 768;
+
+export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const maxMobileWidth = parseInt(theme.screens.md);
-    const mediaQuery = window.matchMedia(`(min-width: ${maxMobileWidth}px)`);
+    const mediaQuery = window.matchMedia(`(min-width: ${BREAKPOINT_MD}px)`);
 
     setIsMobile(!mediaQuery.matches);
 
@@ -20,5 +20,3 @@ const useIsMobile = () => {
 
   return isMobile;
 };
-
-export {useIsMobile};

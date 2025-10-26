@@ -1,10 +1,10 @@
-import {useIsMobile} from "./use-is-mobile";
+import { useIsMobile } from "./use-is-mobile";
 
 // For better UX, offset the scroll position by a few pixels
 const OFFSET_TOP_MOBILE = 24;
 const OFFSET_TOP_DESKTOP = 48;
 
-const useSmoothScroll = (hash: string) => {
+export const useSmoothScroll = (hash: string) => {
   const isMobile = useIsMobile();
 
   function scrollToTarget(e: React.MouseEvent) {
@@ -24,5 +24,3 @@ const useSmoothScroll = (hash: string) => {
 
   return scrollToTarget;
 };
-
-export {useSmoothScroll};

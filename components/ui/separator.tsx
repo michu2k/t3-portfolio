@@ -1,22 +1,22 @@
-import React from "react";
+import * as React from "react";
 
-import {cn} from "~/utils/cn";
+import { cn } from "~/utils/cn";
 
-type SeparatorProps = {
+type SeparatorProps = React.ComponentProps<"hr"> & {
   orientation?: "horizontal" | "vertical";
-  className?: string;
 };
 
-const Separator = ({orientation = "horizontal", className}: SeparatorProps) => {
+const Separator = ({ orientation = "horizontal", className, ...props }: SeparatorProps) => {
   return (
     <hr
       className={cn(
-        "shrink-0 border-0 bg-muted",
+        "bg-muted shrink-0 border-0",
         orientation === "horizontal" ? "mx-auto h-0.5 w-full" : "h-full w-px",
         className
       )}
+      {...props}
     />
   );
 };
 
-export {Separator};
+export { Separator };

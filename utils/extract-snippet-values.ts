@@ -1,18 +1,12 @@
-import type {Snippets} from "~/server/api/routers/snippet";
+import { SnippetType } from "@prisma/client";
 
-type SnippetValues<T extends string> = {
-  [key in T]: string;
-};
+import type { Snippets, SnippetTypeMap } from "~/server/api/routers/snippet";
 
 /** Get the snippet values from the array */
-function extractSnippetValues<T extends string>(data: Snippets): Partial<SnippetValues<T>> {
+export function extractSnippetValues<T extends SnippetType>(data: Snippets): Partial<SnippetTypeMap[T]> {
   if (data.length) {
-    return data.reduce((acc, {name, value}) => ({...acc, [name]: value}), {});
+    return data.reduce((acc, { name, value }) => ({ ...acc, [name]: value }), {});
   }
 
   return {};
 }
-
-export type {SnippetValues};
-
-export {extractSnippetValues};

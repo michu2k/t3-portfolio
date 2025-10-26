@@ -1,17 +1,17 @@
 "use client";
 
-import React from "react";
-import type {BuiltInProviderType} from "next-auth/providers/index";
-import type {ClientSafeProvider, LiteralUnion} from "next-auth/react";
-import {signIn} from "next-auth/react";
+import * as React from "react";
+import type { BuiltInProviderType } from "next-auth/providers/index";
+import type { ClientSafeProvider, LiteralUnion } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
-import {Button} from "~/components/ui/button";
+import { Button } from "~/components/ui/button";
 
 type SignInProvidersProps = {
   providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null;
 };
 
-const SignInProviders = ({providers}: SignInProvidersProps) => {
+const SignInProviders = ({ providers }: SignInProvidersProps) => {
   if (!providers) return null;
 
   return Object.values(providers).map((provider) => (
@@ -21,4 +21,4 @@ const SignInProviders = ({providers}: SignInProvidersProps) => {
   ));
 };
 
-export {SignInProviders};
+export { SignInProviders };

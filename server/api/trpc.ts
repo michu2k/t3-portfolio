@@ -7,12 +7,12 @@
  * need to use are documented accordingly near the end.
  */
 
-import {initTRPC, TRPCError} from "@trpc/server";
-import superjson from "superjson";
-import {ZodError} from "zod";
+import { initTRPC, TRPCError } from "@trpc/server";
+import SuperJSON from "superjson";
+import { ZodError } from "zod";
 
-import {getServerAuthSession} from "~/server/auth";
-import {prisma} from "~/server/db";
+import { getServerAuthSession } from "~/server/auth";
+import { prisma } from "~/server/db";
 
 /**
  * 1. CONTEXT
@@ -26,7 +26,7 @@ import {prisma} from "~/server/db";
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: {headers: Headers}) => {
+export const createTRPCContext = async (opts: { headers: Headers }) => {
   const session = await getServerAuthSession();
 
   return {
@@ -45,8 +45,8 @@ export const createTRPCContext = async (opts: {headers: Headers}) => {
  */
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
-  transformer: superjson,
-  errorFormatter({shape, error}) {
+  transformer: SuperJSON,
+  errorFormatter({ shape, error }) {
     return {
       ...shape,
       data: {
@@ -95,14 +95,14 @@ export const publicProcedure = t.procedure;
  *
  * @see https://trpc.io/docs/procedures
  */
-export const protectedProcedure = t.procedure.use(({ctx, next}) => {
-  if (!ctx.session || !ctx.session.user) {
-    throw new TRPCError({code: "UNAUTHORIZED"});
+export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
+  if (!ctx.session?.user) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
   }
   return next({
     ctx: {
       // infers the `session` as non-nullable
-      session: {...ctx.session, user: ctx.session.user}
+      session: { ...ctx.session, user: ctx.session.user }
     }
   });
 });

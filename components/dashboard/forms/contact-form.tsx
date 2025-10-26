@@ -1,30 +1,28 @@
 "use client";
 
-import React from "react";
-import {FormProvider, useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
+import * as React from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SnippetType } from "@prisma/client";
 
-import {Button} from "~/components/ui/button";
-import {FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage} from "~/components/ui/form";
-import {Heading} from "~/components/ui/heading";
-import {Skeleton} from "~/components/ui/skeleton";
-import {Textarea} from "~/components/ui/textarea";
-import {useSnippets} from "~/hooks/use-snippets";
-import {useToast} from "~/hooks/use-toast";
-import type {Snippets} from "~/server/api/routers/snippet";
-import {extractSnippetValues} from "~/utils/extract-snippet-values";
-import {revalidatePath} from "~/utils/revalidate-path";
-import type {ContactSnippetsFormValues} from "~/utils/validations/contact";
-import {contactSnippetsSchema} from "~/utils/validations/contact";
+import { Button } from "~/components/ui/button";
+import { FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage } from "~/components/ui/form";
+import { Heading } from "~/components/ui/heading";
+import { Skeleton } from "~/components/ui/skeleton";
+import { Textarea } from "~/components/ui/textarea";
+import { toast } from "~/components/ui/toaster";
+import { useSnippets } from "~/hooks/use-snippets";
+import type { Snippets } from "~/server/api/routers/snippet";
+import type { ContactSnippetsFormValues } from "~/utils/validations/contact";
+import { contactSnippetsSchema } from "~/utils/validations/contact";
 
 type ContactFormProps = {
   snippets: Snippets;
 };
 
-const ContactForm = ({snippets}: ContactFormProps) => {
-  const {toast} = useToast();
-  const updateSnippets = useSnippets<keyof ContactSnippetsFormValues>("CONTACT", snippets);
-  const snippetValues = extractSnippetValues<keyof ContactSnippetsFormValues>(snippets);
+const ContactForm = ({ snippets }: ContactFormProps) => {
+  const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.CONTACT, snippets);
+  const snippetValues = extractSnippetValues();
 
   const formMethods = useForm<ContactSnippetsFormValues>({
     defaultValues: {
@@ -34,14 +32,12 @@ const ContactForm = ({snippets}: ContactFormProps) => {
     resolver: zodResolver(contactSnippetsSchema)
   });
 
-  const {control, handleSubmit} = formMethods;
+  const { control, handleSubmit } = formMethods;
 
   async function handleFormSubmit(snippets: ContactSnippetsFormValues, e?: React.BaseSyntheticEvent) {
     e?.preventDefault();
 
     await updateSnippets(snippets);
-
-    revalidatePath("/dashboard/contact");
 
     toast({
       title: "Success",
@@ -60,7 +56,7 @@ const ContactForm = ({snippets}: ContactFormProps) => {
         <FormField
           control={control}
           name="description"
-          render={({field}) => (
+          render={({ field }) => (
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
@@ -86,7 +82,7 @@ const ContactFormSkeleton = () => {
         General settings
       </Heading>
 
-      <div className="pb-20 pt-4">
+      <div className="pt-4 pb-20">
         <FormLabelSkeleton>Description</FormLabelSkeleton>
         <Skeleton className="h-28 w-full" />
       </div>
@@ -94,4 +90,4 @@ const ContactFormSkeleton = () => {
   );
 };
 
-export {ContactForm, ContactFormSkeleton};
+export { ContactForm, ContactFormSkeleton };
