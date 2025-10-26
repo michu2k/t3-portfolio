@@ -19,9 +19,9 @@ const AboutMe = async ({ snippets }: AboutMeProps) => {
 
   return (
     <PageSection id="about" heading="Personal Details" subheading="About Me">
-      <div className="flex flex-col gap-12 sm:flex-row sm:items-center md:gap-14">
+      <div className="flex flex-col gap-10 sm:flex-row sm:items-center md:gap-14">
         {imageObj ? (
-          <MotionInViewWrapper className="relative my-auto h-52 w-40 flex-shrink-0 sm:h-72 sm:w-56 md:h-96 md:w-80">
+          <MotionInViewWrapper className="relative my-auto h-52 w-40 flex-shrink-0 sm:h-64 sm:w-52">
             <div className="relative h-full w-full overflow-hidden rounded-md">
               <Image
                 src={imageObj.url}
