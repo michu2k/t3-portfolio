@@ -18,7 +18,7 @@ const Projects = async () => {
 
   return (
     <PageSection id="projects" heading="Featured projects" subheading="Projects">
-      <div className="grid gap-12 sm:grid-cols-2 sm:gap-y-4 md:gap-x-14">{displayProjectsItems()}</div>
+      <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">{displayProjectsItems()}</div>
     </PageSection>
   );
 };
@@ -27,11 +27,11 @@ const ProjectCard = ({ id, name, shortDescription, description, coverImage }: Pr
   const projectUrl = `/projects/${id}`;
 
   return (
-    <article className="group w-auto shrink-0 sm:even:mt-20">
+    <article className="group w-auto shrink-0">
       <Link
         href={projectUrl}
         className="focus-visible:ring-appearance flex gap-4 rounded-md focus-visible:ring-2 focus-visible:outline-none sm:flex-col sm:gap-6">
-        <MotionInViewWrapper className="relative h-32 w-32 shrink-0 overflow-hidden rounded-md sm:h-56 sm:w-full lg:h-80">
+        <MotionInViewWrapper className="relative h-28 w-28 shrink-0 overflow-hidden rounded-md sm:h-56 sm:w-full lg:h-72">
           {coverImage ? (
             <Image
               src={coverImage.url}
