@@ -32,7 +32,7 @@ type ExperienceItemFormProps = {
   experienceItem: ExperienceItemWithResponsibilities | null;
 };
 
-const ExperienceItemForm = ({ experienceItem }: ExperienceItemFormProps) => {
+export const ExperienceItemForm = ({ experienceItem }: ExperienceItemFormProps) => {
   const router = useRouter();
   const newResponsibilityItem = { id: undefined, name: "" };
 
@@ -235,7 +235,7 @@ const ExperienceItemForm = ({ experienceItem }: ExperienceItemFormProps) => {
   );
 };
 
-const ExperienceItemFormSkeleton = () => {
+export const ExperienceItemFormSkeleton = () => {
   return (
     <>
       <div className="py-4">
@@ -270,5 +270,3 @@ const ExperienceItemFormSkeleton = () => {
     </>
   );
 };
-
-export { ExperienceItemForm, ExperienceItemFormSkeleton };

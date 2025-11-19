@@ -17,7 +17,7 @@ type DeleteEntityDialogProps = {
   onClickDeleteBtn: (e: React.MouseEvent) => void;
 };
 
-const DeleteEntityDialog = ({ title, entityName, onClickDeleteBtn }: DeleteEntityDialogProps) => {
+export const DeleteEntityDialog = ({ title, entityName, onClickDeleteBtn }: DeleteEntityDialogProps) => {
   return (
     <DialogContent>
       <DialogHeader>
@@ -48,5 +48,3 @@ const DeleteEntityDialog = ({ title, entityName, onClickDeleteBtn }: DeleteEntit
     </DialogContent>
   );
 };
-
-export { DeleteEntityDialog };

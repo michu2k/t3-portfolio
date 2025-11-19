@@ -66,7 +66,7 @@ const navigationItems: Array<NavigationItemDef> = [
   }
 ];
 
-const SidebarNavigation = () => {
+export const SidebarNavigation = () => {
   const isMobile = useIsMobile();
 
   function displayNavigationItems() {
@@ -168,5 +168,3 @@ const UserPanel = () => {
     </>
   );
 };
-
-export { SidebarNavigation };

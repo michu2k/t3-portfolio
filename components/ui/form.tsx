@@ -14,9 +14,9 @@ type FormFieldContextValue<
   name: TName;
 };
 
-const FormFieldContext = React.createContext({} as FormFieldContextValue);
+export const FormFieldContext = React.createContext({} as FormFieldContextValue);
 
-const FormField = <
+export const FormField = <
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
@@ -33,9 +33,9 @@ type FormItemContextValue = {
   id: string;
 };
 
-const FormItemContext = React.createContext({} as FormItemContextValue);
+export const FormItemContext = React.createContext({} as FormItemContextValue);
 
-const FormItem = ({ className, ...props }: React.ComponentProps<"div">) => {
+export const FormItem = ({ className, ...props }: React.ComponentProps<"div">) => {
   const id = useId();
 
   return (
@@ -47,7 +47,7 @@ const FormItem = ({ className, ...props }: React.ComponentProps<"div">) => {
 
 type FormLabelProps = React.ComponentProps<typeof LabelPrimitive.Root> & { isOptional?: boolean };
 
-const FormLabel = ({ className, isOptional, children, ...props }: FormLabelProps) => {
+export const FormLabel = ({ className, isOptional, children, ...props }: FormLabelProps) => {
   const { formItemId } = useFormField();
 
   return (
@@ -65,7 +65,7 @@ const FormLabel = ({ className, isOptional, children, ...props }: FormLabelProps
   );
 };
 
-const FormLabelSkeleton = ({ className, isOptional, children }: FormLabelProps) => {
+export const FormLabelSkeleton = ({ className, isOptional, children }: FormLabelProps) => {
   return (
     <span className={cn("font-poppins text-foreground block pb-3 text-sm leading-5 font-semibold", className)}>
       {children}
@@ -80,7 +80,7 @@ const FormLabelSkeleton = ({ className, isOptional, children }: FormLabelProps) 
 
 type FormControlProps = React.ComponentProps<typeof Slot> & { withDescription?: boolean };
 
-const FormControl = ({ withDescription, ...props }: FormControlProps) => {
+export const FormControl = ({ withDescription, ...props }: FormControlProps) => {
   const { error, formItemId, formDescriptionId, formMessageId } = useFormField();
 
   return (
@@ -95,7 +95,7 @@ const FormControl = ({ withDescription, ...props }: FormControlProps) => {
   );
 };
 
-const FormDescription = ({ className, ...props }: React.ComponentProps<"p">) => {
+export const FormDescription = ({ className, ...props }: React.ComponentProps<"p">) => {
   const { formDescriptionId } = useFormField();
 
   return (
@@ -103,7 +103,7 @@ const FormDescription = ({ className, ...props }: React.ComponentProps<"p">) => 
   );
 };
 
-const FormMessage = ({ className, children, ...props }: React.ComponentProps<"p">) => {
+export const FormMessage = ({ className, children, ...props }: React.ComponentProps<"p">) => {
   const { error, formMessageId } = useFormField();
   const body = error ? String(error?.message) : children;
 
@@ -116,16 +116,4 @@ const FormMessage = ({ className, children, ...props }: React.ComponentProps<"p"
       {body}
     </p>
   );
-};
-
-export {
-  FormFieldContext,
-  FormItemContext,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormLabelSkeleton,
-  FormControl,
-  FormDescription,
-  FormMessage
 };

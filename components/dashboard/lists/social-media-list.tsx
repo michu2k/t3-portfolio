@@ -27,7 +27,7 @@ type SocialMediaListProps = {
   socialMediaLinks?: Array<SocialMediaLink>;
 };
 
-const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
+export const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
   const router = useRouter();
 
@@ -141,7 +141,7 @@ const SocialMediaCard = ({ id, icon, url, onClickDeleteBtn }: SocialMediaCardPro
   );
 };
 
-const SocialMediaListSkeleton = () => {
+export const SocialMediaListSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -168,5 +168,3 @@ const SocialMediaCardSkeleton = () => {
     </article>
   );
 };
-
-export { SocialMediaList, SocialMediaListSkeleton };

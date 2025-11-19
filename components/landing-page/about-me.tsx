@@ -13,7 +13,7 @@ type AboutMeProps = {
   snippets: Snippets;
 };
 
-const AboutMe = async ({ snippets }: AboutMeProps) => {
+export const AboutMe = async ({ snippets }: AboutMeProps) => {
   const { description = "", image: imageId } = extractSnippetValues<typeof SnippetType.ABOUT_ME>(snippets);
   const imageObj = imageId ? await api.image.getImage({ key: imageId }) : null;
 
@@ -40,5 +40,3 @@ const AboutMe = async ({ snippets }: AboutMeProps) => {
     </PageSection>
   );
 };
-
-export { AboutMe };

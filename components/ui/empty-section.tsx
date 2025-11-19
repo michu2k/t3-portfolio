@@ -6,7 +6,7 @@ type EmptySectionProps = React.ComponentProps<"div"> & {
   description?: string;
 };
 
-const EmptySection = ({ heading, description }: EmptySectionProps) => {
+export const EmptySection = ({ heading, description }: EmptySectionProps) => {
   return (
     <div className="min-h-[6rem] w-full py-4">
       <div className="bg-accent flex w-full items-center gap-4 rounded-lg px-3 py-6">
@@ -22,5 +22,3 @@ const EmptySection = ({ heading, description }: EmptySectionProps) => {
     </div>
   );
 };
-
-export { EmptySection };

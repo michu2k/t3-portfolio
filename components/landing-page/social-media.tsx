@@ -10,7 +10,7 @@ type SocialMediaProps = {
   className?: string;
 };
 
-const SocialMedia = async ({ className }: SocialMediaProps) => {
+export const SocialMedia = async ({ className }: SocialMediaProps) => {
   const socialMediaItems = await api.socialMedia.getItems();
 
   function displaySocialMediaIcons() {
@@ -45,5 +45,3 @@ const SocialMediaItem = ({ icon, url }: SocialMediaLink) => {
     </li>
   );
 };
-
-export { SocialMedia };

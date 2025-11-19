@@ -7,7 +7,7 @@ const DEFAULT_ANIMATION_DURATION = 0.6;
 
 const DEFAULT_ANIMATION_DELAY = 0.3;
 
-const MotionInViewWrapper = ({
+export const MotionInViewWrapper = ({
   children,
   transition,
   initial,
@@ -37,5 +37,3 @@ const MotionInViewWrapper = ({
     </LazyMotion>
   );
 };
-
-export { MotionInViewWrapper };

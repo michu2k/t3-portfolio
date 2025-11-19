@@ -7,7 +7,7 @@ type PageHeaderProps = {
   description: string;
 };
 
-const PageHeader = ({ heading, description }: PageHeaderProps) => {
+export const PageHeader = ({ heading, description }: PageHeaderProps) => {
   return (
     <div className="relative h-16 md:h-auto">
       <header className="border-muted bg-background fixed top-0 right-0 left-0 z-30 mx-4 flex h-16 flex-col items-center justify-center border-b text-center md:relative md:mx-10 md:block md:h-auto md:py-6 md:text-left lg:max-w-2xl">
@@ -19,5 +19,3 @@ const PageHeader = ({ heading, description }: PageHeaderProps) => {
     </div>
   );
 };
-
-export { PageHeader };

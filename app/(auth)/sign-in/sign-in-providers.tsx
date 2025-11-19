@@ -11,7 +11,7 @@ type SignInProvidersProps = {
   providers: Record<LiteralUnion<BuiltInProviderType, string>, ClientSafeProvider> | null;
 };
 
-const SignInProviders = ({ providers }: SignInProvidersProps) => {
+export const SignInProviders = ({ providers }: SignInProvidersProps) => {
   if (!providers) return null;
 
   return Object.values(providers).map((provider) => (
@@ -20,5 +20,3 @@ const SignInProviders = ({ providers }: SignInProvidersProps) => {
     </Button>
   ));
 };
-
-export { SignInProviders };
