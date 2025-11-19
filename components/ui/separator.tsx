@@ -6,7 +6,7 @@ type SeparatorProps = React.ComponentProps<"hr"> & {
   orientation?: "horizontal" | "vertical";
 };
 
-const Separator = ({ orientation = "horizontal", className, ...props }: SeparatorProps) => {
+export const Separator = ({ orientation = "horizontal", className, ...props }: SeparatorProps) => {
   return (
     <hr
       className={cn(
@@ -18,5 +18,3 @@ const Separator = ({ orientation = "horizontal", className, ...props }: Separato
     />
   );
 };
-
-export { Separator };

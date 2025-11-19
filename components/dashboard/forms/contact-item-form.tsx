@@ -53,7 +53,7 @@ type ContactItemFormProps = {
   contact: ContactMethod | null;
 };
 
-const ContactItemForm = ({ contact }: ContactItemFormProps) => {
+export const ContactItemForm = ({ contact }: ContactItemFormProps) => {
   const router = useRouter();
 
   const createItemMutation = api.contact.createItem.useMutation();
@@ -160,7 +160,7 @@ const ContactItemForm = ({ contact }: ContactItemFormProps) => {
   );
 };
 
-const ContactItemFormSkeleton = () => {
+export const ContactItemFormSkeleton = () => {
   return (
     <>
       <div className="pt-4 pb-12">
@@ -180,5 +180,3 @@ const ContactItemFormSkeleton = () => {
     </>
   );
 };
-
-export { ContactItemForm, ContactItemFormSkeleton };

@@ -4,13 +4,17 @@ import { CheckIcon, ChevronDownIcon } from "lucide-react";
 
 import { cn } from "~/utils/cn";
 
-const Select = SelectPrimitive.Root;
+export const Select = SelectPrimitive.Root;
 
-const SelectGroup = SelectPrimitive.Group;
+export const SelectGroup = SelectPrimitive.Group;
 
-const SelectValue = SelectPrimitive.Value;
+export const SelectValue = SelectPrimitive.Value;
 
-const SelectTrigger = ({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Trigger>) => {
+export const SelectTrigger = ({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Trigger>) => {
   return (
     <SelectPrimitive.Trigger
       className={cn(
@@ -26,7 +30,7 @@ const SelectTrigger = ({ className, children, ...props }: React.ComponentProps<t
   );
 };
 
-const SelectContent = ({
+export const SelectContent = ({
   className,
   children,
   position = "popper",
@@ -56,7 +60,7 @@ const SelectContent = ({
   );
 };
 
-const SelectLabel = ({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Label>) => {
+export const SelectLabel = ({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Label>) => {
   return (
     <SelectPrimitive.Label
       className={cn("font-poppins py-1.5 pr-2 pl-8 text-sm font-semibold", className)}
@@ -65,7 +69,7 @@ const SelectLabel = ({ className, ...props }: React.ComponentProps<typeof Select
   );
 };
 
-const SelectItem = ({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) => {
+export const SelectItem = ({ className, children, ...props }: React.ComponentProps<typeof SelectPrimitive.Item>) => {
   return (
     <SelectPrimitive.Item
       className={cn(
@@ -84,8 +88,6 @@ const SelectItem = ({ className, children, ...props }: React.ComponentProps<type
   );
 };
 
-const SelectSeparator = ({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Separator>) => {
+export const SelectSeparator = ({ className, ...props }: React.ComponentProps<typeof SelectPrimitive.Separator>) => {
   return <SelectPrimitive.Separator className={cn("bg-muted -mx-1 my-1 h-px", className)} {...props} />;
 };
-
-export { Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectLabel, SelectItem, SelectSeparator };

@@ -16,13 +16,13 @@ type SidebarContextProps = {
   hideSidebar: () => void;
 };
 
-const SidebarContext = React.createContext({} as SidebarContextProps);
+export const SidebarContext = React.createContext({} as SidebarContextProps);
 
 type SidebarProps = PropsWithChildren<{
   isExpandable?: boolean;
 }>;
 
-const Sidebar = ({ children, isExpandable = true }: SidebarProps) => {
+export const Sidebar = ({ children, isExpandable = true }: SidebarProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const pathname = usePathname();
 
@@ -45,7 +45,7 @@ const Sidebar = ({ children, isExpandable = true }: SidebarProps) => {
   );
 };
 
-const SidebarOverlay = ({ className, ...props }: React.ComponentProps<typeof motion.div>) => {
+export const SidebarOverlay = ({ className, ...props }: React.ComponentProps<typeof motion.div>) => {
   const { toggleSidebar } = useContext(SidebarContext);
 
   const overlayAnimation: MotionNodeAnimationOptions = {
@@ -73,7 +73,7 @@ type SidebarContentProps = PropsWithChildren<{
   className?: string;
 }>;
 
-const SidebarContent = ({ className, children, ...props }: SidebarContentProps) => {
+export const SidebarContent = ({ className, children, ...props }: SidebarContentProps) => {
   const { isExpanded, isExpandable, toggleSidebar } = useContext(SidebarContext);
 
   const contentAnimation: MotionNodeAnimationOptions = {
@@ -117,7 +117,7 @@ const SidebarContent = ({ className, children, ...props }: SidebarContentProps) 
   );
 };
 
-const SidebarTrigger = ({ className, onClick, ...props }: React.ComponentProps<"button">) => {
+export const SidebarTrigger = ({ className, onClick, ...props }: React.ComponentProps<"button">) => {
   const { toggleSidebar } = useContext(SidebarContext);
 
   function handleBtnClick(e: React.MouseEvent<HTMLButtonElement>) {
@@ -137,5 +137,3 @@ const SidebarTrigger = ({ className, onClick, ...props }: React.ComponentProps<"
     </button>
   );
 };
-
-export { Sidebar, SidebarContent, SidebarTrigger, SidebarContext };

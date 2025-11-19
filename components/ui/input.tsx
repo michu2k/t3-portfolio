@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { cn } from "~/utils/cn";
 
-const Input = ({ className, type, ref, ...props }: React.ComponentProps<"input">) => {
+export const Input = ({ className, type, ref, ...props }: React.ComponentProps<"input">) => {
   return (
     <input
       ref={ref}
@@ -15,5 +15,3 @@ const Input = ({ className, type, ref, ...props }: React.ComponentProps<"input">
     />
   );
 };
-
-export { Input };

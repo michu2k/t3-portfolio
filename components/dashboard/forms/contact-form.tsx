@@ -20,7 +20,7 @@ type ContactFormProps = {
   snippets: Snippets;
 };
 
-const ContactForm = ({ snippets }: ContactFormProps) => {
+export const ContactForm = ({ snippets }: ContactFormProps) => {
   const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.CONTACT, snippets);
   const snippetValues = extractSnippetValues();
 
@@ -75,7 +75,7 @@ const ContactForm = ({ snippets }: ContactFormProps) => {
   );
 };
 
-const ContactFormSkeleton = () => {
+export const ContactFormSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -89,5 +89,3 @@ const ContactFormSkeleton = () => {
     </>
   );
 };
-
-export { ContactForm, ContactFormSkeleton };

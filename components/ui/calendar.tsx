@@ -6,7 +6,7 @@ import { cn } from "~/utils/cn";
 
 import { Button, buttonVariants } from "./button";
 
-const Calendar = ({ classNames, components, ...props }: React.ComponentProps<typeof DayPicker>) => {
+export const Calendar = ({ classNames, components, ...props }: React.ComponentProps<typeof DayPicker>) => {
   const defaultClassNames = getDefaultClassNames();
 
   return (
@@ -105,5 +105,3 @@ function CalendarDayButton({ className, day, modifiers, ...props }: React.Compon
     />
   );
 }
-
-export { Calendar };

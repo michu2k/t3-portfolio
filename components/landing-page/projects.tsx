@@ -9,7 +9,7 @@ import { api } from "~/trpc/server";
 
 import { PageSection } from "./page-section";
 
-const Projects = async () => {
+export const Projects = async () => {
   const projectItems = await api.project.getItems();
 
   function displayProjectsItems() {
@@ -61,5 +61,3 @@ const ProjectCard = ({ id, name, shortDescription, description, coverImage }: Pr
     </article>
   );
 };
-
-export { Projects };

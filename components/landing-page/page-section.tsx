@@ -12,7 +12,7 @@ type PageSectionProps = PropsWithChildren<{
   className?: string;
 }>;
 
-const PageSection = ({ id, heading, subheading, className, children }: PageSectionProps) => {
+export const PageSection = ({ id, heading, subheading, className, children }: PageSectionProps) => {
   return (
     <section id={id} className={cn("px-4 py-16 md:px-6", className)}>
       <div className="section-container">
@@ -31,5 +31,3 @@ const PageSection = ({ id, heading, subheading, className, children }: PageSecti
     </section>
   );
 };
-
-export { PageSection };

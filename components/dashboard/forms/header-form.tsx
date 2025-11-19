@@ -21,7 +21,7 @@ type HeaderFormProps = {
   snippets: Snippets;
 };
 
-const HeaderForm = ({ snippets }: HeaderFormProps) => {
+export const HeaderForm = ({ snippets }: HeaderFormProps) => {
   const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.HEADER, snippets);
   const { heading = "", description = "" } = extractSnippetValues();
 
@@ -94,7 +94,7 @@ const HeaderForm = ({ snippets }: HeaderFormProps) => {
   );
 };
 
-const HeaderFormSkeleton = () => {
+export const HeaderFormSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -113,5 +113,3 @@ const HeaderFormSkeleton = () => {
     </>
   );
 };
-
-export { HeaderForm, HeaderFormSkeleton };

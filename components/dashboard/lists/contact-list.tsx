@@ -26,7 +26,7 @@ type ContactListProps = {
   contactMethods: Array<ContactMethod>;
 };
 
-const ContactList = ({ contactMethods }: ContactListProps) => {
+export const ContactList = ({ contactMethods }: ContactListProps) => {
   const deleteItemMutation = api.contact.deleteItem.useMutation();
   const router = useRouter();
 
@@ -141,7 +141,7 @@ const ContactMethodCard = ({ id, name, description, onClickDeleteBtn }: ContactM
   );
 };
 
-const ContactListSkeleton = () => {
+export const ContactListSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -172,5 +172,3 @@ const ContactMethodCardSkeleton = () => {
     </div>
   );
 };
-
-export { ContactList, ContactListSkeleton };

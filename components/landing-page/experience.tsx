@@ -8,7 +8,7 @@ import { api } from "~/trpc/server";
 import { Separator } from "../ui/separator";
 import { PageSection } from "./page-section";
 
-const Experience = async () => {
+export const Experience = async () => {
   const experienceItems = (await api.experience.getItems({
     include: { responsibilities: true }
   })) as Array<ExperienceItemWithResponsibilities>;
@@ -62,5 +62,3 @@ const ExperienceListItem = ({
     </li>
   );
 };
-
-export { Experience };

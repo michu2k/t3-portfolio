@@ -13,7 +13,7 @@ type ContactProps = {
   snippets: Snippets;
 };
 
-const Contact = async ({ snippets }: ContactProps) => {
+export const Contact = async ({ snippets }: ContactProps) => {
   const contactMethods = await api.contact.getItems();
   const { description = "" } = extractSnippetValues<typeof SnippetType.CONTACT>(snippets);
 
@@ -45,5 +45,3 @@ const ContactMethodListItem = ({ name, description, type }: ContactMethod) => {
     </li>
   );
 };
-
-export { Contact };

@@ -81,7 +81,7 @@ type TargetElement = {
   target: HTMLElement;
 };
 
-const HomeNavigation = ({ children }: { children: React.ReactNode }) => {
+export const HomeNavigation = ({ children }: { children: React.ReactNode }) => {
   const [activeTargetId, setActiveTargetId] = useState<string | null>(null);
   const { scrollY } = useScroll();
 
@@ -109,7 +109,7 @@ const HomeNavigation = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const SubpageNavigation = ({ children }: { children: React.ReactNode }) => {
+export const SubpageNavigation = ({ children }: { children: React.ReactNode }) => {
   return <Navigation navItems={subpageNavigationItems}>{children}</Navigation>;
 };
 
@@ -143,5 +143,3 @@ const NavigationItem = ({ href, text, isActive }: NavigationItemProps) => {
     </li>
   );
 };
-
-export { HomeNavigation, SubpageNavigation };
