@@ -27,7 +27,7 @@ type ProjectListProps = {
   projects: Array<ProjectItemWithImages>;
 };
 
-const ProjectList = ({ projects }: ProjectListProps) => {
+export const ProjectList = ({ projects }: ProjectListProps) => {
   const deleteItemMutation = api.project.deleteItem.useMutation();
   const router = useRouter();
 
@@ -154,7 +154,7 @@ const ProjectCard = ({ id, name, shortDescription, description, coverImage, onCl
   );
 };
 
-const ProjectListSkeleton = () => {
+export const ProjectListSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -187,5 +187,3 @@ const ProjectCardSkeleton = () => {
     </div>
   );
 };
-
-export { ProjectList, ProjectListSkeleton };

@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 
 import { type AppStore, reduxStore } from "~/store/store";
 
-function ReduxStoreProvider({ children }: { children: React.ReactNode }) {
+export function ReduxStoreProvider({ children }: { children: React.ReactNode }) {
   const storeRef = useRef<AppStore | null>(null);
 
   if (!storeRef.current) {
@@ -15,5 +15,3 @@ function ReduxStoreProvider({ children }: { children: React.ReactNode }) {
 
   return <Provider store={storeRef.current}>{children}</Provider>;
 }
-
-export { ReduxStoreProvider };

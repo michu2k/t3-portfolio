@@ -27,7 +27,7 @@ type ExperienceListProps = {
   experience: Array<ExperienceItem>;
 };
 
-const ExperienceList = ({ experience }: ExperienceListProps) => {
+export const ExperienceList = ({ experience }: ExperienceListProps) => {
   const deleteItemMutation = api.experience.deleteItem.useMutation();
   const router = useRouter();
 
@@ -142,7 +142,7 @@ const ExperienceCard = ({ id, company, startDate, endDate, position, onClickDele
   );
 };
 
-const ExperienceListSkeleton = () => {
+export const ExperienceListSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -177,5 +177,3 @@ const ExperienceCardSkeleton = () => {
     </div>
   );
 };
-
-export { ExperienceList, ExperienceListSkeleton };

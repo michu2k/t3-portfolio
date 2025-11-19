@@ -23,7 +23,7 @@ type SocialMediaItemFormProps = {
   socialMediaLink: SocialMediaLink | null;
 };
 
-const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
+export const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
   const router = useRouter();
 
   const createItemMutation = api.socialMedia.createItem.useMutation();
@@ -133,7 +133,7 @@ const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
   );
 };
 
-const SocialMediaItemFormSkeleton = () => {
+export const SocialMediaItemFormSkeleton = () => {
   return (
     <>
       <div className="py-4">
@@ -152,5 +152,3 @@ const SocialMediaItemFormSkeleton = () => {
     </>
   );
 };
-
-export { socialMediaIconsDef, SocialMediaItemForm, SocialMediaItemFormSkeleton };

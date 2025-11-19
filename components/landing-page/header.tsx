@@ -11,7 +11,7 @@ type HeaderProps = {
   snippets: Snippets;
 };
 
-const Header = async ({ snippets }: HeaderProps) => {
+export const Header = async ({ snippets }: HeaderProps) => {
   const { heading = "", description = "" } = extractSnippetValues<typeof SnippetType.HEADER>(snippets);
 
   return (
@@ -30,5 +30,3 @@ const Header = async ({ snippets }: HeaderProps) => {
     </header>
   );
 };
-
-export { Header };

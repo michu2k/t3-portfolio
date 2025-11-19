@@ -33,7 +33,7 @@ type ProjectItemFormProps = {
   project: ProjectItemWithImages | null;
 };
 
-const ProjectItemForm = ({ project }: ProjectItemFormProps) => {
+export const ProjectItemForm = ({ project }: ProjectItemFormProps) => {
   const router = useRouter();
 
   const createItemMutation = api.project.createItem.useMutation();
@@ -208,7 +208,7 @@ const ProjectItemForm = ({ project }: ProjectItemFormProps) => {
   );
 };
 
-const ProjectItemFormSkeleton = () => {
+export const ProjectItemFormSkeleton = () => {
   return (
     <>
       <div className="py-4">
@@ -255,5 +255,3 @@ const ProjectItemFormSkeleton = () => {
     </>
   );
 };
-
-export { ProjectItemForm, ProjectItemFormSkeleton };

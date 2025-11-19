@@ -30,7 +30,7 @@ type AboutFormProps = {
   currentImage: FileObj | null;
 };
 
-const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
+export const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
   const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.ABOUT_ME, snippets);
   const { description = "", image: currentImageKey } = extractSnippetValues();
 
@@ -145,7 +145,7 @@ const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
   );
 };
 
-const AboutFormSkeleton = () => {
+export const AboutFormSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -170,5 +170,3 @@ const AboutFormSkeleton = () => {
     </>
   );
 };
-
-export { AboutForm, AboutFormSkeleton };

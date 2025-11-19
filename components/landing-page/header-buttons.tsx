@@ -7,7 +7,7 @@ import { Button } from "~/components/ui/button";
 import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";
 import { useSmoothScroll } from "~/hooks/use-smooth-scroll";
 
-const HeaderButtons = () => {
+export const HeaderButtons = () => {
   const scrollToProjects = useSmoothScroll("#projects");
   const scrollToContact = useSmoothScroll("#contact");
 
@@ -25,5 +25,3 @@ const HeaderButtons = () => {
     </MotionInViewWrapper>
   );
 };
-
-export { HeaderButtons };

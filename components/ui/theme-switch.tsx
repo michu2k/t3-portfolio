@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 
 import { capitalize } from "~/utils/capitalize";
 
-const ThemeSwitch = () => {
+export const ThemeSwitch = () => {
   const { theme = "", setTheme } = useTheme();
   const isMounted = useSyncExternalStore(
     () => () => {},
@@ -50,5 +50,3 @@ const ThemeSwitch = () => {
     </div>
   );
 };
-
-export { ThemeSwitch };

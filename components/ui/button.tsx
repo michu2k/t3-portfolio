@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "~/utils/cn";
 
-const buttonVariants = cva(
+export const buttonVariants = cva(
   `font-poppins font-medium shrink-0
   inline-flex justify-center items-center rounded-md cursor-pointer
   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-appearance
@@ -37,10 +37,8 @@ type ButtonProps = React.ComponentProps<"button"> &
     asChild?: boolean;
   };
 
-const Button = ({ className, variant, size, type = "button", asChild, ...props }: ButtonProps) => {
+export const Button = ({ className, variant, size, type = "button", asChild, ...props }: ButtonProps) => {
   const Component = asChild ? Slot : "button";
 
   return <Component type={type} className={cn(buttonVariants({ variant, size }), className)} {...props} />;
 };
-
-export { Button, buttonVariants };

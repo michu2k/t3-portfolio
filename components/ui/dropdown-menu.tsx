@@ -3,15 +3,15 @@ import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 
 import { cn } from "~/utils/cn";
 
-const DropdownMenu = DropdownMenuPrimitive.Root;
+export const DropdownMenu = DropdownMenuPrimitive.Root;
 
-const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
+export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 
-const DropdownMenuGroup = DropdownMenuPrimitive.Group;
+export const DropdownMenuGroup = DropdownMenuPrimitive.Group;
 
-const DropdownMenuPortal = DropdownMenuPrimitive.Portal;
+export const DropdownMenuPortal = DropdownMenuPrimitive.Portal;
 
-const DropdownMenuContent = ({
+export const DropdownMenuContent = ({
   className,
   sideOffset = 2,
   children,
@@ -32,7 +32,7 @@ const DropdownMenuContent = ({
   </DropdownMenuPrimitive.Portal>
 );
 
-const DropdownMenuItem = ({ className, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Item>) => (
+export const DropdownMenuItem = ({ className, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Item>) => (
   <DropdownMenuPrimitive.Item
     className={cn(
       "focus:bg-muted/40 relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2.5 text-xs transition-colors outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
@@ -42,24 +42,16 @@ const DropdownMenuItem = ({ className, ...props }: React.ComponentProps<typeof D
   />
 );
 
-const DropdownMenuLabel = ({ className, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Label>) => (
+export const DropdownMenuLabel = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof DropdownMenuPrimitive.Label>) => (
   <DropdownMenuPrimitive.Label className={cn("font-poppins px-2 py-2 text-xs font-semibold", className)} {...props} />
 );
 
-const DropdownMenuSeparator = ({
+export const DropdownMenuSeparator = ({
   className,
   ...props
 }: React.ComponentProps<typeof DropdownMenuPrimitive.Separator>) => (
   <DropdownMenuPrimitive.Separator className={cn("bg-muted -mx-1 my-1 h-px", className)} {...props} />
 );
-
-export {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuGroup,
-  DropdownMenuPortal,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator
-};
