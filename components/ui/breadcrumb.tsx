@@ -4,6 +4,11 @@ import { ChevronRight, MoreHorizontal } from "lucide-react";
 
 import { cn } from "~/utils/cn";
 
+export type BreadcrumbItem = {
+  label: string;
+  href?: string;
+};
+
 export const Breadcrumb = ({
   ...props
 }: React.ComponentProps<"nav"> & {
@@ -17,7 +22,7 @@ export const BreadcrumbList = ({ className, ...props }: React.ComponentProps<"ol
   />
 );
 
-export const BreadcrumbItem = ({ className, ...props }: React.ComponentProps<"li">) => (
+export const BreadcrumbListItem = ({ className, ...props }: React.ComponentProps<"li">) => (
   <li className={cn("inline-flex items-center gap-1", className)} {...props} />
 );
 
