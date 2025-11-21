@@ -12,16 +12,13 @@ export const Breadcrumb = ({
 
 export const BreadcrumbList = ({ className, ...props }: React.ComponentProps<"ol">) => (
   <ol
-    className={cn(
-      "text-muted-foreground flex flex-wrap items-center gap-1.5 text-sm break-words sm:gap-2.5",
-      className
-    )}
+    className={cn("text-muted-foreground flex flex-wrap items-center gap-1 text-sm break-words sm:gap-2.5", className)}
     {...props}
   />
 );
 
 export const BreadcrumbItem = ({ className, ...props }: React.ComponentProps<"li">) => (
-  <li className={cn("inline-flex items-center gap-1.5", className)} {...props} />
+  <li className={cn("inline-flex items-center gap-1", className)} {...props} />
 );
 
 export const BreadcrumbLink = ({
@@ -33,7 +30,15 @@ export const BreadcrumbLink = ({
 }) => {
   const Comp = asChild ? Slot : "a";
 
-  return <Comp className={cn("hover:text-foreground transition-colors", className)} {...props} />;
+  return (
+    <Comp
+      className={cn(
+        "hover:text-foreground focus-visible:ring-appearance rounded-md text-sm transition-colors focus-visible:ring-2 focus-visible:outline-none",
+        className
+      )}
+      {...props}
+    />
+  );
 };
 
 export const BreadcrumbPage = ({ className, ...props }: React.ComponentProps<"span">) => (
@@ -41,13 +46,13 @@ export const BreadcrumbPage = ({ className, ...props }: React.ComponentProps<"sp
     role="link"
     aria-disabled="true"
     aria-current="page"
-    className={cn("text-foreground font-normal", className)}
+    className={cn("text-foreground text-sm", className)}
     {...props}
   />
 );
 
 export const BreadcrumbSeparator = ({ children, className, ...props }: React.ComponentProps<"li">) => (
-  <li role="presentation" aria-hidden="true" className={cn("[&>svg]:h-3.5 [&>svg]:w-3.5", className)} {...props}>
+  <li role="presentation" aria-hidden="true" className={cn("[&>svg]:h-4 [&>svg]:w-4", className)} {...props}>
     {children ?? <ChevronRight />}
   </li>
 );
