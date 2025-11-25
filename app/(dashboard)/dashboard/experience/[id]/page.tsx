@@ -4,8 +4,10 @@ import type { Metadata } from "next";
 import { ExperienceItemForm, ExperienceItemFormSkeleton } from "~/components/dashboard/forms/experience-item-form";
 import { PageContent } from "~/components/dashboard/layouts/page-content";
 import { PageHeader } from "~/components/dashboard/layouts/page-header";
+import type { BreadcrumbItem } from "~/components/ui/breadcrumb";
 import { ensureAuthenticated } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
+import { dashboardPaths } from "~/utils/dashboard.config";
 
 export const metadata: Metadata = {
   title: "Dashboard: Experience"
@@ -25,9 +27,14 @@ export default async function Page({ params }: PageProps) {
   const heading = isNew ? "Create" : "Edit";
   const description = isNew ? "Create a new experience item." : "Edit an existing experience item.";
 
+  const breadcrumbs: Array<BreadcrumbItem> = [
+    { label: "Experience", href: dashboardPaths.experience },
+    { label: heading }
+  ];
+
   return (
     <HydrateClient>
-      <PageHeader heading={heading} description={description} />
+      <PageHeader heading={heading} description={description} breadcrumbs={breadcrumbs} />
       <PageContent>
         <Suspense fallback={<ExperienceItemFormSkeleton />}>
           <ExperienceItemFormWrapper id={id} />
