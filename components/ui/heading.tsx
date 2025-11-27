@@ -19,9 +19,9 @@ type HeadingProps = React.ComponentProps<"h1" | "h2" | "h3"> & {
   as: "h1" | "h2" | "h3";
 } & VariantProps<typeof headingVariants>;
 
-export const Heading = ({ as: Component, size, className, ref, children, ...props }: HeadingProps) => {
+export const Heading = ({ as: Component, size, className, children, ...props }: HeadingProps) => {
   return (
-    <Component ref={ref} className={cn(headingVariants({ size }), className)} {...props}>
+    <Component className={cn(headingVariants({ size }), className)} {...props}>
       {children}
     </Component>
   );
