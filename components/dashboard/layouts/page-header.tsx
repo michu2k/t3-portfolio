@@ -42,7 +42,7 @@ export const PageHeader = ({ heading, description, breadcrumbs = [] }: PageHeade
       </div>
 
       {breadcrumbs?.length ? (
-        <Breadcrumb className="pt-3">
+        <Breadcrumb className="border-muted border-b py-2 lg:max-w-2xl">
           <BreadcrumbList>{displayBreadcrumbItems()}</BreadcrumbList>
         </Breadcrumb>
       ) : null}
