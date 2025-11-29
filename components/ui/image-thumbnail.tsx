@@ -45,7 +45,6 @@ export const ImageThumbnail = ({ file, size, className }: ImageThumbnailProps) =
 
 type ImageThumbnailCardProps = React.ComponentProps<"div"> & {
   file: FileObj;
-  className?: string;
   actions?: React.ReactNode;
 };
 
