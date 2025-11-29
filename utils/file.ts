@@ -1,6 +1,7 @@
 import type { Accept } from "react-dropzone";
 
 export type FileObj = {
+  buffer?: Uint8Array;
   name: string;
   url: string;
   size: number;
