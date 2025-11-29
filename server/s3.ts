@@ -5,8 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import { env } from "~/env";
 import { type FileObj, getFileExtension } from "~/utils/file";
 
-import { BUFFER_ENCODING } from "./image";
-
 export const s3 = new S3Client({
   region: env.AWS_S3_REGION,
   credentials: {
@@ -21,12 +19,10 @@ export async function uploadFileToS3(file: FileObj, directory?: string) {
     const ext = getFileExtension(file.type);
     const key = directory ? `${directory}/${uuidv4()}.${ext}` : `${uuidv4()}.${ext}`;
 
-    const fileBuffer = Buffer.from(file.url.replace(/^data:\w+\/\w+;base64,/, ""), BUFFER_ENCODING);
-
     const command = new PutObjectCommand({
       Bucket: env.AWS_S3_BUCKET,
       Key: key,
-      Body: fileBuffer,
+      Body: file.buffer,
       ContentEncoding: "base64",
       ContentType: file.type
     });
