@@ -27,8 +27,13 @@ export const imageRouter = createTRPCRouter({
         throw new Error("Image is required");
       }
 
-      const newImageUrl = await resizeImage({ base64String: image.url, width, height });
-      const { key: imageKey } = await uploadFileToS3({ ...image, url: newImageUrl });
+      const resizedImage = await resizeImage({
+        file: image,
+        width,
+        height
+      });
+
+      const { key: imageKey } = await uploadFileToS3({ ...image, ...resizedImage });
       return imageKey;
     }),
 
