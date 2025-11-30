@@ -1,24 +1,23 @@
 import sharp from "sharp";
 
+import type { FileObj } from "~/utils/file";
+
 type ResizeImageOptions = {
-  base64String: string;
+  file: FileObj;
   width?: number;
   height?: number;
 };
 
-export const BUFFER_ENCODING = "base64";
-
-/** Resize the given image in base64 format */
-export async function resizeImage({ base64String, width, height }: ResizeImageOptions) {
-  if (!width || !height) {
-    return base64String;
+/** Resize the given image to the specified width and height */
+export async function resizeImage({ file, width, height }: ResizeImageOptions) {
+  if (!width || !height || !file.buffer) {
+    return { buffer: file.buffer, size: file.size };
   }
 
-  const [dataUrl, base64] = base64String.split("base64,") as [string, string];
+  const fileBuffer = Buffer.from(file.buffer);
 
-  const fileBuffer = Buffer.from(base64, BUFFER_ENCODING);
-  const resizedImgBuffer = await sharp(fileBuffer).resize(width, height, { fit: "outside" }).toBuffer();
+  const resizedBuffer = await sharp(fileBuffer).resize(width, height, { fit: "outside" }).toBuffer();
+  const resizedBufferSize = Buffer.byteLength(resizedBuffer);
 
-  // Apply the previously deleted dataUrl to the new base64
-  return `${dataUrl}base64,${resizedImgBuffer.toString(BUFFER_ENCODING)}`;
+  return { buffer: resizedBuffer, size: resizedBufferSize };
 }
