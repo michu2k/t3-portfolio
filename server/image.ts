@@ -3,13 +3,12 @@ import sharp from "sharp";
 import type { FileObj } from "~/utils/file";
 
 type ResizeImageOptions = {
-  file: FileObj;
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
 };
 
 /** Resize the given image to the specified width and height */
-export async function resizeImage({ file, width, height }: ResizeImageOptions) {
+export async function resizeImage(file: FileObj, { width, height }: ResizeImageOptions) {
   if (!width || !height || !file.buffer) {
     return { buffer: file.buffer, size: file.size };
   }

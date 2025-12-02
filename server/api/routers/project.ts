@@ -55,8 +55,7 @@ export const projectRouter = createTRPCRouter({
       }
 
       return await ctx.prisma.$transaction(async (tx) => {
-        const resizedCoverImage = await resizeImage({
-          file: coverImage,
+        const resizedCoverImage = await resizeImage(coverImage, {
           width: THUMBNAIL_WIDTH,
           height: THUMBNAIL_HEIGHT
         });
@@ -97,8 +96,7 @@ export const projectRouter = createTRPCRouter({
         if (coverImage.name !== item.coverImageKey) {
           await deleteFileFromS3(item.coverImageKey);
 
-          const resizedCoverImage = await resizeImage({
-            file: coverImage,
+          const resizedCoverImage = await resizeImage(coverImage, {
             width: THUMBNAIL_WIDTH,
             height: THUMBNAIL_HEIGHT
           });
