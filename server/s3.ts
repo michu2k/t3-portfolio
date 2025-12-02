@@ -23,7 +23,6 @@ export async function uploadFileToS3(file: FileObj, directory?: string) {
       Bucket: env.AWS_S3_BUCKET,
       Key: key,
       Body: file.buffer,
-      ContentEncoding: "base64",
       ContentType: file.type
     });
 
