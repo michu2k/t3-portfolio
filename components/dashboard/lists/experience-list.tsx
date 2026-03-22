@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import type { ExperienceItem } from "@prisma/client";
 import { format } from "date-fns";
 import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
@@ -20,6 +19,7 @@ import { EmptySection } from "~/components/ui/empty-section";
 import { Heading } from "~/components/ui/heading";
 import { Skeleton } from "~/components/ui/skeleton";
 import { toast } from "~/components/ui/toaster";
+import type { ExperienceItem } from "~/prisma/generated/client";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
 

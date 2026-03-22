@@ -1,10 +1,10 @@
 import React, { Suspense } from "react";
-import { SnippetType } from "@prisma/client";
 import type { Metadata } from "next";
 
 import { AboutForm, AboutFormSkeleton } from "~/components/dashboard/forms/about-form";
 import { PageContent } from "~/components/dashboard/layouts/page-content";
 import { PageHeader } from "~/components/dashboard/layouts/page-header";
+import { SnippetType } from "~/prisma/generated/client";
 import { ensureAuthenticated } from "~/server/auth";
 import { api, HydrateClient } from "~/trpc/server";
 import { extractSnippetValues } from "~/utils/extract-snippet-values";

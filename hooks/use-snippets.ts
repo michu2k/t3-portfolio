@@ -1,5 +1,4 @@
-import type { SnippetType } from "@prisma/client";
-
+import type { SnippetType } from "~/prisma/generated/client";
 import type { Snippets, SnippetTypeMap } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/react";
 import { extractSnippetValues } from "~/utils/extract-snippet-values";

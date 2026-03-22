@@ -3,7 +3,6 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SnippetType } from "@prisma/client";
 import { PencilIcon, TrashIcon } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
@@ -15,6 +14,7 @@ import { Skeleton } from "~/components/ui/skeleton";
 import { Textarea } from "~/components/ui/textarea";
 import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
+import { SnippetType } from "~/prisma/generated/client";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/react";
 import type { FileObj } from "~/utils/file";

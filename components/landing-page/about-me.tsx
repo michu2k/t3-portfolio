@@ -1,8 +1,8 @@
 import * as React from "react";
-import type { SnippetType } from "@prisma/client";
 import Image from "next/image";
 
 import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";
+import type { SnippetType } from "~/prisma/generated/client";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/server";
 import { extractSnippetValues } from "~/utils/extract-snippet-values";

@@ -3,8 +3,6 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { ContactMethod } from "@prisma/client";
-import { ContactMethodType } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
 import { Button } from "~/components/ui/button";
@@ -21,6 +19,8 @@ import { Input } from "~/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { Skeleton } from "~/components/ui/skeleton";
 import { toast } from "~/components/ui/toaster";
+import type { ContactMethod } from "~/prisma/generated/client";
+import { ContactMethodType } from "~/prisma/generated/client";
 import { api } from "~/trpc/react";
 import { capitalize } from "~/utils/capitalize";
 import { dashboardPaths } from "~/utils/dashboard.config";
