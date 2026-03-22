@@ -1,7 +1,6 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import simpleImportSortPlugin from "eslint-plugin-simple-import-sort";
 import unusedImportsPlugin from "eslint-plugin-unused-imports";
-import eslintTs from "typescript-eslint";
 
 const compat = new FlatCompat({
   baseDirectory: import.meta.dirname
@@ -9,14 +8,14 @@ const compat = new FlatCompat({
 
 /** @type {import("eslint").Linter.Config[]} */
 const eslintConfig = [
-  ...eslintTs.configs.recommended,
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.config({
+    extends: ["next/core-web-vitals", "next/typescript"]
+  }),
   {
     name: "Common config",
     plugins: {
       "unused-imports": unusedImportsPlugin,
-      "simple-import-sort": simpleImportSortPlugin,
-      "@typescript-eslint": eslintTs.plugin
+      "simple-import-sort": simpleImportSortPlugin
     },
     rules: {
       "@typescript-eslint/no-misused-promises": [
