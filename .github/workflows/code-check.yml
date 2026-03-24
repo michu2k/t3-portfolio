@@ -48,6 +48,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Generate Prisma client
+        run: pnpm run prisma:gen
+
       - name: Run Typescript check
         run: pnpm run ts:check
 
