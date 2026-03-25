@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import type { SocialMediaLink } from "@prisma/client";
 import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -19,6 +18,7 @@ import { EmptySection } from "~/components/ui/empty-section";
 import { Heading } from "~/components/ui/heading";
 import { Skeleton } from "~/components/ui/skeleton";
 import { toast } from "~/components/ui/toaster";
+import type { SocialMediaLink } from "~/prisma/generated/client";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
 import { getSocialMediaIcon } from "~/utils/get-social-media-icon";

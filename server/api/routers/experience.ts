@@ -1,6 +1,6 @@
-import type { ExperienceItem, ExperienceItemResponsibility } from "@prisma/client";
 import { z } from "zod";
 
+import type { ExperienceItem, ExperienceItemResponsibility } from "~/prisma/generated/client";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
 import { experienceItemSchema } from "~/utils/validations/experience";
 

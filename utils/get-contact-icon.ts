@@ -1,6 +1,6 @@
 import type React from "react";
-import type { ContactMethodType } from "@prisma/client";
 
+import type { ContactMethodType } from "~/prisma/generated/client";
 import EnvelopeSvg from "~/public/svgs/contact/envelope.svg";
 import HouseSvg from "~/public/svgs/contact/house.svg";
 import PhoneSvg from "~/public/svgs/contact/phone.svg";
