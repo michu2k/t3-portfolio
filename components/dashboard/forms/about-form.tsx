@@ -14,7 +14,7 @@ import { Skeleton } from "~/components/ui/skeleton";
 import { Textarea } from "~/components/ui/textarea";
 import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
-import { SnippetType } from "~/prisma/generated/client";
+import { SnippetType } from "~/prisma/generated/enums";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/react";
 import type { FileObj } from "~/utils/file";

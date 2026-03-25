@@ -20,7 +20,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~
 import { Skeleton } from "~/components/ui/skeleton";
 import { toast } from "~/components/ui/toaster";
 import type { ContactMethod } from "~/prisma/generated/client";
-import { ContactMethodType } from "~/prisma/generated/client";
+import { ContactMethodType } from "~/prisma/generated/enums";
 import { api } from "~/trpc/react";
 import { capitalize } from "~/utils/capitalize";
 import { dashboardPaths } from "~/utils/dashboard.config";

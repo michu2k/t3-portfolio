@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { SnippetType } from "~/prisma/generated/client";
+import { SnippetType } from "~/prisma/generated/enums";
 
 export const snippetSchema = z.object({
   id: z.string().optional(),

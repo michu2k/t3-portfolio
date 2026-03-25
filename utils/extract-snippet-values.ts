@@ -1,4 +1,4 @@
-import { SnippetType } from "~/prisma/generated/client";
+import { SnippetType } from "~/prisma/generated/enums";
 import type { Snippets, SnippetTypeMap } from "~/server/api/routers/snippet";
 
 /** Get the snippet values from the array */

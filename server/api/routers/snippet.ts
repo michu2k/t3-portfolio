@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import type { Snippet } from "~/prisma/generated/client";
-import { SnippetType } from "~/prisma/generated/client";
+import { SnippetType } from "~/prisma/generated/enums";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
 import { snippetSchema } from "~/utils/validations/snippet";
 
@@ -54,7 +54,7 @@ export const snippetRouter = createTRPCRouter({
   getSnippetsByType: publicProcedure
     .input(
       z.object({
-        type: z.nativeEnum(SnippetType)
+        type: z.enum(SnippetType)
       })
     )
     .query(async ({ ctx, input: { type } }) => {
