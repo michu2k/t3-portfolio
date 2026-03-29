@@ -1,6 +1,6 @@
 import React from "react";
-import type { SocialMediaLink } from "@prisma/client";
 
+import type { SocialMediaLink } from "~/prisma/generated/client";
 import { api } from "~/trpc/server";
 import { capitalize } from "~/utils/capitalize";
 import { cn } from "~/utils/cn";

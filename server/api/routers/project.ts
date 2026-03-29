@@ -1,6 +1,6 @@
-import type { ProjectItem } from "@prisma/client";
 import { z } from "zod";
 
+import type { ProjectItem } from "~/prisma/generated/client";
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "~/server/api/trpc";
 import { resizeImage } from "~/server/image";
 import { deleteFileFromS3, getPresignedUrl, uploadFileToS3 } from "~/server/s3";
