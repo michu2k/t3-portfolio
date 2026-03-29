@@ -33,8 +33,8 @@ const ExperienceListItem = ({
 }: ExperienceItemWithResponsibilities) => {
   return (
     <li className="group flex flex-col gap-2 md:flex-row md:gap-8">
-      <MotionInViewWrapper transition={{ delay: 0.5 }} className="flex flex-col justify-center md:min-h-[2rem]">
-        <span className="flex-inline font-poppins text-muted-foreground group-hover:text-primary mb-auto min-w-[10rem] text-sm leading-7 font-medium transition-colors">
+      <MotionInViewWrapper transition={{ delay: 0.5 }} className="flex flex-col justify-center md:min-h-8">
+        <span className="flex-inline font-poppins text-muted-foreground group-hover:text-primary mb-auto min-w-40 text-sm leading-7 font-medium transition-colors">
           {format(startDate, "MMM yyyy")} {" - "}
           {endDate ? format(endDate, "MMM yyyy") : "Present"}
         </span>
@@ -43,7 +43,7 @@ const ExperienceListItem = ({
       <Separator orientation="vertical" className="hidden h-auto md:block" />
 
       <div className="relative flex flex-col gap-6">
-        <MotionInViewWrapper transition={{ delay: 0.5 }} className="flex flex-col justify-center gap-2 md:min-h-[4rem]">
+        <MotionInViewWrapper transition={{ delay: 0.5 }} className="flex flex-col justify-center gap-2 md:min-h-16">
           <p className="font-poppins text-foreground text-xl leading-7 font-semibold">{position}</p>
           <p className="text-primary text-sm leading-7">{company}</p>
         </MotionInViewWrapper>

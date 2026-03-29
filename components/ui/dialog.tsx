@@ -40,10 +40,7 @@ export const DialogContent = ({
         )}
         {...props}>
         <div
-          className={cn(
-            "border-muted bg-background relative flex min-h-[18rem] flex-col rounded-lg border p-8",
-            className
-          )}>
+          className={cn("border-muted bg-background relative flex min-h-72 flex-col rounded-lg border p-8", className)}>
           <DialogClose className="focus-visible:ring-appearance absolute top-4 right-4 flex size-6 cursor-pointer items-center justify-center rounded-sm transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:outline-none disabled:pointer-events-none">
             <XIcon size={22} />
             <span className="sr-only">Close</span>

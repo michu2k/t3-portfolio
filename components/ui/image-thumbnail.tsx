@@ -50,7 +50,7 @@ type ImageThumbnailCardProps = React.ComponentProps<"div"> & {
 
 export const ImageThumbnailCard = ({ file, className, actions }: ImageThumbnailCardProps) => {
   return (
-    <div className={cn("flex min-h-[5.5rem] gap-4", className)}>
+    <div className={cn("flex min-h-22 gap-4", className)}>
       <ImageThumbnail file={file} />
 
       <div className="flex min-w-0 flex-1 flex-col items-start gap-2">

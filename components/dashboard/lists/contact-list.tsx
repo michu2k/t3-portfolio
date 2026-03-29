@@ -107,7 +107,7 @@ type ContactMethodCardProps = ContactMethod & {
 
 const ContactMethodCard = ({ id, name, description, onClickDeleteBtn }: ContactMethodCardProps) => {
   return (
-    <article className="border-muted flex min-h-20 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <article className="border-muted flex min-h-20 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
       <div className="flex-1">
         <p className="font-poppins text-sm leading-8 font-semibold">{name}</p>
         <p className="text-muted-foreground text-xs leading-6">{description}</p>
@@ -159,7 +159,7 @@ export const ContactListSkeleton = () => {
 
 const ContactMethodCardSkeleton = () => {
   return (
-    <div className="border-muted flex min-h-20 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <div className="border-muted flex min-h-20 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
       <div className="flex-1">
         <div className="flex h-8 items-center">
           <Skeleton className="h-4 w-36" />

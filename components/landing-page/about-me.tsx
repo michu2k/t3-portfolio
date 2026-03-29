@@ -21,7 +21,7 @@ export const AboutMe = async ({ snippets }: AboutMeProps) => {
     <PageSection id="about" heading="Personal Details" subheading="About Me">
       <div className="flex flex-col gap-10 sm:flex-row sm:items-center md:gap-14">
         {imageObj ? (
-          <MotionInViewWrapper className="relative my-auto h-52 w-40 flex-shrink-0 sm:h-64 sm:w-52">
+          <MotionInViewWrapper className="relative my-auto h-52 w-40 shrink-0 sm:h-64 sm:w-52">
             <div className="relative h-full w-full overflow-hidden rounded-md">
               <Image
                 src={imageObj.url}

@@ -22,7 +22,7 @@ export const DropdownMenuContent = ({
       sideOffset={sideOffset}
       collisionPadding={16}
       className={cn(
-        "border-muted bg-background text-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-[8rem] rounded-md border p-1 drop-shadow-md",
+        "border-muted bg-background text-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 min-w-32 rounded-md border p-1 drop-shadow-md",
         className
       )}
       {...props}>
@@ -35,7 +35,7 @@ export const DropdownMenuContent = ({
 export const DropdownMenuItem = ({ className, ...props }: React.ComponentProps<typeof DropdownMenuPrimitive.Item>) => (
   <DropdownMenuPrimitive.Item
     className={cn(
-      "focus:bg-muted/40 relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2.5 text-xs transition-colors outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "focus:bg-muted/40 relative flex cursor-pointer items-center gap-2 rounded-md px-2 py-2.5 text-xs transition-colors outline-none select-none data-disabled:pointer-events-none data-disabled:opacity-50",
       className
     )}
     {...props}

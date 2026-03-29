@@ -105,7 +105,7 @@ export const ContactItemForm = ({ contact }: ContactItemFormProps) => {
               <FormLabel>Type</FormLabel>
               <Select name={name} value={value} onValueChange={(newVal) => (newVal ? onChange(newVal) : undefined)}>
                 <FormControl withDescription>
-                  <SelectTrigger className="w-[14rem]">
+                  <SelectTrigger className="w-56">
                     <SelectValue placeholder="Select type..." />
                   </SelectTrigger>
                 </FormControl>
@@ -165,7 +165,7 @@ export const ContactItemFormSkeleton = () => {
     <>
       <div className="pt-4 pb-12">
         <FormLabelSkeleton>Type</FormLabelSkeleton>
-        <Skeleton className="h-10 w-[14rem]" />
+        <Skeleton className="h-10 w-56" />
       </div>
 
       <div className="py-4">

@@ -131,7 +131,7 @@ export const ExperienceItemForm = ({ experienceItem }: ExperienceItemFormProps) 
             control={control}
             name="startDate"
             render={({ field: { value, onChange } }) => (
-              <FormItem className="max-w-[14rem] flex-1">
+              <FormItem className="max-w-56 flex-1">
                 <FormLabel>From</FormLabel>
 
                 <Popover>
@@ -162,7 +162,7 @@ export const ExperienceItemForm = ({ experienceItem }: ExperienceItemFormProps) 
             control={control}
             name="endDate"
             render={({ field: { value, onChange } }) => (
-              <FormItem className="max-w-[14rem] flex-1">
+              <FormItem className="max-w-56 flex-1">
                 <FormLabel isOptional>To</FormLabel>
 
                 <Popover>
@@ -249,12 +249,12 @@ export const ExperienceItemFormSkeleton = () => {
       </div>
 
       <div className="sm:flex sm:gap-4">
-        <div className="max-w-[14rem] flex-1 py-4">
+        <div className="max-w-56 flex-1 py-4">
           <FormLabelSkeleton>From</FormLabelSkeleton>
           <Skeleton className="h-10 w-full" />
         </div>
 
-        <div className="max-w-[14rem] flex-1 py-4">
+        <div className="max-w-56 flex-1 py-4">
           <FormLabelSkeleton isOptional>To</FormLabelSkeleton>
           <Skeleton className="h-10 w-full" />
         </div>
