@@ -16,7 +16,7 @@ export const Header = async ({ snippets }: HeaderProps) => {
 
   return (
     <header id="top" className="px-4 py-16 md:px-6 md:py-20">
-      <div className="section-container flex min-h-[30rem] flex-col items-start justify-center">
+      <div className="section-container flex min-h-120 flex-col items-start justify-center">
         <MotionInViewWrapper className="mb-8 flex w-full flex-col gap-8 md:flex-row md:items-center">
           <h1 className="font-poppins text-foreground text-5xl leading-tight font-bold md:text-6xl">{heading}</h1>
         </MotionInViewWrapper>

@@ -104,7 +104,7 @@ type ExperienceCardProps = ExperienceItem & {
 
 const ExperienceCard = ({ id, company, startDate, endDate, position, onClickDeleteBtn }: ExperienceCardProps) => {
   return (
-    <article className="border-muted flex min-h-28 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <article className="border-muted flex min-h-28 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
       <div className="flex-1">
         <p className="font-poppins text-sm leading-8 font-semibold">{position}</p>
         <p className="text-muted-foreground text-xs leading-6">{company}</p>
@@ -160,7 +160,7 @@ export const ExperienceListSkeleton = () => {
 
 const ExperienceCardSkeleton = () => {
   return (
-    <div className="border-muted flex min-h-28 w-full items-center gap-1 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <div className="border-muted flex min-h-28 w-full items-center gap-1 border-b border-solid py-2 last-of-type:border-0">
       <div className="flex-1">
         <div className="flex h-8 items-center">
           <Skeleton className="h-4 w-20" />

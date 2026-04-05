@@ -213,7 +213,7 @@ export const ProjectItemFormSkeleton = () => {
     <>
       <div className="py-4">
         <FormLabelSkeleton>Cover image</FormLabelSkeleton>
-        <div className="flex min-h-[5.5rem] gap-4">
+        <div className="flex min-h-22 gap-4">
           <Skeleton className="h-24 w-36" />
           <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
             <Skeleton className="h-4 w-36" />
@@ -234,7 +234,7 @@ export const ProjectItemFormSkeleton = () => {
 
       <div className="py-4">
         <FormLabelSkeleton>Image</FormLabelSkeleton>
-        <div className="flex min-h-[5.5rem] gap-4">
+        <div className="flex min-h-22 gap-4">
           <Skeleton className="h-24 w-36" />
           <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
             <Skeleton className="h-4 w-36" />

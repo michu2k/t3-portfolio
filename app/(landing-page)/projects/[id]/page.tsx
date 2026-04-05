@@ -56,7 +56,7 @@ export default async function Page({ params }: PageProps) {
       </SubpageNavigation>
 
       <header id="top" className="px-4 py-10 md:px-6 md:py-14">
-        <div className="section-container flex min-h-[8rem] flex-col items-start justify-center gap-2 md:min-h-[10rem] lg:min-h-[12rem]">
+        <div className="section-container flex min-h-32 flex-col items-start justify-center gap-2 md:min-h-40 lg:min-h-48">
           <h1 className="font-poppins text-foreground text-3xl font-bold md:text-4xl lg:text-5xl">{name}</h1>
         </div>
       </header>
@@ -89,7 +89,7 @@ export default async function Page({ params }: PageProps) {
 
               <div className="mx-auto flex w-full gap-4">
                 {websiteUrl ? (
-                  <Button variant="secondary" className="max-w-[14rem] flex-1 gap-3 px-8" asChild>
+                  <Button variant="secondary" className="max-w-56 flex-1 gap-3 px-8" asChild>
                     <a href={websiteUrl} target="_blank" rel="noopener noreferrer">
                       <GlobeIcon size={16} />
                       Project website

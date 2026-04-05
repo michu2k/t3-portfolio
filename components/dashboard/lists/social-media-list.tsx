@@ -106,8 +106,8 @@ const SocialMediaCard = ({ id, icon, url, onClickDeleteBtn }: SocialMediaCardPro
   const Icon = getSocialMediaIcon(icon);
 
   return (
-    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
-      <Icon className="fill-foreground size-4 flex-shrink-0" aria-hidden="true" />
+    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
+      <Icon className="fill-foreground size-4 shrink-0" aria-hidden="true" />
 
       <div className="flex-1">
         <p className="text-muted-foreground text-sm leading-6">{url}</p>
@@ -159,7 +159,7 @@ export const SocialMediaListSkeleton = () => {
 
 const SocialMediaCardSkeleton = () => {
   return (
-    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
       <Skeleton className="size-4" />
 
       <div className="flex-1">

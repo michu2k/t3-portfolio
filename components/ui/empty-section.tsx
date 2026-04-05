@@ -8,7 +8,7 @@ type EmptySectionProps = React.ComponentProps<"div"> & {
 
 export const EmptySection = ({ heading, description }: EmptySectionProps) => {
   return (
-    <div className="min-h-[6rem] w-full py-4">
+    <div className="min-h-24 w-full py-4">
       <div className="bg-accent flex w-full items-center gap-4 rounded-lg px-3 py-6">
         <ScrollIcon size={56} strokeWidth={1} />
 
