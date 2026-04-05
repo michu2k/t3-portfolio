@@ -7,11 +7,20 @@ const adapter = new PrismaPg({
   connectionString: process.env.DATABASE_URL
 });
 
-const createPrismaClient = () =>
-  new PrismaClient({
+const createPrismaClient = () => {
+  const client = new PrismaClient({
     adapter,
     log: env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"]
   });
+
+  if (env.NODE_ENV === "development") {
+    client.$on("query", (e) => {
+      console.log("Duration: " + e.duration + "ms");
+    });
+  }
+
+  return client;
+};
 
 const globalForPrisma = globalThis as unknown as {
   prisma: ReturnType<typeof createPrismaClient> | undefined;
