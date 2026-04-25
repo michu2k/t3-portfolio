@@ -1,7 +1,7 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
-import React, { useContext, useState } from "react";
+import React, { Suspense, useContext, useState } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import Link from "next/link";
 
@@ -104,7 +104,7 @@ export const HomeNavigation = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Navigation navItems={homeNavigationItems} isItemActive={({ id }) => id === activeTargetId}>
-      {children}
+      <Suspense>{children}</Suspense>
     </Navigation>
   );
 };

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { Suspense } from "react";
 import { format } from "date-fns";
 
 import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";
@@ -9,6 +9,16 @@ import { Separator } from "../ui/separator";
 import { PageSection } from "./page-section";
 
 export const Experience = async () => {
+  return (
+    <PageSection id="experience" heading="Where I've worked" subheading="Experience">
+      <Suspense>
+        <ExperienceList />
+      </Suspense>
+    </PageSection>
+  );
+};
+
+const ExperienceList = async () => {
   const experienceItems = (await api.experience.getItems({
     include: { responsibilities: true }
   })) as Array<ExperienceItemWithResponsibilities>;
@@ -17,11 +27,7 @@ export const Experience = async () => {
     return experienceItems.map((item) => <ExperienceListItem key={item.id} {...item} />);
   }
 
-  return (
-    <PageSection id="experience" heading="Where I've worked" subheading="Experience">
-      <ul className="flex flex-col gap-14 md:gap-16">{displayExperience()}</ul>
-    </PageSection>
-  );
+  return <ul className="flex flex-col gap-14 md:gap-16">{displayExperience()}</ul>;
 };
 
 const ExperienceListItem = ({

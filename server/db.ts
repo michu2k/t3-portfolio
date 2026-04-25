@@ -15,7 +15,7 @@ const createPrismaClient = () => {
 
   if (env.NODE_ENV === "development") {
     client.$on("query", (e) => {
-      console.log("Duration: " + e.duration + "ms");
+      console.log("Duration: " + e.duration.toFixed(2) + "ms");
     });
   }
 
