@@ -9,7 +9,7 @@
 
 import { initTRPC, TRPCError } from "@trpc/server";
 import SuperJSON from "superjson";
-import { ZodError } from "zod";
+import z, { ZodError } from "zod";
 
 import { getServerAuthSession } from "~/server/auth";
 import { prisma } from "~/server/db";
@@ -51,7 +51,7 @@ const t = initTRPC.context<typeof createTRPCContext>().create({
       ...shape,
       data: {
         ...shape.data,
-        zodError: error.cause instanceof ZodError ? error.cause.flatten() : null
+        zodError: error.cause instanceof ZodError ? z.treeifyError(error.cause) : null
       }
     };
   }

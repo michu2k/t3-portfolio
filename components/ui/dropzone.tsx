@@ -15,7 +15,7 @@ type DropzoneContextProps = {
   multiple?: boolean;
 };
 
-const DropzoneContext = React.createContext({} as DropzoneContextProps);
+export const DropzoneContext = React.createContext({} as DropzoneContextProps);
 
 type DropzoneProps = PropsWithChildren<
   {
@@ -36,7 +36,7 @@ type DropzoneProps = PropsWithChildren<
   )
 >;
 
-const Dropzone = ({
+export const Dropzone = ({
   name,
   accept,
   maxSize = MAX_FILE_SIZE,
@@ -87,7 +87,7 @@ const Dropzone = ({
   );
 };
 
-const DropzoneContent = () => {
+export const DropzoneContent = () => {
   const { isDragActive, accept, multiple, maxSize } = useContext(DropzoneContext);
 
   function getAcceptedFileTypes() {
@@ -113,7 +113,7 @@ const DropzoneContent = () => {
   }
 
   return (
-    <div className="flex min-h-16 flex-grow items-center gap-4 md:gap-6">
+    <div className="flex min-h-16 grow items-center gap-4 md:gap-6">
       <UploadCloudIcon className="size-8 md:size-10" strokeWidth={1} />
 
       <div className="flex flex-1 flex-col gap-1">
@@ -130,5 +130,3 @@ const DropzoneContent = () => {
     </div>
   );
 };
-
-export { Dropzone, DropzoneContent, DropzoneContext };

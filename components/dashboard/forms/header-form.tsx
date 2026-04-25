@@ -3,7 +3,6 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SnippetType } from "@prisma/client";
 
 import { Button } from "~/components/ui/button";
 import { FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMessage } from "~/components/ui/form";
@@ -13,6 +12,7 @@ import { Skeleton } from "~/components/ui/skeleton";
 import { Textarea } from "~/components/ui/textarea";
 import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
+import { SnippetType } from "~/prisma/generated/enums";
 import type { Snippets } from "~/server/api/routers/snippet";
 import type { HeaderSnippetsFormValues } from "~/utils/validations/header";
 import { headerSnippetsSchema } from "~/utils/validations/header";
@@ -21,7 +21,7 @@ type HeaderFormProps = {
   snippets: Snippets;
 };
 
-const HeaderForm = ({ snippets }: HeaderFormProps) => {
+export const HeaderForm = ({ snippets }: HeaderFormProps) => {
   const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.HEADER, snippets);
   const { heading = "", description = "" } = extractSnippetValues();
 
@@ -94,7 +94,7 @@ const HeaderForm = ({ snippets }: HeaderFormProps) => {
   );
 };
 
-const HeaderFormSkeleton = () => {
+export const HeaderFormSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -113,5 +113,3 @@ const HeaderFormSkeleton = () => {
     </>
   );
 };
-
-export { HeaderForm, HeaderFormSkeleton };

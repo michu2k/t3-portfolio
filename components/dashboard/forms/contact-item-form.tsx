@@ -3,8 +3,6 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { ContactMethod } from "@prisma/client";
-import { ContactMethodType } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
 import { Button } from "~/components/ui/button";
@@ -21,6 +19,8 @@ import { Input } from "~/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "~/components/ui/select";
 import { Skeleton } from "~/components/ui/skeleton";
 import { toast } from "~/components/ui/toaster";
+import type { ContactMethod } from "~/prisma/generated/client";
+import { ContactMethodType } from "~/prisma/generated/enums";
 import { api } from "~/trpc/react";
 import { capitalize } from "~/utils/capitalize";
 import { dashboardPaths } from "~/utils/dashboard.config";
@@ -53,7 +53,7 @@ type ContactItemFormProps = {
   contact: ContactMethod | null;
 };
 
-const ContactItemForm = ({ contact }: ContactItemFormProps) => {
+export const ContactItemForm = ({ contact }: ContactItemFormProps) => {
   const router = useRouter();
 
   const createItemMutation = api.contact.createItem.useMutation();
@@ -105,7 +105,7 @@ const ContactItemForm = ({ contact }: ContactItemFormProps) => {
               <FormLabel>Type</FormLabel>
               <Select name={name} value={value} onValueChange={(newVal) => (newVal ? onChange(newVal) : undefined)}>
                 <FormControl withDescription>
-                  <SelectTrigger className="w-[14rem]">
+                  <SelectTrigger className="w-56">
                     <SelectValue placeholder="Select type..." />
                   </SelectTrigger>
                 </FormControl>
@@ -160,12 +160,12 @@ const ContactItemForm = ({ contact }: ContactItemFormProps) => {
   );
 };
 
-const ContactItemFormSkeleton = () => {
+export const ContactItemFormSkeleton = () => {
   return (
     <>
       <div className="pt-4 pb-12">
         <FormLabelSkeleton>Type</FormLabelSkeleton>
-        <Skeleton className="h-10 w-[14rem]" />
+        <Skeleton className="h-10 w-56" />
       </div>
 
       <div className="py-4">
@@ -180,5 +180,3 @@ const ContactItemFormSkeleton = () => {
     </>
   );
 };
-
-export { ContactItemForm, ContactItemFormSkeleton };

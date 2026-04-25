@@ -66,7 +66,7 @@ const navigationItems: Array<NavigationItemDef> = [
   }
 ];
 
-const SidebarNavigation = () => {
+export const SidebarNavigation = () => {
   const isMobile = useIsMobile();
 
   function displayNavigationItems() {
@@ -95,7 +95,7 @@ const SidebarNavigation = () => {
           </Button>
         </div>
 
-        <nav className="flex flex-grow flex-col">
+        <nav className="flex grow flex-col">
           <ul className="flex flex-col gap-3">{displayNavigationItems()}</ul>
 
           <Button
@@ -168,5 +168,3 @@ const UserPanel = () => {
     </>
   );
 };
-
-export { SidebarNavigation };

@@ -3,7 +3,6 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SnippetType } from "@prisma/client";
 import { PencilIcon, TrashIcon } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
@@ -15,6 +14,7 @@ import { Skeleton } from "~/components/ui/skeleton";
 import { Textarea } from "~/components/ui/textarea";
 import { toast } from "~/components/ui/toaster";
 import { useSnippets } from "~/hooks/use-snippets";
+import { SnippetType } from "~/prisma/generated/enums";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/react";
 import type { FileObj } from "~/utils/file";
@@ -30,7 +30,7 @@ type AboutFormProps = {
   currentImage: FileObj | null;
 };
 
-const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
+export const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
   const { updateSnippets, extractSnippetValues } = useSnippets(SnippetType.ABOUT_ME, snippets);
   const { description = "", image: currentImageKey } = extractSnippetValues();
 
@@ -145,7 +145,7 @@ const AboutForm = ({ snippets, currentImage }: AboutFormProps) => {
   );
 };
 
-const AboutFormSkeleton = () => {
+export const AboutFormSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -154,7 +154,7 @@ const AboutFormSkeleton = () => {
 
       <div className="py-4">
         <FormLabelSkeleton isOptional>Image</FormLabelSkeleton>
-        <div className="flex min-h-[5.5rem] gap-4">
+        <div className="flex min-h-22 gap-4">
           <Skeleton className="h-24 w-36" />
           <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
             <Skeleton className="h-4 w-36" />
@@ -170,5 +170,3 @@ const AboutFormSkeleton = () => {
     </>
   );
 };
-
-export { AboutForm, AboutFormSkeleton };

@@ -3,7 +3,6 @@
 import * as React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { SocialMediaLink } from "@prisma/client";
 import { useRouter } from "next/navigation";
 
 import { Button } from "~/components/ui/button";
@@ -11,6 +10,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormLabelSkeleton, FormMes
 import { Input } from "~/components/ui/input";
 import { Skeleton } from "~/components/ui/skeleton";
 import { toast } from "~/components/ui/toaster";
+import type { SocialMediaLink } from "~/prisma/generated/client";
 import { api } from "~/trpc/react";
 import { capitalize } from "~/utils/capitalize";
 import { cn } from "~/utils/cn";
@@ -23,7 +23,7 @@ type SocialMediaItemFormProps = {
   socialMediaLink: SocialMediaLink | null;
 };
 
-const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
+export const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
   const router = useRouter();
 
   const createItemMutation = api.socialMedia.createItem.useMutation();
@@ -133,7 +133,7 @@ const SocialMediaItemForm = ({ socialMediaLink }: SocialMediaItemFormProps) => {
   );
 };
 
-const SocialMediaItemFormSkeleton = () => {
+export const SocialMediaItemFormSkeleton = () => {
   return (
     <>
       <div className="py-4">
@@ -152,5 +152,3 @@ const SocialMediaItemFormSkeleton = () => {
     </>
   );
 };
-
-export { socialMediaIconsDef, SocialMediaItemForm, SocialMediaItemFormSkeleton };

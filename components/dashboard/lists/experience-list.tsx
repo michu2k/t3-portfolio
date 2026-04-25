@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import type { ExperienceItem } from "@prisma/client";
 import { format } from "date-fns";
 import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
@@ -20,6 +19,7 @@ import { EmptySection } from "~/components/ui/empty-section";
 import { Heading } from "~/components/ui/heading";
 import { Skeleton } from "~/components/ui/skeleton";
 import { toast } from "~/components/ui/toaster";
+import type { ExperienceItem } from "~/prisma/generated/client";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
 
@@ -27,7 +27,7 @@ type ExperienceListProps = {
   experience: Array<ExperienceItem>;
 };
 
-const ExperienceList = ({ experience }: ExperienceListProps) => {
+export const ExperienceList = ({ experience }: ExperienceListProps) => {
   const deleteItemMutation = api.experience.deleteItem.useMutation();
   const router = useRouter();
 
@@ -104,7 +104,7 @@ type ExperienceCardProps = ExperienceItem & {
 
 const ExperienceCard = ({ id, company, startDate, endDate, position, onClickDeleteBtn }: ExperienceCardProps) => {
   return (
-    <article className="border-muted flex min-h-28 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <article className="border-muted flex min-h-28 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
       <div className="flex-1">
         <p className="font-poppins text-sm leading-8 font-semibold">{position}</p>
         <p className="text-muted-foreground text-xs leading-6">{company}</p>
@@ -142,7 +142,7 @@ const ExperienceCard = ({ id, company, startDate, endDate, position, onClickDele
   );
 };
 
-const ExperienceListSkeleton = () => {
+export const ExperienceListSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -160,7 +160,7 @@ const ExperienceListSkeleton = () => {
 
 const ExperienceCardSkeleton = () => {
   return (
-    <div className="border-muted flex min-h-28 w-full items-center gap-1 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <div className="border-muted flex min-h-28 w-full items-center gap-1 border-b border-solid py-2 last-of-type:border-0">
       <div className="flex-1">
         <div className="flex h-8 items-center">
           <Skeleton className="h-4 w-20" />
@@ -177,5 +177,3 @@ const ExperienceCardSkeleton = () => {
     </div>
   );
 };
-
-export { ExperienceList, ExperienceListSkeleton };

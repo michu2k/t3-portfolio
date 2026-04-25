@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import type { ContactMethod } from "@prisma/client";
 import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -19,6 +18,7 @@ import { EmptySection } from "~/components/ui/empty-section";
 import { Heading } from "~/components/ui/heading";
 import { Skeleton } from "~/components/ui/skeleton";
 import { toast } from "~/components/ui/toaster";
+import type { ContactMethod } from "~/prisma/generated/client";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
 
@@ -26,7 +26,7 @@ type ContactListProps = {
   contactMethods: Array<ContactMethod>;
 };
 
-const ContactList = ({ contactMethods }: ContactListProps) => {
+export const ContactList = ({ contactMethods }: ContactListProps) => {
   const deleteItemMutation = api.contact.deleteItem.useMutation();
   const router = useRouter();
 
@@ -107,7 +107,7 @@ type ContactMethodCardProps = ContactMethod & {
 
 const ContactMethodCard = ({ id, name, description, onClickDeleteBtn }: ContactMethodCardProps) => {
   return (
-    <article className="border-muted flex min-h-20 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <article className="border-muted flex min-h-20 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
       <div className="flex-1">
         <p className="font-poppins text-sm leading-8 font-semibold">{name}</p>
         <p className="text-muted-foreground text-xs leading-6">{description}</p>
@@ -141,7 +141,7 @@ const ContactMethodCard = ({ id, name, description, onClickDeleteBtn }: ContactM
   );
 };
 
-const ContactListSkeleton = () => {
+export const ContactListSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -159,7 +159,7 @@ const ContactListSkeleton = () => {
 
 const ContactMethodCardSkeleton = () => {
   return (
-    <div className="border-muted flex min-h-20 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <div className="border-muted flex min-h-20 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
       <div className="flex-1">
         <div className="flex h-8 items-center">
           <Skeleton className="h-4 w-36" />
@@ -172,5 +172,3 @@ const ContactMethodCardSkeleton = () => {
     </div>
   );
 };
-
-export { ContactList, ContactListSkeleton };

@@ -1,5 +1,6 @@
-import { ContactMethodType } from "@prisma/client";
 import { z } from "zod";
+
+import { ContactMethodType } from "~/prisma/generated/enums";
 
 export type ContactMethodFormValues = z.infer<typeof contactMethodSchema>;
 

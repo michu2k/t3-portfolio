@@ -18,8 +18,8 @@ export const imageRouter = createTRPCRouter({
     .input(
       z.object({
         image: z.custom<FileObj>(),
-        width: z.number().optional(),
-        height: z.number().optional()
+        width: z.number(),
+        height: z.number()
       })
     )
     .mutation(async ({ input: { image, width, height } }) => {
@@ -27,8 +27,12 @@ export const imageRouter = createTRPCRouter({
         throw new Error("Image is required");
       }
 
-      const newImageUrl = await resizeImage({ base64String: image.url, width, height });
-      const { key: imageKey } = await uploadFileToS3({ ...image, url: newImageUrl });
+      const resizedImage = await resizeImage(image, {
+        width,
+        height
+      });
+
+      const { key: imageKey } = await uploadFileToS3({ ...image, ...resizedImage });
       return imageKey;
     }),
 

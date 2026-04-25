@@ -27,7 +27,7 @@ type ProjectListProps = {
   projects: Array<ProjectItemWithImages>;
 };
 
-const ProjectList = ({ projects }: ProjectListProps) => {
+export const ProjectList = ({ projects }: ProjectListProps) => {
   const deleteItemMutation = api.project.deleteItem.useMutation();
   const router = useRouter();
 
@@ -108,7 +108,7 @@ const ProjectCard = ({ id, name, shortDescription, description, coverImage, onCl
   const itemDescription = (shortDescription || description).slice(0, MAX_TEXT_LENGTH);
 
   return (
-    <article className="border-muted flex min-h-[5.25rem] w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <article className="border-muted flex min-h-21 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
       <ImageThumbnail file={coverImage} size="sm" />
 
       <div className="flex flex-1 flex-col items-start">
@@ -154,7 +154,7 @@ const ProjectCard = ({ id, name, shortDescription, description, coverImage, onCl
   );
 };
 
-const ProjectListSkeleton = () => {
+export const ProjectListSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -172,7 +172,7 @@ const ProjectListSkeleton = () => {
 
 const ProjectCardSkeleton = () => {
   return (
-    <div className="border-muted flex min-h-[5.25rem] w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <div className="border-muted flex min-h-21 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
       <Skeleton className="h-16 w-20 md:w-24" />
 
       <div className="flex flex-1 flex-col items-start">
@@ -187,5 +187,3 @@ const ProjectCardSkeleton = () => {
     </div>
   );
 };
-
-export { ProjectList, ProjectListSkeleton };

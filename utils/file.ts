@@ -1,6 +1,7 @@
 import type { Accept } from "react-dropzone";
 
 export type FileObj = {
+  buffer?: Uint8Array;
   name: string;
   url: string;
   size: number;
@@ -27,20 +28,16 @@ export function getFileExtension(file: FileObj | string) {
   return _file.match(/\w*$/gi)?.[0].toLowerCase() || "";
 }
 
-async function _convertFileToBase64(file: File) {
-  return new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
-}
+const _convertFileToUint8Array = async (file: File): Promise<Uint8Array> => {
+  const buffer = await file.arrayBuffer();
+  return new Uint8Array(buffer);
+};
 
 export async function transformFileToFileObj(file: File): Promise<FileObj> {
   return {
+    buffer: await _convertFileToUint8Array(file),
     name: file.name,
-    url: await _convertFileToBase64(file),
+    url: URL.createObjectURL(file),
     size: file.size,
     type: file.type
   };

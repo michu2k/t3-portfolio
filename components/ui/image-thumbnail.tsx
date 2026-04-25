@@ -27,7 +27,7 @@ type ImageThumbnailProps = VariantProps<typeof imageThumbnailVariants> & {
   className?: string;
 };
 
-const ImageThumbnail = ({ file, size, className }: ImageThumbnailProps) => {
+export const ImageThumbnail = ({ file, size, className }: ImageThumbnailProps) => {
   const { url, type } = file ?? {};
   const isImage = type?.includes("image");
 
@@ -45,13 +45,12 @@ const ImageThumbnail = ({ file, size, className }: ImageThumbnailProps) => {
 
 type ImageThumbnailCardProps = React.ComponentProps<"div"> & {
   file: FileObj;
-  className?: string;
   actions?: React.ReactNode;
 };
 
-const ImageThumbnailCard = ({ file, className, actions }: ImageThumbnailCardProps) => {
+export const ImageThumbnailCard = ({ file, className, actions }: ImageThumbnailCardProps) => {
   return (
-    <div className={cn("flex min-h-[5.5rem] gap-4", className)}>
+    <div className={cn("flex min-h-22 gap-4", className)}>
       <ImageThumbnail file={file} />
 
       <div className="flex min-w-0 flex-1 flex-col items-start gap-2">
@@ -63,5 +62,3 @@ const ImageThumbnailCard = ({ file, className, actions }: ImageThumbnailCardProp
     </div>
   );
 };
-
-export { ImageThumbnail, ImageThumbnailCard };

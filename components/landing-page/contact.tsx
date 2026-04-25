@@ -1,7 +1,8 @@
-import * as React from "react";
-import { type ContactMethod, SnippetType } from "@prisma/client";
+import React, { Suspense } from "react";
 
 import { MotionInViewWrapper } from "~/components/ui/motion-in-view-wrapper";
+import type { ContactMethod } from "~/prisma/generated/client";
+import { SnippetType } from "~/prisma/generated/enums";
 import type { Snippets } from "~/server/api/routers/snippet";
 import { api } from "~/trpc/server";
 import { extractSnippetValues } from "~/utils/extract-snippet-values";
@@ -13,20 +14,27 @@ type ContactProps = {
   snippets: Snippets;
 };
 
-const Contact = async ({ snippets }: ContactProps) => {
-  const contactMethods = await api.contact.getItems();
+export const Contact = async ({ snippets }: ContactProps) => {
   const { description = "" } = extractSnippetValues<typeof SnippetType.CONTACT>(snippets);
-
-  function displayContactItems() {
-    return contactMethods.map((item) => <ContactMethodListItem key={item.id} {...item} />);
-  }
 
   return (
     <PageSection id="contact" heading="Get In Touch" subheading="Contact">
       <p className="text-muted-foreground mb-12 max-w-2xl text-base leading-7">{description}</p>
-      <ul className="flex flex-col gap-8">{displayContactItems()}</ul>
+      <Suspense>
+        <ContactMethodList />
+      </Suspense>
     </PageSection>
   );
+};
+
+const ContactMethodList = async () => {
+  const contactMethods = await api.contact.getItems();
+
+  function displayContactMethods() {
+    return contactMethods.map((item) => <ContactMethodListItem key={item.id} {...item} />);
+  }
+
+  return <ul className="flex flex-col gap-8">{displayContactMethods()}</ul>;
 };
 
 const ContactMethodListItem = ({ name, description, type }: ContactMethod) => {
@@ -45,5 +53,3 @@ const ContactMethodListItem = ({ name, description, type }: ContactMethod) => {
     </li>
   );
 };
-
-export { Contact };

@@ -11,11 +11,11 @@ import { cn } from "~/utils/cn";
 const TOAST_DURATION = 5000;
 
 /** toast function rendering the custom Toast component */
-function toast(props: ToastProps) {
+export function toast(props: ToastProps) {
   return sonnerToast.custom(() => <Toast {...props} />);
 }
 
-const Toaster = ({ ...props }: ToasterProps) => {
+export const Toaster = ({ ...props }: ToasterProps) => {
   const { theme = "" } = useTheme();
 
   return (
@@ -60,7 +60,7 @@ type ToastProps = VariantProps<typeof toastVariants> & {
   className?: string;
 };
 
-const Toast = ({ className, variant, title, description, ...props }: ToastProps) => {
+export const Toast = ({ className, variant, title, description, ...props }: ToastProps) => {
   const toastIcon = {
     default: BellIcon,
     success: CheckIcon,
@@ -85,5 +85,3 @@ const Toast = ({ className, variant, title, description, ...props }: ToastProps)
     </div>
   );
 };
-
-export { Toaster, Toast, toast };

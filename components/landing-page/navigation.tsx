@@ -1,7 +1,7 @@
 "use client";
 
 import type { PropsWithChildren } from "react";
-import React, { useContext, useState } from "react";
+import React, { Suspense, useContext, useState } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import Link from "next/link";
 
@@ -58,8 +58,8 @@ const Navigation = ({ navItems, isItemActive = () => false, children }: Navigati
 
   return (
     <Sidebar>
-      <div className="relative h-16 md:h-[4.5rem]">
-        <div className="bg-background fixed top-0 right-0 left-0 z-40 mx-auto h-16 w-full px-4 md:h-[4.5rem] md:px-6">
+      <div className="relative h-16 md:h-18">
+        <div className="bg-background fixed top-0 right-0 left-0 z-40 mx-auto h-16 w-full px-4 md:h-18 md:px-6">
           <nav className="section-container flex h-full items-center justify-between gap-4">
             <SidebarTrigger className="md:hidden" />
             <ul className="section-container hidden flex-1 items-center gap-8 md:flex">{displayNavigationItems()}</ul>
@@ -81,7 +81,7 @@ type TargetElement = {
   target: HTMLElement;
 };
 
-const HomeNavigation = ({ children }: { children: React.ReactNode }) => {
+export const HomeNavigation = ({ children }: { children: React.ReactNode }) => {
   const [activeTargetId, setActiveTargetId] = useState<string | null>(null);
   const { scrollY } = useScroll();
 
@@ -104,12 +104,12 @@ const HomeNavigation = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Navigation navItems={homeNavigationItems} isItemActive={({ id }) => id === activeTargetId}>
-      {children}
+      <Suspense>{children}</Suspense>
     </Navigation>
   );
 };
 
-const SubpageNavigation = ({ children }: { children: React.ReactNode }) => {
+export const SubpageNavigation = ({ children }: { children: React.ReactNode }) => {
   return <Navigation navItems={subpageNavigationItems}>{children}</Navigation>;
 };
 
@@ -143,5 +143,3 @@ const NavigationItem = ({ href, text, isActive }: NavigationItemProps) => {
     </li>
   );
 };
-
-export { HomeNavigation, SubpageNavigation };

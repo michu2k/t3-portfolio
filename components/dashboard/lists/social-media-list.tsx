@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import type { SocialMediaLink } from "@prisma/client";
 import { EllipsisIcon, PencilIcon, PlusIcon, TrashIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -19,6 +18,7 @@ import { EmptySection } from "~/components/ui/empty-section";
 import { Heading } from "~/components/ui/heading";
 import { Skeleton } from "~/components/ui/skeleton";
 import { toast } from "~/components/ui/toaster";
+import type { SocialMediaLink } from "~/prisma/generated/client";
 import { api } from "~/trpc/react";
 import { dashboardPaths } from "~/utils/dashboard.config";
 import { getSocialMediaIcon } from "~/utils/get-social-media-icon";
@@ -27,7 +27,7 @@ type SocialMediaListProps = {
   socialMediaLinks?: Array<SocialMediaLink>;
 };
 
-const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
+export const SocialMediaList = ({ socialMediaLinks = [] }: SocialMediaListProps) => {
   const deleteItemMutation = api.socialMedia.deleteItem.useMutation();
   const router = useRouter();
 
@@ -106,8 +106,8 @@ const SocialMediaCard = ({ id, icon, url, onClickDeleteBtn }: SocialMediaCardPro
   const Icon = getSocialMediaIcon(icon);
 
   return (
-    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
-      <Icon className="fill-foreground size-4 flex-shrink-0" aria-hidden="true" />
+    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
+      <Icon className="fill-foreground size-4 shrink-0" aria-hidden="true" />
 
       <div className="flex-1">
         <p className="text-muted-foreground text-sm leading-6">{url}</p>
@@ -141,7 +141,7 @@ const SocialMediaCard = ({ id, icon, url, onClickDeleteBtn }: SocialMediaCardPro
   );
 };
 
-const SocialMediaListSkeleton = () => {
+export const SocialMediaListSkeleton = () => {
   return (
     <>
       <Heading as="h2" size="sm">
@@ -159,7 +159,7 @@ const SocialMediaListSkeleton = () => {
 
 const SocialMediaCardSkeleton = () => {
   return (
-    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b-[1px] border-solid py-2 last-of-type:border-0">
+    <article className="border-muted flex min-h-16 w-full items-center gap-3 border-b border-solid py-2 last-of-type:border-0">
       <Skeleton className="size-4" />
 
       <div className="flex-1">
@@ -168,5 +168,3 @@ const SocialMediaCardSkeleton = () => {
     </article>
   );
 };
-
-export { SocialMediaList, SocialMediaListSkeleton };

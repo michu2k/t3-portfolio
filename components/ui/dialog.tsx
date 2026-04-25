@@ -4,15 +4,15 @@ import { XIcon } from "lucide-react";
 
 import { cn } from "~/utils/cn";
 
-const Dialog = DialogPrimitive.Root;
+export const Dialog = DialogPrimitive.Root;
 
-const DialogTrigger = DialogPrimitive.Trigger;
+export const DialogTrigger = DialogPrimitive.Trigger;
 
-const DialogPortal = DialogPrimitive.Portal;
+export const DialogPortal = DialogPrimitive.Portal;
 
-const DialogClose = DialogPrimitive.Close;
+export const DialogClose = DialogPrimitive.Close;
 
-const DialogOverlay = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Overlay>) => {
+export const DialogOverlay = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Overlay>) => {
   return (
     <DialogPrimitive.Overlay
       className={cn(
@@ -24,7 +24,11 @@ const DialogOverlay = ({ className, ...props }: React.ComponentProps<typeof Dial
   );
 };
 
-const DialogContent = ({ className, children, ...props }: React.ComponentProps<typeof DialogPrimitive.Content>) => {
+export const DialogContent = ({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Content>) => {
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -36,10 +40,7 @@ const DialogContent = ({ className, children, ...props }: React.ComponentProps<t
         )}
         {...props}>
         <div
-          className={cn(
-            "border-muted bg-background relative flex min-h-[18rem] flex-col rounded-lg border p-8",
-            className
-          )}>
+          className={cn("border-muted bg-background relative flex min-h-72 flex-col rounded-lg border p-8", className)}>
           <DialogClose className="focus-visible:ring-appearance absolute top-4 right-4 flex size-6 cursor-pointer items-center justify-center rounded-sm transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:outline-none disabled:pointer-events-none">
             <XIcon size={22} />
             <span className="sr-only">Close</span>
@@ -52,15 +53,15 @@ const DialogContent = ({ className, children, ...props }: React.ComponentProps<t
   );
 };
 
-const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
+export const DialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   return <div className={cn("flex flex-col justify-center space-y-4 pb-6 text-center", className)} {...props} />;
 };
 
-const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
+export const DialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   return <div className={cn("flex items-center justify-center gap-3 pt-6", className)} {...props} />;
 };
 
-const DialogTitle = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) => {
+export const DialogTitle = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) => {
   return (
     <DialogPrimitive.Title
       className={cn("font-poppins text-foreground text-lg font-semibold tracking-tight", className)}
@@ -69,24 +70,14 @@ const DialogTitle = ({ className, ...props }: React.ComponentProps<typeof Dialog
   );
 };
 
-const DialogDescription = ({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Description>) => {
+export const DialogDescription = ({
+  className,
+  ...props
+}: React.ComponentProps<typeof DialogPrimitive.Description>) => {
   return (
     <DialogPrimitive.Description
       className={cn("text-muted-foreground text-center text-sm leading-6", className)}
       {...props}
     />
   );
-};
-
-export {
-  Dialog,
-  DialogTrigger,
-  DialogPortal,
-  DialogClose,
-  DialogOverlay,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription
 };
