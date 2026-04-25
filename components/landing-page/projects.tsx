@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,17 +10,23 @@ import { api } from "~/trpc/server";
 import { PageSection } from "./page-section";
 
 export const Projects = async () => {
+  return (
+    <PageSection id="projects" heading="Featured projects" subheading="Projects">
+      <Suspense>
+        <ProjectList />
+      </Suspense>
+    </PageSection>
+  );
+};
+
+const ProjectList = async () => {
   const projectItems = await api.project.getItems();
 
   function displayProjectsItems() {
     return projectItems.map((item) => <ProjectCard key={item.id} {...item} />);
   }
 
-  return (
-    <PageSection id="projects" heading="Featured projects" subheading="Projects">
-      <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">{displayProjectsItems()}</div>
-    </PageSection>
-  );
+  return <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">{displayProjectsItems()}</div>;
 };
 
 const ProjectCard = ({ id, name, shortDescription, description, coverImage }: ProjectItemWithImages) => {
